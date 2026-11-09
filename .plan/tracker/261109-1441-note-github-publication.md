@@ -1,6 +1,6 @@
 # Initial GitHub publication
 
-Created: 2026-11-09 14:41:21 -0800.
+Created: 2026-11-09 14:41:21 -0800. Updated: 2026-11-09 14:43:01 -0800.
 
 ## Scope and configuration
 
@@ -17,10 +17,23 @@ documents are preserved as current or historical development artifacts. All JSON
 receipts parse successfully; no files exceed 10 MB and no symlinks are present.
 This publication does not run the implementation milestones or research pilots.
 
+## Current visibility
+
+The initial publication completed on `main` at commit
+`c2240f68ac3222d241d2eff9809633e50fbf1ac5`. On the user's follow-up request,
+the repository was changed to public. GitHub's repository API confirmed
+`visibility: public` and `private: false`.
+
 ## User Prompt, Verbatim
 
 ~~~text
 push to github hotneutron's dsh-research
+~~~
+
+## Visibility Request, Verbatim
+
+~~~text
+make that repo public
 ~~~
 
 ## Revision History
@@ -28,3 +41,4 @@ push to github hotneutron's dsh-research
 | Revision | Timestamp | Change |
 |---|---|---|
 | r1 | 2026-11-09 14:41:21 -0800 | Recorded the exact publication request, initial workspace and repository checks, publication scope, and private `main` configuration. |
+| r2 | 2026-11-09 14:43:01 -0800 | Recorded the completed initial push, changed the repository to public, verified the GitHub API response, and preserved the exact visibility request. |
