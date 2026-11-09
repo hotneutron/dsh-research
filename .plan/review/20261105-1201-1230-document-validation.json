@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 15:57:43 -0800",
+  "scope": "document_validation_only",
+  "user_prompt_verbatim": "~/wk/dsh-superagent-prototype and ~/wk/deepseek-harness are checked out.\n~/wk/accorde and ~/wk/autoresearch are also checked out.\nreivew the 1201 brainstorms and 1230 plans and write actionable plans for each milestone.",
+  "result": "passed",
+  "checked_documents": 11,
+  "resolved_local_links": 98,
+  "milestones": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6"
+  ],
+  "properties": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+  ],
+  "reuse_routes": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "original_1201_fenced_blocks_preserved": {
+    "20261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md": true,
+    "20261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md": true
+  },
+  "pilot_released_input_metadata": {
+    "rows": 60,
+    "development_train": 30,
+    "validation": 30,
+    "seeds": 5,
+    "confirmation_rows": 0
+  },
+  "pilot_released_input_sha256": "547005f4e9c71cf6762a40397d397a6dca4780a404b69d848b739e5c13417283",
+  "matrix_dispositions_verified": {
+    "YES": 36,
+    "YES/BUT": 24,
+    "DEFER": 5
+  },
+  "sibling_git_state_unchanged": {
+    "dsh-superagent-prototype": true,
+    "deepseek-harness": true,
+    "autoresearch": true,
+    "accorde": true
+  },
+  "reviewed_sibling_source_hashes_unchanged": true,
+  "document_sha256": {
+    ".plan/20261105-1201-1230-review-and-milestones.md": "93e7397cb7c7f3d64eba3197ac8c87224e6c2ed986237b2f1636c2616dff3fd4",
+    ".plan/20261105-m1-minimal-contract-and-reuse.md": "9ef2d3f37ec8f84da2c223926f265e19b8f49252a3e5c6b8609cf10e80d3fb09",
+    ".plan/20261105-m2-skill-and-thin-helpers.md": "ed632492d5353dfc96b66d53e60a77bc9487704706e0c71fd40924965cabf95a",
+    ".plan/20261105-m3-automatic-planning-and-review.md": "6416ee9a62822253bad9b6133417294cc14e92a452cab9e40f1e8dca1cb3e524",
+    ".plan/20261105-m4-scientific-property-qualification.md": "2d645a7cd94c946af20c4d3344ee808a3fe6b429a61eb2777df63c879c9f8773",
+    ".plan/20261105-m5-bounded-accorde-cpu-pilot.md": "93abbd5967be627144ecdcf4ced369423c98cd0f14f5fc63a1b009efa9caf2f9",
+    ".plan/20261105-m6-new-work-cutover-and-continuity.md": "43eb57c30a81d8cfe6658520c435baab6e429ac964adbfcd8981229e6a103c59",
+    ".plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md": "0222f774979b45ac29e4dfee115627ab1849ae9a104b7dc71aeaf7c28b57586f",
+    ".plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md": "3cf4d1a05e0f81667d3653ee6387f360c9dc703e312cc691a41196efb78523cd",
+    ".plan/tracker/20261105-milestone-execution.md": "2ad1f69b8122084d633a37e9f0a89578c4ae34f959c6afa8d05b75959a115412",
+    ".agent/rules-rationale.md": "b208ce0b65933d44246f3d84d7918f73c2c3c11f69402fa65d641d1608607312"
+  },
+  "errors": [],
+  "runtime_tests_run": false,
+  "pilot_executed": false,
+  "confirmation_opened": false
+}

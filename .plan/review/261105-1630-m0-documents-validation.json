@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 16:30:05 -0800",
+  "scope": "M0/Lark documentation and filename validation",
+  "user_prompts_verbatim": [
+    "create m0 to give a overview of the architecture, workflows with examples, idempotency considerations, with enough mermaid figures to help me understand, \nLet's also brainstorm a more human effective and human labor efficient way to review the progress of the research, and current artifacts, and how to visualize, and how to share/collab with team members, try to reuse dsh/superagent as much as possible.",
+    "if dsh-superagent already integrated lark/feishu, live (organized) lark docs might be a good candidate for sharing/reviewing",
+    "please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name."
+  ],
+  "result": "passed",
+  "markdown_documents": 19,
+  "resolved_local_links": 284,
+  "renamed_documents": 19,
+  "filename_format": "YYMMDD-HHMM-*",
+  "original_fenced_content_preserved_during_rename": true,
+  "mermaid_grammar_receipt": ".plan/review/261105-1629-m0-mermaid-validation-final.json",
+  "mermaid_diagrams_passed": 16,
+  "m0_diagrams_passed": 9,
+  "milestones_covered": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6"
+  ],
+  "scientific_properties_covered": [
+    "P01",
+    "P02",
+    "P03",
+    "P04",
+    "P05",
+    "P06",
+    "P07",
+    "P08"
+  ],
+  "reuse_routes_covered": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "checked_sibling_source_hashes_unchanged": true,
+  "document_sha256": {
+    ".plan/261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md": "4ddf6ff6a15f3cd9dabe04fe73f30d8c1fb2089a87b8c7ecb88915f4fecf4395",
+    ".plan/261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md": "d4788fbda432999d77cf723742d646e8aaecf8f5a0ee89ed66bdf859efc4aa46",
+    ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md": "6bbdf84b3176f4eca5ea28d6fbdd2decc178a720486446f70324625a432a1f6c",
+    ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md": "8c9c4e1fdb493608135975b85c882595641b3c38e56ab08f54ae55d7f5b81498",
+    ".plan/261103-1637-dist-exec-drop-matrix.md": "49d430ec12b4c79b6d959d801d1e428e41d8ae711943591b73fcf787fef54e87",
+    ".plan/261105-1555-m1-minimal-contract-and-reuse.md": "081e30918d81f12e17694ce6108fd2246b07657ca177bb24a77c7bcdbc53fd4d",
+    ".plan/261105-1555-m2-skill-and-thin-helpers.md": "ca833dc2ad3ccfa00461b1c31b0a631f91b77806e8831b2c0ea4ae396b95bc11",
+    ".plan/261105-1555-m3-automatic-planning-and-review.md": "7b9586d76a8e1797b2aa52876815b1b6c41616d1b8b125d3a973eb9d3ed6fa61",
+    ".plan/261105-1555-m4-scientific-property-qualification.md": "58e04418360e8b43f1fa62377ee7cafea5e64e19c8ead752047973b894c38af6",
+    ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md": "e8a87c8f3c34f1d8646cc5d57c30133cf3ddfb6f537c3a2960dea5a9dc1c6e97",
+    ".plan/261105-1555-m6-new-work-cutover-and-continuity.md": "3651ee04e6f31f722a7ce5eb90cbce27d76612813b2773bea2b7d0f57e9e2acf",
+    ".plan/261105-1555-review-1201-1230-and-milestones.md": "474ab806cb0df8a02c8e5ccce7adf688a505f08d796028a81382be46e49efd49",
+    ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md": "bf5fb873bcc7b21be7ca0fe3a684b8f6ed4dab37da82ebc57be7d952b07032e3",
+    ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md": "d3fd96f3a92a4a898e4f8df46dc7dea0813c6dd47b727781f3f98617127de172",
+    ".plan/261105-1621-plan-lark-research-review-and-sharing.md": "34569e7a71a7005ee3b23432f00294d6b9633e2ff59482ed35e02e04b791d4a0",
+    ".plan/examples/261105-1616-research-brief-example.md": "97e95bb45225ec7d67464886db4783b899c603059d7688bf54ec2b70e448e6fc",
+    ".plan/tracker/261105-1536-note-repository-bootstrap.md": "667850e5927b43911d2e4b146872246dff70b332edd2f44d07a1acaf0facfe6c",
+    ".plan/tracker/261105-1555-milestone-execution.md": "884a908cb2843da58394a170df6bc2eb007f167d671bfc53539200b5dc7885c5",
+    ".plan/tracker/261105-1620-note-disk-cleanup.md": "f576b80c07ce60eb43a3b2e723daac89880841382923b5398ed6695d6f989bbb"
+  },
+  "limitations": [
+    "No browser layout/render test.",
+    "No native Lark diagram conversion, target bot permission or cloud document operation.",
+    "No runtime implementation, benchmark or confirmation execution."
+  ],
+  "errors": []
+}

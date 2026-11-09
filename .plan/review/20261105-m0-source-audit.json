@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 16:16:16 -0800",
+  "scope": "M0_documentation_and_source_backed_design_only",
+  "user_prompt_verbatim": "create m0 to give a overview of the architecture, workflows with examples, idempotency considerations, with enough mermaid figures to help me understand, \nLet's also brainstorm a more human effective and human labor efficient way to review the progress of the research, and current artifacts, and how to visualize, and how to share/collab with team members, try to reuse dsh/superagent as much as possible.",
+  "repository_heads": {
+    "dsh-superagent-prototype": "8c32a9dc5d72c033816c6a8110b37f40cf94fba4",
+    "deepseek-harness": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159"
+  },
+  "source_sha256": {
+    "/home/cliu/wk/dsh-superagent-prototype/docs/000-philosophy.md": "0a12126843556fde2bcc2ca52dae2c297b9b5ca9170c3e33d624b2a4d85ca76b",
+    "/home/cliu/wk/dsh-superagent-prototype/docs/001-domain.md": "cd010379e65cc428ffb335aee46529f2a524b8f573fc72359223060fb5a5111b",
+    "/home/cliu/wk/dsh-superagent-prototype/docs/003-execution.md": "049aa22a717f75b9dec4cd6969356db6f736c127de4501c3ce1f6d846217f6eb",
+    "/home/cliu/wk/dsh-superagent-prototype/docs/005-panel.md": "f1f40a19be353933affef35f85428a5be4a3225045ab60bbbc307d35adf652bd",
+    "/home/cliu/wk/dsh-superagent-prototype/src/app/tools/executor.ts": "9869d8a5043725847f18814e23b29c11ae93aa974defa72d2eab62c61a6def47",
+    "/home/cliu/wk/dsh-superagent-prototype/src/client/ticket.tsx": "0d78ec9067cb1e11169ae283b038ffa43859fe2380557a90ea980a492f28bc73",
+    "/home/cliu/wk/dsh-superagent-prototype/src/client/markdown.ts": "5993337bd0b5c9672eab57628e1f94ecb6db5be4f1e13174d7f6336d60eb8a51",
+    "/home/cliu/wk/deepseek-harness/packages/client/ui-sidebar-documentpreview/README.md": "940db456bef841acc32ef63c6868b945d7455f07bc2ce56103adde1a008e8de9",
+    "/home/cliu/wk/deepseek-harness/packages/client/ui-deliverables/README.md": "34b333aefb81d58f07efa193710a9d95b061ce2d7f7047dd2bd5c8c7226b1472",
+    "/home/cliu/wk/deepseek-harness/packages/deliverables/tool-present/README.md": "756a2b86783edc61529e510092a525ef025b22398154e21aff5d9d68ac532ca4",
+    "/home/cliu/wk/deepseek-harness/packages/deliverables/workspace-changes/README.md": "daa1909d56e92f454c751aa4b61b9a8d60ab7da78e4de05af219a5f85553bf20",
+    "/home/cliu/wk/deepseek-harness/packages/session-query/session-log-export/README.md": "36189782c6baaabeab4e790293db95c3b054c72f5881c7bb017f090289ead1e0",
+    "/home/cliu/wk/deepseek-harness/packages/feedback/message-feedback/README.md": "289d671a6dd2fa9c059e01aafb9570496add27d74405b6bfae64bf95d0521f5d",
+    "/home/cliu/wk/deepseek-harness/packages/team/agent-team/README.md": "06951906917a3f0e43d0793162b5c65712016e4e2b9ed6b9e911ac1c30b8ee31",
+    "/home/cliu/wk/deepseek-harness/packages/experimental/liveshare/README.md": "e4be7476577da2d0db04be72219ddfc22223729a9b3d99364247b5a7d261b517",
+    "/home/cliu/wk/deepseek-harness/docs/subsystems/liveshare.md": "08350c2b927f627b60da57036c5629cf0dabf457a3adaedc0e32932bd3d76dc7"
+  },
+  "source_facts": [
+    "Ordinary research progress is not a complete scientific view in the prototype attention panel.",
+    "present references current paths; source-file bytes are not included in Session ZIP exports.",
+    "workspace-changes summaries and comparisons are host/session-lifetime state.",
+    "message feedback is log-only and not automatic steering or approval.",
+    "HTML document preview is available under its configured coding surface.",
+    "Agent Teams is agent coordination, not human membership or a new research authority.",
+    "LiveShare view is interactive; PTC and selected Remote method limits require qualification.",
+    "LiveShare fork creation has a documented interrupted-publication duplication window."
+  ],
+  "recommendation": "Versioned checkpoint brief, one goal conversation, existing attention/file preview/export; optional derived rendering and curated review Session",
+  "runtime_installation": false,
+  "external_messages_sent": false,
+  "experiments_launched": 0,
+  "confirmation_openings": 0
+}

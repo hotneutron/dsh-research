@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-06T00:27:47.299Z",
+  "user_prompt_verbatim": "please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.",
+  "scope": "Mermaid grammar parsing with real DOM support; no browser layout/render or Lark conversion test",
+  "mermaid_version": "11.12.0",
+  "jsdom_version": "22.1.0",
+  "figure_count": 16,
+  "result": "failed",
+  "figures": [
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 37,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 94,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 127,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 144,
+      "result": "passed",
+      "diagramType": "sequence"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 25,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 74,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 90,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 120,
+      "result": "failed",
+      "error": "Error: Parse error on line 18:\n...ty; write checkpoint  W->>R: Evidence a\n-----------------------^\nExpecting 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 155,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 180,
+      "result": "passed",
+      "diagramType": "stateDiagram"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 201,
+      "result": "failed",
+      "error": "Error: Parse error on line 13:\n...execution unresolved  A-->>W: Defer and\n-----------------------^\nExpecting 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 240,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 261,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 31,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 67,
+      "result": "failed",
+      "error": "Error: Parse error on line 9:\n...f; append checkpoint  W->>L: Refetch af\n-----------------------^\nExpecting 'SOLID_OPEN_ARROW', 'DOTTED_OPEN_ARROW', 'SOLID_ARROW', 'BIDIRECTIONAL_SOLID_ARROW', 'DOTTED_ARROW', 'BIDIRECTIONAL_DOTTED_ARROW', 'SOLID_CROSS', 'DOTTED_CROSS', 'SOLID_POINT', 'DOTTED_POINT', got 'NEWLINE'"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 105,
+      "result": "passed",
+      "diagramType": "flowchart-v2"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-06T00:29:11.147Z",
+  "user_prompts_verbatim": [
+    "create m0 to give a overview of the architecture, workflows with examples, idempotency considerations, with enough mermaid figures to help me understand, \nLet's also brainstorm a more human effective and human labor efficient way to review the progress of the research, and current artifacts, and how to visualize, and how to share/collab with team members, try to reuse dsh/superagent as much as possible.",
+    "if dsh-superagent already integrated lark/feishu, live (organized) lark docs might be a good candidate for sharing/reviewing",
+    "please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name."
+  ],
+  "scope": "Mermaid grammar parse using real DOM; browser layout and native Lark conversion not tested",
+  "mermaid_version": "11.12.0",
+  "jsdom_version": "22.1.0",
+  "figure_count": 16,
+  "result": "passed",
+  "figures": [
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 37,
+      "source_sha256": "2b23003a9b5a2a96bf9a4807fc5d3baef132fc3977ac19fe4199b70e2a06a16b",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 94,
+      "source_sha256": "b86cba570da7426cacf07a500e119cb379402455539f37b35613d77257331e15",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 127,
+      "source_sha256": "5df35a16bd5a8c32574838690bffdf1bc78d584f0eee2863b59a26193cec553f",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "line": 144,
+      "source_sha256": "858e80bef63a5419e2e21da608d310e1f4ab88662fa3287681a9724825465998",
+      "diagram_type": "sequence",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 25,
+      "source_sha256": "25aac775f70fac23a7221be438c5ab7083f4a235bdac9a5df78877a33fa55835",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 74,
+      "source_sha256": "c1e3490cb94ccacdce10cef778f70ebee49bd5201333eac92ab6e8f3b1d9742b",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 90,
+      "source_sha256": "2389274d648fa5ea605b42ef9fe424ab20f4fbf873562d41f03273bc3fa734ed",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 120,
+      "source_sha256": "99f91e72bf7f8386446e136a46699948590149c7400e8bce9be04c3e33827712",
+      "diagram_type": "sequence",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 155,
+      "source_sha256": "d540e071d43eb916ec90a8c78c1c38eb35578b24a2ee16f9ab538e380bb12f90",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 180,
+      "source_sha256": "db21e0dae79c794ef112eff2a2b727bee0e27b54158b153fb1cc9e72a681bffe",
+      "diagram_type": "stateDiagram",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 201,
+      "source_sha256": "a415d003f68c3b8e9b6b1aad7c54ea8206068a0ff4ba4578a5a60d2d093e3a58",
+      "diagram_type": "sequence",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 240,
+      "source_sha256": "dd6ffa39547f45515b44e32f0c742aad8eccbf6a4812fd98bf74dd445c465607",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "line": 261,
+      "source_sha256": "f83423805c303e875275361a4946229a32fe1ee40e60881f1029c7dff3cab625",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 31,
+      "source_sha256": "66761bfe9aa38f9843d33dcecd5ef19afa8ed91c8902f61b140c90d7593ddaa1",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 67,
+      "source_sha256": "684901a179e34db3dbac12ff692487ca46692f07f3130d5e9deb003fa883b3bb",
+      "diagram_type": "sequence",
+      "result": "passed"
+    },
+    {
+      "file": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "line": 105,
+      "source_sha256": "8c4dbb74c8122da82307df6c327236256e26ad1b88b5c2957c84f57658819b11",
+      "diagram_type": "flowchart-v2",
+      "result": "passed"
+    }
+  ]
+}

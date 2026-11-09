@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 15:55:26 -0800",
+  "scope": "source_review_and_planning_only",
+  "user_prompt_verbatim": "~/wk/dsh-superagent-prototype and ~/wk/deepseek-harness are checked out.\n~/wk/accorde and ~/wk/autoresearch are also checked out.\nreivew the 1201 brainstorms and 1230 plans and write actionable plans for each milestone.",
+  "prior_user_prompt_verbatim": "~/wk/dsh-superagent-prototype and ~/wk/deepseek-harness are checked out.\n~/wk/accorde and ~/wk/autoresearch are also checked out.\nreivew the 1201 plan and write actionable plans for each milestone.",
+  "repositories": {
+    "dsh-superagent-prototype": {
+      "head": "8c32a9dc5d72c033816c6a8110b37f40cf94fba4",
+      "branch": "main",
+      "status_porcelain": []
+    },
+    "deepseek-harness": {
+      "head": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159",
+      "branch": "master",
+      "status_porcelain": []
+    },
+    "autoresearch": {
+      "head": "ead1ae507934a6da5e914a2559d6fcac99c505c4",
+      "branch": "dist-exec",
+      "status_porcelain": []
+    },
+    "accorde": {
+      "head": "7c85e7541a3d8dfbb25fec46d96ff644c1ae72b5",
+      "branch": "cross-isa",
+      "status_porcelain": [
+        "?? .plan/20261021-223518-plan-cross-isa-core20-campaign.md",
+        "?? .plan/20261021-235213-plan-core24-core28-expansion.md",
+        "?? .plan/20261021-brainstorm-cross-isa-operation-shape-ood-kernel-grammar.md",
+        "?? .plan/20261021-note-ppp-ir-exec-operation-shape-gate-evidence.md",
+        "?? .plan/20261022-note-amora-portable-kernel-package.md",
+        "?? .plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md",
+        "?? .plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md",
+        "?? .plan/20261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+        "?? .plan/20261103-1230-plan-dsh-research-plugin-rebuild.md",
+        "?? .plan/20261103-1637-dist-exec-drop-matrix.md",
+        "?? .plan/trackers/20261021-223518-tracker-cross-isa-core20-campaign.md",
+        "?? docs/multi_isa_generalization/core20-portable-scripted-campaign.md",
+        "?? local_artifacts/",
+        "?? reports/cross_isa/",
+        "?? reports/ppp_ir_mlp/roadmap_b_native_contraction_gather_v1/h3_phase_idle_v1/",
+        "?? tools/cross_isa_campaign/",
+        "?? tools/cross_isa_expansion/"
+      ]
+    }
+  },
+  "reviewed_file_sha256_before_local_navigation_amendments": {
+    "/home/cliu/wk/dsh-research/.plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md": "2070f343148fa184076937cd906a0d2e3994b78f92f136792a335bd22b6542c9",
+    "/home/cliu/wk/dsh-research/.plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md": "c347abd531f60032a91c9fc1aa3df303ea3194e63f44b2b1ba4986d1eb915c37",
+    "/home/cliu/wk/accorde/.plan/20261103-1230-plan-dsh-research-plugin-rebuild.md": "6621856d351f9c7310b9a25d0e781237a2987d326ced919e779b0a3023fd5341",
+    "/home/cliu/wk/accorde/.plan/20261103-1230-plan-dsh-research-plugin-rebuild-zh.md": "95bdbbb00f6ec34a7db26dc96d9a381532642e4c9d3ca251274423d4619f0591",
+    "/home/cliu/wk/accorde/.plan/20261103-1637-dist-exec-drop-matrix.md": "2067c4032c8c080c02d10fb658838f25b528f0af537bc88002fa24abdb93cb1f",
+    "/home/cliu/wk/dsh-superagent-prototype/package.json": "f5170d812137dd370c568decb481e19f4da9a3d1fd7bad341a0f07942020a559",
+    "/home/cliu/wk/dsh-superagent-prototype/src/executor/background.ts": "60b98302d412426cda7df12ed69d750183f60fb00ac802a01ae2c963cfc79420",
+    "/home/cliu/wk/dsh-superagent-prototype/src/sources/host.ts": "b07998dad9194319a95a9436084cf1612aef9c4c6de22288cfa04258bbfbb1ce",
+    "/home/cliu/wk/dsh-superagent-prototype/prompts/work.md": "b36fbc7ed4cf2d6f91ef2981a31fd5a70e11e2f3304afb921ab94ba135c69a2e",
+    "/home/cliu/wk/dsh-superagent-prototype/prompts/team/delivery.md": "aff7c953ce8dfc6e6838f843a5980b4d7c844a517e2d05f89560e8984a9bf55d",
+    "/home/cliu/wk/deepseek-harness/package.json": "805ddd9dce6f9c80b7050e2c9938f423088e422b31dec9bc53128e35c6e664d2",
+    "/home/cliu/wk/deepseek-harness/packages/subagent/subagent/src/index.ts": "b9b098db20176ea066895bda65aa20aadfb8d32f25a5a2eb033122885a74bf36",
+    "/home/cliu/wk/deepseek-harness/packages/shell/tool-bash/src/index.ts": "de24abe9436d4ee4c9d9773538da58621d1d028abac78a53ad3b9e47a5fca7fd",
+    "/home/cliu/wk/deepseek-harness/packages/shell/shell/src/types.ts": "32a710e1000dae0a7c47efbd9f970e5495ac3bad5e0a0e2298388f42ef03c089",
+    "/home/cliu/wk/deepseek-harness/packages/storage/storage-domain/README.md": "e961c1a4e351b36f7bcc3275fde61544b3de51a7b92cffa9843eaa8a928d2ff0",
+    "/home/cliu/wk/deepseek-harness/docs/subsystems/jobs.md": "f1d65175ab141534eb5d65721232cfa01f7e010003b98c6ebe14624375304795",
+    "/home/cliu/wk/autoresearch/runtime/src/autoresearch_runtime/confirmation.py": "04dfa8e838370c30d9cff85206805e867867ef8646addfdb3242c2b41fbd20dd",
+    "/home/cliu/wk/accorde/.autoresearch/runtime.lock.json": "8a7748057964244802f3dc4d96cd708057c4af195c9ec3be1d170149268a5600",
+    "/home/cliu/wk/accorde/.autoresearch/project.json": "2d50cb534b5cda8eb5dc41e2966e887e1e39752fb391d5365e97e035ccfdd97d",
+    "/home/cliu/wk/accorde/tools/autoresearch_ppp/replay.py": "1c308df0c7ca7fbf4878957000077ba757b132545ab8e14abea9bcd0fbfc583f",
+    "/home/cliu/wk/accorde/tools/autoresearch_ppp/adapter.py": "714f61f085ee34212ee638334512c3cd1c8d6152ee9a399d981c9346e99b8fd5",
+    "/home/cliu/wk/accorde/reports/autoresearch_integration_v1/selection_export.json": "547005f4e9c71cf6762a40397d397a6dca4780a404b69d848b739e5c13417283"
+  },
+  "dist_exec_delta": {
+    "base": "33ef750face59b42f9663c8e355a77600d1765e7",
+    "head": "ead1ae507934a6da5e914a2559d6fcac99c505c4",
+    "paths": 65,
+    "added": 60,
+    "modified": 5,
+    "method": "Git recount plus documented matrix; not a fresh independent full-file donor audit"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "scope": "runtime",
+      "state": "pending_qualification",
+      "detail": "Prototype subagent wait/list/drain methods differ from current harness public operations."
+    },
+    {
+      "id": "F2",
+      "scope": "admission",
+      "state": "planned",
+      "detail": "Worker/per-owner job bounds do not enforce persistent project attempt/time budget."
+    },
+    {
+      "id": "F3",
+      "scope": "deadline",
+      "state": "planned",
+      "detail": "Bash timeout promotion/background defaults require explicit kill deadline and no bypass."
+    },
+    {
+      "id": "F4",
+      "scope": "restart",
+      "state": "planned",
+      "detail": "Local jobs die with host and persisted settlement may be absent; reservation must stay consumed."
+    },
+    {
+      "id": "F5",
+      "scope": "state",
+      "state": "candidate_public_route",
+      "detail": "Public storage-domain serialized record update avoids private SourceContext access; selected-version smoke pending."
+    },
+    {
+      "id": "F6",
+      "scope": "confirmation",
+      "state": "production_disabled",
+      "detail": "Donor validate hashes dataset before begin commits opening; literal consume-before-byte-read not established."
+    },
+    {
+      "id": "F7",
+      "scope": "prompt_policy",
+      "state": "planned",
+      "detail": "Research delivery and no-trailer policy need explicit main/worker prompt overrides."
+    }
+  ],
+  "executed_experiments": 0,
+  "confirmation_openings": 0,
+  "framework_tests_rerun": false,
+  "limitations": [
+    "No installation or deployment qualified.",
+    "No private confirmation-data inspection or active-store census.",
+    "Earlier framework test evidence remains historical.",
+    "No current scientific outcome inferred from workflow source."
+  ]
+}

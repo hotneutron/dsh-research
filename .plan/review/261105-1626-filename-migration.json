@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 16:26:56 -0800",
+  "user_prompt_verbatim": "please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.",
+  "rule": "YYMMDD-HHMM-*",
+  "scope": "local plan/tracker Markdown documents, including copied plans and example brief",
+  "existing_explicit_times_preserved": true,
+  "missing_times_from_creation_or_snapshot_metadata": true,
+  "historical_receipt_json_unchanged": true,
+  "records": [
+    {
+      "from": ".plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md",
+      "to": ".plan/261103-1201-brainstorm-autoresearch-versus-dsh-superagent-zh.md",
+      "local_links_updated": 3,
+      "copied_audit_links_repaired": 0,
+      "revision": 8,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "0222f774979b45ac29e4dfee115627ab1849ae9a104b7dc71aeaf7c28b57586f",
+      "after_sha256": "4ddf6ff6a15f3cd9dabe04fe73f30d8c1fb2089a87b8c7ecb88915f4fecf4395"
+    },
+    {
+      "from": ".plan/20261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md",
+      "to": ".plan/261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md",
+      "local_links_updated": 3,
+      "copied_audit_links_repaired": 0,
+      "revision": 7,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "3cf4d1a05e0f81667d3653ee6387f360c9dc703e312cc691a41196efb78523cd",
+      "after_sha256": "d4788fbda432999d77cf723742d646e8aaecf8f5a0ee89ed66bdf859efc4aa46"
+    },
+    {
+      "from": ".plan/20261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "to": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "local_links_updated": 4,
+      "copied_audit_links_repaired": 5,
+      "revision": 7,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "95bdbbb00f6ec34a7db26dc96d9a381532642e4c9d3ca251274423d4619f0591",
+      "after_sha256": "6bbdf84b3176f4eca5ea28d6fbdd2decc178a720486446f70324625a432a1f6c"
+    },
+    {
+      "from": ".plan/20261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "to": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "local_links_updated": 3,
+      "copied_audit_links_repaired": 5,
+      "revision": 8,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "6621856d351f9c7310b9a25d0e781237a2987d326ced919e779b0a3023fd5341",
+      "after_sha256": "8c9c4e1fdb493608135975b85c882595641b3c38e56ab08f54ae55d7f5b81498"
+    },
+    {
+      "from": ".plan/20261103-1637-dist-exec-drop-matrix.md",
+      "to": ".plan/261103-1637-dist-exec-drop-matrix.md",
+      "local_links_updated": 1,
+      "copied_audit_links_repaired": 2,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "2067c4032c8c080c02d10fb658838f25b528f0af537bc88002fa24abdb93cb1f",
+      "after_sha256": "49d430ec12b4c79b6d959d801d1e428e41d8ae711943591b73fcf787fef54e87"
+    },
+    {
+      "from": ".plan/20261105-1201-1230-review-and-milestones.md",
+      "to": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "local_links_updated": 14,
+      "copied_audit_links_repaired": 0,
+      "revision": 5,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "6e3af79282e7c8b931b9b6f195f7b64363f511efa51a0033ebf55907024ba202",
+      "after_sha256": "fe09aa257f996720bb77a64da98760773a7fdea3663e7168f1d4c9e67cf9759b"
+    },
+    {
+      "from": ".plan/20261105-brainstorm-human-research-review-and-collaboration.md",
+      "to": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "local_links_updated": 3,
+      "copied_audit_links_repaired": 0,
+      "revision": 3,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "31239364369f32fcdfb79f39424a7ad919ba40bf3a6c979b68ce878bf1ce8c55",
+      "after_sha256": "bf5fb873bcc7b21be7ca0fe3a684b8f6ed4dab37da82ebc57be7d952b07032e3"
+    },
+    {
+      "from": ".plan/20261105-m0-architecture-workflows-and-idempotency.md",
+      "to": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "local_links_updated": 9,
+      "copied_audit_links_repaired": 0,
+      "revision": 3,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "8988d4b89f75c42e10a663a0245b2d604668cde58c2c455f3f20f0dde19fc63a",
+      "after_sha256": "7bc1186e5996e070efcae257b305f1870f259b10722e2bfc5b5e5e66e74d2dff"
+    },
+    {
+      "from": ".plan/20261105-m1-minimal-contract-and-reuse.md",
+      "to": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "9ef2d3f37ec8f84da2c223926f265e19b8f49252a3e5c6b8609cf10e80d3fb09",
+      "after_sha256": "081e30918d81f12e17694ce6108fd2246b07657ca177bb24a77c7bcdbc53fd4d"
+    },
+    {
+      "from": ".plan/20261105-m2-skill-and-thin-helpers.md",
+      "to": ".plan/261105-1555-m2-skill-and-thin-helpers.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "ed632492d5353dfc96b66d53e60a77bc9487704706e0c71fd40924965cabf95a",
+      "after_sha256": "ca833dc2ad3ccfa00461b1c31b0a631f91b77806e8831b2c0ea4ae396b95bc11"
+    },
+    {
+      "from": ".plan/20261105-m3-automatic-planning-and-review.md",
+      "to": ".plan/261105-1555-m3-automatic-planning-and-review.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "6416ee9a62822253bad9b6133417294cc14e92a452cab9e40f1e8dca1cb3e524",
+      "after_sha256": "7b9586d76a8e1797b2aa52876815b1b6c41616d1b8b125d3a973eb9d3ed6fa61"
+    },
+    {
+      "from": ".plan/20261105-m4-scientific-property-qualification.md",
+      "to": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "2d645a7cd94c946af20c4d3344ee808a3fe6b429a61eb2777df63c879c9f8773",
+      "after_sha256": "58e04418360e8b43f1fa62377ee7cafea5e64e19c8ead752047973b894c38af6"
+    },
+    {
+      "from": ".plan/20261105-m5-bounded-accorde-cpu-pilot.md",
+      "to": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "93abbd5967be627144ecdcf4ced369423c98cd0f14f5fc63a1b009efa9caf2f9",
+      "after_sha256": "e8a87c8f3c34f1d8646cc5d57c30133cf3ddfb6f537c3a2960dea5a9dc1c6e97"
+    },
+    {
+      "from": ".plan/20261105-m6-new-work-cutover-and-continuity.md",
+      "to": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "43eb57c30a81d8cfe6658520c435baab6e429ac964adbfcd8981229e6a103c59",
+      "after_sha256": "3651ee04e6f31f722a7ce5eb90cbce27d76612813b2773bea2b7d0f57e9e2acf"
+    },
+    {
+      "from": ".plan/20261105-plan-lark-research-review-and-sharing.md",
+      "to": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "017197cd2a6b0a0602efec1f0c9887cab4dd476f9f48a7745628c87b82773796",
+      "after_sha256": "3ce149629b2eb2d67f6c844999c191e05044ad4a5f8e40b3f0f19ca19693c8ca"
+    },
+    {
+      "from": ".plan/examples/20261105-research-brief-example.md",
+      "to": ".plan/examples/261105-1616-research-brief-example.md",
+      "local_links_updated": 5,
+      "copied_audit_links_repaired": 0,
+      "revision": 3,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "929d0c0f2f2d180b7e880b143920b74079eaa3b3380a37a9a58b65ca59ed9622",
+      "after_sha256": "97e95bb45225ec7d67464886db4783b899c603059d7688bf54ec2b70e448e6fc"
+    },
+    {
+      "from": ".plan/tracker/20261105-1536-note-repository-bootstrap.md",
+      "to": ".plan/tracker/261105-1536-note-repository-bootstrap.md",
+      "local_links_updated": 2,
+      "copied_audit_links_repaired": 0,
+      "revision": 4,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "b7d153f1925888d23befcffcb17ae53ea2eca3e00a1928291f50519b81de67d6",
+      "after_sha256": "667850e5927b43911d2e4b146872246dff70b332edd2f44d07a1acaf0facfe6c"
+    },
+    {
+      "from": ".plan/tracker/20261105-1620-note-disk-cleanup.md",
+      "to": ".plan/tracker/261105-1620-note-disk-cleanup.md",
+      "local_links_updated": 0,
+      "copied_audit_links_repaired": 0,
+      "revision": 2,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "e7a8d8d86a2be12cab1110ede06c46b3e4a70e4474b80367fd50b5b1496f39fc",
+      "after_sha256": "f576b80c07ce60eb43a3b2e723daac89880841382923b5398ed6695d6f989bbb"
+    },
+    {
+      "from": ".plan/tracker/20261105-milestone-execution.md",
+      "to": ".plan/tracker/261105-1555-milestone-execution.md",
+      "local_links_updated": 11,
+      "copied_audit_links_repaired": 0,
+      "revision": 4,
+      "original_fenced_blocks_preserved": true,
+      "before_sha256": "8532670531c9a73e367905860dda725a35ffa836e8267e62f8e59569d16860a4",
+      "after_sha256": "31e783fce4eb21b2c9bef8dc7524adeee895f9c2a2a9043ef2249e7776466f1e"
+    }
+  ]
+}

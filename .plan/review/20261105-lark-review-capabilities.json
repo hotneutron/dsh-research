@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-05 16:21:35 -0800",
+  "scope": "Lark review design and read-only command/skill inspection",
+  "user_prompt_verbatim": "if dsh-superagent already integrated lark/feishu, live (organized) lark docs might be a good candidate for sharing/reviewing",
+  "original_M0_prompt_verbatim": "create m0 to give a overview of the architecture, workflows with examples, idempotency considerations, with enough mermaid figures to help me understand, \nLet's also brainstorm a more human effective and human labor efficient way to review the progress of the research, and current artifacts, and how to visualize, and how to share/collab with team members, try to reuse dsh/superagent as much as possible.",
+  "cli_version": "1.0.93",
+  "commands_inspected": [
+    "lark-cli --version",
+    "lark-cli --help",
+    "lark-cli docs --help",
+    "lark-cli wiki --help",
+    "lark-cli drive --help",
+    "lark-cli skills list",
+    "lark-cli skills read lark-doc",
+    "lark-cli skills read lark-doc/references/lark-doc-update.md",
+    "lark-cli skills read lark-doc/references/lark-doc-whiteboard.md",
+    "lark-cli skills read lark-wiki",
+    "lark-cli docs +fetch --help",
+    "lark-cli docs +update --help",
+    "lark-cli docs +history-list --help",
+    "lark-cli docs +whiteboard-update --help"
+  ],
+  "source_sha256": {
+    "/home/cliu/wk/dsh-superagent-prototype/prompts/cli.md": "a47ab1126c241ede5383de358d1421279791d582c722547f1b542154ad3fd51e",
+    "/home/cliu/wk/dsh-superagent-prototype/src/infra/commands.ts": "9d7593c5022e0c1813731c1f1cd8471b1536b0b5f42974a08ef2b2930c1e62b2",
+    "/home/cliu/wk/dsh-superagent-prototype/skills/dsh-superagent-feishu/SKILL.md": "5cd538eef17f39d3a7c8beb0ff12ab2fff6e405139e59e8667009fd16ebd23c8",
+    "/home/cliu/wk/dsh-superagent-prototype/docs/006-deployment.md": "92c5a1c6aecab6782a64b3847a2d6f36a48dc9865fa7b04b892fcdaf04f7de9d"
+  },
+  "verified_capabilities": [
+    "Bot-only prototype wrapper; Docs/Wiki/Drive discovery in worker procedure.",
+    "Targeted Docs update and fetch support explicit revision IDs and block scope.",
+    "History/comment/media/organization command routes available.",
+    "Whiteboard update supports Mermaid and an idempotent token."
+  ],
+  "unverified": [
+    "Target app scopes and bot document/space access.",
+    "Live stale-write enforcement, comment retention and publication reconciliation.",
+    "Automatic Doc-comment intake as a trusted source.",
+    "Native diagram conversion and remote artifact access."
+  ],
+  "cloud_api_calls": 0,
+  "cloud_writes": 0,
+  "identity_or_permission_changes": 0
+}

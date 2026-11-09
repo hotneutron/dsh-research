@@ -1,0 +1,12 @@
+{
+  "created": "2026-11-05 17:05:50 -0800",
+  "user_prompt_verbatim": "I think the project related artifacts and decision should stay in the project workspace (i.e. accorde/), so it's self-contained, try to minimize the states stored in the dsh-research. Please confirm that, and be explicit about Responsibility/Owner/Location of Persistent State.\n\"organized live Lark Docs\" is not convincing. I don't see the feedback loop.\nAlso please confirm that for most execution and iterations, human intervention is not required, nor blocking. Human input is required only when the direction is \"scientifically exhausted\".",
+  "contract": "/home/cliu/wk/dsh-research/.plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+  "project_plan": "/home/cliu/wk/accorde/.plan/261105-1705-plan-dsh-research-project-integration.md",
+  "project_tracker": "/home/cliu/wk/accorde/.plan/trackers/261105-1705-tracker-dsh-research-project-integration.md",
+  "project_pilot": "/home/cliu/wk/accorde/.plan/261105-1555-plan-dsh-research-cpu-pilot.md",
+  "project_brief": "/home/cliu/wk/accorde/.plan/examples/261105-1616-research-brief-example.md",
+  "old_brief": "/home/cliu/wk/dsh-research/.plan/examples/261105-1616-research-brief-example.md",
+  "modified_scope": "planning documents only; no active state or cloud mutation",
+  "legacy_program_sha256": "45d4e3e81717e4297d0a830c60f359cdfc4af37b500815ca8dcd1504df604f9b"
+}
