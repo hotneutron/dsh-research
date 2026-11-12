@@ -1,8 +1,12 @@
-# dsh-research milestone execution tracker
+# dsh-research milestone implementation tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r19. Status: M1/M2 development in progress; M3–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:39:31 -0800. Revision: r20. Status: M1/M2 development in progress; M3–M6 execution pending.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
+
+## Tracking scope
+
+This is the canonical M1–M6 implementation status and next-work record under .plan/tracker/. README.md provides stable package usage, architecture and ownership guidance with a single link here. Milestone plans define intended work and acceptance gates; receipts in .plan/review/ retain exact observations. Keep current implementation state and next actions in this tracker.
 
 ## Canonical contract status
 
@@ -28,8 +32,7 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 
 | Milestone | Status | Dependency / next concrete work | Completion evidence |
 |---|---|---|---|
-| [M0](../261105-1616-m0-architecture-workflows-and-idempotency.md) | documentation ready for review | Team walkthrough of architecture, examples and idempotency; review the brief/collaboration proposal | Guide, nine Mermaid figures, [brainstorm](../261105-1616-brainstorm-human-research-review-and-collaboration.md) and `sample brief` (project-owned input pending) |
-| [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | in progress; encoding/native fixture observations | Bind Ticket/job admission and obtain independent profile/conformance review | [M1 scope](../review/261111-2124-m1-scope.json) and [capabilities](../review/261111-2124-m1-runtime-capabilities.json); integrated S1–S8 not complete |
+| [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | in progress; encoding/native fixture observations | Qualify independent profile/compatibility and superagent Ticket/source handoff; preserve authority/recovery gates | [M1 scope](../review/261111-2124-m1-scope.json) and [capabilities](../review/261111-2124-m1-runtime-capabilities.json); integrated S1–S8 not complete |
 | [M2](../261105-1555-m2-skill-and-thin-helpers.md) | in progress; native/packed synthetic mechanics | M1 acceptance; full scope/profile qualification and M3 handoff | [M2 package receipt](../review/261111-2142-m2-package-receipt.json) + actual ordinary-worker/packed-example fixtures |
 | [M3](../261105-1555-m3-automatic-planning-and-review.md) | planned | M2; configure effective research prompts/presets | Scripted automatic separate-review transition and stale-action refusal |
 | [M4](../261105-1555-m4-scientific-property-qualification.md) | planned | M2/M3; qualify real reused boundaries | the canonical property set scoped matrix + deadline/restart receipts |
@@ -37,6 +40,16 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 | [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | planned | M5; inventory authority/history before new-work adoption | Independent adoption / confirmation / retirement decisions |
 
 Plans written does not mean milestones executed. Record dates, actual commands, receipt links, limits and failures when work occurs; update this artifact's timestamped Revision History on every amendment.
+
+## Next implementation work
+
+The next code milestone is M3: configure effective author/reviewer prompts and presets, emit automatic separate scoped review transitions, and connect captured feedback to dispositions, frozen changes and actual effects. Continue development with bounded scripted/released-input fixtures; M1/M2 acceptance gates remain open.
+
+Package 0.1.1 at local commit 955292c supplies the M2 helpers, native tool, research skill and packed CPU example. The [M2 receipt](../review/261111-2142-m2-package-receipt.json) records 14 behavior tests and 11 native cases, including the extracted-package consumer. The [M1 receipt](../review/261111-2124-m1-runtime-capabilities.json) remains scoped evidence for its original bindings.
+
+Independent contract/profile qualification, superagent Ticket/source wiring and broader authority/lifecycle/fault coverage still need evidence before full M1/M2 acceptance. M4 closes its frozen qualification matrix; M5 requires project-owned pilot/evaluator inputs and launch qualification; M6 handles reviewed adoption and authority-preserving migration. No live scientific profile or migration is qualified by the README cleanup.
+
+The removed README milestone table incorrectly labeled M1/M2 as Planned and named M1 as the next implementation step. Its old bytes remain in Git at 955292c; the current table and next-work record above govern implementation tracking. Historical README revision rows remain in README.md for the required artifact audit trail.
 
 ## 1604 entry accounting
 
@@ -149,6 +162,14 @@ I think the project related artifacts and decision should stay in the project wo
 Also please confirm that for most execution and iterations, human intervention is not required, nor blocking. Human input is required only when the direction is "scientifically exhausted".
 ~~~
 
+## README and implementation tracking request, verbatim
+
+~~~text
+given that local_artifacts is git ignored, it's not appropirate to refer those in the README.md
+also remove the status of plans and next work from README.md to its own tracker.
+use .plan/tracker/ for M1-M6 impl status tracking.
+~~~
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -172,3 +193,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r17 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r18 | 2026-11-11 21:39:00 -0800  | Recorded local documentation commit, M1 encoding/N13–N15 bindings and bounded public-runtime observations; kept independent review, integrated admission and all M2–M6/live gates pending. |
 | r19 | 2026-11-11 22:08:03 -0800 | Recorded M2 guarded native and packed consumer development evidence, skill/hold behavior and exact package pins; kept independent M1/M2 acceptance and M3–M6 pending. |
+| r20 | 2026-11-11 22:39:31 -0800 | Made .plan/tracker/ canonical for M1–M6 implementation status and next work, removed the stale README duplicate, retained qualification evidence/gates and recorded the user request verbatim; implementation outcomes unchanged. |

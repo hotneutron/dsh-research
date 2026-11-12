@@ -1,10 +1,8 @@
 # dsh-research
 
-dsh-research is a research skill, policy and thin-helper package in development over existing DSH and dsh-superagent facilities. It helps a hosted project connect a scientific question to bounded execution, trustworthy evidence, separate agent review and a justified next action.
+dsh-research is a research skill, policy and thin-helper package over existing DSH and dsh-superagent facilities. It helps a hosted project connect a scientific question to bounded execution, trustworthy evidence, separate agent review and a justified next action.
 
 The hosted project owns its scientific code, plans, decisions, evidence and persistent state. dsh-research owns reusable implementation and its own engineering records. Existing DSH facilities provide workers, jobs, communication, recovery and persistence; the package does not rebuild those services.
-
-**Current status:** package 0.1.1 includes M1 record/binding encodings and M2 project-bound helpers, a guarded native tool, a research skill and a synthetic CPU example. Development fixtures have evidence; independent profile/conformance review, full M1/M2 acceptance and M3–M6 remain pending. The native route currently supports synthetic released CPU development.
 
 ## Development checks
 
@@ -15,17 +13,15 @@ npx --yes pnpm@11.7.0 install --frozen-lockfile --ignore-scripts
 npx --yes pnpm@11.7.0 build
 npx --yes pnpm@11.7.0 typecheck
 npx --yes pnpm@11.7.0 test
-mkdir -p local_artifacts/dsh-research/m1-implementation
-npx --yes pnpm@11.7.0 m1:smoke local_artifacts/dsh-research/m1-implementation/my-fresh-run
-mkdir -p local_artifacts/dsh-research/m2-implementation
-npx --yes pnpm@11.7.0 m2:smoke local_artifacts/dsh-research/m2-implementation/my-fresh-run
+
+dsh_check_root=$(mktemp -d "${TMPDIR:-/tmp}/dsh-research-checks.XXXXXX")
+npx --yes pnpm@11.7.0 m1:smoke "$dsh_check_root/compatibility"
+npx --yes pnpm@11.7.0 m2:smoke "$dsh_check_root/synthetic-cpu"
 ```
 
-Both smoke commands require a fresh output directory. It imports the built public package, validates the four synthetic records, and exercises public native SQLite and scripted DSH author/reviewer/child operations. It retains exact contract/register references, fixture bytes and traces in ignored artifacts. [Current capability receipt](.plan/review/261111-2124-m1-runtime-capabilities.json) records tested scope and pending gates. Synthetic reviewer answers and storage reopen observations do not qualify scientific review or durable job dispatch.
+Both smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling.
 
-The M2 example runs the existing AgentLoop, shell/jobs, SQLite/domain storage and project-root Session persistence. It exercises exact native reviewer completion, reservation before dispatch, valid negatives, replay, role/argv refusals, timeout-zero invalidity, drift and owned uncertainty holds. The packed package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md); its extracted example has been checked outside the source tree. See the [M2 receipt](.plan/review/261111-2142-m2-package-receipt.json) for assurance limits and retained evidence.
-
-Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. The adapter requires registered project state and never initializes an authority implicitly. Native jobs remain process-local; an unresolved launch retains its project reservation after reopen.
+The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts the `synthetic_released_cpu` policy and requires registered project state. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
 
 ## Deliberate branching vs explorative branching
 
@@ -36,14 +32,14 @@ Exploration becomes deliberate when its purpose, bounds and intended outcome are
 
 ## What the package contributes
 
-The [minimal rebuild plan](.plan/261103-1230-plan-dsh-research-plugin-rebuild.md) defines four small responsibilities:
+The [research-loop contract](docs/contracts.md) defines four small responsibilities:
 
 - A manifest binding the original request, goal, candidate, evaluator, inputs, method, bounds and acceptance policy.
 - Evidence checking against actual job terminal facts and the existing domain verifier.
 - Checkpoint interpretation and evidence-backed continuation, diagnosis, pivot, hold or completion.
 - Scoped review/admission checks over existing authoritative limits and confirmation history.
 
-These are procedures and thin helpers, not four new services. Domain tools decide scientific adequacy. The current scope omits another coordinator, scheduler, workspace pool, artifact CAS, exposure ledger, reviewer manager and research dashboard.
+These are procedures and thin helpers, not four new services. Domain tools decide scientific adequacy. Existing DSH providers supply orchestration, jobs, communication and persistence.
 
 ## Architecture: reusable code, project-owned research
 
@@ -70,7 +66,7 @@ Accorde illustrates a hosted project. Package code supplies behavior; project co
 
 ## Project ownership and persistence
 
-P is the explicitly configured canonical hosted-project root, independent of worker cwd, worktree or Session restart. The following are target paths for a qualified new route; active legacy locations remain authoritative until a verified handoff.
+P is the explicitly configured canonical hosted-project root, independent of worker cwd, worktree or Session restart. Configure provider paths under P; keep active legacy locations authoritative until a verified handoff.
 
 ```text
 P/
@@ -81,14 +77,9 @@ P/
     superagent/                       # native orchestration state
     sessions/                         # native Session persistence
     profile/                          # resolved package/provider/prompt pins
-  local_artifacts/autoresearch/dsh/
-    <goal>/paths/<path-id>/planning/   # ignored explorative plans and trackers
-    <goal>/<campaign>/<attempt>/      # immutable execution/evidence records
-    <goal>/feedback/                   # captured comment/reply versions
-    <goal>/published/<checkpoint>/    # released bytes and publication associations
 ```
 
-dsh-research keeps its own deliberate plans and compact qualification receipts in Git. Raw fixture logs and supporting experimental drafts can use ignored local development artifacts. Hosted-project scientific records never become package-global state.
+Project-owned artifact storage retains exploratory plans, immutable execution output, captured feedback and released bytes. dsh-research keeps its own deliberate plans and compact qualification receipts in Git. Raw fixture logs and supporting experimental drafts can use ignored local development artifacts. Hosted-project scientific records never become package-global state.
 
 Worktrees and project clones cannot create fresh budgets, action consumption or confirmation history. Use existing provider paths and one coupled scientific writer; do not directly rewrite native databases or initialize empty substitutes. A Git clone alone does not include ignored scientific evidence and live state: full project recovery needs supported backups/exports and their linked artifact versions.
 
@@ -96,10 +87,10 @@ See the [state/autonomy contract](.plan/261105-1705-contract-project-state-auton
 
 ## Execution, review and autonomy
 
-The [research-loop contract 2.3.3](docs/contracts.md) specifies the stages, invariants and trace records for this route. Actions pin its version/hash and qualified provider profile; admission requires verifiable commit/order proof and missing independent review holds the dependent action; the contract remains a specified baseline with a tested M1 subset; integrated and live conformance remain pending.
+The [research-loop contract](docs/contracts.md) specifies the stages, invariants and trace records. Actions pin its version/hash and qualified provider profile. Admission requires verifiable commit/order proof; missing separate review holds the dependent action.
 
 
-The intended route is:
+The contract defines this research loop:
 
 ```text
 goal and standing authority
@@ -114,7 +105,7 @@ Timeout, cancellation, crash, unknown execution and identity drift remain invali
 
 Normal execution, technical review, diagnosis, covered recovery and alternative selection continue autonomously within standing scope and resource policy. Optional comments or publication failures do not block admissible research. Human scientific steering follows independently challenged scoped exhaustion after orthogonal alternatives and a materially different rebrainstorm. Hard limits, missing permission and unresolved processes remain operational holds; explicit human stop is respected.
 
-Fresh/sealed confirmation remains disabled in the current M1–M5 route until its separate ordering, history and single-writer gates pass. Renaming a branch, profile or campaign cannot make exposed data fresh.
+The synthetic CPU profile keeps fresh/sealed confirmation off. Enabled access requires its own qualified ordering, exposure-history and single-writer policy. Renaming a branch, profile or campaign cannot make exposed data fresh.
 
 ## Keeping source and plans manageable
 
@@ -124,7 +115,7 @@ For existing main code, distinguish supported capabilities, compatible duplicati
 
 For integration, preserve the original evaluated snapshot and prepare a focused change containing reusable code, appropriate checks/docs, accepted deliberate plans and useful findings. Explorative per-attempt planning and raw outputs stay in retained artifacts. Record and verify the resulting integration tree; squashing does not reduce the merged file set or establish scientific validity.
 
-The [1452 clutter guidance](.plan/261109-1452-brainstorm-repo-clutter-and-team-artifacts.md) is a curated record with a referenced supporting draft. It now distinguishes deliberate work from explorative detail. Ignore rules do not untrack existing files, and ignored research artifacts still require retention and sharing.
+The [clutter guidance](.plan/261109-1452-brainstorm-repo-clutter-and-team-artifacts.md) distinguishes deliberate work from explorative detail. Ignore rules do not untrack existing files, and ignored research artifacts still require retention and sharing.
 
 ## Team sharing and feedback
 
@@ -142,7 +133,7 @@ captured comment version
   -> response with decision and evidence links
 ```
 
-Preserve human comment-bearing regions during narrow revision-aware updates. Reconcile uncertain publication before retrying. A publication retry cannot launch another experiment or reset budget. The [sharing plan](.plan/261105-1621-plan-lark-research-review-and-sharing.md) defines the intended capture, assessment, effect and response checks; live access and feedback qualification remain pending.
+Preserve human comment-bearing regions during narrow revision-aware updates. Reconcile uncertain publication before retrying. A publication retry cannot launch another experiment or reset budget. The [sharing guidance](.plan/261105-1621-plan-lark-research-review-and-sharing.md) describes capture, assessment, effect and response checks.
 
 ## Architecture revision and migration
 
@@ -152,25 +143,7 @@ Compare the current architecture, a narrow repair and an end-to-end alternative.
 
 Keep active runs pinned until terminal/reconciled. Rehearse supported backup/restore, use a charged released-input canary, and fence the old writer at a supported safe boundary. Preserve charges, reservations, consumed actions/reviews, feedback and publication associations, and exposure history. Rollback changes compatible code/profile; it cannot overwrite post-cutover consumption with a stale backup. Retirement follows dependency and restoration checks.
 
-## Plans and next work
-
-The [milestone index](.plan/261105-1555-review-1201-1230-and-milestones.md) and [tracker](.plan/tracker/261105-1555-milestone-execution.md) separate documented design from executed qualification:
-
-| Milestone | Intended deliverable | Current state |
-|---|---|---|
-| M0 | Architecture, ownership, autonomy and feedback design | Documented |
-| M1 | Minimal contracts and a qualified runtime/provider pairing | Planned |
-| M2 | Skill/thin helpers and a synthetic guarded worker route | Planned |
-| M3 | Automatic planning, separate review and feedback integration | Planned |
-| M4 | Scientific-property and continuity qualification | Planned |
-| M5 | Project-owned bounded released-input pilot | Planned |
-| M6 | New-work adoption, migration and conditional retirement | Planned |
-
-The current contract includes mandatory coverage and qualification-budget obligations; M1 implements the confirmation-off encoding and compatibility-row check; semantic adopter compatibility remains pending. Qualification costs belong to package coordination, with their own frozen bounds and no duplicate science charge.
-
-The next implementation step is M1: refresh capability observations, qualify the chosen public provider operations and keep unsupported routes disabled. Missing hosted-project pilot/evaluator inputs must be resolved in that project; package documentation does not substitute for them.
-
-Repository policy is in [AGENTS.md](AGENTS.md). No implementation, live pilot, state migration or cloud publication is implied by these plans.
+Implementation progress, qualification evidence and next work for M1–M6 are maintained in the [implementation tracker](.plan/tracker/261105-1555-milestone-execution.md). Repository policy is in [AGENTS.md](AGENTS.md).
 
 ## Revision History
 
@@ -187,3 +160,4 @@ Repository policy is in [AGENTS.md](AGENTS.md). No implementation, live pilot, s
 | r9 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r10 | 2026-11-11 21:39:00 -0800  | Documented runnable M1 package/fixture checks, contract 2.3.3 bindings and tested-versus-pending scope; preserved concise branching guidance and architecture figure. |
 | r11 | 2026-11-11 22:08:03 -0800 | Recorded M2 native helper/skill/packed-example implementation, runnable checks and exact tested-versus-pending scope; preserved concise branching guidance and the architecture figure. |
+| r12 | 2026-11-11 22:41:00 -0800 | Removed private artifact paths and duplicate milestone status/next-work content; linked the canonical implementation tracker and retained portable usage, architecture, branching guidance and historical revisions. |
