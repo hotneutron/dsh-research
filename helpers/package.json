@@ -1,6 +1,6 @@
 {
   "name": "dsh-research",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "type": "module",
   "description": "Project-owned research contracts for DSH and superagent",
@@ -20,11 +20,7 @@
   },
   "files": [
     "dist",
-    "docs/contracts.md",
-    "docs/compatibility.json",
-    "skills",
-    "examples",
-    "docs/integration.md"
+    "examples"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node scripts/copy-qualification-lock.mjs",
@@ -33,7 +29,8 @@
     "m1:smoke": "tsx scripts/m1-smoke.ts",
     "m2:smoke": "node examples/synthetic-cpu/run.mjs",
     "m3:smoke": "node examples/synthetic-cpu/automatic.mjs",
-    "m4:smoke": "node examples/synthetic-cpu/faults.mjs"
+    "m4:smoke": "node examples/synthetic-cpu/faults.mjs",
+    "m6:smoke": "node examples/synthetic-cpu/continuity.mjs"
   },
   "dependencies": {
     "zod": "4.4.3"

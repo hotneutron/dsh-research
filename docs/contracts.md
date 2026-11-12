@@ -2,7 +2,7 @@
 
 Contract ID: `dsh-research/research-loop`.
 Contract version: `2.3.3`.
-Created: 2026-11-11 17:02 -0800. Updated: 2026-11-11 21:39:00 -0800.
+Created: 2026-11-11 17:02 -0800. Updated: 2026-11-12 00:30:09 -0800.
 Status: specified design baseline. M1 public encodings and keyless provider fixtures have scoped development checks; independent/full conformance and live qualification remain pending. This document grants no execution or deployment authority.
 
 ## Scope and authority
@@ -32,7 +32,7 @@ Each frozen action must bind `contract_ref`: contract ID, version, immutable con
 
 For each required obligation/profile, record its assurance separately: `specified`, `implemented`, `fixture_verified`, `live_verified`, or `disabled`, with supporting references and known limits. A specified requirement is a design obligation, not an implemented guarantee. A fixture pass does not establish live provider behavior. Required unsupported operations keep their route disabled or held for qualification.
 
-M1 freezes the public encoding/provider mappings and compatibility matrix for the semantic records below. [Encoding v1](../src/records.ts) and [binding checks](../src/bindings.ts) implement a confirmation-off subset; parsing does not grant authorization or qualify provider semantics. Enabled confirmation remains disabled pending its own reviewed encoding and provider checks.
+M1 freezes the public encoding/provider mappings and compatibility matrix for the semantic records below. [Encoding v1](../helpers/src/records.ts) and [binding checks](../helpers/src/bindings.ts) implement a confirmation-off subset; parsing does not grant authorization or qualify provider semantics. Enabled confirmation remains disabled pending its own reviewed encoding and provider checks.
 
 ## Four semantic records
 
@@ -165,7 +165,7 @@ Execution status, evidence status and domain verdict remain separate. Suggested 
 | Worker/runtime restart without terminal settlement | Keep unknown ownership/reservation and use actual query/teardown evidence; a restarted Session does not prove continued or stopped execution |
 | Final/sealed input referenced under the initial profile | Refuse before protected-byte access; no new ledger or implicit enabled-confirmation path |
 
-The bounded Accorde pilot remains a proposed released-input example: at most four benchmark attempts, each with a 60-second timeout reservation (240 seconds total), concurrency one, no fan-out/GPU collection/fresh confirmation. Retries count within the four. Model/reviewer work and runtime overhead require their own declared bounds. This example grants no launch authority, and a campaign bound is not a goal-exhaustion rule.
+An illustrative synthetic CPU policy can use the following proposed limits: at most four benchmark attempts, each with a 60-second timeout reservation (240 seconds total), concurrency one, no fan-out/GPU collection/fresh confirmation. Retries count within the four. Model/reviewer work and runtime overhead require their own declared bounds. This arithmetic example grants no Accorde GPU pilot scope, budget or launch authority, and a campaign bound is not a goal-exhaustion rule. Accorde GPU adoption binds its own reviewed project policy and complete-unit resource budget.
 
 ## Feedback and publication side channels
 
@@ -273,7 +273,7 @@ A qualification-budget overrun or qualification-only envelope failure uses the [
 
 ## Budget and envelope arbitration for T4
 
-Qualification budget and an operating envelope are different constraints with their own bound references, units and purpose. The Accorde pilot's 240 seconds is a benchmark timeout reservation, not automatically the package-coordination window W or a qualification budget. Compare only against the actual accepted envelope, retaining its original W/D and C_run+C_qual result.
+Qualification budget and an operating envelope are different constraints with their own bound references, units and purpose. The illustrative synthetic policy's 240 seconds is a benchmark timeout reservation, not automatically the package-coordination window W or a qualification budget. Compare only against the actual accepted envelope, retaining its original W/D and C_run+C_qual result.
 
 | Observation | First disposition | T4 eligibility |
 |---|---|---|
@@ -375,3 +375,5 @@ The r4 value `2026-11-11 18:08 -0800` is retained from the initial edit, but is 
 | r7 | 2026-11-11 20:30:26 -0800 | Addressed N8–N10: accepted-envelope horizon/denominator binding, owned qualification holds and explicit T4 C_run/C_qual evidence; specified 2.3.1 without runtime qualification. |
 | r8 | 2026-11-11 21:12:18 -0800 | Addressed N11–N12 with a cumulative version assessment/adoption gate and explicit budget/envelope/qualification-cost arbitration; specified 2.3.2 without runtime conformance or migration. |
 | r9 | 2026-11-11 21:39:00 -0800  | Incorporated N13–N15 into M1 encoding: labeled retrospective assessments, bound machine-readable compatibility rows and accepted envelope declarations; retained prior contract bytes and pending independent/provider/live qualification. |
+| r10 | 2026-11-12 00:07:50 -0800 | Editorial source-link update for helpers layout; contract obligations, version 2.3.3 and compatibility table remain unchanged. Earlier frozen bytes retain their original hashes. |
+| r11 | 2026-11-12 00:30:09 -0800 | Corrected the illustrative CPU arithmetic to synthetic helper scope and removed its mistaken Accorde attribution; generic invariants, encoding, version 2.3.3 and compatibility table remain unchanged. |

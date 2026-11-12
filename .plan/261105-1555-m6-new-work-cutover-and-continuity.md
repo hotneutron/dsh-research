@@ -1,8 +1,8 @@
 # M6 — Adopt new work and preserve authority through cutover
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r14. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:31:07 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
-Dependency: accepted M5 workflow evidence. New-work adoption, enabled confirmation and legacy retirement are separate gates; a pilot pass cannot satisfy all three.
+Dependency: accepted M5 GPU workflow evidence. New-work adoption, enabled confirmation and legacy retirement are separate gates; a pilot pass cannot satisfy all three.
 
 Outcome: a project-owner decision with per-campaign authority, preserved budget/exposure and a reversible operational rollback.
 
@@ -16,7 +16,7 @@ Classify by purpose: deliberate project branches have defined scope/deliverables
 
 Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. The canonical tracker records implementation/qualification progress.
 
-The target confirmation authority is project-local (for Accorde: .autoresearch/confirmation/accorde-ppp.sqlite3), but the existing global-path ledger is a transition exception. Do not move/create it during this documentation task. A supported idle backup, full history/charge/opening reconciliation and one-writer handoff must preserve the same authority before relocating it; active pins and irreversible history stay intact.
+The target confirmation authority is project-local (for Accorde: .autoresearch/confirmation/accorde-ppp.sqlite3), but the existing global-path ledger is a transition exception. Read-only preparation does not move or initialize it. A supported idle backup, full history/charge/opening reconciliation and one-writer handoff must preserve the same authority before relocating it; active pins and irreversible history stay intact.
 
 Resolved native stateDir, Session root, storage path and profile recipes belong to the hosted project. Rollback may change transport/code pins but cannot restore an old zero budget, consumed review or exposure state. Adoption and ordinary new-work continuation within standing policy are agent decisions; they do not require a fresh human approval. Scientific exhaustion is the required direction-escalation boundary.
 
@@ -36,7 +36,7 @@ For the existing project ledger at ~/.local/state/autoresearch/confirmation/acco
 | Decision | Required evidence | Permitted outcome |
 |---|---|---|
 | New development/released-input work | Accepted M4/M5 route, operational value, exact runtime/profile lock, one admission owner, confirmed tool/source scope | Adopt for explicitly authorized new campaigns; confirmation remains off |
-| Fresh confirmation | Full P06 ordering/linkage/aggregate semantics passed against existing authority, stable namespace/history, frozen subject and single-writer handoff | Enable only after exact qualified procedure/standing scope and independent agent review; otherwise remain disabled |
+| Fresh confirmation | Full DATA-2 ordering/linkage/aggregate semantics passed against existing authority, stable namespace/history, frozen subject and single-writer handoff | Enable only after exact qualified procedure/standing scope and independent agent review; otherwise remain disabled |
 | Retire legacy dependency | No active/unknown campaign needs old runtime, complete budget/exposure/evidence continuity, verified backup and rollback | Archive reference/code conservatively; otherwise retain existing authority |
 
 The minimal package need not ship a new confirmation implementation. If that authority still belongs to the old runtime, keep its narrow dependency until an actual reconciled handoff. Do not retire it solely to declare the new package standalone.
@@ -129,3 +129,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r12 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r13 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r14 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r15 | 2026-11-12 00:09:54 -0800 | Linked concrete Accorde preparation, retained live qualification and authority gates, and delegated new inventory/continuity evidence to the canonical tracker. |
+| r16 | 2026-11-12 00:31:07 -0800 | Bound adoption to corrected GPU M5 evidence; helper CPU/storage fixtures remain scoped and do not qualify GPU or legacy authority handoff. |

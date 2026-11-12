@@ -39,6 +39,9 @@ test('historical state remains readable while rollback cannot refund consumed ac
   const active = reserveAction(zero, p.manifest, p.ref('manifest', p.manifest), p.review, p.ref('review', p.review), policy, policyRef, 0, 'claim')
   assert.equal(auditContinuity(active, active).preserved, true)
   assert.ok(auditContinuity(active, zero).violations.includes('consumption_refunded'))
+  const unknown = structuredClone(active)
+  unknown.actions[p.manifest.action_id]!.phase = 'unknown'
+  assert.ok(auditContinuity(unknown, active).violations.includes(`dispatch_phase_rolled_back:${p.manifest.action_id}`))
   const { consumed_review_requests, review_requests, rejected_subjects, feedback, publications, ...base } = zero
   const old = LegacyResearchStateSchema.parse({ ...base, schema_version: 1 })
   assert.equal(old.schema_version, 1)

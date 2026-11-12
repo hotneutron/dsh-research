@@ -1,8 +1,8 @@
-# M5 — Qualify a project-owned autonomous pilot
+# M5 — Qualify a project-owned GPU research pilot
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:30:09 -0800. Revision: r18. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
-Qualify one project-owned autonomous pilot through the reusable package. The concrete `Accorde pilot plan` (project-owned input pending) and `integration plan` (project-owned input pending) are authoritative for that project. This file is the package milestone definition, not a second Accorde campaign/decision store.
+Qualify one project-owned GPU research pilot through the reusable package. Accorde targets GPU performance modeling and CUDA execution/profiling; the legacy CPU replay is historical software evidence. The project-owned [Accorde integration/pilot charter](../../accorde/.plan/261112-0004-dsh-research-integration-and-continuity.md) now exists as preparation. Its accepted live bindings and qualification remain pending; the project owns scientific authority. This file is the package milestone definition, not a second Accorde campaign/decision store.
 
 ## Current design basis
 
@@ -32,13 +32,13 @@ Adopt an exact qualified [contract/profile reference](../docs/contracts.md) in t
 
 Demonstrate real project-local result/evidence continuity, automatic reviewer involvement, correct charged attempts, no bypass/duplicate launch, comment capture-to-disposition-to-actual-effect proof, and continuation without waiting for human feedback. Valid-negative and procedural outcomes trigger autonomous diagnosis/recovery/pivot; scientific exhaustion requires a reviewed reasoned assessment before human steering.
 
-The bounded pilot is deliberate work: version its accepted project plan/contracts and useful milestone summary in P/.plan/. Keep explorative alternatives/per-attempt planning and large/raw outputs in the ignored project artifact root, preserving exact prompts and snapshots. The frozen pilot packet binds plan snapshot/hash, source/evaluator/input and architecture/profile pins, remaining bounds and exact agent review. Include required permitted plan/evidence bytes in a recipient-accessible export and demonstrate the feedback disposition-to-effect loop. Missing project plan/evaluator references keep live qualification pending.
+The bounded pilot is deliberate work: version its accepted project plan/contracts and useful milestone summary in P/.plan/. Keep explorative alternatives/per-attempt planning and large/raw outputs in the ignored project artifact root, preserving exact prompts and snapshots. The frozen pilot packet binds plan snapshot/hash, source/evaluator/input and architecture/profile pins, remaining bounds and exact agent review. Include required permitted plan/evidence bytes in a recipient-accessible export and demonstrate the feedback disposition-to-effect loop. Unqualified project execution/review/authority/budget bindings keep live qualification pending; available draft source/input references alone do not close that gate.
 
-The Accorde example remains capped at four attempts times 60 seconds (240 seconds of benchmark timeout reservation) and concurrency one. Retries count within the four attempts; there is no fan-out, GPU collection or sealed/fresh confirmation. Declare paid author/reviewer/model and runtime-overhead bounds separately; the benchmark reservation does not cover them. That campaign cap is not the project's outer-loop termination rule. Implementation reports/decisions and specific evaluator adapters are filed in Accorde. Only reusable-package qualification receipts belong here.
+Bind the actual project GPU workload/campaign, host/device UUID, exact compiler/CUDA/driver/runtime environment and whole scheduling unit before pilot freeze. Derive credible bounds for correctness, compilation, warm-up, capture/repeats/profiling, verification and teardown; retain exclusive resource ownership, process/device quiescence or unresolved reservations. The former four-attempt/240-second CPU packet is withdrawn from Accorde M5 and supplies no GPU budget. Declare GPU benchmark, paid author/reviewer/model and runtime-coordination bounds separately under existing aggregate authority. Confirmation remains off. Exact project result/verifier mappings, independent GPU-profile and scientific/property qualification are required; existing synthetic CPU fixtures remain engineering mechanics evidence. Implementation reports and scientific decisions stay in Accorde.
 
 ## Earlier User Prompts and Quoted Examples, Verbatim
 
-These are retained history; the current contract below supersedes older placement and human-gate choices.
+These are retained history; the GPU scope and current ownership/authority contract supersede the earlier CPU pilot and placement/human-gate choices.
 
 ~~~text
 <python> <accorde>/tools/autoresearch_ppp/replay.py --data <frozen-released-selection> --out <new-attempt-output> --candidate <one-frozen-candidate>
@@ -62,6 +62,12 @@ I think the project related artifacts and decision should stay in the project wo
 Also please confirm that for most execution and iterations, human intervention is not required, nor blocking. Human input is required only when the direction is "scientifically exhausted".
 ~~~
 
+## GPU Scope Correction, Verbatim
+
+~~~text
+accorde is for GPU, not CPU.
+~~~
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -82,3 +88,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r14 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r15 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r16 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r17 | 2026-11-12 00:09:54 -0800 | Linked concrete Accorde preparation, retained live qualification and authority gates, and delegated new inventory/continuity evidence to the canonical tracker. |
+| r18 | 2026-11-12 00:30:09 -0800 | Renamed the milestone to GPU pilot, withdrew borrowed CPU scope/budget and required exact complete-unit device/environment/resource/verifier qualification; historical prompts/receipts retained. |

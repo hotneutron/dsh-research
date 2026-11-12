@@ -12,8 +12,8 @@ export function packets(projectRoot = '/tmp/dsh-research-synthetic-project') {
     artifacts.set(uri, bytes)
     return { uri, sha256: sha256(bytes), size_bytes: bytes.byteLength }
   }
-  const contractBytes = readFileSync(new URL('../../docs/contracts.md', import.meta.url))
-  const registerBytes = readFileSync(new URL('../../docs/compatibility.json', import.meta.url))
+  const contractBytes = readFileSync(new URL('../../../docs/contracts.md', import.meta.url))
+  const registerBytes = readFileSync(new URL('../../../docs/compatibility.json', import.meta.url))
   const register = JSON.parse(registerBytes.toString())
   const version = contractBytes.toString().match(/^Contract version: `([^`]+)`\./m)![1]!
   const row = register.rows.find((r: { contract_version: string }) => r.contract_version === version)

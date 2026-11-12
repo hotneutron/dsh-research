@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T00:12:40.483023-08:00",
+  "request_verbatim": "move the package.json etc to helpers/ then. \nwork on M5 and M6",
+  "package": {
+    "version": "0.1.3",
+    "root": "helpers/",
+    "tarball_sha256": "fc0c7dbd5b87693dce8ec6b8c2875028004e43c6a44803402fec473bf5973b35",
+    "entries": 42,
+    "generated_docs_skill_lock": "exact canonical bytes",
+    "contract_version": "2.3.3",
+    "contract_sha256": "effba8279cf60e58992cf6a79161c6fe0381b666e6b01c58fc63cb48ec525f26",
+    "contract_change": "editorial links only; obligations and compatibility table unchanged"
+  },
+  "validation": {
+    "frozen_install_build_typecheck": "passed",
+    "behavior_tests_passed": 36,
+    "relocated_M1_M2_M4_M6_native": "passed; M6 includes M3 automatic workflow",
+    "extracted_package_native_restore": "passed with exact pinned development dependencies supplied",
+    "backup_linked_files_verified": 78,
+    "stale_rollback": "refused",
+    "project_bridge_checks_passed": 8,
+    "project_verifier_checks_passed": 5
+  },
+  "M5": {
+    "status": "project preparation implemented; live held",
+    "project_plan": {
+      "path": "/Users/bytedance/wk/accorde/.plan/261112-0004-dsh-research-integration-and-continuity.md",
+      "sha256": "0313a0be18450e5ca59b74b7981111b4c76d81c79d2b1a7494c10e5aae1cdc94",
+      "size_bytes": 7125
+    },
+    "project_tracker": {
+      "path": "/Users/bytedance/wk/accorde/.plan/tracker/261112-0004-dsh-research-adoption.md",
+      "sha256": "b7385bb95075432b0b2b102c54a41e5ccbb660b725a308192f952c5017c45244",
+      "size_bytes": 3791
+    },
+    "released_input_sha256": "547005f4e9c71cf6762a40397d397a6dca4780a404b69d848b739e5c13417283",
+    "required_draft_cells": 80,
+    "covered_live_cells": 0,
+    "remaining_gates": [
+      "Separate native review and full target-profile M1-M4 qualification",
+      "Qualified project execution policy; current adapter remains synthetic-only",
+      "Resolved registered project authority, author/reviewer/provider/prompt profile and model/coordination limits",
+      "Actual feedback-to-effect and team recipient-access proof"
+    ]
+  },
+  "M6": {
+    "status": "metadata inventory and conservative audit/recovery implemented; live held",
+    "legacy_locks_inventoried": 9,
+    "actual_consumers_charges_reservations_exposure": "unresolved",
+    "live_recovery_and_fencing": "unqualified",
+    "new_work_confirmation_retirement": "separate held decisions"
+  },
+  "accounting": {
+    "synthetic_attempt_reservations_including_uncertain": 13,
+    "synthetic_attempt_ceiling": 64,
+    "synthetic_deadline_ms": 2000,
+    "live_scientific_attempts": 0,
+    "paid_model_calls": 0,
+    "GPU_collections": 0,
+    "confirmation_byte_reads": 0,
+    "scientific_state_mutations": 0,
+    "authority_handoffs": 0
+  },
+  "retained_detail": {
+    "path": "local_artifacts/dsh-research/package-layout-and-adoption/261112-0012-verification-detail.json",
+    "sha256": "cfa6cc4974c4c74403558aae665c7e9529517688ccda67a2d62567c812ad5834",
+    "size_bytes": 11664
+  },
+  "limitations": [
+    "No independent target-profile/live scientific qualification or project execution policy enabled",
+    "No supported live fencing, exposure handoff or canonical-root relocation qualified",
+    "No team recipient-access/cloud-sharing proof",
+    "Uncommitted local changes; no push"
+  ],
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T00:11:00-08:00",
+      "change": "Collected package and project preparation/recovery checks"
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T00:12:40.483023-08:00",
+      "change": "Added pre-byte-read released-path guard and retained compact summary"
+    },
+    {
+      "revision": "r3",
+      "timestamp": "2026-11-12T00:32:54.682944-08:00",
+      "change": "Annotated rejected CPU attribution prospectively; original captured metrics/source hashes retained"
+    }
+  ],
+  "scope_correction": {
+    "timestamp": "2026-11-12T00:32:54.682944-08:00",
+    "status": "Historical CPU-project preparation; withdrawn as Accorde M5",
+    "current_assessment": "261112-0025-gpu-scope-correction.json",
+    "original_bytes": "Preserved in original Git commit/archive and local qualification detail"
+  }
+}

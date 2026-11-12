@@ -6,9 +6,10 @@ The hosted project owns its scientific code, plans, decisions, evidence and pers
 
 ## Development checks
 
-Use Node >=24.9 and the pinned pnpm version. From this checkout:
+Use Node >=24.9 and the pinned pnpm version. The TypeScript package lives in `helpers/`; canonical docs and the research skill remain at the repository root. From this checkout:
 
 ```sh
+cd helpers
 npx --yes pnpm@11.7.0 install --frozen-lockfile --ignore-scripts
 npx --yes pnpm@11.7.0 build
 npx --yes pnpm@11.7.0 typecheck
@@ -19,9 +20,10 @@ npx --yes pnpm@11.7.0 m1:smoke "$dsh_check_root/compatibility"
 npx --yes pnpm@11.7.0 m2:smoke "$dsh_check_root/synthetic-cpu"
 npx --yes pnpm@11.7.0 m3:smoke "$dsh_check_root/automatic"
 npx --yes pnpm@11.7.0 m4:smoke "$dsh_check_root/faults"
+npx --yes pnpm@11.7.0 m6:smoke "$dsh_check_root/continuity"
 ```
 
-The smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling.
+The smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling. The continuity example rehearses an idle SQLite backup, linked artifact export and native restore under the original canonical project identity.
 
 See the [native integration guide](docs/integration.md) for the proposal/review/feedback tools, project configuration and read-only audits.
 
@@ -66,7 +68,7 @@ flowchart TB
   F --> E
 ```
 
-Accorde illustrates a hosted project. Package code supplies behavior; project configuration and records supply research authority. See the [M0 architecture plan](.plan/261105-1616-m0-architecture-workflows-and-idempotency.md).
+Accorde illustrates a hosted project researching GPU performance modeling, CUDA execution and profiling. Synthetic CPU examples exercise reusable helper mechanics. Package code supplies behavior; project configuration and records supply research authority. See the [M0 architecture plan](.plan/261105-1616-m0-architecture-workflows-and-idempotency.md).
 
 ## Project ownership and persistence
 
@@ -166,3 +168,5 @@ Implementation progress, qualification evidence and next work for M1–M6 are ma
 | r11 | 2026-11-11 22:08:03 -0800 | Recorded M2 native helper/skill/packed-example implementation, runnable checks and exact tested-versus-pending scope; preserved concise branching guidance and the architecture figure. |
 | r12 | 2026-11-11 22:41:00 -0800 | Removed private artifact paths and duplicate milestone status/next-work content; linked the canonical implementation tracker and retained portable usage, architecture, branching guidance and historical revisions. |
 | r13 | 2026-11-11 23:30:50 -0800 | Added portable automatic workflow/fault check commands and stable integration guidance; implementation status remains solely in the tracked milestone record. |
+| r14 | 2026-11-12 00:07:50 -0800 | Grouped package configuration, source, tests, scripts and examples under helpers; build emits canonical docs and skill copies, and a portable native continuity rehearsal. |
+| r15 | 2026-11-12 00:30:09 -0800 | Clarified Accorde's GPU scientific target and the helper purpose of synthetic CPU examples. |

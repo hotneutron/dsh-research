@@ -1,6 +1,6 @@
 # Native research integration
 
-Use the exact package and peer versions pinned in package.json and the generated qualification lock. The native API is exported from `dsh-research/native`; records, binding checks and read-only audits are exported from `dsh-research`.
+Use the exact package and peer versions pinned in helpers/package.json and the generated qualification lock. The native API is exported from `dsh-research/native`; records, binding checks and read-only audits are exported from `dsh-research`.
 
 ## Project configuration
 
@@ -16,7 +16,7 @@ Configure one canonical hosted-project root P and one authorized host writer. Na
 | Native history | @deepseek-ai/dsh-session-persistence-jsonl | P/.autoresearch/dsh/sessions |
 | Skill loading | @deepseek-ai/dsh-skill-filesystem | Explicit package skills directory; verify discovered bytes |
 
-The shipped development policy accepts `synthetic_released_cpu`. Its evaluator entrypoint and declared input/mode template are pinned. Extending to a scientific project requires its own reviewed policy, input/evaluator mapping and qualification; a caller cannot promote the development scope.
+The shipped development policy accepts `synthetic_released_cpu`. Its evaluator entrypoint and declared input/mode template are pinned. Accorde's scientific route targets GPU performance modeling and CUDA execution/profiling. It requires its own reviewed policy, exact workload/device/environment, complete-unit budget, exclusive resource ownership, process/device quiescence and project-domain output/verifier mapping. The existing GPU source interfaces remain unqualified for DSH adoption; a caller cannot promote the synthetic development scope.
 
 ## Coupled record versions
 
@@ -49,9 +49,13 @@ Normal `progressReport` outcomes include `human_action=null`. Supply an existing
 
 ## Reproducible examples and audits
 
-The [shared fixture](../examples/synthetic-cpu/fixture.mjs) supplies disposable synthetic authority and a deterministic project verifier. [Automatic execution](../examples/synthetic-cpu/automatic.mjs) exercises proposal, separate native review, a valid negative, edited feedback and an actual successor effect. [Fault drills](../examples/synthetic-cpu/faults.mjs) cover reviewer interruption, uncertain association, delayed acknowledgement and replay.
+The [shared fixture](../helpers/examples/synthetic-cpu/fixture.mjs) supplies disposable synthetic authority and a deterministic project verifier. [Automatic execution](../helpers/examples/synthetic-cpu/automatic.mjs) exercises proposal, separate native review, a valid negative, edited feedback and an actual successor effect. [Fault drills](../helpers/examples/synthetic-cpu/faults.mjs) cover reviewer interruption, uncertain association, delayed acknowledgement and replay.
 
 `auditCoverage` checks closure only for its exact frozen matrix, scope and assurance. Missing or conflicting assertions remain unresolved/failed; fixture observations cannot satisfy live cells. Observation provenance and semantic/domain review remain separate qualification obligations. The fault matrix is a finite union of relevant cells, not an automatic cross product of every property and fault.
+
+`auditContinuity` checks full immutable action/review identities, dispatch phases, charged history, rejected subjects, finalized feedback/effects and publication audience/access proofs. A changed writer returns `writer_changed_requires_handoff`; any changed feedback cursor returns `feedback_cursor_requires_reconciliation`. Profile/policy changes also require explicit compatibility review. These results require external supported fencing or exact scan-chain evidence, which two snapshots cannot supply. Even a clean snapshot audit does not approve deployment or certify legacy exposure history.
+
+The [continuity rehearsal](../helpers/examples/synthetic-cpu/continuity.mjs) closes the disposable source writer, uses Node's supported SQLite backup API, exports exact linked artifact and native Session files, and opens the restored database through the native domain without reseeding. It preserves the original canonical root; actual relocation, running jobs and live authority handoff require their own qualification.
 
 Implementation status and blockers are maintained in the [M1–M6 tracker](../.plan/tracker/261105-1555-milestone-execution.md).
 
@@ -60,3 +64,5 @@ Implementation status and blockers are maintained in the [M1–M6 tracker](../.p
 | Revision | Timestamp | Change |
 |---|---|---|
 | r1 | 2026-11-11 23:30:50 -0800 | Documented exact native facilities, automatic review/feedback, versioned state and audit boundaries with reproducible package examples. |
+| r2 | 2026-11-12 00:07:50 -0800 | Updated helpers paths and documented conservative continuity, compatibility and supported disposable backup/restore checks. |
+| r3 | 2026-11-12 00:30:09 -0800 | Corrected the Accorde integration target to GPU and recorded pending project-specific device/resource/terminal/verifier qualification. |

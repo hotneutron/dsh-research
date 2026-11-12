@@ -1,8 +1,9 @@
 # Local package-development artifacts; shared summaries remain under .plan/.
-/local_artifacts/dsh-research/
-/node_modules/
-/dist/
+/local_artifacts/
+/helpers/node_modules/
+/helpers/dist/
 
 ## Revision History
 # 2026-11-09 16:01 -0800: Ignore detailed local development artifacts while retaining curated plans and summaries.
 # 2026-11-11 21:26:33 -0800: Ignore installed dependencies and generated package output.
+# 2026-11-11 23:59:30 -0800: Follow the helper package layout; retain the user-expanded local_artifacts ignore.

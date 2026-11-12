@@ -1,6 +1,6 @@
 # M4 — Qualify the categorized research-loop properties on reused boundaries
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r15. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:31:07 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: M2/M3 integrated route; test-case design may begin with M1. This is bounded offline protocol qualification, not a hardware/model study.
 
@@ -22,7 +22,7 @@ Normal execution, diagnosis, separate agent review, alternatives and covered rec
 
 - A hosted-project root/worktree change cannot put scientific state or Doc mappings in the shared package; all coupled state/provider roots stay anchored to P.
 - Normal result, valid negative, agent reviewer request_changes and correctable procedural failure lead to autonomous continuation/diagnosis/recovery without human_action or a person-stage dependency.
-- A terminal four-attempt campaign triggers outer-loop assessment; it does not imply scientific exhaustion or reset aggregate charges.
+- A terminal bounded campaign triggers outer-loop assessment; it does not imply scientific exhaustion or reset aggregate charges.
 - New/edited/duplicate comments survive capture/wakeup/restart and get project-local dispositions. An adopted suggestion must appear in a changed frozen successor and an actual executed/failed/pending effect receipt.
 - No comments and a Docs publication outage do not block an admissible iteration. Cursor progress, collection, adoption and publication are separate.
 - Exhaustion must survive independent review after orthogonal alternatives/rebrainstorm. Unresolved process/permission/hard-limit holds remain operational, never mislabeled scientific exhaustion.
@@ -165,3 +165,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r13 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r15 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r16 | 2026-11-12 00:31:07 -0800 | Made bounded-campaign assessment independent of the superseded Accorde CPU four-attempt example; declared project GPU bounds remain required. |

@@ -75,7 +75,7 @@ export async function createCpuFixture(outputArg, options = {}) {
   domain = await facility.open(researchDomain)
   const table = domain.table('projects')
   await ctx.plugin(Skills)
-  await ctx.plugin(FilesystemSkills, { includeDefaultRoots: false, customSkillDirs: [join(packageRoot, 'skills')], watch: false })
+  await ctx.plugin(FilesystemSkills, { includeDefaultRoots: false, customSkillDirs: [join(packageRoot, 'dist/skills')], watch: false })
   const skill = await ctx.skills.get('research', { cwd: root })
   assert.ok(skill && skill.content.includes('research_run'))
   cases.push({ id: 'filesystem-skill-loading', outcome: 'passed', path: skill.path, body_sha256: sha256(skill.content) })
@@ -95,8 +95,8 @@ export async function createCpuFixture(outputArg, options = {}) {
     ctx.subagents.registerProvider({ name: 'synthetic-review', capabilities: { ...NO_START_CAPABILITIES, agentOptions: true, toolFilter: true, persona: true, depthLimit: true }, inheritsParentContext: false, prepareContinuable: async () => ({}) })
   }
 
-  const contract = await source('snapshots/contracts.md', join(packageRoot, 'docs/contracts.md'))
-  const registerBytes = await readFile(join(packageRoot, 'docs/compatibility.json'))
+  const contract = await source('snapshots/contracts.md', join(packageRoot, 'dist/docs/contracts.md'))
+  const registerBytes = await readFile(join(packageRoot, 'dist/docs/compatibility.json'))
   const register = JSON.parse(registerBytes.toString())
   const registerRef = await artifacts.write('snapshots/compatibility.json', registerBytes)
   const row = register.rows.at(-1)

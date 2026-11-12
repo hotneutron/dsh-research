@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T00:32:54.682944-08:00",
+  "user_prompts_verbatim": [
+    "accorde is for GPU, not CPU.",
+    "commit, amend and push with force-with-lease."
+  ],
+  "scientific_target": "Accorde GPU performance modeling, CUDA execution/profiling and operation-shape generalization",
+  "supersedes": "M5 CPU-project scope and budget claims in 261112-0004-layout-and-adoption-receipt.json; original helper/storage observations remain historical",
+  "removed_project_files": [
+    "tools/dsh_research/replay_bridge.py",
+    "tools/dsh_research/verifier.mjs"
+  ],
+  "project_preparation": {
+    "code": {
+      "uri": "/Users/bytedance/wk/accorde/tools/dsh_research/prepare.py",
+      "sha256": "4713b7281b18b552a74e0fe896c831def802d1775bb13a515e3868cb81842620",
+      "size_bytes": 9601
+    },
+    "plan": {
+      "uri": "/Users/bytedance/wk/accorde/.plan/261112-0004-dsh-research-integration-and-continuity.md",
+      "sha256": "3e5c0b7b5fe35f896895829b1e8ef33d43a3c87cab6ba2c54625dc2a140abedb",
+      "size_bytes": 7512
+    },
+    "tracker": {
+      "uri": "/Users/bytedance/wk/accorde/.plan/tracker/261112-0004-dsh-research-adoption.md",
+      "sha256": "491818bfb6c07c772b9ef9fc8f28c335adfeee89df0311450a12c196fe5a6819",
+      "size_bytes": 4323
+    },
+    "intake": {
+      "uri": "/Users/bytedance/wk/accorde/local_artifacts/autoresearch/dsh/accorde-gpu-pilot/preparation/261112-0031-gpu-intake/intake.json",
+      "sha256": "aa387c612f5c6aaa673db7c839527dba9f694ac31b028e14a19b07d1f5ba5225",
+      "size_bytes": 15003
+    },
+    "verification": {
+      "uri": "/Users/bytedance/wk/accorde/local_artifacts/autoresearch/dsh/accorde-gpu-pilot/preparation/261112-0031-gpu-intake/verification.json",
+      "sha256": "f1bd612393d95837137ac76982484e7e7a93377d94d11be811c547aac3ad2bf2",
+      "size_bytes": 704
+    },
+    "archive": {
+      "uri": "/Users/bytedance/wk/accorde/local_artifacts/autoresearch/dsh/accorde-gpu-pilot/superseded-cpu-preparation/261112-0027/archive-manifest.json",
+      "sha256": "9fa83213f86c7c4e6c03e3799b5f10b3544b6ab0c30600694ebe2e2caf069abb",
+      "size_bytes": 1298
+    },
+    "legacy_locks": 9,
+    "draft_cells": 85,
+    "qualified_GPU_cells": 0
+  },
+  "validation": {
+    "helper_build_typecheck": "passed",
+    "helper_tests_passed": 36,
+    "nonexecuting_intake_checks_passed": 9,
+    "only_intake_subprocess": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "GPU_launches": 0,
+    "scientific_dataset_reads": 0,
+    "confirmation_byte_reads": 0,
+    "scientific_authority_mutations": 0
+  },
+  "pending": [
+    "Project-selected GPU workload/goal and current host/device/environment",
+    "Complete GPU-unit plus model/reviewer/coordination budgets under existing aggregate authority",
+    "Qualified GPU resource/launch/terminal-quiescence/domain-verifier/reviewer route; native adapter still synthetic-only",
+    "Actual team recipient access and accepted M5 before M6 live handoff"
+  ],
+  "contract": {
+    "version": "2.3.3",
+    "artifact": {
+      "uri": "docs/contracts.md",
+      "sha256": "c9200005507399b64a1ea1338c5fe1e3ab7da72a45a17f3e10eb3526d3dc911b",
+      "size_bytes": 66055
+    },
+    "change": "Example-attribution correction only; invariant set, public encoding and compatibility table unchanged"
+  },
+  "publication": {
+    "mode": "Amend prior commits and push with explicit remote-SHA leases",
+    "package_expected_remote": "41c788a4f0c591de3c54e923fc71a3ecd5ce8565",
+    "project_expected_remote": "887c99b2386dc33fbe8388cfde9bf51b7d914df9"
+  }
+}

@@ -1,6 +1,6 @@
 # Review of the 1201 brainstorms and 1230 plans; milestone execution index
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r22. Status: source review and M0–M6 documentation drafted; M1–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:30:09 -0800. Revision: r23. Status: source/milestone scope index; current implementation status is in the canonical tracker.
 
 The minimal reuse-first recommendation is retained; the current state/autonomy/feedback contract below supersedes earlier package-root persistence and routine human-gate choices. Keep the six milestones from the 1230 English r7 / Chinese r6 plan and the canonical categorized property set. Implementation must resolve the runtime pairing and enforce scientific admission through a small adapter over existing facilities. The checked-out prototype and harness are not yet a verified compatible deployment.
 
@@ -113,7 +113,7 @@ The 65-path count was verified against Git and the matrix. The matrix's per-file
 | [M2: skill and helpers](261105-1555-m2-skill-and-thin-helpers.md) | Small skill/helper package plus a guarded adapter to existing shell/jobs/storage; synthetic ordinary-worker example | dsh-research implementer; M1 contract and pairing |
 | [M3: automatic planning and review](261105-1555-m3-automatic-planning-and-review.md) | Tested prompt/profile recipe; completion → proposal → separate reviewer → exact transition/defer | Integration implementer; M2 |
 | [M4: scientific property qualification](261105-1555-m4-scientific-property-qualification.md) | the canonical property set positive/negative receipts; replay/restart/failure accounting; confirmation-off scope stated | Qualification implementer; M2/M3; test design can begin earlier |
-| [M5: bounded Accorde CPU pilot](261105-1555-m5-bounded-accorde-cpu-pilot.md) | One actual author/reviewer workflow on released inputs; <=4 attempts ×60 seconds, 240 seconds reserved, benchmark concurrency 1 | Project author/reviewer; M1–M4 technical gates and standing authority |
+| [M5: bounded Accorde GPU pilot](261105-1555-m5-bounded-accorde-gpu-pilot.md) | One actual author/reviewer workflow for GPU research; frozen workload/device/environment, whole-unit GPU budget, exclusive ownership and verified terminal evidence | Project author/reviewer; M1–M4 technical gates and standing authority |
 | [M6: new work cutover and continuity](261105-1555-m6-new-work-cutover-and-continuity.md) | New-campaign adoption decision; per-campaign authority inventory; retained exposure/budget; rollback/conditional archive record | Operator + project owner; M5 accepted |
 
 These are ownership roles, not a requirement to spawn parallel agents. Source findings below are recorded Nov 5 observations; requalify the selected current versions in M1. Keep reusable implementation in dsh-research; resolved project configuration, research artifacts and scientific decisions belong in the hosted project. Default prototype source changes remain zero. Accorde supplies its evaluator and scientific meaning; the donor supplies references and, where necessary, its existing confirmation authority. No new scheduler, SQL driver, reviewer server, communication source, fleet, board or statistical DSL.
@@ -124,9 +124,9 @@ The M2 adapter is justified only to connect already available operations and enf
 
 The current request authorizes review and planning. The next executable task is M1. Implementation, profile installation, live source configuration, model spending and pilot launch are separate future actions.
 
-M1 first makes the runtime and admission decisions reviewable. Offline synthetic verification precedes paid model calls. M5 freezes one exact project-owned launch packet covering admitted attempts, automatic reviewer work, bounds and stop rules; standing project authority and independent agent review admit routine work without a fresh human reply. Changed candidate/data/method/budget invalidates dependent review. Paid reviewer/model limits must be specified in the packet; 240 seconds covers benchmark timeout reservations only.
+M1 first makes the runtime and admission decisions reviewable. Offline synthetic verification precedes paid model calls. M5 freezes one exact project-owned launch packet covering admitted attempts, automatic reviewer work, bounds and stop rules; standing project authority and independent agent review admit routine work without a fresh human reply. Changed candidate/data/method/budget invalidates dependent review. Paid reviewer/model limits and complete-unit GPU/coordination bounds must be specified independently in the project packet; the old CPU 240-second packet is superseded.
 
-M6 evaluates operational value with evidence: manual continuation interventions, automatic reviewer receipts, unresolved execution outcomes and added maintenance surface. A small CPU pilot establishes workflow behavior, not predictor improvement, fresh confirmation, remote-fleet qualification or a reliability-rate claim. A successful bounded pilot can justify new development work while confirmation and legacy retirement remain gated separately.
+M6 evaluates operational value with evidence: manual continuation interventions, automatic reviewer receipts, unresolved execution outcomes and added maintenance surface. A bounded GPU pilot establishes only its measured scientific/workflow scope; predictor improvement, fresh confirmation, broader environments and reliability claims require their own evidence. A successful bounded pilot can justify new development work while confirmation and legacy retirement remain gated separately.
 
 ## Coverage and immediate next task
 
@@ -216,3 +216,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r20 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r21 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r22 | 2026-11-11 22:08:03 -0800 | Indexed M2 implementation and packed-consumer evidence while preserving acceptance gates, project ownership and meta-loop scope. |
+| r23 | 2026-11-12 00:30:09 -0800 | Corrected the live M5 link/scope to GPU research with project-specific whole-unit/resource budgets; retained synthetic CPU helper checks and historical records. |
