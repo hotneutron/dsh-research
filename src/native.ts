@@ -1,0 +1,246 @@
+import { randomUUID } from 'node:crypto'
+import { resolve } from 'node:path'
+import { performance } from 'node:perf_hooks'
+import { z } from 'zod'
+import type { Context } from '@deepseek-ai/cordis'
+import type { Agent } from '@deepseek-ai/dsh-agent'
+import type { JobOutcome } from '@deepseek-ai/dsh-jobs'
+import type { ShellExecution, ShellRunResult } from '@deepseek-ai/dsh-shell'
+import { SessionId } from '@deepseek-ai/dsh-session'
+import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain'
+import type { KvTable } from '@deepseek-ai/dsh-storage-domain'
+import { defineTool } from '@deepseek-ai/dsh-tools'
+import type { ToolDefinition } from '@deepseek-ai/dsh-tools'
+import { ByteRef, Count, ReviewSchema, EvidenceSchema } from './records.js'
+import type { ArtifactReference, Evidence, Manifest, Review } from './records.js'
+import { canonicalJson, sha256 } from './bindings.js'
+import { ProjectArtifacts, loadManifest, verifyIdentity } from './manifest.js'
+import { ResearchStateSchema, DevelopmentPolicySchema, equalIdentity, reserveAction, updateAction, assertApprovedReview } from './admission.js'
+import type { ResearchState, DevelopmentPolicy } from './admission.js'
+import { checkCapture } from './evaluate.js'
+import { checkpointFor } from './loop.js'
+
+export const researchDomain = defineDomain({ name: 'dsh_research_admission', version: 1, tables: { projects: domainTable<string, ResearchState>(ResearchStateSchema) } })
+export const RunActionSchema = z.strictObject({ manifest: ByteRef, review: ByteRef, expected_revision: Count })
+export interface NativeResearchConfig {
+  artifacts: ProjectArtifacts
+  table: KvTable<string, ResearchState>
+  projectKey: string
+  policy: ArtifactReference
+  authorSessionId: string
+  /** Existing project domain verifier; its pinned code supplies scientific meaning. */
+  verifier: { identity: ArtifactReference; verify(result: Record<string, number | string | boolean>): Promise<'positive' | 'negative' | 'inconclusive'> }
+  observe?: (event: string, detail: unknown) => void
+}
+export interface RunAssociation {
+  status: 'settled' | 'held' | 'running' | 'admitted' | 'dispatching' | 'unknown'
+  action_id: string
+  attempt_id: string
+  job_id: string | null
+  evidence: ArtifactReference | null
+  checkpoint: ArtifactReference | null
+  replay: boolean
+}
+class ReviewUnavailable extends Error {}
+
+/** POSIX shell literals for the exact argv; no model-supplied shell program is accepted. */
+export const shellLiteral = (value: string): string => `'${value.replace(/'/g, `'"'"'`)}'`
+
+export class NativeResearchAdapter {
+  private constructor(private readonly ctx: Context, private readonly config: NativeResearchConfig, readonly policy: DevelopmentPolicy) {}
+  static async open(ctx: Context, config: NativeResearchConfig): Promise<NativeResearchAdapter> {
+    const policy = DevelopmentPolicySchema.parse(JSON.parse(Buffer.from(await config.artifacts.read(config.policy)).toString('utf8')))
+    const state = config.table.get(config.projectKey)
+    if (!state) throw new Error('Registered project state is required; never initialize a new authority implicitly')
+    ResearchStateSchema.parse(state)
+    if (policy.authority.project_root !== config.artifacts.root || !equalIdentity(state.authority, policy.authority)
+      || !equalIdentity(state.binding, policy.binding) || !equalIdentity(state.policy, config.policy)
+      || !equalIdentity(config.verifier.identity, policy.verifier)) throw new Error('Project state/provider/profile registration mismatch')
+    return new NativeResearchAdapter(ctx, { ...config, artifacts: config.artifacts.withReadPrefixes(policy.allowed_read_prefixes) }, policy)
+  }
+  private observe(event: string, detail: unknown): void {
+    // Optional diagnostics cannot change committed execution/settlement semantics.
+    try { this.config.observe?.(event, detail) } catch {}
+  }
+  private association(actionId: string, replay: boolean): RunAssociation {
+    const action = this.config.table.get(this.config.projectKey)?.actions[actionId]
+    if (!action) throw new Error('Action association is unavailable')
+    return { status: action.phase, action_id: action.action_id, attempt_id: action.attempt_id, job_id: action.job_id,
+      evidence: action.evidence, checkpoint: action.checkpoint, replay }
+  }
+  private async nativeReview(review: Review, manifest: Manifest, manifestRef: ArtifactReference): Promise<void> {
+    if (review.status !== 'completed' || review.completion === null) throw new ReviewUnavailable('Exact review has no completed native receipt')
+    assertApprovedReview(manifest, manifestRef, review, this.policy)
+    const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
+    if (!reviewer || reviewer.options.provider !== this.policy.reviewer.provider) throw new ReviewUnavailable('Configured native reviewer is unavailable')
+    const events = reviewer.session.snapshotEvents()
+    const completion = Buffer.from(canonicalJson({ session_id: reviewer.id, provider: this.policy.reviewer.provider, events }))
+    await this.config.artifacts.read(review.completion)
+    if (sha256(completion) !== review.completion.sha256) throw new Error('Review completion does not match actual native Session bytes')
+    const end = events.findLast(e => e.type === 'turn/end')
+    const message = events.findLast(e => e.type === 'assistant/message')
+    if (!end || end.type !== 'turn/end' || end.data.reason.kind !== 'completed' || !message || message.type !== 'assistant/message') throw new ReviewUnavailable('Native reviewer did not complete normally')
+    const output = JSON.parse(message.data.message.content.filter(b => b.type === 'text').map(b => b.text).join(''))
+    if (output.decision !== 'approve' || output.action_id !== manifest.action_id || output.manifest_sha256 !== manifestRef.sha256
+      || output.request_sha256 !== review.request.sha256 || output.review_id !== review.review_id) throw new Error('Actual reviewer output covers a different action/request')
+    if (message.data.message.source?.kind !== 'model' || message.data.message.source.provider !== this.policy.reviewer.provider) throw new Error('Reviewer producer attribution mismatch')
+    for (const ref of [review.request, review.packet, review.scope.proposal, review.reviewer.preset, review.reviewer.permissions, ...review.evidence]) await this.config.artifacts.read(ref)
+  }
+  async run(input: unknown, owner: Agent, signal: AbortSignal): Promise<RunAssociation> {
+    const request = RunActionSchema.parse(input)
+    if (owner.id !== this.config.authorSessionId || this.ctx.agents.get(owner.id) !== owner) throw new Error('Only the exact configured live author can invoke research_run')
+    const manifest = await loadManifest(request.manifest, this.config.artifacts)
+    if (manifest.author_session_id !== owner.id) throw new Error('Manifest author and native tool owner differ')
+    if (resolve(manifest.invocation.cwd) !== this.config.artifacts.root || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/.test(manifest.goal.id)) throw new Error('Synthetic profile requires canonical project cwd and a safe goal ID')
+    if (manifest.inputs.length !== 1 || manifest.invocation.argv.length !== 3
+      || manifest.invocation.argv[0] !== resolve(this.config.artifacts.root, this.policy.entrypoint.uri)
+      || manifest.invocation.argv[1] !== resolve(this.config.artifacts.root, manifest.inputs[0]!.artifact.uri)
+      || manifest.invocation.argv[2] !== manifest.proposal.operation) throw new Error('Invocation does not match the synthetic evaluator/input template')
+    const known = this.config.table.get(this.config.projectKey)?.actions[manifest.action_id]
+    if (known) return this.association(manifest.action_id, true)
+    const review = ReviewSchema.parse(JSON.parse(Buffer.from(await this.config.artifacts.read(request.review)).toString('utf8')))
+    try { await this.nativeReview(review, manifest, request.manifest) } catch (error) {
+      if (error instanceof ReviewUnavailable) {
+        await this.config.table.update(this.config.projectKey, current => {
+          if (current.active_action_id !== null || (current.hold !== null && current.hold.kind !== 'review_unavailable')) return current
+          return ResearchStateSchema.parse({ ...current, revision: current.revision + 1, hold: { kind: 'review_unavailable', owner: this.config.authorSessionId,
+            reason: error.message, evidence: [request.review], affected: [manifest.action_id],
+            exit_condition: 'Completed separate review for this exact action, verified against native Session bytes and current profile',
+            next_check: 'Existing bounded reviewer completion/reconciliation', reassess_at: new Date(Date.now() + 60_000).toISOString() } })
+        })
+      }
+      throw error
+    }
+    await verifyIdentity(manifest, this.config.artifacts)
+    await this.config.artifacts.read(this.policy.entrypoint)
+    await this.config.artifacts.read(this.config.policy)
+    signal.throwIfAborted()
+    const token = randomUUID()
+    const committed = await this.config.table.update(this.config.projectKey, current => reserveAction(current, manifest, request.manifest, review, request.review,
+      this.policy, this.config.policy, request.expected_revision, token))
+    const action = committed.actions[manifest.action_id]!
+    if (action.dispatch_token !== token) return this.association(manifest.action_id, true)
+    this.observe('admission_acknowledged', { revision: action.admitted_revision, action_id: action.action_id, attempt_id: action.attempt_id })
+    const directory = `local_artifacts/autoresearch/dsh/${manifest.goal.id}/${manifest.action_id}`
+    let jobId: string | null = null
+    try {
+      const identityBytes = Buffer.from(canonicalJson({ manifest_sha256: request.manifest.sha256, bindings_verified: true }))
+      const before = await this.config.artifacts.write(`${directory}/identity-before.json`, identityBytes)
+      const ack = await this.config.artifacts.write(`${directory}/admission.json`, Buffer.from(canonicalJson({ authority: committed.authority, action })))
+      await this.config.table.update(this.config.projectKey, current => updateAction(current, manifest.action_id, a => ({ ...a, phase: 'dispatching' })))
+      // The durable acknowledgement is awaited; the registered tuple is verified immediately before native dispatch.
+      const live = this.config.table.get(this.config.projectKey)!
+      const proof = live.actions[manifest.action_id]!
+      if (live.stopped || live.hold !== null || proof.dispatch_token !== token || proof.admitted_revision !== action.admitted_revision
+        || proof.manifest.sha256 !== request.manifest.sha256 || live.authority.authority_id !== manifest.binding.authority.authority_id) throw new Error('Committed admission proof or stop state no longer permits dispatch')
+      signal.throwIfAborted()
+      const command = [manifest.invocation.executable, ...manifest.invocation.argv].map(shellLiteral).join(' ')
+      const spec = this.ctx.shell.resolve({ command, workdir: manifest.invocation.cwd, timeoutMs: manifest.bounds.timeout_ms,
+        onExpiry: 'kill', stdoutMaxBytes: this.policy.max_output_bytes, env: manifest.invocation.env, signal })
+      if (spec.command !== command || resolve(spec.workdir) !== resolve(manifest.invocation.cwd) || spec.onExpiry !== 'kill'
+        || spec.timeoutMs !== manifest.bounds.timeout_ms) throw new Error('Resolved shell spec differs from the frozen invocation/deadline')
+      let running: Promise<ShellExecution> | null = null
+      let terminal: ShellRunResult | null = null
+      let nativeFailure: string | null = null
+      const start = performance.now()
+      this.observe('dispatch_after_verified_ack', { action_id: action.action_id, admitted_revision: action.admitted_revision })
+      const id = this.ctx.jobs.start({ kind: 'bash', label: manifest.action_id, owner: owner.id,
+        run: () => {
+          running = this.ctx.shell.execute(spec)
+          const done: Promise<JobOutcome> = running.then(handle => handle.result()).then((result): JobOutcome => {
+            terminal = result
+            return { status: result.timedOut || result.aborted || result.signal !== null ? 'killed' : result.exitCode === 0 ? 'completed' : 'failed' }
+          }).catch(error => { nativeFailure = error instanceof Error ? error.message : 'native_failure'; return { status: 'failed' } })
+          return { cancel: () => { if (running) void running.then(handle => handle.kill()).catch(() => {}) }, done }
+        },
+      })
+      jobId = id
+      this.observe('native_job_registered', { job_id: id, action_id: action.action_id })
+      await this.config.table.update(this.config.projectKey, current => updateAction(current, manifest.action_id, a => ({ ...a, phase: 'running', job_id: id })))
+      const job = await this.ctx.jobs.wait(id, manifest.bounds.timeout_ms + 5000, owner.id)
+      if (terminal === null || nativeFailure !== null) throw new Error(`Native terminal/quiescence unresolved: ${nativeFailure ?? 'missing result'}`)
+      // Assignments occur in an awaited native callback; this is its completed value, not an invented terminal flag.
+      const facts: ShellRunResult = terminal
+      const elapsed = (performance.now() - start) / 1000
+      const terminalRef = await this.config.artifacts.write(`${directory}/native-terminal.json`, Buffer.from(canonicalJson({ job, result: facts, process_elapsed_seconds: elapsed })))
+      const capturedBytes = Buffer.from(facts.stdout.text, 'utf8')
+      const captureRef = await this.config.artifacts.write(`${directory}/result.json`, capturedBytes)
+      const checked = checkCapture(capturedBytes, manifest, !facts.stdout.truncated)
+      let matches = true
+      try { await verifyIdentity(manifest, this.config.artifacts); await this.config.artifacts.read(this.config.policy); await this.config.artifacts.read(this.policy.entrypoint) } catch { matches = false }
+      const after = await this.config.artifacts.write(`${directory}/identity-after.json`, matches ? identityBytes : Buffer.from('identity drift'))
+      const normal = job.status === 'completed' && facts.exitCode === 0 && !facts.timedOut && !facts.aborted && facts.signal === null
+      const verdict = checked.valid && matches && normal ? await this.config.verifier.verify(checked.result) : 'unavailable'
+      const verifierResult = verdict === 'unavailable' ? null : await this.config.artifacts.write(`${directory}/verifier.json`, Buffer.from(canonicalJson({ verdict })))
+      const current = this.config.table.get(this.config.projectKey)!
+      const balance = { consumed_attempts: current.consumed_attempts, reserved_timeout_ms: current.reserved_timeout_ms - action.timeout_ms, costs: [] }
+      const evidence: Evidence = EvidenceSchema.parse({ schema_version: 1, kind: 'evidence', binding: manifest.binding,
+        action_id: action.action_id, attempt_id: action.attempt_id, manifest: request.manifest,
+        admission: { authority_id: live.authority.authority_id, committed_revision: action.admitted_revision, acknowledgement: ack,
+          action_id: action.action_id, attempt_id: action.attempt_id, manifest_sha256: request.manifest.sha256 },
+        native: { owner_session_id: owner.id, producer: '@deepseek-ai/dsh-shell+jobs', job_id: id, tool_call_id: null },
+        terminal: { status: facts.timedOut ? 'timed_out' : facts.aborted ? 'cancelled' : facts.signal !== null || facts.exitCode !== 0 ? 'crashed' : 'completed',
+          raw_status: job.status, exit_code: facts.exitCode, signal: facts.signal, timeout: facts.timedOut, abort: facts.aborted,
+          ownership_resolved: true, settlement: terminalRef },
+        identity: { expected: before, before, after, matches }, capture: { artifact: captureRef, complete: !facts.stdout.truncated, overflow: facts.stdout.truncated, parser_input_sha256: checked.sha256 },
+        output_schema: manifest.output, result: checked.result, verifier: { identity: this.config.verifier.identity, result: verifierResult, verdict },
+        evidence_status: checked.valid && matches && normal ? 'valid' : 'invalid', scientific_status: checked.valid && matches && normal ? 'eligible' : 'ineligible',
+        costs: [{ execution_id: id, purpose: 'C_qual', unit: 'process_elapsed_seconds', amount: elapsed, source: terminalRef, unresolved_reason: null }], remaining: balance,
+      })
+      const evidenceRef = await this.config.artifacts.write(`${directory}/evidence.json`, Buffer.from(canonicalJson(evidence)))
+      const settledState = { ...current, reserved_timeout_ms: balance.reserved_timeout_ms }
+      const checkpoint = checkpointFor(manifest, evidence, evidenceRef, settledState, request.review)
+      const checkpointRef = await this.config.artifacts.write(`${directory}/checkpoint.json`, Buffer.from(canonicalJson(checkpoint)))
+      await this.config.table.update(this.config.projectKey, s => {
+        const a = s.actions[manifest.action_id]!
+        if (a.phase === 'settled' || !a.reservation_active) return s
+        if (s.revision !== current.revision || s.stopped !== current.stopped) throw new Error('Project state changed during evidence capture; reconcile the original settlement')
+        return ResearchStateSchema.parse({ ...s, revision: s.revision + 1, active_action_id: null, reserved_timeout_ms: s.reserved_timeout_ms - action.timeout_ms,
+          actions: { ...s.actions, [manifest.action_id]: { ...a, phase: 'settled', reservation_active: false, evidence: evidenceRef, checkpoint: checkpointRef } } })
+      })
+      this.observe('settled', { action_id: action.action_id, evidence_status: evidence.evidence_status, scientific_status: evidence.scientific_status })
+      return this.association(manifest.action_id, false)
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : 'unresolved execution'
+      await this.config.table.update(this.config.projectKey, current => {
+        const updated = updateAction(current, manifest.action_id, old => ({ ...old, phase: 'unknown', job_id: jobId ?? old.job_id }))
+        return ResearchStateSchema.parse({ ...updated, hold: { kind: 'unknown_execution', owner: this.config.authorSessionId, reason, evidence: [],
+          affected: [manifest.action_id], exit_condition: 'Query native ownership/terminal facts and reconcile the original admitted attempt; never relaunch it',
+          next_check: 'Existing host completion or explicit read-only reconciliation', reassess_at: new Date(Date.now() + 60_000).toISOString() } })
+      })
+      this.observe('unknown_execution_hold', { action_id: action.action_id, reason })
+      return this.association(manifest.action_id, false)
+    }
+  }
+  tool(): ToolDefinition {
+    const reference = { type: 'object' as const, additionalProperties: false, properties: {
+      uri: { type: 'string' as const, required: true as const }, sha256: { type: 'string' as const, required: true as const }, size_bytes: { type: 'integer' as const, required: true as const } } }
+    return defineTool({ name: 'research_run', description: 'Run one exact reviewed frozen synthetic research action; all execution and state limits are host-owned.',
+      parameters: { manifest: { ...reference, required: true }, review: { ...reference, required: true }, expected_revision: { type: 'integer', required: true } },
+      output: { schema: { type: 'json' }, render: (_args, value) => [{ type: 'text', text: JSON.stringify(value) }] },
+      execute: async (args, exec) => {
+        if (!exec.agent) throw new Error('Native author Session is required')
+        return JSON.parse(JSON.stringify(await this.run(args, exec.agent, exec.signal)))
+      },
+    })
+  }
+  register(): () => void {
+    const author = this.ctx.agents.get(SessionId(this.config.authorSessionId))
+    const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
+    if (!author || !reviewer) throw new Error('Author and reviewer must exist before installing this scoped fixture route')
+    const disposers: Array<() => void> = []
+    const dispose = () => { while (disposers.length) disposers.pop()!() }
+    try {
+      disposers.push(this.ctx.jobs.attachController('research_run'))
+      disposers.push(this.ctx.tools.guard(exec => {
+        if (exec.agent?.id === this.policy.reviewer.session_id) return 'Research reviewer has no execution tools in this profile'
+        if (exec.agent?.id === this.config.authorSessionId && exec.name !== 'research_run') return 'Research author must use the guarded frozen-action entrypoint'
+        return undefined
+      }))
+      disposers.push(this.ctx.tools.register(this.tool()))
+      disposers.push(author.ctx.tools.restrict({ allow: ['research_run'] }))
+      disposers.push(reviewer.ctx.tools.restrict({ deny: ['research_run'] }))
+      return dispose
+    } catch (error) { dispose(); throw error }
+  }
+}

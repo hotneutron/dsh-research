@@ -1,0 +1,594 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T22:15:54.697407-08:00",
+  "request_verbatim": "keep building",
+  "baseline_commit": "84b09e9",
+  "milestone": "M2",
+  "status": "in_progress",
+  "outcome": "thin helper/skill/native and packed synthetic development checks passed; full M1/M2 acceptance pending",
+  "package": {
+    "name": "dsh-research",
+    "version": "0.1.1",
+    "tarball": "local_artifacts/dsh-research/m2-implementation/dsh-research-0.1.1.tgz",
+    "sha256": "ad9efea3d151feb99cd9e2de93d3927acaf6cd05ab45c5315efd23db15e58377",
+    "integrity": "sha512-YR8T++u9RgBvPYMDIkvHThBw+ctiPQbbxS/nZko5fZ5ZJHCad9VLXVHsUQ+Zq2e6Num9PPeMpTRS0DRlMPmoWg==",
+    "size_bytes": 72382,
+    "files": [
+      "README.md",
+      "dist/admission.d.ts",
+      "dist/admission.js",
+      "dist/bindings.d.ts",
+      "dist/bindings.js",
+      "dist/evaluate.d.ts",
+      "dist/evaluate.js",
+      "dist/index.d.ts",
+      "dist/index.js",
+      "dist/loop.d.ts",
+      "dist/loop.js",
+      "dist/manifest.d.ts",
+      "dist/manifest.js",
+      "dist/native.d.ts",
+      "dist/native.js",
+      "dist/qualification-lock.yaml",
+      "dist/records.d.ts",
+      "dist/records.js",
+      "docs/compatibility.json",
+      "docs/contracts.md",
+      "examples/synthetic-cpu/evaluate.mjs",
+      "examples/synthetic-cpu/run.mjs",
+      "examples/synthetic-cpu/verifier.mjs",
+      "package.json",
+      "skills/research/agents/openai.yaml",
+      "skills/research/references/packets.md",
+      "skills/research/SKILL.md"
+    ],
+    "qualification_lock_sha256": "40c26c994aa613e39c6ae70bb5126a6ff1731b08db54c9d0a8d4d7f627f5b438",
+    "native_peer_versions": {
+      "@deepseek-ai/cordis": "4.0.5-alpha.1",
+      "@deepseek-ai/dsh-agent": "0.2.1-alpha.2",
+      "@deepseek-ai/dsh-jobs": "0.2.1-alpha.2",
+      "@deepseek-ai/dsh-shell": "0.2.1-alpha.2",
+      "@deepseek-ai/dsh-session": "0.2.1-alpha.2",
+      "@deepseek-ai/dsh-storage-domain": "0.2.1-alpha.2",
+      "@deepseek-ai/dsh-tools": "0.2.1-alpha.2"
+    }
+  },
+  "binding": {
+    "contract_ref": {
+      "id": "dsh-research/research-loop",
+      "version": "2.3.3",
+      "artifact": {
+        "uri": "snapshots/contracts.md",
+        "sha256": "3020d5dbc6a57e1b7b440b96c9243ffa8e13bf3e65fb1e8d8d9dc422bc0e911a",
+        "size_bytes": 65422
+      }
+    },
+    "compatibility_row_ref": {
+      "register": {
+        "uri": "snapshots/compatibility.json",
+        "sha256": "f0f6d597e6be5a2822b88d52afdb84bf9a082853f11908ad23288ba6c3e34ca4",
+        "size_bytes": 4404
+      },
+      "contract_version": "2.3.3",
+      "row_id": "contract-2.3.3",
+      "row_sha256": "e8a8ed6c26c84b39fca1b34fd5e608c7af511c1bfaa18fdc2efd25823085de38",
+      "table_sha256": "ce693a340f78d3686646afd6d1dd541f162f22cbca30ef6ddfe399fe23fce0a5"
+    },
+    "authority": {
+      "project_id": "synthetic-m2",
+      "project_root": "/private/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om/synthetic-project",
+      "authority_id": "synthetic-m2",
+      "writer_id": "synthetic-host",
+      "registration": {
+        "uri": "snapshots/registration.json",
+        "sha256": "79ca49c92114b51693edfd34141559a0fd843a1ee827be6c00c0c00762bb5cf9",
+        "size_bytes": 232
+      }
+    },
+    "profile": {
+      "revision": "synthetic-m2-v1",
+      "effective": {
+        "uri": "snapshots/profile.json",
+        "sha256": "e014c42bd41a3d81388415b390bf11ea78a04736ceca9482003c29152a868c80",
+        "size_bytes": 788
+      },
+      "lock": {
+        "uri": "snapshots/lock.yaml",
+        "sha256": "40c26c994aa613e39c6ae70bb5126a6ff1731b08db54c9d0a8d4d7f627f5b438",
+        "size_bytes": 100248
+      },
+      "releases": [
+        {
+          "name": "@deepseek-ai/cordis",
+          "version": "4.0.5-alpha.1",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/cordis/package.json",
+            "sha256": "37ac1aefbfc2a8d601bd061cec506159a1ca47aabf116f9682e4253fce1ead27",
+            "size_bytes": 1274
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-agent-loop",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-agent-loop/package.json",
+            "sha256": "aa1b8439533faf76b2aebdab13a290fcacf5ea949ee425b8bc47b074f15397ef",
+            "size_bytes": 2014
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-shell",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-shell/package.json",
+            "sha256": "7089b8339428be1d5dede63605c01e894f16ccf1a428a643fd7f281b8e844944",
+            "size_bytes": 1044
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-bash-local",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-bash-local/package.json",
+            "sha256": "7fa97cdb13cad0ed69384ee4a3a1ed5a2115424978ab0f566ea2b8db4761914b",
+            "size_bytes": 1291
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-subprocess-local",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-subprocess-local/package.json",
+            "sha256": "6d159e9614c927133e8d20f4b027b29516ced5f58820e8bbda4b410d36a91697",
+            "size_bytes": 1703
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-jobs-local",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-jobs-local/package.json",
+            "sha256": "cf81b324e8ba29451766277e636f85332767c99e5a96376cb1fe21f17cc19692",
+            "size_bytes": 1597
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-storage-domain",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-storage-domain/package.json",
+            "sha256": "0aff91a04b57092f8921e71dee75785047c6c9066885f6e084c3f8fcb73dec42",
+            "size_bytes": 1121
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-storage-sqlite",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-storage-sqlite/package.json",
+            "sha256": "c0acfb0f15b55b8ddf584531f083b487ed3c07edb35465919f0bd1f85ca78371",
+            "size_bytes": 1041
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-tools",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-tools/package.json",
+            "sha256": "79cfb0da665839d4f9a2bf38a32669bda61c5d2928a48cc8b4b7e1a4970b6e55",
+            "size_bytes": 2419
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-skill-filesystem",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-skill-filesystem/package.json",
+            "sha256": "3b563bca546bab503bea58b7f8190dbaf2780166cc257734a1d112fe86d64641",
+            "size_bytes": 1265
+          }
+        },
+        {
+          "name": "@deepseek-ai/dsh-session-persistence-jsonl",
+          "version": "0.2.1-alpha.2",
+          "content": {
+            "uri": "snapshots/releases/@deepseek-ai/dsh-session-persistence-jsonl/package.json",
+            "sha256": "1b8c9b1f045decf01db0269d0d5f8041024efbf7d80b22a8b842ae37a241392f",
+            "size_bytes": 1568
+          }
+        },
+        {
+          "name": "dsh-research",
+          "version": "0.1.1",
+          "content": {
+            "uri": "snapshots/package.json",
+            "sha256": "371ac570980ce290995ce1ac9dd4632e0a3884dc296e830c520cda0d600f3fd2",
+            "size_bytes": 2948
+          }
+        }
+      ],
+      "confirmation": "off",
+      "assurance": "implemented"
+    }
+  },
+  "checks": [
+    {
+      "name": "build",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "build"
+      ],
+      "timestamp": "2026-11-11T22:13:49.938632-08:00",
+      "process_wall_seconds": 2.1961784579980304,
+      "exit_code": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "typecheck"
+      ],
+      "timestamp": "2026-11-11T22:13:52.169121-08:00",
+      "process_wall_seconds": 2.2304277079965686,
+      "exit_code": 0
+    },
+    {
+      "name": "tests",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "test"
+      ],
+      "timestamp": "2026-11-11T22:13:53.442602-08:00",
+      "process_wall_seconds": 1.2734332919935696,
+      "exit_code": 0
+    }
+  ],
+  "unit_behavior_tests": 14,
+  "native_cases": [
+    {
+      "id": "filesystem-skill-loading",
+      "outcome": "passed",
+      "path": "/private/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om/node_modules/.pnpm/dsh-research@file+..+..+..+..+..+..+..+Users+bytedance+wk+dsh-research+local_artifacts+_3b87490edbd4fd0407c3d32838ac5c99/node_modules/dsh-research/skills/research/SKILL.md",
+      "body_sha256": "a4fee79d2a3924ae5f9d25521b4b5acbb4148c2458f7ba34736b3496094afb2c"
+    },
+    {
+      "id": "unavailable-review-owned-hold-no-admission",
+      "outcome": "passed"
+    },
+    {
+      "id": "author-bypass-reviewer-launch-and-argv-refusal",
+      "outcome": "passed"
+    },
+    {
+      "id": "ordinary-worker-valid-negative",
+      "outcome": "passed",
+      "action": {
+        "action_id": "action-d0574179b2852526b9939b1899f3289ff14756adccfd1fc795079d95cb59c24a",
+        "attempt_id": "attempt-action-d0574179b2852526b9939b1899f3289ff14756adccfd1fc795079d95cb59c24a",
+        "manifest": {
+          "uri": "snapshots/manifest-1.json",
+          "sha256": "a16ff40a198e653bb101449d27963156c0e42b50c80e4f8b886dbe9e616fb70c",
+          "size_bytes": 7325
+        },
+        "review": {
+          "uri": "snapshots/review-1.json",
+          "sha256": "13f336ec532e5dea9fced7352e6aa9446f7bf10b995f68eccedfdb9ef4cccfeb",
+          "size_bytes": 6097
+        },
+        "review_id": "synthetic-review-1",
+        "dispatch_token": "d390c4ee-9bc3-476d-bec6-df4cbc853c0f",
+        "admitted_revision": 2,
+        "timeout_ms": 2000,
+        "reservation_active": false,
+        "phase": "settled",
+        "job_id": "bash-1",
+        "owner_session_id": "m2-author",
+        "evidence": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-d0574179b2852526b9939b1899f3289ff14756adccfd1fc795079d95cb59c24a/evidence.json",
+          "sha256": "3d17447e218c9456086e3f3d86e6d8c92406f481508b31f347786dcfb9b8186f",
+          "size_bytes": 8019
+        },
+        "checkpoint": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-d0574179b2852526b9939b1899f3289ff14756adccfd1fc795079d95cb59c24a/checkpoint.json",
+          "sha256": "f2d3b39c5970c8bf037a9344f4c81065d3d78c46f9b675dd7f108d73bf34175c",
+          "size_bytes": 5697
+        }
+      }
+    },
+    {
+      "id": "duplicate-no-consumption-or-execution",
+      "outcome": "passed"
+    },
+    {
+      "id": "concurrent-duplicate-one-dispatch",
+      "outcome": "passed"
+    },
+    {
+      "id": "timeout-zero",
+      "outcome": "passed",
+      "action": {
+        "status": "settled",
+        "action_id": "action-598fffb45a9c9a7129af4b0fb7b4668b6549bb03d44ecc7ef863195256617a05",
+        "attempt_id": "attempt-action-598fffb45a9c9a7129af4b0fb7b4668b6549bb03d44ecc7ef863195256617a05",
+        "job_id": "bash-3",
+        "evidence": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-598fffb45a9c9a7129af4b0fb7b4668b6549bb03d44ecc7ef863195256617a05/evidence.json",
+          "sha256": "2484f2abc38db17a88e747a94942ca8f9a9cb5908fbe8ac748324e6824138b39",
+          "size_bytes": 7792
+        },
+        "checkpoint": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-598fffb45a9c9a7129af4b0fb7b4668b6549bb03d44ecc7ef863195256617a05/checkpoint.json",
+          "sha256": "1f808e47dc756196588f37b302d5b38cf9806fb6fb46549984792225ca733f25",
+          "size_bytes": 5679
+        },
+        "replay": false
+      }
+    },
+    {
+      "id": "invalid-output",
+      "outcome": "passed",
+      "action": {
+        "status": "settled",
+        "action_id": "action-90ec3343614c38d70c66b191c4dc1e1b0dd7dbdb1a65a85e57bf1bebea57b6d9",
+        "attempt_id": "attempt-action-90ec3343614c38d70c66b191c4dc1e1b0dd7dbdb1a65a85e57bf1bebea57b6d9",
+        "job_id": "bash-4",
+        "evidence": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-90ec3343614c38d70c66b191c4dc1e1b0dd7dbdb1a65a85e57bf1bebea57b6d9/evidence.json",
+          "sha256": "823aac5ed2853fdf5025c189c829d667d052532bb28eb87a682b5b1e012eb379",
+          "size_bytes": 7788
+        },
+        "checkpoint": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-90ec3343614c38d70c66b191c4dc1e1b0dd7dbdb1a65a85e57bf1bebea57b6d9/checkpoint.json",
+          "sha256": "9adcf466611f1bb1dcf7ff424f8e6a0e54ac0a86f1027282c0af69a6a4d0a8ad",
+          "size_bytes": 5684
+        },
+        "replay": false
+      }
+    },
+    {
+      "id": "drift",
+      "outcome": "passed",
+      "action": {
+        "status": "settled",
+        "action_id": "action-5679fcc358b3984c990c28de1cbf36061800b018d06d851aab5ca2af49b03fe7",
+        "attempt_id": "attempt-action-5679fcc358b3984c990c28de1cbf36061800b018d06d851aab5ca2af49b03fe7",
+        "job_id": "bash-5",
+        "evidence": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-5679fcc358b3984c990c28de1cbf36061800b018d06d851aab5ca2af49b03fe7/evidence.json",
+          "sha256": "891d13e9e59a459de0b9c018e236b9bb6bc1ef15f1c1a79101f16152e4a83898",
+          "size_bytes": 7796
+        },
+        "checkpoint": {
+          "uri": "local_artifacts/autoresearch/dsh/synthetic-cpu/action-5679fcc358b3984c990c28de1cbf36061800b018d06d851aab5ca2af49b03fe7/checkpoint.json",
+          "sha256": "4602ac34e792a35bfc780a0b087bee63c37c42567666cc393d4fd04b13aba0e1",
+          "size_bytes": 5665
+        },
+        "replay": false
+      }
+    },
+    {
+      "id": "unknown-publication-retains-reservation",
+      "outcome": "passed"
+    },
+    {
+      "id": "reopen-preserves-consumption-and-unknown-hold",
+      "outcome": "passed"
+    }
+  ],
+  "packed_consumer": {
+    "commands": [
+      {
+        "name": "install",
+        "root": "/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om",
+        "command": [
+          "npx",
+          "--yes",
+          "pnpm@11.7.0",
+          "install",
+          "--ignore-scripts"
+        ],
+        "timestamp": "2026-11-11T22:14:32.209585-08:00",
+        "process_wall_seconds": 1.3480770000023767,
+        "exit_code": 0
+      },
+      {
+        "name": "native-example",
+        "root": "/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om",
+        "command": [
+          "node",
+          "/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om/node_modules/dsh-research/examples/synthetic-cpu/run.mjs",
+          "/var/folders/fk/mpp_82rj6sx0r33zk612jpg80000gn/T/dsh-research-m2-boundary-consumer-449y65om/synthetic-project"
+        ],
+        "timestamp": "2026-11-11T22:14:33.627018-08:00",
+        "process_wall_seconds": 1.4173657499995898,
+        "exit_code": 0
+      }
+    ],
+    "retained_evidence_snapshot": "local_artifacts/dsh-research/m2-implementation/261111-2142-boundary-consumer-evidence",
+    "receipt_sha256": "e21aa052a12a8659a5984f420d760ebf9ef4706a265b34a8d89870258b6cdc64",
+    "authority_fields_preserved": true,
+    "snapshot_is_active_authority": false
+  },
+  "guarded_operations": {
+    "manifest": "exact-byte/contract/register/action binding; canonical project and profile read scope",
+    "review": "completed exact native reviewer Session bytes, provider/action/request/scope matching; unavailable receipt enters owned hold",
+    "admission": "single existing domain serialized record couples attempts/full timeout/review/active action and immutable intent; awaited acknowledgement checked before dispatch",
+    "dispatch": "public native shell resolve/execute and native owned bash job; kill deadline, exact evaluator/input/mode template and exclusive author entrypoint",
+    "capture": "complete captured buffer is hashed and parsed once; typed finite fields and identity before/after; bound project verifier",
+    "settlement": "terminal/evidence/checkpoint retained in project artifacts; state revision changes hold settlement; consumed history never refunded",
+    "replay": "known logical action returns original association; concurrent delivery consumes/executes once; unknown publication remains held after reopen",
+    "roles": "native author allow/reviewer deny restrictions plus monotonic guards refuse alternate tools, extra argv and reviewer launch",
+    "skill": "skill-creator initialization/validation; actual filesystem provider loads extracted resources; no global installation"
+  },
+  "state_result": {
+    "consumed_attempts": 6,
+    "consumed_timeout_ms": 10200,
+    "retained_reservation_ms": 2000,
+    "hold": {
+      "kind": "unknown_execution",
+      "owner": "m2-author",
+      "reason": "Synthetic publication failure: no trustworthy terminal acknowledgement",
+      "evidence": [],
+      "affected": [
+        "action-4ccee2743959826b2a1d8e61b57ef58339fa995efd312884d136feb0ebd2225a"
+      ],
+      "exit_condition": "Query native ownership/terminal facts and reconcile the original admitted attempt; never relaunch it",
+      "next_check": "Existing host completion or explicit read-only reconciliation",
+      "reassess_at": "2026-11-12T06:15:33.609Z"
+    },
+    "scientific_project_attempts": 0,
+    "external_model_calls": 0,
+    "GPU_collections": 0,
+    "protected_reads": 0
+  },
+  "cost_accounting": {
+    "purpose": "C_qual",
+    "final_build_type_test_runner_seconds": 5.700039457988169,
+    "final_pack_runner_seconds": 0.4588999160041567,
+    "final_packed_runner_seconds": 2.7654427500019665,
+    "nested_native_job_times_not_charged_twice": true,
+    "synthetic_evaluator_dispatches_this_turn": 30,
+    "ceiling": 32,
+    "retained_earlier_native_runs": [
+      {
+        "path": "local_artifacts/dsh-research/m2-implementation/261111-2142-run3/receipt.json",
+        "sha256": "86d54af26076a29e24fcde1152604ecbc7004a9ea425edf009b469b1928da1a2",
+        "dispatches": 5
+      },
+      {
+        "path": "local_artifacts/dsh-research/m2-implementation/261111-2142-run2/receipt.json",
+        "sha256": "f832662a2f5f39d47ba80f6e16df6a5d4cc07678d4962e12677b11c290b73d0a",
+        "dispatches": 5
+      },
+      {
+        "path": "local_artifacts/dsh-research/m2-implementation/261111-2142-final-native/receipt.json",
+        "sha256": "b5de3c4a59f5db1189d86299c6965ddfa9e3fe2c0f97302b1ccabde139959887",
+        "dispatches": 5
+      }
+    ],
+    "full_authoring_setup_overhead": "unresolved; no complete turn cost or accepted-envelope/T4 claim",
+    "C_science": 0
+  },
+  "qualification": {
+    "assurance": "scoped development fixture observations; independent qualification pending",
+    "M1_gates_remaining": [
+      "independent contract/profile and compatibility review",
+      "superagent Ticket/source integration",
+      "full registered-authority/worktree/single-writer qualification",
+      "required broader lifecycle/fault evidence"
+    ],
+    "M2_acceptance": "pending M1 acceptance and full scope/profile handoff review",
+    "unsupported": [
+      "live scientific reviewer semantics",
+      "production project profile (native policy accepts synthetic_released_cpu only)",
+      "restart-durable or distributed jobs",
+      "automatic successor/exhaustion/feedback/publication loop (M3)",
+      "full M4 property matrix and mode/submodule/environment qualification",
+      "fresh/sealed confirmation",
+      "M5 pilot/M6 migration"
+    ],
+    "no_architecture_entry_qualified": true
+  },
+  "failure_history": [
+    {
+      "stage": "initial Session persistence mount",
+      "observation": "Pinned alpha plugin uses default class export; namespace mount rejected before admission",
+      "resolution": "Used public default provider; retained source failure history"
+    },
+    {
+      "stage": "initial pack",
+      "observation": "npm omitted root pnpm-lock.yaml despite files list",
+      "resolution": "Generated exact lock snapshot in dist; initial tarball retained"
+    },
+    {
+      "stage": "consumer and state refinements",
+      "observation": "Added coupled-history consistency, scoped reads, owned reviewer hold and pinned evaluator/input template",
+      "resolution": "Final built/typed/tested and extracted consumer cases all pass"
+    }
+  ],
+  "sources": [
+    {
+      "path": "package.json",
+      "sha256": "371ac570980ce290995ce1ac9dd4632e0a3884dc296e830c520cda0d600f3fd2"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "40c26c994aa613e39c6ae70bb5126a6ff1731b08db54c9d0a8d4d7f627f5b438"
+    },
+    {
+      "path": "src/index.ts",
+      "sha256": "8c35231834ba6ecde116f5ae0028ed50b3854bccadf972f4b430e467d6d7c8a2"
+    },
+    {
+      "path": "src/manifest.ts",
+      "sha256": "a5c1674fbcbafd9ab15b42fe9a5da7f6fd3e90db082ab2aea6978aa502147d22"
+    },
+    {
+      "path": "src/admission.ts",
+      "sha256": "f1548f2cea5dedb9bcde30eee5094863718a30e2245aa0000370296f575c1d72"
+    },
+    {
+      "path": "src/evaluate.ts",
+      "sha256": "78c763fd5b2e64be2997573363ba3f49b67bd0f33d306962711ae9e0a4506d8b"
+    },
+    {
+      "path": "src/loop.ts",
+      "sha256": "60f7eb99abbf3442e3581830a56b844c3b8fa6fce8ae4488ac250c2772052ae4"
+    },
+    {
+      "path": "src/native.ts",
+      "sha256": "e16190290383784ac98ea317ee4a80927b886c4b0b319f334cd621e883ef4726"
+    },
+    {
+      "path": "examples/synthetic-cpu/evaluate.mjs",
+      "sha256": "713cff2ca88ae89e771df773aefeea14ac854dd5f510257b1a24d9e2781c1b7f"
+    },
+    {
+      "path": "examples/synthetic-cpu/verifier.mjs",
+      "sha256": "537795685f1138b77ab8d73066e85db6d143a892fefb6924a609fc53c73c6b36"
+    },
+    {
+      "path": "examples/synthetic-cpu/run.mjs",
+      "sha256": "59ea06e93fe1af1cc7ee212f4a94430f2e4ed3035b8b14e9e978de295d58e0f7"
+    },
+    {
+      "path": "skills/research/SKILL.md",
+      "sha256": "c2a2dc3a20e1d2fa46669b811cc6297eb196f9697b9a6d3b331be8cdf86127fd"
+    },
+    {
+      "path": "skills/research/agents/openai.yaml",
+      "sha256": "6db076adc2c67bb8a537e8da360901924ac3c52864fe4b2961998c133f3d7eeb"
+    },
+    {
+      "path": "skills/research/references/packets.md",
+      "sha256": "1560d3ea42d393c7913e23bed69c90a93d8e1a72d788a1f3a4fb27559110551b"
+    },
+    {
+      "path": "scripts/copy-qualification-lock.mjs",
+      "sha256": "404197b722839841ab49a686d1f722795d2979e68ec0d740a23bf8bf044fd211"
+    },
+    {
+      "path": "tests/helpers.test.ts",
+      "sha256": "ed3670a9e3263b87845a8b4ea8bd2deeda9512fe965229785a13e536e9b2ace3"
+    },
+    {
+      "path": "tests/fixtures/packets.ts",
+      "sha256": "58e9496153bb101e753181c4984d094499a7799deeeaeef9eefb88b09d292d67"
+    }
+  ],
+  "sharing": {
+    "tracked": "source, skill, scope and compact package receipt",
+    "raw": "ignored local package-development artifacts and retained consumer snapshot",
+    "team_export_access_verified": false,
+    "hosted_project_state_copied": false,
+    "temporary_authority_rewritten": false
+  },
+  "publication": "local commit only; no push or cloud action",
+  "next_step": "M3 effective prompts/presets and automatic separate review/feedback traces, with incomplete M1/M2 production gates retained"
+}

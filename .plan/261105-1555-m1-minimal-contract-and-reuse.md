@@ -1,6 +1,6 @@
 # M1 — Freeze the minimal contract and verify reuse
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r14. Status: in progress; encoding/native fixture checks passed, integrated admission qualification pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r15. Status: in progress; encoding/native fixture checks passed, integrated admission qualification pending.
 
 Dependency: reviewed milestone breakdown. This milestone is in progress. The pinned-alpha public consumer checks are recorded below; the source audit alone is not runtime qualification.
 
@@ -26,7 +26,7 @@ The TypeScript package now exports the four confirmation-off record schemas and 
 
 Unchanged superagent with its 0.2.1-alpha.2 DSH dependencies passed typecheck, 1,197 tests and build. A public-name consumer exercised native SQLite serialized reservation/replay/reopen and the actual AgentLoop/SubagentRuntime with separate scripted author/reviewer Sessions and gated wait/list/selected-drain operations. Encoding fixtures refuse declared controlled violations. Raw traces and synthetic state stay in ignored package-development artifacts.
 
-M1 remains incomplete: independent contract/profile qualification review, Ticket-to-guarded-job integration, launcher order proof, uncertain-launch/restart reconciliation, resolved persistence/profile authority and the complete required capability coverage need evidence. No production route, live model review, hosted-project state migration, protected input or M5 pilot is enabled. The next implementation step is to bind the demonstrated public boundaries into M2’s guarded thin helper while retaining those gates.
+M1 remains incomplete: independent contract/profile qualification review, Ticket-to-guarded-job integration, launcher order proof, uncertain-launch/restart reconciliation, resolved persistence/profile authority and the complete required capability coverage need evidence. No production route, live model review, hosted-project state migration, protected input or M5 pilot is enabled. M2’s [guarded native fixture](review/261111-2142-m2-package-receipt.json) now binds these public boundaries and demonstrates actual shell/jobs and project-root Session persistence. Independent M1 qualification and Ticket/source integration remain gates.
 
 ## Work packages
 
@@ -144,3 +144,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r12 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r13 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
+| r15 | 2026-11-11 22:08:03 -0800 | Linked M2 guarded native job and Session-persistence observations; kept independent M1 qualification, Ticket/source and broader authority/recovery checks pending. |

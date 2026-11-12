@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-11T21:44:49.909770-08:00",
+  "request_verbatim": "keep building",
+  "scope": "M2 thin helper/native tool and synthetic released CPU development; integrated milestone completion remains gated by M1 review",
+  "baseline_commit": "84b09e9",
+  "contract": {
+    "version": "2.3.3",
+    "sha256": "3020d5dbc6a57e1b7b440b96c9243ffa8e13bf3e65fb1e8d8d9dc422bc0e911a"
+  },
+  "required_development_cases": [
+    "exact-manifest-review-binding",
+    "stop-bounds-and-concurrent-admission",
+    "commit-before-native-dispatch",
+    "one-execution-on-duplicate-or-reopen",
+    "same-captured-bytes-hashed-and-parsed",
+    "valid-negative-and-checkpoint",
+    "timeout-zero-remains-invalid",
+    "identity-drift-and-finite-output-refusal",
+    "unknown-launch-retains-reservation",
+    "ordinary-scripted-worker-model-tool",
+    "filesystem-skill-loading",
+    "packed-public-consumer"
+  ],
+  "qualification_budget": {
+    "owner": "dsh-research implementation author",
+    "authority": "keep building within the approved minimal M1\u2013M2 route",
+    "purpose": "C_qual",
+    "process_wall_ceiling_seconds": 600,
+    "retry_reserve_seconds": 120,
+    "max_fixture_evaluator_dispatches": 32,
+    "per_evaluator_deadline_ms": 2000,
+    "total_fixture_timeout_reservation_ms": 64000,
+    "external_model_calls": 0,
+    "protected_reads": 0,
+    "GPU_collections": 0,
+    "deadline": "2026-11-11T22:44:49.909770-08:00"
+  },
+  "independent_scope_review": "pending; development observations are not full project qualification",
+  "excluded_claims": [
+    "live scientific review/pilot",
+    "qualified production deployment",
+    "distributed/restart-durable processes",
+    "provider power-loss guarantee",
+    "fresh confirmation",
+    "whole-matrix M4 qualification",
+    "automatic T1\u2013T4 entry"
+  ],
+  "sharing": "Small code/skill/receipt in Git; raw traces and synthetic project state ignored; no cloud publication or team evidence-access claim",
+  "skill_creation": "Apply skill-creator; project location is specified by M2 as skills/research"
+}

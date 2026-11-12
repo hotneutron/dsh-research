@@ -4,9 +4,9 @@ dsh-research is a research skill, policy and thin-helper package in development 
 
 The hosted project owns its scientific code, plans, decisions, evidence and persistent state. dsh-research owns reusable implementation and its own engineering records. Existing DSH facilities provide workers, jobs, communication, recovery and persistence; the package does not rebuild those services.
 
-**Current status:** M1 has a TypeScript package for four record encodings and binding checks, with bounded native-provider fixture evidence. Integrated admission, independent conformance review and M2–M6 remain pending. A production research-run command is not available.
+**Current status:** package 0.1.1 includes M1 record/binding encodings and M2 project-bound helpers, a guarded native tool, a research skill and a synthetic CPU example. Development fixtures have evidence; independent profile/conformance review, full M1/M2 acceptance and M3–M6 remain pending. The native route currently supports synthetic released CPU development.
 
-## M1 development checks
+## Development checks
 
 Use Node >=24.9 and the pinned pnpm version. From this checkout:
 
@@ -17,9 +17,15 @@ npx --yes pnpm@11.7.0 typecheck
 npx --yes pnpm@11.7.0 test
 mkdir -p local_artifacts/dsh-research/m1-implementation
 npx --yes pnpm@11.7.0 m1:smoke local_artifacts/dsh-research/m1-implementation/my-fresh-run
+mkdir -p local_artifacts/dsh-research/m2-implementation
+npx --yes pnpm@11.7.0 m2:smoke local_artifacts/dsh-research/m2-implementation/my-fresh-run
 ```
 
-The smoke command requires a fresh output directory. It imports the built public package, validates the four synthetic records, and exercises public native SQLite and scripted DSH author/reviewer/child operations. It retains exact contract/register references, fixture bytes and traces in ignored artifacts. [Current capability receipt](.plan/review/261111-2124-m1-runtime-capabilities.json) records tested scope and pending gates. Synthetic reviewer answers and storage reopen observations do not qualify scientific review or durable job dispatch.
+Both smoke commands require a fresh output directory. It imports the built public package, validates the four synthetic records, and exercises public native SQLite and scripted DSH author/reviewer/child operations. It retains exact contract/register references, fixture bytes and traces in ignored artifacts. [Current capability receipt](.plan/review/261111-2124-m1-runtime-capabilities.json) records tested scope and pending gates. Synthetic reviewer answers and storage reopen observations do not qualify scientific review or durable job dispatch.
+
+The M2 example runs the existing AgentLoop, shell/jobs, SQLite/domain storage and project-root Session persistence. It exercises exact native reviewer completion, reservation before dispatch, valid negatives, replay, role/argv refusals, timeout-zero invalidity, drift and owned uncertainty holds. The packed package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md); its extracted example has been checked outside the source tree. See the [M2 receipt](.plan/review/261111-2142-m2-package-receipt.json) for assurance limits and retained evidence.
+
+Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. The adapter requires registered project state and never initializes an authority implicitly. Native jobs remain process-local; an unresolved launch retains its project reservation after reopen.
 
 ## Deliberate branching vs explorative branching
 
@@ -180,3 +186,4 @@ Repository policy is in [AGENTS.md](AGENTS.md). No implementation, live pilot, s
 | r8 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r9 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r10 | 2026-11-11 21:39:00 -0800  | Documented runnable M1 package/fixture checks, contract 2.3.3 bindings and tested-versus-pending scope; preserved concise branching guidance and architecture figure. |
+| r11 | 2026-11-11 22:08:03 -0800 | Recorded M2 native helper/skill/packed-example implementation, runnable checks and exact tested-versus-pending scope; preserved concise branching guidance and the architecture figure. |

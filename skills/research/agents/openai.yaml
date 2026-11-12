@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Research"
+  short_description: "Bounded research with auditable project evidence"
+  default_prompt: "Use $research to run the next bounded, reviewed research action in this project."

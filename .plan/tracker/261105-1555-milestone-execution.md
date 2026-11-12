@@ -1,12 +1,12 @@
 # dsh-research milestone execution tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r18. Status: M1 in progress; M2–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r19. Status: M1/M2 development in progress; M3–M6 execution pending.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
 
 ## Canonical contract status
 
-[Research-loop contract 2.3.3](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, with confirmation-off public encodings and scoped native fixture observations now implemented. Independent conformance review, integrated admission and live qualifications remain pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
+[Research-loop contract 2.3.3](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, with confirmation-off public encodings and scoped native fixture observations now implemented. M2 now demonstrates guarded native admission/job fixtures; independent conformance review, broader source/profile integration and live qualifications remain pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
 
 ## Current document alignment
 
@@ -22,7 +22,7 @@ This tracker owns reusable-package implementation/qualification only. The `Accor
 
 Current [persistent-state and autonomy contract](../261105-1705-contract-project-state-autonomy-and-feedback.md): all per-project state and resolved provider paths stay in the hosted project. Its research loop has no routine human approval/input dependency; human scientific direction is raised only after challenged exhaustion. M3 must prove autonomous feedback capture/disposition/effect/response and avoid the prototype's default person-stage handoff for ordinary negative/procedural results. M4 tests roots, feedback edit/replay, no comments/publication failure, recovery and exhaustion classification.
 
-M1 fixture execution stays in synthetic package-owned state; no hosted-project migration, cloud action or research experiment was performed. Prior M0 validation is historical; new validation covers the revised diagrams and project links.
+M1/M2 fixture execution stays in synthetic package-owned state; no hosted-project migration, cloud action or research experiment was performed. Prior M0 validation is historical; new validation covers the revised diagrams and project links.
 
 ## Milestone status
 
@@ -30,7 +30,7 @@ M1 fixture execution stays in synthetic package-owned state; no hosted-project m
 |---|---|---|---|
 | [M0](../261105-1616-m0-architecture-workflows-and-idempotency.md) | documentation ready for review | Team walkthrough of architecture, examples and idempotency; review the brief/collaboration proposal | Guide, nine Mermaid figures, [brainstorm](../261105-1616-brainstorm-human-research-review-and-collaboration.md) and `sample brief` (project-owned input pending) |
 | [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | in progress; encoding/native fixture observations | Bind Ticket/job admission and obtain independent profile/conformance review | [M1 scope](../review/261111-2124-m1-scope.json) and [capabilities](../review/261111-2124-m1-runtime-capabilities.json); integrated S1–S8 not complete |
-| [M2](../261105-1555-m2-skill-and-thin-helpers.md) | planned | M1; package pure helpers and guarded delegation | Built package + actual synthetic ordinary-worker receipt |
+| [M2](../261105-1555-m2-skill-and-thin-helpers.md) | in progress; native/packed synthetic mechanics | M1 acceptance; full scope/profile qualification and M3 handoff | [M2 package receipt](../review/261111-2142-m2-package-receipt.json) + actual ordinary-worker/packed-example fixtures |
 | [M3](../261105-1555-m3-automatic-planning-and-review.md) | planned | M2; configure effective research prompts/presets | Scripted automatic separate-review transition and stale-action refusal |
 | [M4](../261105-1555-m4-scientific-property-qualification.md) | planned | M2/M3; qualify real reused boundaries | the canonical property set scoped matrix + deadline/restart receipts |
 | [M5](../261105-1555-m5-bounded-accorde-cpu-pilot.md) | planned | M1–M4 and reviewed frozen live launch packet | Actual <=4×60s/240s serial benchmark workflow + reviewer + stop |
@@ -42,7 +42,7 @@ Plans written does not mean milestones executed. Record dates, actual commands, 
 
 Track package signals separately from qualified T1–T4 entries: accepted requirement, versions, expected/observed facts, attempted/ruled-out repair, affected shared boundary, structural reviewer conclusion and bounded assessment cost. Package design authors own deliberate engineering entry decisions; hosted-project records retain scientific evidence/authority. The gate requires material core blockage, architectural cause and insufficient local repair. Routine failure or scientific exhaustion does not substitute for that evidence.
 
-No architecture trigger has been empirically qualified by these documentation updates. M1 is in progress; M2–M6 stay planned; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
+No architecture trigger has been empirically qualified by these documentation updates. M1/M2 are in progress; M3–M6 stay planned; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
 
 ## Human-review corrections
 
@@ -98,6 +98,10 @@ Scientific benchmark attempts: 0. External model-provider calls: 0. GPU collecti
 ## M1 execution checkpoint
 
 See [capability evidence](../review/261111-2124-m1-runtime-capabilities.json). Unchanged prototype checks passed on the alpha pairing; the core package encodes four records and N13–N15 bindings. Native SQLite and real AgentLoop/SubagentRuntime fixtures use synthetic project authority and scripted answers. Retain the initial unsupported-depth refusal, subsequent successful checks and original costs. Independent scope/profile review and production launch remain held; fixture results do not qualify all 23 properties or the M5 pilot.
+
+## M2 execution checkpoint
+
+The [M2 receipt](../review/261111-2142-m2-package-receipt.json) records package 0.1.1, exact native tool/role restrictions and model-driven CPU execution, coupled admission/settlement, same-byte capture/verifier/checkpoint, unavailable-review hold and unknown-launch/reopen behavior, skill loading and an outside-tree tarball consumer. Scripted approval qualifies development plumbing only. No hosted project, protected input, funded model, production service or migration is activated. Native jobs are process-local and uncertain attempts remain held. Full M1/M2 acceptance remains dependent on independent review and scope/profile/Ticket qualification.
 
 ## Recording format for execution
 
@@ -167,3 +171,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r16 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r17 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r18 | 2026-11-11 21:39:00 -0800  | Recorded local documentation commit, M1 encoding/N13–N15 bindings and bounded public-runtime observations; kept independent review, integrated admission and all M2–M6/live gates pending. |
+| r19 | 2026-11-11 22:08:03 -0800 | Recorded M2 guarded native and packed consumer development evidence, skill/hold behavior and exact package pins; kept independent M1/M2 acceptance and M3–M6 pending. |

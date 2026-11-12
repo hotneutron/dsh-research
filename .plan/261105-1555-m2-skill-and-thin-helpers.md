@@ -1,6 +1,6 @@
 # M2 — Package the research skill and thin helpers
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r10. Status: planned; implementation not started.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r11. Status: in progress; native/packed synthetic mechanics demonstrated, M1 acceptance and full M2 qualification pending.
 
 Dependency: M1 contract, runtime pairing and public admission operations accepted. Pure helper work may be developed earlier against the draft schema; integrated completion still depends on M1.
 
@@ -14,11 +14,19 @@ The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-fe
 
 Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
 
-Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1/M2 encoding and native helper development have evidence; M3–M6 implementation remains pending.
 
 The package adapter resolves project state from the explicit project manifest/config and invokes existing providers. It owns no per-project DB or durable cache. The host project's record contains feedback cursor/queue/dispositions and Lark publication mappings; the shared consumer is a thin existing-CLI/source procedure, not another feedback store.
 
 At safe boundaries, the author assesses captured feedback and supplies a structured adopted/rejected/deferred/stale disposition with rationale and successor/effect references to the pure reducers. Collection, adoption and executed effect are distinct. A duplicate version is a no-op; a new edited body is assessed as a new version. Synthetic package tests use disposable roots and cannot touch real project charges/openings.
+
+## Implementation checkpoint
+
+Package 0.1.1 implements src/manifest.ts, src/admission.ts, src/evaluate.ts, src/loop.ts and the public native adapter. The [scope](review/261111-2142-m2-scope.json) and [package receipt](review/261111-2142-m2-package-receipt.json) retain source/profile/contract/package identities and development limits. The research skill is discovered through the actual filesystem provider; an extracted tarball consumer executes the example outside the source tree.
+
+The ordinary scripted author invokes research_run through the real model tool registry. The adapter verifies actual separate reviewer Session bytes, couples review/attempt/timeout consumption in the existing SQLite/domain record, awaits/queries the committed tuple and uses native bash jobs with onExpiry=kill. Complete captured bytes are hashed and parsed once; the project domain verifier owns the verdict. Synthetic cases cover valid negatives, duplicate/concurrent delivery, role/argv refusal, timeout-zero, bad typed output, drift, reviewer holds and unknown publication/reopen. Raw output/native state remains ignored.
+
+This is scoped development evidence, not full M2 acceptance: M1 independent/profile qualification and superagent Ticket/source wiring remain pending. Live review, broader environments/fault classes, automatic successor/feedback handling and M3–M6 are unqualified. The shipped native policy deliberately accepts only synthetic_released_cpu; it does not enable hosted-project scientific work.
 
 ## Implementation order and owned files
 
@@ -83,7 +91,7 @@ Expose package scripts for test, typecheck, build and a built-consumer smoke. Af
 
 ## Completion and handoff
 
-M2 is complete when one ordinary worker on M1's pairing runs the synthetic example through the guarded existing route and produces manifest, reservation, actual execution receipt, captured evidence/domain verdict and checkpoint. Record package/export/profile hashes and actual test commands in .plan/review/m2-package-receipt.json.
+M2 is complete when one ordinary worker on M1's pairing runs the synthetic example through the guarded existing route and produces manifest, reservation, actual execution receipt, captured evidence/domain verdict and checkpoint. Record package/export/profile hashes and actual test commands in [the timestamped package receipt](review/261111-2142-m2-package-receipt.json).
 
 Zero default superagent source changes and zero full dist-exec runtime dependencies remain acceptance conditions. Unit tests of pure functions alone do not complete M2. Hand the built package, skill loading receipt and effective guarded tool route to M3.
 
@@ -125,3 +133,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r8 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
 | r9 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
 | r10 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
+| r11 | 2026-11-11 22:08:03 -0800 | Implemented the M2 pure helpers, scoped native tool, research skill and packed synthetic consumer; retained M1-dependent acceptance and unqualified live/broader routes. |

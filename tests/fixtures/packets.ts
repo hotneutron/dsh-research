@@ -20,6 +20,8 @@ export function packets(projectRoot = '/tmp/dsh-research-synthetic-project') {
   const fixturePolicy = ref('fixture/policy.json', { standing_scope: 'synthetic CPU development only', confirmation: 'off' })
   const profile = ref('fixture/profile.json', { confirmation: 'off', launcher: 'not_enabled', reviewer: 'scripted', version: 1 })
   const require = createRequire(import.meta.url)
+  const corePackageBytes = readFileSync(new URL('../../package.json', import.meta.url))
+  const corePackageVersion = JSON.parse(corePackageBytes.toString()).version as string
   const releaseNames = ['@deepseek-ai/cordis', '@deepseek-ai/dsh-agent', '@deepseek-ai/dsh-agent-loop', '@deepseek-ai/dsh-agent-loop-testkit', '@deepseek-ai/dsh-session', '@deepseek-ai/dsh-llm', '@deepseek-ai/dsh-subagent', '@deepseek-ai/dsh-storage', '@deepseek-ai/dsh-storage-domain', '@deepseek-ai/dsh-storage-sqlite', '@deepseek-ai/dsh-session-query', '@deepseek-ai/dsh-session-projection']
   const runtimeReleases = releaseNames.map(name => {
     const bytes = readFileSync(require.resolve(`${name}/package.json`))
@@ -34,7 +36,7 @@ export function packets(projectRoot = '/tmp/dsh-research-synthetic-project') {
     authority: { project_id: 'synthetic', project_root: projectRoot, authority_id: 'synthetic-authority', writer_id: 'fixture-writer', registration: fixturePolicy },
     profile: {
       revision: 'fixture-v1', effective: profile, lock: ref('fixture/lock.yaml', readFileSync(new URL('../../pnpm-lock.yaml', import.meta.url))),
-      releases: [{ name: 'dsh-research', version: '0.1.0', content: ref('fixture/package.json', readFileSync(new URL('../../package.json', import.meta.url))) }, ...runtimeReleases],
+      releases: [{ name: 'dsh-research', version: corePackageVersion, content: ref('fixture/package.json', corePackageBytes) }, ...runtimeReleases],
       confirmation: 'off', assurance: 'implemented',
     },
   }

@@ -1,10 +1,10 @@
 # Review of the 1201 brainstorms and 1230 plans; milestone execution index
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r21. Status: source review and M0–M6 documentation drafted; M1–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r22. Status: source review and M0–M6 documentation drafted; M1–M6 execution pending.
 
 The minimal reuse-first recommendation is retained; the current state/autonomy/feedback contract below supersedes earlier package-root persistence and routine human-gate choices. Keep the six milestones from the 1230 English r7 / Chinese r6 plan and the canonical categorized property set. Implementation must resolve the runtime pairing and enforce scientific admission through a small adapter over existing facilities. The checked-out prototype and harness are not yet a verified compatible deployment.
 
-This is the current execution breakdown in dsh-research. The 1201 brainstorms explain the decision; the 1230 plans own the minimal architecture. This breakdown refines their work order and gates. Historical full-stack, permanent-Python, C01–C28, mandatory two-host and review-board proposals remain historical. The documentation baseline was committed locally as a456c5e. M1 now has a TypeScript encoding package and bounded public-provider fixture evidence; integrated admission and live deployment remain pending.
+This is the current execution breakdown in dsh-research. The 1201 brainstorms explain the decision; the 1230 plans own the minimal architecture. This breakdown refines their work order and gates. Historical full-stack, permanent-Python, C01–C28, mandatory two-host and review-board proposals remain historical. The documentation baseline was committed locally as a456c5e. M1 now has public encodings and M2 has guarded native helper/skill/packed-CPU fixtures. Independent qualification, source/Ticket integration and live deployment remain pending.
 
 ## Canonical loop contract
 
@@ -29,6 +29,10 @@ This is the current execution breakdown in dsh-research. The 1201 brainstorms ex
 ## N11–N12 closure
 
 [Resolution](review/261111-2112-N11-N12-resolution-zh.md) makes version compatibility cumulative and defines qualification-budget/envelope arbitration before T4. M1/M6 check the current row/adopter assessment; M4 rejects cost-only automatic entry. Original costs/failures and runtime pending status remain intact.
+
+## M2 implementation evidence
+
+[Package receipt](review/261111-2142-m2-package-receipt.json) records native model-tool execution, immutable evidence and coupled state, role/replay/failure/hold cases, actual skill loading and an outside-tree packed consumer. The minimal package remains over existing providers. Full M1/M2 acceptance and M3–M6 remain pending; development checks do not activate a live project or the architecture meta loop.
 
 ## Latest alignment and architecture revision
 
@@ -211,3 +215,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r19 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r20 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r21 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
+| r22 | 2026-11-11 22:08:03 -0800 | Indexed M2 implementation and packed-consumer evidence while preserving acceptance gates, project ownership and meta-loop scope. |
