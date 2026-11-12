@@ -1,6 +1,6 @@
 {
   "name": "dsh-research",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "Project-owned research contracts for DSH and superagent",
@@ -23,14 +23,17 @@
     "docs/contracts.md",
     "docs/compatibility.json",
     "skills",
-    "examples"
+    "examples",
+    "docs/integration.md"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node scripts/copy-qualification-lock.mjs",
     "typecheck": "tsc -p tsconfig.check.json",
     "test": "node --import tsx --test tests/*.test.ts",
     "m1:smoke": "tsx scripts/m1-smoke.ts",
-    "m2:smoke": "node examples/synthetic-cpu/run.mjs"
+    "m2:smoke": "node examples/synthetic-cpu/run.mjs",
+    "m3:smoke": "node examples/synthetic-cpu/automatic.mjs",
+    "m4:smoke": "node examples/synthetic-cpu/faults.mjs"
   },
   "dependencies": {
     "zod": "4.4.3"
@@ -59,7 +62,8 @@
     "@deepseek-ai/dsh-tools": "0.2.1-alpha.2",
     "@types/node": "22.20.0",
     "tsx": "4.23.13",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "4.0.5-alpha.1",
@@ -68,7 +72,10 @@
     "@deepseek-ai/dsh-shell": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-session": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-storage-domain": "0.2.1-alpha.2",
-    "@deepseek-ai/dsh-tools": "0.2.1-alpha.2"
+    "@deepseek-ai/dsh-tools": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-subagent": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-session-query": "0.2.1-alpha.2"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/cordis": {
@@ -90,6 +97,15 @@
       "optional": true
     },
     "@deepseek-ai/dsh-tools": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-system-prompt": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-subagent": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-session-query": {
       "optional": true
     }
   }

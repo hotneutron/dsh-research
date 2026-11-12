@@ -7,6 +7,8 @@ import type { Agent } from '@deepseek-ai/dsh-agent'
 import type { JobOutcome } from '@deepseek-ai/dsh-jobs'
 import type { ShellExecution, ShellRunResult } from '@deepseek-ai/dsh-shell'
 import { SessionId } from '@deepseek-ai/dsh-session'
+import type { SessionEvent } from '@deepseek-ai/dsh-session'
+import type {} from '@deepseek-ai/dsh-session-query'
 import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain'
 import type { KvTable } from '@deepseek-ai/dsh-storage-domain'
 import { defineTool } from '@deepseek-ai/dsh-tools'
@@ -20,7 +22,7 @@ import type { ResearchState, DevelopmentPolicy } from './admission.js'
 import { checkCapture } from './evaluate.js'
 import { checkpointFor } from './loop.js'
 
-export const researchDomain = defineDomain({ name: 'dsh_research_admission', version: 1, tables: { projects: domainTable<string, ResearchState>(ResearchStateSchema) } })
+export const researchDomain = defineDomain({ name: 'dsh_research_admission', version: 2, tables: { projects: domainTable<string, ResearchState>(ResearchStateSchema) } })
 export const RunActionSchema = z.strictObject({ manifest: ByteRef, review: ByteRef, expected_revision: Count })
 export interface NativeResearchConfig {
   artifacts: ProjectArtifacts
@@ -28,6 +30,7 @@ export interface NativeResearchConfig {
   projectKey: string
   policy: ArtifactReference
   authorSessionId: string
+  authorTools?: readonly string[]
   /** Existing project domain verifier; its pinned code supplies scientific meaning. */
   verifier: { identity: ArtifactReference; verify(result: Record<string, number | string | boolean>): Promise<'positive' | 'negative' | 'inconclusive'> }
   observe?: (event: string, detail: unknown) => void
@@ -72,11 +75,20 @@ export class NativeResearchAdapter {
     if (review.status !== 'completed' || review.completion === null) throw new ReviewUnavailable('Exact review has no completed native receipt')
     assertApprovedReview(manifest, manifestRef, review, this.policy)
     const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
-    if (!reviewer || reviewer.options.provider !== this.policy.reviewer.provider) throw new ReviewUnavailable('Configured native reviewer is unavailable')
-    const events = reviewer.session.snapshotEvents()
-    const completion = Buffer.from(canonicalJson({ session_id: reviewer.id, provider: this.policy.reviewer.provider, events }))
-    await this.config.artifacts.read(review.completion)
-    if (sha256(completion) !== review.completion.sha256) throw new Error('Review completion does not match actual native Session bytes')
+    if (reviewer && reviewer.options.provider !== this.policy.reviewer.provider) throw new ReviewUnavailable('Configured reviewer profile differs')
+    const retained = JSON.parse(Buffer.from(await this.config.artifacts.read(review.completion)).toString('utf8'))
+    if (retained.session_id !== this.policy.reviewer.session_id || retained.provider !== this.policy.reviewer.provider || !Array.isArray(retained.events)) throw new Error('Review completion identity mismatch')
+    let observed: readonly SessionEvent[]
+    if (reviewer) observed = reviewer.session.snapshotEvents()
+    else {
+      const query = this.ctx.get('sessionQuery')
+      if (!query) throw new ReviewUnavailable('Retained reviewer query is unavailable')
+      const cut = await query.observeSession(SessionId(this.policy.reviewer.session_id), { projectionMode: 'none' })
+      try { observed = cut.events } finally { cut[Symbol.dispose]() }
+    }
+    const events = observed.slice(0, retained.events.length)
+    const completion = Buffer.from(canonicalJson({ session_id: this.policy.reviewer.session_id, provider: this.policy.reviewer.provider, events }))
+    if (sha256(completion) !== review.completion.sha256) throw new Error('Review completion does not match actual native Session prefix bytes')
     const end = events.findLast(e => e.type === 'turn/end')
     const message = events.findLast(e => e.type === 'assistant/message')
     if (!end || end.type !== 'turn/end' || end.data.reason.kind !== 'completed' || !message || message.type !== 'assistant/message') throw new ReviewUnavailable('Native reviewer did not complete normally')
@@ -194,7 +206,9 @@ export class NativeResearchAdapter {
       await this.config.table.update(this.config.projectKey, s => {
         const a = s.actions[manifest.action_id]!
         if (a.phase === 'settled' || !a.reservation_active) return s
-        if (s.revision !== current.revision || s.stopped !== current.stopped) throw new Error('Project state changed during evidence capture; reconcile the original settlement')
+        if (s.stopped !== current.stopped || !equalIdentity(s.binding, current.binding) || !equalIdentity(s.policy, current.policy)
+          || !equalIdentity(s.actions[manifest.action_id], current.actions[manifest.action_id]) || s.consumed_attempts !== current.consumed_attempts
+          || s.reserved_timeout_ms !== current.reserved_timeout_ms) throw new Error('Project state changed during evidence capture; reconcile the original settlement')
         return ResearchStateSchema.parse({ ...s, revision: s.revision + 1, active_action_id: null, reserved_timeout_ms: s.reserved_timeout_ms - action.timeout_ms,
           actions: { ...s.actions, [manifest.action_id]: { ...a, phase: 'settled', reservation_active: false, evidence: evidenceRef, checkpoint: checkpointRef } } })
       })
@@ -227,20 +241,24 @@ export class NativeResearchAdapter {
   register(): () => void {
     const author = this.ctx.agents.get(SessionId(this.config.authorSessionId))
     const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
-    if (!author || !reviewer) throw new Error('Author and reviewer must exist before installing this scoped fixture route')
+    if (!author) throw new Error('Author must exist before installing this scoped fixture route')
+    const authorTools = this.config.authorTools ?? ['research_run']
     const disposers: Array<() => void> = []
     const dispose = () => { while (disposers.length) disposers.pop()!() }
     try {
       disposers.push(this.ctx.jobs.attachController('research_run'))
       disposers.push(this.ctx.tools.guard(exec => {
         if (exec.agent?.id === this.policy.reviewer.session_id) return 'Research reviewer has no execution tools in this profile'
-        if (exec.agent?.id === this.config.authorSessionId && exec.name !== 'research_run') return 'Research author must use the guarded frozen-action entrypoint'
+        if (exec.agent?.id === this.config.authorSessionId && !authorTools.includes(exec.name)) return 'Research author must use the guarded frozen-action entrypoint'
         return undefined
       }))
       disposers.push(this.ctx.tools.register(this.tool()))
-      disposers.push(author.ctx.tools.restrict({ allow: ['research_run'] }))
-      disposers.push(reviewer.ctx.tools.restrict({ deny: ['research_run'] }))
+      disposers.push(author.ctx.tools.restrict({ allow: [...authorTools] }))
+      if (reviewer) disposers.push(reviewer.ctx.tools.restrict({ deny: [...authorTools] }))
       return dispose
     } catch (error) { dispose(); throw error }
   }
 }
+
+export { NativeReviewDriver, AUTHOR_INSTRUCTIONS, REVIEW_INSTRUCTIONS } from './review.js'
+export { NativeCoordinationTools } from './coordination.js'

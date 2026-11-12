@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { AuthorityRef, Binding, ByteRef, Count, Hold, Id } from './records.js'
 import type { ArtifactReference, BoundIdentity, Manifest, Review } from './records.js'
 import { canonicalJson, sha256 } from './bindings.js'
+import { ReviewIntentSchema, FeedbackStateSchema, PublicationSchema } from './collaboration.js'
 
 export const DevelopmentPolicySchema = z.strictObject({
   scope: z.literal('synthetic_released_cpu'), authority: AuthorityRef, binding: Binding,
@@ -11,6 +12,8 @@ export const DevelopmentPolicySchema = z.strictObject({
   domain_policy: ByteRef, verifier: ByteRef, entrypoint: ByteRef, reviewer: z.strictObject({
     session_id: Id, provider: Id, preset: ByteRef, permissions: ByteRef,
   }),
+  review_limits: z.strictObject({ max_requests: Count.positive(), timeout_ms: Count.positive(), max_tokens: Count.positive(),
+    subagent_provider: Id, model: Id }).optional(),
   allowed_read_prefixes: z.array(z.enum(['snapshots/', 'local_artifacts/autoresearch/dsh/'])).min(1),
 }).superRefine((v, ctx) => {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'Policy binding and registered authority differ' })
@@ -22,12 +25,23 @@ export const ActionStateSchema = z.strictObject({
   phase: z.enum(['admitted', 'dispatching', 'running', 'settled', 'unknown']), job_id: Id.nullable(),
   owner_session_id: Id, evidence: ByteRef.nullable(), checkpoint: ByteRef.nullable(),
 })
-export const ResearchStateSchema = z.strictObject({
+const legacyStateObject = z.strictObject({
   schema_version: z.literal(1), authority: AuthorityRef, binding: Binding, policy: ByteRef,
   revision: Count, stopped: z.boolean(), consumed_attempts: Count, consumed_timeout_ms: Count,
   reserved_timeout_ms: Count, consumed_reviews: z.array(Id),
   active_action_id: Id.nullable(), actions: z.record(Id, ActionStateSchema), hold: Hold.nullable(),
+})
+export const LegacyResearchStateSchema = legacyStateObject.superRefine(validateConsumption)
+export const ResearchStateSchema = legacyStateObject.extend({
+  schema_version: z.literal(2), consumed_review_requests: Count, review_requests: z.record(Id, ReviewIntentSchema),
+  rejected_subjects: z.record(Id, ByteRef), feedback: FeedbackStateSchema, publications: z.record(Id, PublicationSchema),
 }).superRefine((v, ctx) => {
+  validateConsumption(v, ctx)
+  if (v.consumed_review_requests !== Object.keys(v.review_requests).length) ctx.addIssue({ code: "custom", message: "Review request consumption differs from retained intents" })
+})
+export const HistoricalResearchStateSchema = z.union([LegacyResearchStateSchema, ResearchStateSchema])
+
+function validateConsumption(v: Omit<z.infer<typeof legacyStateObject>, 'schema_version'>, ctx: z.RefinementCtx) {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'State binding and registered authority differ' })
   const actions = Object.values(v.actions)
   const reserved = actions.filter(a => a.reservation_active)
@@ -41,7 +55,7 @@ export const ResearchStateSchema = z.strictObject({
     ctx.addIssue({ code: 'custom', message: 'Active action does not match retained reservation' })
   if (actions.some(a => a.phase === 'settled' && (a.reservation_active || a.evidence === null || a.checkpoint === null)))
     ctx.addIssue({ code: 'custom', message: 'Settled action lacks retained evidence/checkpoint or still reserves resources' })
-})
+}
 export type ResearchState = z.infer<typeof ResearchStateSchema>
 export type ActionState = z.infer<typeof ActionStateSchema>
 

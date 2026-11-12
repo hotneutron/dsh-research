@@ -17,9 +17,13 @@ npx --yes pnpm@11.7.0 test
 dsh_check_root=$(mktemp -d "${TMPDIR:-/tmp}/dsh-research-checks.XXXXXX")
 npx --yes pnpm@11.7.0 m1:smoke "$dsh_check_root/compatibility"
 npx --yes pnpm@11.7.0 m2:smoke "$dsh_check_root/synthetic-cpu"
+npx --yes pnpm@11.7.0 m3:smoke "$dsh_check_root/automatic"
+npx --yes pnpm@11.7.0 m4:smoke "$dsh_check_root/faults"
 ```
 
-Both smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling.
+The smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling.
+
+See the [native integration guide](docs/integration.md) for the proposal/review/feedback tools, project configuration and read-only audits.
 
 The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts the `synthetic_released_cpu` policy and requires registered project state. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
 
@@ -161,3 +165,4 @@ Implementation progress, qualification evidence and next work for M1–M6 are ma
 | r10 | 2026-11-11 21:39:00 -0800  | Documented runnable M1 package/fixture checks, contract 2.3.3 bindings and tested-versus-pending scope; preserved concise branching guidance and architecture figure. |
 | r11 | 2026-11-11 22:08:03 -0800 | Recorded M2 native helper/skill/packed-example implementation, runnable checks and exact tested-versus-pending scope; preserved concise branching guidance and the architecture figure. |
 | r12 | 2026-11-11 22:41:00 -0800 | Removed private artifact paths and duplicate milestone status/next-work content; linked the canonical implementation tracker and retained portable usage, architecture, branching guidance and historical revisions. |
+| r13 | 2026-11-11 23:30:50 -0800 | Added portable automatic workflow/fault check commands and stable integration guidance; implementation status remains solely in the tracked milestone record. |

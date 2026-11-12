@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T23:29:01.444193-08:00",
+  "request_verbatim": "keep impl unless blocked.",
+  "project_root": "/Users/bytedance/wk/accorde",
+  "project_head": "7c85e7541a3d8dfbb25fec46d96ff644c1ae72b5",
+  "search": {
+    "command": [
+      "rg",
+      "-l",
+      "dsh-research|dsh-superagent",
+      "P/.plan",
+      "P/docs"
+    ],
+    "exit_code": 1,
+    "matches": []
+  },
+  "path_availability": {
+    ".autoresearch/dsh/profile": false,
+    ".autoresearch/dsh/state.sqlite3": false,
+    ".autoresearch/dsh/sessions": false,
+    "tools/autoresearch_ppp/replay.py": true,
+    ".plan/20261009-1339-plan-autoresearch-integration.md": true
+  },
+  "legacy_integration": {
+    "path": ".plan/20261009-1339-plan-autoresearch-integration.md",
+    "sha256": "4552cbbadd4cbf633869047805767df9022af5d5bf19b6f188c13a4be32a3d97",
+    "scope": "Legacy autoresearch/P3 controller and inbox; not an accepted dsh-research profile or launch packet"
+  },
+  "M5_blockers": [
+    "No project-owned accepted dsh-research goal/pilot launch packet with exact candidate/evaluator/verifier/released-input pins found",
+    "No resolved project-owned dsh profile/authority paths found",
+    "No project author/reviewer/model and coordination budget declaration for this pilot is bound",
+    "Full M1\u2013M4 target-profile qualification and required semantic/native observations remain unqualified; scripted fixtures cannot supply them"
+  ],
+  "M6_blockers": [
+    "M5 qualification/adoption prerequisite unmet",
+    "No project-specific active legacy writer/exposure authority inventory or reviewed old/new mapping is bound; do not initialize or migrate a substitute"
+  ],
+  "independent_work_completed": [
+    "M3 automatic native proposal/review/feedback/effect/publication machinery",
+    "M4 coverage/continuity/budget audit mechanics and native failure drills"
+  ],
+  "prohibited_substitutions": [
+    "Package synthetic state for project scientific authority",
+    "Legacy autoresearch controller packet for a dsh-research launch",
+    "Scripted review or timer reservation as funded/live qualification"
+  ],
+  "scientific_data_reads": 0,
+  "project_mutations": 0,
+  "paid_model_calls": 0,
+  "GPU_collections": 0,
+  "next_required_input": "Accepted project-owned frozen pilot packet and independently reviewed target profile/qualification; existing legacy plan is insufficient"
+}

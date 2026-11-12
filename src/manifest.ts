@@ -56,6 +56,14 @@ export class ProjectArtifacts {
     try { await handle.writeFile(bytes); await handle.sync() } finally { await handle.close() }
     return { uri, sha256: sha256(bytes), size_bytes: bytes.byteLength }
   }
+  async writeOnce(uri: string, bytes: Uint8Array): Promise<ArtifactReference> {
+    const ref = { uri, sha256: sha256(bytes), size_bytes: bytes.byteLength }
+    try { return await this.write(uri, bytes) } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+      await this.read(ref)
+      return ref
+    }
+  }
 }
 
 export async function loadManifest(ref: ArtifactReference, artifacts: ProjectArtifacts): Promise<Manifest> {

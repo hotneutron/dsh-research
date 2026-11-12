@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "created": "2026-11-11T22:49:48.465216-08:00",
+  "request_verbatim": "keep impl unless blocked.",
+  "baseline_commit": "744db7a",
+  "contract_sha256": "3020d5dbc6a57e1b7b440b96c9243ffa8e13bf3e65fb1e8d8d9dc422bc0e911a",
+  "work": [
+    "M3 durable automatic review over existing subagents",
+    "project-owned feedback capture/disposition/effect/publication associations",
+    "effective prompt/tool profiles and non-human-gated continuation",
+    "M4 finite conformance/continuity audit interface and bounded native drills",
+    "read-only M5/M6 prerequisite resolution and explicit blockers"
+  ],
+  "qualification_budget": {
+    "owner": "dsh-research implementation author",
+    "authority": "keep impl unless blocked within planned minimal M3/M4 scope",
+    "purpose": "C_qual",
+    "max_synthetic_evaluator_dispatches": 96,
+    "per_dispatch_deadline_ms": 2000,
+    "total_timeout_reservation_ms": 192000,
+    "max_scripted_reviewer_dispatches": 192,
+    "external_model_calls": 0,
+    "GPU_collections": 0,
+    "protected_reads": 0,
+    "process_wall_ceiling_seconds": 1200,
+    "retry_reserve_seconds": 240,
+    "deadline": "2026-11-12T01:49:48.465216-08:00"
+  },
+  "scope_note": "Development fixtures and scoped audit mechanics; independent/live qualification is never inferred from scripted model output",
+  "exclusions": [
+    "new scheduler/reviewer/feedback service",
+    "new financial/exposure ledger",
+    "funded model or GPU study",
+    "sealed/confirmation input access",
+    "unqualified project launch or authority migration"
+  ],
+  "documentation": "M1\u2013M6 current status stays solely in .plan/tracker; README has no private-artifact links or progress ledger"
+}

@@ -1,6 +1,6 @@
 # M1 — Freeze the minimal contract and verify reuse
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:08:03 -0800. Revision: r15. Status: in progress; encoding/native fixture checks passed, integrated admission qualification pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: reviewed milestone breakdown. This milestone is in progress. The pinned-alpha public consumer checks are recorded below; the source audit alone is not runtime qualification.
 
@@ -14,7 +14,7 @@ The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-fe
 
 Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
 
-Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. The canonical tracker records implementation/qualification progress.
 
 M1 must qualify explicit storage-sqlite Config.path, session-persistence-jsonl Config.root and superagent Config.stateDir under P. Test that a worktree/profile/clone cannot silently create a second project budget or exposure authority. No project record or Doc mapping is stored under dsh-research or a package-global default.
 
@@ -145,3 +145,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r13 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
 | r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r15 | 2026-11-11 22:08:03 -0800 | Linked M2 guarded native job and Session-persistence observations; kept independent M1 qualification, Ticket/source and broader authority/recovery checks pending. |
+| r16 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |

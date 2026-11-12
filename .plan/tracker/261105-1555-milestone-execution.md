@@ -1,6 +1,6 @@
 # dsh-research milestone implementation tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 22:39:31 -0800. Revision: r20. Status: M1/M2 development in progress; M3–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r21. Status: M3 implementation fixtures pass; M4 scoped audits/drills pass with full qualification incomplete; M5/M6 blocked on project adoption prerequisites.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
 
@@ -34,28 +34,30 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 |---|---|---|---|
 | [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | in progress; encoding/native fixture observations | Qualify independent profile/compatibility and superagent Ticket/source handoff; preserve authority/recovery gates | [M1 scope](../review/261111-2124-m1-scope.json) and [capabilities](../review/261111-2124-m1-runtime-capabilities.json); integrated S1–S8 not complete |
 | [M2](../261105-1555-m2-skill-and-thin-helpers.md) | in progress; native/packed synthetic mechanics | M1 acceptance; full scope/profile qualification and M3 handoff | [M2 package receipt](../review/261111-2142-m2-package-receipt.json) + actual ordinary-worker/packed-example fixtures |
-| [M3](../261105-1555-m3-automatic-planning-and-review.md) | planned | M2; configure effective research prompts/presets | Scripted automatic separate-review transition and stale-action refusal |
-| [M4](../261105-1555-m4-scientific-property-qualification.md) | planned | M2/M3; qualify real reused boundaries | the canonical property set scoped matrix + deadline/restart receipts |
-| [M5](../261105-1555-m5-bounded-accorde-cpu-pilot.md) | planned | M1–M4 and reviewed frozen live launch packet | Actual <=4×60s/240s serial benchmark workflow + reviewer + stop |
-| [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | planned | M5; inventory authority/history before new-work adoption | Independent adoption / confirmation / retirement decisions |
+| [M3](../261105-1555-m3-automatic-planning-and-review.md) | implemented; scoped fixture observations, acceptance pending | Independent target-profile/Ticket/semantic qualification | [M3/M4 receipt](../review/261111-2244-m3-m4-package-receipt.json): automatic native proposal/review/feedback/effect loop |
+| [M4](../261105-1555-m4-scientific-property-qualification.md) | audit code and scoped native drills passed; full route matrix incomplete | Close accepted target-profile property/semantic/single-writer/operating-scope cells under reviewed budget | [M3/M4 receipt](../review/261111-2244-m3-m4-package-receipt.json); unobserved cells remain unresolved |
+| [M5](../261105-1555-m5-bounded-accorde-cpu-pilot.md) | blocked | Accepted project-owned goal/pilot packet, released-input/evaluator and model/reviewer budget/profile bindings; full M1–M4 target qualification | [Prerequisite audit](../review/261111-2244-project-adoption-prerequisites.json); no live project attempts |
+| [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | blocked | M5 acceptance and project-specific legacy writer/exposure inventory plus reviewed version/mapping/fencing | Read-only continuity audit available; [adoption prerequisites](../review/261111-2244-project-adoption-prerequisites.json); no authority handoff |
 
 Plans written does not mean milestones executed. Record dates, actual commands, receipt links, limits and failures when work occurs; update this artifact's timestamped Revision History on every amendment.
 
-## Next implementation work
+## Next implementation work and blockers
 
-The next code milestone is M3: configure effective author/reviewer prompts and presets, emit automatic separate scoped review transitions, and connect captured feedback to dispositions, frozen changes and actual effects. Continue development with bounded scripted/released-input fixtures; M1/M2 acceptance gates remain open.
+Package 0.1.2 adds the native automatic proposal/reviewer tools, same-record review/feedback/publication associations, effect checkpoint versions, persisted reviewer prefix verification, and read-only coverage/continuity/budget audits. The existing 21 behavior tests plus M2/M3/M4 native cases pass within the declared development scope. Exact final sources/profile/package/commands are in the [package receipt](../review/261111-2244-m3-m4-package-receipt.json).
 
-Package 0.1.1 at local commit 955292c supplies the M2 helpers, native tool, research skill and packed CPU example. The [M2 receipt](../review/261111-2142-m2-package-receipt.json) records 14 behavior tests and 11 native cases, including the extracted-package consumer. The [M1 receipt](../review/261111-2124-m1-runtime-capabilities.json) remains scoped evidence for its original bindings.
+M3 uses an actual separate native subagent and retained Session evidence; request_changes leads to a fresh changed proposal, a valid negative leads to an independently reviewed feedback-driven successor, and no additional human reply is required. Replayed review/feedback/publication causes no new scientific launch. M4's scoped drills cover reviewer timeout, lost dispatch association, delayed durable acknowledgement, same-attempt replay and stale snapshot rollback refusal. The finite coverage auditor never promotes missing, conflicting or weaker-assurance observations to a pass.
 
-Independent contract/profile qualification, superagent Ticket/source wiring and broader authority/lifecycle/fault coverage still need evidence before full M1/M2 acceptance. M4 closes its frozen qualification matrix; M5 requires project-owned pilot/evaluator inputs and launch qualification; M6 handles reviewed adoption and authority-preserving migration. No live scientific profile or migration is qualified by the README cleanup.
+Live M5 work is blocked by [project prerequisites](../review/261111-2244-project-adoption-prerequisites.json): no accepted Accorde dsh-research launch packet or resolved project profile/authority was found; no exact released-input/evaluator/candidate and author/reviewer/model budget is bound. The available legacy autoresearch integration plan/evaluator belong to a different composition. They cannot replace the required scientific mandate, source mapping or qualification. Full target-profile property/semantic/authority qualification remains incomplete; scripted fixtures are not live scientific review evidence.
 
-The removed README milestone table incorrectly labeled M1/M2 as Planned and named M1 as the next implementation step. Its old bytes remain in Git at 955292c; the current table and next-work record above govern implementation tracking. Historical README revision rows remain in README.md for the required artifact audit trail.
+M6 remains blocked by M5 and absent project-specific legacy authority/writer/exposure mapping and fencing evidence. Version 1 snapshots remain readable for audit; version 2 adds coordination associations. The new native domain rejects implicit version 1 store adoption, and no project state has been migrated or initialized as a substitute. Read-only continuity checks preserve old attempts, reviews, checkpoints, feedback and publication identities.
+
+Required external state change: provide/adopt an accepted project-owned frozen pilot packet and independently reviewed target profile/qualification with explicit resource/model bounds, then bind an actual legacy authority inventory before migration. Ordinary technical/qualification holds are not scientific exhaustion and add no human scientific steering question.
 
 ## 1604 entry accounting
 
 Track package signals separately from qualified T1–T4 entries: accepted requirement, versions, expected/observed facts, attempted/ruled-out repair, affected shared boundary, structural reviewer conclusion and bounded assessment cost. Package design authors own deliberate engineering entry decisions; hosted-project records retain scientific evidence/authority. The gate requires material core blockage, architectural cause and insufficient local repair. Routine failure or scientific exhaustion does not substitute for that evidence.
 
-No architecture trigger has been empirically qualified by these documentation updates. M1/M2 are in progress; M3–M6 stay planned; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
+No architecture trigger has been empirically qualified by these documentation updates. M3/M4 development has scoped evidence; M5/M6 are blocked on the named prerequisites; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
 
 ## Human-review corrections
 
@@ -194,3 +196,4 @@ use .plan/tracker/ for M1-M6 impl status tracking.
 | r18 | 2026-11-11 21:39:00 -0800  | Recorded local documentation commit, M1 encoding/N13–N15 bindings and bounded public-runtime observations; kept independent review, integrated admission and all M2–M6/live gates pending. |
 | r19 | 2026-11-11 22:08:03 -0800 | Recorded M2 guarded native and packed consumer development evidence, skill/hold behavior and exact package pins; kept independent M1/M2 acceptance and M3–M6 pending. |
 | r20 | 2026-11-11 22:39:31 -0800 | Made .plan/tracker/ canonical for M1–M6 implementation status and next work, removed the stale README duplicate, retained qualification evidence/gates and recorded the user request verbatim; implementation outcomes unchanged. |
+| r21 | 2026-11-11 23:30:50 -0800 | Recorded automatic M3 native workflow and scoped M4 audit/drill evidence; made concrete M5/M6 project prerequisites explicit, preserved all qualification gaps and delegated plan status to this tracker. |

@@ -15,6 +15,8 @@ export function checkpointFor(manifest: Manifest, evidence: Evidence, evidenceRe
       : negative ? 'The domain result is valid and negative; prepare a bounded diagnostic or alternative' : 'The domain verdict is retained; prepare the next exact scoped review',
     uncertainty: ['This checkpoint does not itself authorize a new execution'], evidence: [evidenceRef], reviews: [reviewRef],
     balance: { consumed_attempts: state.consumed_attempts, reserved_timeout_ms: state.reserved_timeout_ms, costs: evidence.costs }, stopped: state.stopped,
-    decision: state.stopped ? 'stop' : 'defer', next_action: null, hold, feedback: [], exhaustion: null,
+    decision: state.stopped ? 'stop' : 'defer', next_action: null, hold,
+    feedback: Object.values(state.feedback.items).filter(item => item.disposition !== 'pending').map(item => ({ source: item.content,
+      disposition: item.reason ?? item.disposition, effect: item.effect, status: item.effect_status })), exhaustion: null,
   })
 }

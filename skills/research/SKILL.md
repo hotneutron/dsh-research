@@ -12,7 +12,7 @@ The packaged native adapter currently supports synthetic released CPU developmen
 ## Author procedure
 
 1. Read the exact original request and preserve it verbatim in project artifacts. Bind the plan snapshot, candidate/configuration, evaluator/interpreter, released inputs, environment, exact argv/cwd/env, limits and output schema in a frozen manifest. Include relevant dirty/untracked content in the source inventory.
-2. Obtain completed separate technical review for that exact manifest and proposal. Match the review request, subject, reviewer/profile and consumable scope. An unavailable reviewer holds the dependent action; do not self-approve or substitute a human signature.
+2. Use the configured research_propose tool to freeze the project-supplied proposal, then research_review to obtain completed separate technical review for that exact manifest and proposal. Match the review request, subject, reviewer/profile and consumable scope. An unavailable reviewer holds the dependent action; do not self-approve or substitute a human signature.
 3. Invoke only the configured guarded `research_run` tool with immutable manifest/review references and the observed state revision. Never replace argv, invoke another shell path, create a fresh authority or reset consumed attempts/reviews. Leave protected, sealed and confirmation inputs unread under the initial profile.
 4. Read the original action association on replay. Treat an unknown launch/settlement as unresolved, retain its reservation, and use existing native ownership/termination evidence for reconciliation. Never repeat an admitted action merely because its worker or transport restarted.
 5. Check actual terminal facts, complete captured bytes, identity before/after and the bound domain verifier. Hash and parse the same captured bytes. Preserve interrupted, timed-out, cancelled, truncated or drifted evidence as invalid even when it contains a passing score or exit zero. Keep a valid negative scientifically useful.
@@ -37,3 +37,4 @@ Treat feedback as capture → disposition → frozen action change → actual ef
 | Revision | Timestamp | Change |
 |---|---|---|
 | r1 | 2026-11-11 22:08:03 -0800 | Created the M2 research procedure over exact records and existing providers, with project ownership, guarded execution, reviewed continuation and permitted sharing. |
+| r2 | 2026-11-11 23:26:54 -0800 | Added automatic proposal/review tool use and retained exact scope, project ownership, independent review and non-human-gated continuation rules. |
