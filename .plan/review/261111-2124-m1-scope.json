@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "id": "m1-encoding-public-runtime-spike",
+  "created": "2026-11-11T21:26:58.810134-08:00",
+  "request_verbatim": "commit then impl",
+  "scope": "M1 encoding and keyless public storage/subagent compatibility only; not live scientific qualification",
+  "contract_baseline_sha256": "ebfafa15545bc6925052772e95d26247c2b86c497a637ceb08949eb5aefd6f9b",
+  "cells": [
+    "records-roundtrip",
+    "numeric-and-capture-refusal",
+    "compatibility-missing-row",
+    "compatibility-hash-drift",
+    "binding-envelope-declaration",
+    "sqlite-reserve-replay-reopen",
+    "sqlite-serialized-bounds",
+    "sqlite-commit-before-observation",
+    "subagent-public-wait-list-drain",
+    "scripted-provider-author-reviewer"
+  ],
+  "assurance_target": "fixture_verified observations; completed independent qualification review pending",
+  "excluded_claims": [
+    "guarded production dispatch",
+    "all 23 properties",
+    "feedback/publication integration",
+    "restart-durable job launch",
+    "live pilot",
+    "protected-input release",
+    "project migration"
+  ],
+  "qualification_budget": {
+    "id": "m1-local-cpu-development",
+    "owner": "dsh-research implementation author",
+    "authority": "commit then impl within bounded M1",
+    "cost_purpose": "C_qual",
+    "units": [
+      "process_wall_seconds",
+      "provider_calls",
+      "protected_reads"
+    ],
+    "planned_distinct_fixture_executions": 4,
+    "process_wall_ceiling_seconds": 600,
+    "retry_reserve_seconds": 120,
+    "provider_call_ceiling": 0,
+    "protected_read_ceiling": 0,
+    "deadline": "2026-11-11T22:11:58.810134-08:00",
+    "cost_rates": "Process wall seconds retained directly; no conversion to unobserved currency or CPU utilization"
+  },
+  "review_status": "No independent scope approval claimed; these development tests cannot qualify a production route",
+  "envelope_binding": "No accepted operating envelope in this package fixture; no T4 envelope claim or amortization",
+  "preparation": "Published-package inspection and dependency preparation started before this finite fixture plan; setup costs remain separate and not inferred as zero"
+}

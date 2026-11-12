@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "established_in": "2.3.2",
+  "table_sha256": "ce693a340f78d3686646afd6d1dd541f162f22cbca30ef6ddfe399fe23fce0a5",
+  "rows": [
+    {
+      "row_id": "contract-1.0.0",
+      "contract_version": "1.0.0",
+      "changed_obligations": "Initial record/stage/identity, review, admission, evidence and continuation specification",
+      "assessment": "Specified baseline; no implemented public encoding or live qualification established",
+      "consumers_and_gate": "M1 must freeze actual mappings; project adopters pin exact bytes/profile",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.0.0",
+      "contract_version": "2.0.0",
+      "changed_obligations": "Category-specific testable predicates, counterexamples and applicability outcomes replace flat IDs",
+      "assessment": "Identifier/granularity change; no aliases or retrospective trace relabeling",
+      "consumers_and_gate": "M1/M4 and audit/query consumers use the version-bound property set; M6 preserves old snapshots",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.1.0",
+      "contract_version": "2.1.0",
+      "changed_obligations": "Admission order proof, reviewer holds, release-schema ownership, applicability proof and scoped structural review",
+      "assessment": "Additional evidence/record obligations; old encodings/qualification cannot be presumed sufficient",
+      "consumers_and_gate": "M1–M4 qualify proof/schema/review mappings; M6 assesses affected adopters",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.2.0",
+      "contract_version": "2.2.0",
+      "changed_obligations": "Mandatory frozen qualification cells, scope closure and reviewed scope changes",
+      "assessment": "New coverage obligations, not editorial clarification",
+      "consumers_and_gate": "M1 freezes scope/cases; M4 provides evidence; M6 revalidates adoption claims",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.3.0",
+      "contract_version": "2.3.0",
+      "changed_obligations": "Qualification budget and C_run/C_qual cost attribution, explicit anomaly annotation",
+      "assessment": "Added budget/accounting obligations; typed cost-purpose and authority mappings need review",
+      "consumers_and_gate": "M1/M4 and T4 consumers bind accounting; M6 inventories actual adopter impact",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.3.1",
+      "contract_version": "2.3.1",
+      "changed_obligations": "Amortization pinned to accepted W/D, owned qualification holds, explicit T4 combined cost evidence",
+      "assessment": "Tightened cost/evidence/hold obligations despite unchanged IDs and patch label",
+      "consumers_and_gate": "M1/M4/M6 and T4 consumers reassess envelope and hold data; preserve original-window failure",
+      "assessment_mode": "retrospective",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.3.2",
+      "contract_version": "2.3.2",
+      "changed_obligations": "Cumulative version assessment and budget/envelope/qualification-cost arbitration",
+      "assessment": "Added release/adoption completeness and triage rules; conformance remains prospective",
+      "consumers_and_gate": "Documentation gate requires this row; M1/M4/M6 and 1604 apply explicit cost classification before T4",
+      "assessment_mode": "contemporaneous",
+      "recorded_at": "2026-11-11T21:12:18-08:00"
+    },
+    {
+      "row_id": "contract-2.3.3",
+      "contract_version": "2.3.3",
+      "assessment_mode": "contemporaneous",
+      "recorded_at": "2026-11-11T21:39:00.959600-08:00",
+      "changed_obligations": "Machine-checkable compatibility row binding, retrospective assessment labeling and accepted-declaration envelope binding",
+      "assessment": "Added qualification/adoption reference encoding; parsing is not semantic compatibility or adoption approval",
+      "consumers_and_gate": "M1 encoding/checks bind register bytes, table and row hash; M4/M6 and T4 consumers retain review and accepted envelope authority"
+    }
+  ]
+}

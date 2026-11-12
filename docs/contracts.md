@@ -1,9 +1,9 @@
 # Research-loop contract
 
 Contract ID: `dsh-research/research-loop`.
-Contract version: `2.3.2`.
-Created: 2026-11-11 17:02 -0800. Updated: 2026-11-11 21:12:18 -0800.
-Status: specified design baseline. Implementation, provider conformance and live qualification remain pending; this document grants no execution or deployment authority.
+Contract version: `2.3.3`.
+Created: 2026-11-11 17:02 -0800. Updated: 2026-11-11 21:39:00 -0800.
+Status: specified design baseline. M1 public encodings and keyless provider fixtures have scoped development checks; independent/full conformance and live qualification remain pending. This document grants no execution or deployment authority.
 
 ## Scope and authority
 
@@ -32,7 +32,7 @@ Each frozen action must bind `contract_ref`: contract ID, version, immutable con
 
 For each required obligation/profile, record its assurance separately: `specified`, `implemented`, `fixture_verified`, `live_verified`, or `disabled`, with supporting references and known limits. A specified requirement is a design obligation, not an implemented guarantee. A fixture pass does not establish live provider behavior. Required unsupported operations keep their route disabled or held for qualification.
 
-M1 freezes the public encoding/provider mappings and compatibility matrix for the semantic records below. These field names describe required information; they are not claims that an installed SDK already implements them.
+M1 freezes the public encoding/provider mappings and compatibility matrix for the semantic records below. [Encoding v1](../src/records.ts) and [binding checks](../src/bindings.ts) implement a confirmation-off subset; parsing does not grant authorization or qualify provider semantics. Enabled confirmation remains disabled pending its own reviewed encoding and provider checks.
 
 ## Four semantic records
 
@@ -279,15 +279,19 @@ Qualification budget and an operating envelope are different constraints with th
 |---|---|---|
 | Qualification budget cannot fund required coverage, irrespective of envelope result | Owned qualification hold and prospective plan/budget review; coverage remains incomplete | Not automatic T4 or scientific exhaustion |
 | Budget suffices and original accepted envelope passes | Continue qualified plan/adoption checks | No envelope-violation trigger |
-| Budget suffices, but C_qual alone produces original-envelope failure while recurring C_run fits | Record the failure and hold affected adoption if the envelope is binding; review matrix size/reuse, one-off baseline/operating assumptions and requirement validity first | The raw qualification bill or short W alone is not architecture entry |
+| Budget suffices, but C_qual alone produces original-envelope failure while recurring C_run fits | Record the failure and hold affected adoption when the exact accepted envelope_ref declaration marks it binding; review matrix size/reuse, one-off baseline/operating assumptions and requirement validity first | The raw qualification bill or short W alone is not architecture entry |
 | C_run violates its accepted bound, or an identified C_qual component is demonstrably caused by an avoidable required architectural step | Local attribution/optimization and requirement/baseline validation first | Candidate T4 only after material blockage, architectural cause, finite narrower-optimization insufficiency and separate scoped review |
 | Attribution, units, scope or envelope baseline is unresolved | Keep observed costs/failure and owned measurement/qualification hold | No inferred T4 qualification or fabricated pass |
+
+Envelope binding, owner, units, ceiling, W/D and allocation come from the exact accepted declaration resolved by envelope_ref, including its accepted policy reference. The analyst or adoption caller cannot override binding as a second interpretation. A missing/unverifiable declaration holds that envelope assessment.
 
 C_qual remains in total package-coordination cost even when triage chooses the plan/baseline lane. To escalate a qualification-driven case, compare the same accepted required logical coverage under bound alternative implementations or causal trace evidence; identify the architectural step and eligible optimization results. Freeze the attribution/allocation method before analysis, and preserve every physical charge once. Neither inherently required conformance work nor an expensive matrix by itself proves architectural overhead.
 
 A prospectively reviewed requirement/envelope revision may correct an unsound baseline but cannot rewrite the original-window failure, remove failed cells or refund consumption. All three 1604 entry conditions still apply; a budget pass does not certify an envelope pass, and an envelope failure does not by itself authorize redesign.
 
 ## Compatibility assessment of new obligations
+
+This register was established in 2.3.2. Rows 1.0.0–2.3.1 are retrospective assessments recorded at that time; they do not claim a release-time review. Original decisions remain in each version’s revision history and retained snapshots. The 2.3.2 and later rows are contemporaneous with their contract revisions.
 
 Maintain this cumulative register for every contract version, not only the latest correction. A new version must have a row matching the header and naming its changed obligations, semantic/encoding compatibility consequence, affected consumers and required review/qualification. Release/adoption checks must reject a missing current row; do not assume a patch/minor label or unchanged property IDs means no obligation changed.
 
@@ -300,8 +304,11 @@ Maintain this cumulative register for every contract version, not only the lates
 | 2.3.0 | Qualification budget and C_run/C_qual cost attribution, explicit anomaly annotation | Added budget/accounting obligations; typed cost-purpose and authority mappings need review | M1/M4 and T4 consumers bind accounting; M6 inventories actual adopter impact |
 | 2.3.1 | Amortization pinned to accepted W/D, owned qualification holds, explicit T4 combined cost evidence | Tightened cost/evidence/hold obligations despite unchanged IDs and patch label | M1/M4/M6 and T4 consumers reassess envelope and hold data; preserve original-window failure |
 | 2.3.2 | Cumulative version assessment and budget/envelope/qualification-cost arbitration | Added release/adoption completeness and triage rules; conformance remains prospective | Documentation gate requires this row; M1/M4/M6 and 1604 apply explicit cost classification before T4 |
+| 2.3.3 | Machine-checkable compatibility row binding, retrospective assessment labeling and accepted-declaration envelope binding | Added qualification/adoption reference encoding; parsing is not semantic compatibility or adoption approval | M1 encoding/checks bind register bytes, table and row hash; M4/M6 and T4 consumers retain review and accepted envelope authority |
 
-No implemented dsh-research record mapping or adopted running profile is evidenced in this documents-only repository. The current edits perform zero runtime/schema/state migration here, not a verified zero-impact conclusion for every external adopter. Before adopting a row, M1 must qualify its public encoding/assurance, M6 must inventory exact old/new adopter bindings, and the scoped review must record compatible, incompatible or unresolved transitions and necessary tests/migration. Old receipts remain evidence for their original bound version.
+Qualification/adoption records must carry compatibility_row_ref: register artifact URI/exact-byte hash/size, contract version, stable row ID, row content hash and compatibility table hash. [Machine-readable register](compatibility.json) mirrors the table and labels assessment timing. The binding checker rejects a missing current row, drifted register/table/row bytes or mismatched contract version. A checked reference is necessary but does not establish semantic compatibility.
+
+No adopted running profile is evidenced in this repository; M1 encoding/provider development does not qualify a project deployment. The current edits perform zero runtime/schema/state migration here, not a verified zero-impact conclusion for every external adopter. Before adopting a row, M1 must qualify its public encoding/assurance, M6 must inventory exact old/new adopter bindings, and the scoped review must record compatible, incompatible or unresolved transitions and necessary tests/migration. Old receipts remain evidence for their original bound version.
 
 Future entries also retain baseline/delta/evidence references and the explicit review decision in the deliberate change record. Unknown affected adopters or unverified encoding behavior stays unresolved; the register does not manufacture compatibility from an absent implementation.
 
@@ -310,6 +317,8 @@ Future entries also retain baseline/delta/evidence references and the explicit r
 Created identifies initial authoring. Updated and the latest revision row identify the final content write for that revision, with timezone and second precision. A later validation receipt has its own execution time and binds exact document hashes; it may legitimately postdate the document it checks. Filesystem mtime may change through copying/checkout and is not native happens-before proof. Preserve prior reviewed bytes and timestamp anomalies rather than retroactively rewriting old snapshots to make a timeline look consistent.
 
 ## Versioning, conformance and migration
+
+Version 2.3.3 adds compatibility_row_ref to qualification/adoption bindings, labels retrospective register judgments and derives envelope binding from its accepted declaration. The confirmation-off M1 encoding has scoped development checks; no hosted-project state/profile migration occurs. The prior 2.3.2 bytes remain [retained](../local_artifacts/dsh-research/contract-history/261111-2124-reviewed-contract-2.3.2-ebfafa15545b.md).
 
 Version 2.3.2 adds cumulative per-version obligation/compatibility assessment and explicit qualification-budget versus envelope arbitration. Preserve [the reviewed 2.3.1 snapshot](../local_artifacts/dsh-research/contract-history/261111-2112-reviewed-contract-2.3.1-87e6d84f8caf.md); no runtime/profile migration occurs.
 
@@ -325,7 +334,7 @@ Version 2.0.0 replaced the former flat property IDs with category-specific predi
 
 Version this stable document and retain immutable adopted snapshots. Record the content hash as well as the version; a version label alone cannot distinguish changed bytes. Changed obligations, stage/identity semantics or supported profiles require an explicit compatibility assessment and new applicable review. Preserve old contract bindings and historical receipts rather than backfill a new meaning into them.
 
-[Current property/reference checks](../.plan/review/261111-2112-N11-N12-validation.json) validate document coverage and references only; provider conformance remains pending.
+[Current M1 capability/document receipt](../.plan/review/261111-2124-m1-runtime-capabilities.json) records encoding and native fixture scope plus document checks; independent integrated-provider conformance remains pending. The 2.3.2 [document check](../.plan/review/261111-2112-N11-N12-validation.json) remains historical evidence for its exact prior hash.
 
 M1 records the contract and public provider encoding/capability mappings. M2 binds records/capture/checks to existing execution/storage. M3 emits observable scientific/review/feedback associations. M4 qualifies invariants and positive/negative conformance cases. M5 adopts only a qualified released-input profile. M6 handles revised-profile/state compatibility and single-writer handoff; documentation completion does not complete any runtime milestone.
 
@@ -365,3 +374,4 @@ The r4 value `2026-11-11 18:08 -0800` is retained from the initial edit, but is 
 | r6 | 2026-11-11 20:20:31 -0800 | Addressed N4–N7: classified new coverage/budget obligations and prospective compatibility, linked qualification cost to its budget/T4, and flagged r4's retained timestamp anomaly; specified 2.3.0 without runtime migration. |
 | r7 | 2026-11-11 20:30:26 -0800 | Addressed N8–N10: accepted-envelope horizon/denominator binding, owned qualification holds and explicit T4 C_run/C_qual evidence; specified 2.3.1 without runtime qualification. |
 | r8 | 2026-11-11 21:12:18 -0800 | Addressed N11–N12 with a cumulative version assessment/adoption gate and explicit budget/envelope/qualification-cost arbitration; specified 2.3.2 without runtime conformance or migration. |
+| r9 | 2026-11-11 21:39:00 -0800  | Incorporated N13–N15 into M1 encoding: labeled retrospective assessments, bound machine-readable compatibility rows and accepted envelope declarations; retained prior contract bytes and pending independent/provider/live qualification. |

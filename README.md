@@ -1,10 +1,25 @@
 # dsh-research
 
-dsh-research is a planned research skill, policy and thin-helper package over existing DSH and dsh-superagent facilities. It helps a hosted project connect a scientific question to bounded execution, trustworthy evidence, separate agent review and a justified next action.
+dsh-research is a research skill, policy and thin-helper package in development over existing DSH and dsh-superagent facilities. It helps a hosted project connect a scientific question to bounded execution, trustworthy evidence, separate agent review and a justified next action.
 
 The hosted project owns its scientific code, plans, decisions, evidence and persistent state. dsh-research owns reusable implementation and its own engineering records. Existing DSH facilities provide workers, jobs, communication, recovery and persistence; the package does not rebuild those services.
 
-**Current status:** this repository contains plans and qualification/documentation receipts. M1–M6 implementation and live integration remain pending. There is no implemented package-install or research-run command to document yet.
+**Current status:** M1 has a TypeScript package for four record encodings and binding checks, with bounded native-provider fixture evidence. Integrated admission, independent conformance review and M2–M6 remain pending. A production research-run command is not available.
+
+## M1 development checks
+
+Use Node >=24.9 and the pinned pnpm version. From this checkout:
+
+```sh
+npx --yes pnpm@11.7.0 install --frozen-lockfile --ignore-scripts
+npx --yes pnpm@11.7.0 build
+npx --yes pnpm@11.7.0 typecheck
+npx --yes pnpm@11.7.0 test
+mkdir -p local_artifacts/dsh-research/m1-implementation
+npx --yes pnpm@11.7.0 m1:smoke local_artifacts/dsh-research/m1-implementation/my-fresh-run
+```
+
+The smoke command requires a fresh output directory. It imports the built public package, validates the four synthetic records, and exercises public native SQLite and scripted DSH author/reviewer/child operations. It retains exact contract/register references, fixture bytes and traces in ignored artifacts. [Current capability receipt](.plan/review/261111-2124-m1-runtime-capabilities.json) records tested scope and pending gates. Synthetic reviewer answers and storage reopen observations do not qualify scientific review or durable job dispatch.
 
 ## Deliberate branching vs explorative branching
 
@@ -75,7 +90,7 @@ See the [state/autonomy contract](.plan/261105-1705-contract-project-state-auton
 
 ## Execution, review and autonomy
 
-The [research-loop contract 2.3.2](docs/contracts.md) specifies the stages, invariants and trace records for this route. Actions pin its version/hash and qualified provider profile; admission requires verifiable commit/order proof and missing independent review holds the dependent action; the current contract is specified, with implementation and live conformance still pending.
+The [research-loop contract 2.3.3](docs/contracts.md) specifies the stages, invariants and trace records for this route. Actions pin its version/hash and qualified provider profile; admission requires verifiable commit/order proof and missing independent review holds the dependent action; the contract remains a specified baseline with a tested M1 subset; integrated and live conformance remain pending.
 
 
 The intended route is:
@@ -145,7 +160,7 @@ The [milestone index](.plan/261105-1555-review-1201-1230-and-milestones.md) and 
 | M5 | Project-owned bounded released-input pilot | Planned |
 | M6 | New-work adoption, migration and conditional retirement | Planned |
 
-The current contract includes mandatory coverage and qualification-budget obligations; implementation and adopter compatibility remain pending. Qualification costs belong to package coordination, with their own frozen bounds and no duplicate science charge.
+The current contract includes mandatory coverage and qualification-budget obligations; M1 implements the confirmation-off encoding and compatibility-row check; semantic adopter compatibility remains pending. Qualification costs belong to package coordination, with their own frozen bounds and no duplicate science charge.
 
 The next implementation step is M1: refresh capability observations, qualify the chosen public provider operations and keep unsupported routes disabled. Missing hosted-project pilot/evaluator inputs must be resolved in that project; package documentation does not substitute for them.
 
@@ -164,3 +179,4 @@ Repository policy is in [AGENTS.md](AGENTS.md). No implementation, live pilot, s
 | r7 | 2026-11-11 20:22:19 -0800 | Aligned README with current contract 2.3.0 and retained 2.1.0 r6 as historical. |
 | r8 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r9 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r10 | 2026-11-11 21:39:00 -0800  | Documented runnable M1 package/fixture checks, contract 2.3.3 bindings and tested-versus-pending scope; preserved concise branching guidance and architecture figure. |

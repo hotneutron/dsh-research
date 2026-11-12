@@ -1,6 +1,6 @@
 # M5 — Qualify a project-owned autonomous pilot
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r14. Status: design revised; implementation and live state migration not executed.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r15. Status: design revised; implementation and live state migration not executed.
 
 Qualify one project-owned autonomous pilot through the reusable package. The concrete `Accorde pilot plan` (project-owned input pending) and `integration plan` (project-owned input pending) are authoritative for that project. This file is the package milestone definition, not a second Accorde campaign/decision store.
 
@@ -10,7 +10,7 @@ The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-fe
 
 Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
 
-Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. Current M1–M6 implementation remains pending.
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
 
 ## Responsibility and deliverables
 
@@ -27,7 +27,7 @@ A pilot failure first receives local diagnosis/recovery within its existing char
 The pilot must demonstrate admission order proof, exact review availability/hold handling and retained applicability evidence for excluded premises. Initial confirmation remains off; the pilot does not qualify enabled DATA-2 by omission. New schema/ordering/hold requirements do not enlarge the existing benchmark or model budgets.
 
 
-Adopt an exact qualified [contract/profile reference](../docs/contracts.md) in the project pilot packet; version 2.3.2 is specified here but live mappings remain pending. Retain L0–L8/F1–F3 native trace associations, actual terminal evidence and the category-scoped property IDs outcomes within P. A successful document check is not pilot qualification.
+Adopt an exact qualified [contract/profile reference](../docs/contracts.md) in the project pilot packet; version 2.3.3 is specified here but live mappings remain pending. Retain L0–L8/F1–F3 native trace associations, actual terminal evidence and the category-scoped property IDs outcomes within P. A successful document check is not pilot qualification.
 
 
 Demonstrate real project-local result/evidence continuity, automatic reviewer involvement, correct charged attempts, no bypass/duplicate launch, comment capture-to-disposition-to-actual-effect proof, and continuation without waiting for human feedback. Valid-negative and procedural outcomes trigger autonomous diagnosis/recovery/pivot; scientific exhaustion requires a reviewed reasoned assessment before human steering.
@@ -80,3 +80,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r12 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
 | r13 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r14 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r15 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |

@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T21:40:20.557059-08:00",
+  "request_verbatim": "commit then impl",
+  "documentation_commit": "a456c5e0205b120323d4a59532bce41c2ad0c3a7",
+  "milestone": "M1",
+  "status": "in_progress",
+  "outcome": "bounded encoding/public-runtime spike passed; integrated qualification pending",
+  "contract": {
+    "id": "dsh-research/research-loop",
+    "version": "2.3.3",
+    "artifact": {
+      "uri": "contract/snapshot.md",
+      "sha256": "3020d5dbc6a57e1b7b440b96c9243ffa8e13bf3e65fb1e8d8d9dc422bc0e911a",
+      "size_bytes": 65422
+    }
+  },
+  "compatibility_row_ref": {
+    "register": {
+      "uri": "contract/compatibility.json",
+      "sha256": "f0f6d597e6be5a2822b88d52afdb84bf9a082853f11908ad23288ba6c3e34ca4",
+      "size_bytes": 4404
+    },
+    "contract_version": "2.3.3",
+    "row_id": "contract-2.3.3",
+    "row_sha256": "e8a8ed6c26c84b39fca1b34fd5e608c7af511c1bfaa18fdc2efd25823085de38",
+    "table_sha256": "ce693a340f78d3686646afd6d1dd541f162f22cbca30ef6ddfe399fe23fce0a5"
+  },
+  "review_source": {
+    "path": "local_artifacts/dsh-research/architecture-revision/contracts-human-review-zh.md",
+    "sha256": "ba42af7e24b5b5e5d4960fcce82b7a1232ee53b64e3d709c77d3cf3052945b56",
+    "modified": false
+  },
+  "N13_N15": {
+    "N13": "Retrospective 1.0.0–2.3.1 register assessments labeled; 2.3.2 establishment retained",
+    "N14": "CompatibilityRowRef on Binding/Qualification; verifier refuses absent/current/hash/version/table drift",
+    "N15": "readEnvelope resolves exact accepted declaration; no binding override argument"
+  },
+  "toolchain": {
+    "node": "v26.5.0",
+    "selected_package_manager": "pnpm@11.7.0",
+    "lockfile_committed_with_source": true
+  },
+  "checkouts": {
+    "dsh-superagent-prototype": {
+      "head": "8c32a9dc5d72c033816c6a8110b37f40cf94fba4",
+      "source_dirty": false,
+      "version": "0.1.0",
+      "package_manager": "pnpm@11.7.0",
+      "lock_sha256": "ba6b997c448984a04b28eeb5b620c14c7cfeff5eb170e1abd6e0734007405c39"
+    },
+    "deepseek-harness": {
+      "head": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159",
+      "source_dirty": false,
+      "version": "0.2.2-rc.1",
+      "package_manager": "pnpm@11.28.5",
+      "lock_sha256": "b6f0946199db2661e45ac0ceead23e6ceedf148604b48ea9b05a6287a4094bcd"
+    }
+  },
+  "pairing": {
+    "selected": "unchanged prototype checkout + published DSH 0.2.1-alpha.2 family",
+    "current_harness_source": "not used for runtime; descendant API mismatch retained",
+    "prototype_check": {
+      "command": "npx --yes pnpm@11.7.0 check",
+      "status": "passed",
+      "test_files": 59,
+      "tests": 1197,
+      "test_process_wall_seconds_reported": 14.87,
+      "typecheck": "passed",
+      "build": "passed",
+      "scope": "prototype existing fixtures; not integrated dsh-research qualification"
+    }
+  },
+  "checks": [
+    {
+      "name": "build",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "build"
+      ],
+      "timestamp": "2026-11-11T21:39:03.031061-08:00",
+      "process_wall_seconds": 1.4887736670025333,
+      "exit_code": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "typecheck"
+      ],
+      "timestamp": "2026-11-11T21:39:04.921518-08:00",
+      "process_wall_seconds": 1.8892387079977198,
+      "exit_code": 0
+    },
+    {
+      "name": "tests",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "test"
+      ],
+      "timestamp": "2026-11-11T21:39:06.196725-08:00",
+      "process_wall_seconds": 1.2734536669995578,
+      "exit_code": 0
+    },
+    {
+      "name": "smoke",
+      "command": [
+        "npx",
+        "--yes",
+        "pnpm@11.7.0",
+        "m1:smoke",
+        "local_artifacts/dsh-research/m1-implementation/261111-2124-final-public-consumer"
+      ],
+      "timestamp": "2026-11-11T21:39:07.459239-08:00",
+      "process_wall_seconds": 1.257637374998012,
+      "exit_code": 0
+    }
+  ],
+  "capabilities": {
+    "S1": {
+      "status": "pending",
+      "observed": "Actual author Session receives synthetic subject",
+      "missing": "superagent Ticket-to-manifest dispatch and original project-source route"
+    },
+    "S2": {
+      "status": "disabled",
+      "reason": "No communication/cloud credentials or target; source routes only"
+    },
+    "S3": {
+      "status": "pending",
+      "reason": "Existing service/watchdog tests pass; production setup not installed"
+    },
+    "S4": {
+      "status": "pending",
+      "reason": "No guarded evaluator/job dispatch, deadline or restart-durable settlement qualified"
+    },
+    "S5": {
+      "status": "pending",
+      "observed": "Native child profile maxActiveSubagents=1 and canonical synthetic cwd",
+      "missing": "Single benchmark/job author, overlap refusal and project/worktree authority integration"
+    },
+    "S6": {
+      "status": "runtime_verified",
+      "scope": "One configured fixture writer; public SQLite/domain serialized update/replay/bounds/reopen",
+      "limitations": [
+        "No power-loss or multi-host guarantee",
+        "Native Session persistence and superagent stateDir resolution pending",
+        "Unknown-state/restart launch recovery pending",
+        "No production dispatch ordering claim"
+      ]
+    },
+    "S7": {
+      "status": "runtime_verified",
+      "scope": "Actual separate scripted provider/Session, exact returned subject hash and no tool calls; actual child wait/list/selected-drain",
+      "limitations": [
+        "Scripted answer is not qualified scientific or structural review",
+        "Production reviewer permissions/preset and unavailable-review recovery pending",
+        "Catalog query fixture provides public observation and explicitly rejects full-text search"
+      ]
+    },
+    "S8": {
+      "status": "pending",
+      "reason": "Existing prototype settings/stop tests pass; effective integrated research profile not installed"
+    }
+  },
+  "coverage": {
+    "development_tests": 8,
+    "required_full_property_ids": [
+      "PROV-1",
+      "PROV-2",
+      "PROV-3",
+      "AUTH-1",
+      "AUTH-2",
+      "AUTH-3",
+      "AUTH-4",
+      "EXEC-1",
+      "EXEC-2",
+      "EXEC-3",
+      "EXEC-4",
+      "STATE-1",
+      "STATE-2",
+      "STATE-3",
+      "DATA-1",
+      "DATA-2",
+      "LOOP-1",
+      "LOOP-2",
+      "LOOP-3",
+      "FB-1",
+      "FB-2",
+      "FB-3",
+      "FB-4"
+    ],
+    "native_fixture_scope": "local/public API only",
+    "full_qualification": "unqualified",
+    "independent_review": "pending",
+    "excluded_claims": [
+      "guarded production dispatch",
+      "all 23 properties",
+      "feedback/publication integration",
+      "restart-durable job launch",
+      "live pilot",
+      "protected-input release",
+      "project migration"
+    ]
+  },
+  "native_smoke": {
+    "path": "local_artifacts/dsh-research/m1-implementation/261111-2124-final-public-consumer/receipt.json",
+    "sha256": "0e0f2a67f41d347b64156a5b201105e9709fcb5b5bbcf254065afd7178760f79",
+    "process_wall_seconds": 0.056574999999999986,
+    "runner_process_wall_seconds": 1.257637374998012,
+    "storage_consumed_attempts": 2,
+    "retained_reservation_ms": 2000,
+    "new_evaluator_dispatches": 0,
+    "scripted_adapter_requests": 4,
+    "external_model_calls": 0,
+    "reviewer_subject_verified": true,
+    "child_wait_was_gated": true,
+    "source_access": "ignored local package-development artifacts; no team export/access verification claimed"
+  },
+  "initial_failures": [
+    {
+      "command": "pnpm test",
+      "observation": "7/8 passed; UNSUPPORTED_CAPABILITY for maxDepth with NO_START_CAPABILITIES",
+      "disposition": "Fixture declares depthLimit=true; native admission guard preserved; subsequent tests passed"
+    },
+    {
+      "command": "pnpm typecheck",
+      "observation": "Initial Node/ES2024 type configuration and abstract query fixture mounting errors",
+      "disposition": "Explicit Node types/ES2024 and typed read-only public query fixture; final full consumer typecheck passed"
+    }
+  ],
+  "cost_accounting": {
+    "purpose": "C_qual",
+    "final_runner_process_wall_seconds": 5.909103416997823,
+    "nested_smoke_not_charged_twice": true,
+    "earlier_retained_runs": [
+      {
+        "path": "local_artifacts/dsh-research/m1-implementation/261111-2124-tests-run2.json",
+        "sha256": "af605519fdc49f431652c75d341fc9746abe4552249722f76450680b299b749c"
+      },
+      {
+        "path": "local_artifacts/dsh-research/m1-implementation/261111-2124-checks.json",
+        "sha256": "5833cc391943c4887e7a1178407c866a2fc7dc271d6046b5590a14b177295db1"
+      },
+      {
+        "path": "local_artifacts/dsh-research/m1-implementation/261111-2124-checks-run3.json",
+        "sha256": "6b8f933e0bb5318bb14d02187107e0e031072a59d1c9fdeef57d6af4747f4282"
+      }
+    ],
+    "complete_turn_cost": "unresolved; early source/dependency/authoring overhead not fully instrumented",
+    "accepted_operating_envelope": null,
+    "T4_qualified": false,
+    "scientific_benchmark_attempts": 0,
+    "protected_reads": 0,
+    "GPU_collections": 0
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "sha256": "74f29941c06e1524622aaa1417aecfc3a2be86cc9f9fb1e88c95174ac9b4a9cd"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "f2d1fa6700cc7c0ec9ec0976fdf7c30fbace0024cdba98c7df19ebd26e08fbd5"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "1b2fa18b6fd1d68776d5994c9795fc48fee3f718900a6ac2d387b48c316fae8f"
+    },
+    {
+      "path": "tsconfig.check.json",
+      "sha256": "c62b377ed9917850947ba83c2a64ff6b6c7f2e042079766a8469ce36f954ab00"
+    },
+    {
+      "path": "src/records.ts",
+      "sha256": "f00fd9e2d4d2d768a3ec4989676a74df5e0619f416556c2ca1526aa52337b8b2"
+    },
+    {
+      "path": "src/bindings.ts",
+      "sha256": "d65acbd734463f36d516abae885f0549e326c671ee73de9a8b30c2c41706902e"
+    },
+    {
+      "path": "src/index.ts",
+      "sha256": "0d6941c06ff45564c7123c8da866de513ab3fe4466e55742abc45cfa84eacef8"
+    },
+    {
+      "path": "tests/records.test.ts",
+      "sha256": "fc7edc0081e0749afb802ec8b5de3cc571b2bd33b3771d593650c0dc27204684"
+    },
+    {
+      "path": "tests/native.test.ts",
+      "sha256": "b132721d6075b53ea4fe2442af14a284835bc6c7c8fde2e8fd10537cb98f4dd2"
+    },
+    {
+      "path": "tests/fixtures/native.ts",
+      "sha256": "f992dd22dd8a78b7d0b3f1a27b56fe0660c84f598b5651239daf227d822bed3e"
+    },
+    {
+      "path": "tests/fixtures/packets.ts",
+      "sha256": "2f600a1290d4d67607ec714569d9d07cb785ec0a2370d56b20fe6002c4faadb4"
+    },
+    {
+      "path": "scripts/m1-smoke.ts",
+      "sha256": "ea33dcfc558bb058da1a097417bc03fee40feb46445a75e21aea8a6b977557f1"
+    },
+    {
+      "path": "docs/contracts.md",
+      "sha256": "3020d5dbc6a57e1b7b440b96c9243ffa8e13bf3e65fb1e8d8d9dc422bc0e911a"
+    },
+    {
+      "path": "docs/compatibility.json",
+      "sha256": "f0f6d597e6be5a2822b88d52afdb84bf9a082853f11908ad23288ba6c3e34ca4"
+    },
+    {
+      "path": ".plan/review/261111-2124-m1-scope.json",
+      "sha256": "81d8e15d919237b5589e5104b2b784278680f8eb1119f5814ba94c82b95dfe6d"
+    }
+  ],
+  "document_checks": {
+    "git_diff_check": "passed",
+    "canonical_properties": 23,
+    "compatibility_rows": 8,
+    "current_contract_and_register_match_smoke": true,
+    "historical_human_review_untouched": true
+  },
+  "next_gate": "Independent contract/profile qualification and Ticket/job guarded admission; M2 wiring does not waive incomplete M1 capability gates",
+  "publication": "local only; no push, hosted-project migration or cloud publication"
+}

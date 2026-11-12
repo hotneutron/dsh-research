@@ -1,18 +1,18 @@
 # Review of the 1201 brainstorms and 1230 plans; milestone execution index
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r20. Status: source review and M0–M6 documentation drafted; M1–M6 execution pending.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r21. Status: source review and M0–M6 documentation drafted; M1–M6 execution pending.
 
 The minimal reuse-first recommendation is retained; the current state/autonomy/feedback contract below supersedes earlier package-root persistence and routine human-gate choices. Keep the six milestones from the 1230 English r7 / Chinese r6 plan and the canonical categorized property set. Implementation must resolve the runtime pairing and enforce scientific admission through a small adapter over existing facilities. The checked-out prototype and harness are not yet a verified compatible deployment.
 
-This is the current execution breakdown in dsh-research. The 1201 brainstorms explain the decision; the 1230 plans own the minimal architecture. This breakdown refines their work order and gates. Historical full-stack, permanent-Python, C01–C28, mandatory two-host and review-board proposals remain historical. The checkout is a documents/receipts repository on main at 9d7dea678c4e6e45abdbf35491aee3b5319502da; Git already exists. Runtime/package implementation and deployment remain pending.
+This is the current execution breakdown in dsh-research. The 1201 brainstorms explain the decision; the 1230 plans own the minimal architecture. This breakdown refines their work order and gates. Historical full-stack, permanent-Python, C01–C28, mandatory two-host and review-board proposals remain historical. The documentation baseline was committed locally as a456c5e. M1 now has a TypeScript encoding package and bounded public-provider fixture evidence; integrated admission and live deployment remain pending.
 
 ## Canonical loop contract
 
-[docs/contracts.md](../docs/contracts.md) now specifies research-loop contract 2.3.2: four semantic records, L0–L8, the category-scoped property IDs, F1–F3 and the expected/observed trace interface for T1–T4. M1 still owns provider encoding/runtime qualification; M2–M4 implement/observe/test the contract, M5 adopts a qualified profile and M6 preserves bindings during handoff. Specification completion does not complete those runtime milestones. [Document checks](review/261111-2112-N11-N12-validation.json) validate this revision only.
+[docs/contracts.md](../docs/contracts.md) now specifies research-loop contract 2.3.3: four semantic records, L0–L8, the category-scoped property IDs, F1–F3 and the expected/observed trace interface for T1–T4. M1 has implemented the confirmation-off public encoding and retains [scoped runtime observations](review/261111-2124-m1-runtime-capabilities.json); complete provider/runtime qualification remains pending; M2–M4 implement/observe/test the contract, M5 adopts a qualified profile and M6 preserves bindings during handoff. Specification completion does not complete those runtime milestones. [Current receipt](review/261111-2124-m1-runtime-capabilities.json) records encoding/provider scope and current document checks; the earlier 2.3.2 document check is retained as historical evidence.
 
 ## Human-review resolution
 
-[Review dispositions](review/261111-1808-contracts-human-review-resolution-zh.md) distinguish stale/withdrawn findings from contract 2.3.2 corrections: ordering proof, reviewer holds, release-schema ownership, applicability proof, qualification priorities and the requirement-revision/structural-review lanes. M1–M6 runtime gates remain pending; documentation resolution is not empirical conformance.
+[Review dispositions](review/261111-1808-contracts-human-review-resolution-zh.md) distinguish stale/withdrawn findings from contract 2.3.2 corrections: ordering proof, reviewer holds, release-schema ownership, applicability proof, qualification priorities and the requirement-revision/structural-review lanes. M1 fixture observations do not close the integrated M1–M6 runtime gates; documentation resolution is not empirical conformance.
 
 ## Review-r5 residual closure
 
@@ -128,7 +128,7 @@ M6 evaluates operational value with evidence: manual continuation interventions,
 
 Every canonical property category has M1 contract bindings and behavior-based M4 coverage. S1–S8 are assigned live capability checks in M1 and effective composition checks in M3. The [tracker](tracker/261105-1555-milestone-execution.md) keeps planning completion separate from execution.
 
-Start M1 by recording the local prerequisites and choosing the prototype/harness pairing. In parallel within the same implementation task, draft the small packet definitions and inspect the public storage/shell exports on that pairing. Do not install a service to discover after launch that methods, hard deadlines or durable reservation are missing.
+M1 recorded prerequisites, selected the prototype/published-alpha pairing, implemented small packet encodings and exercised public storage/child exports. Its next gate is independent qualification of the integrated admission/job/profile route. Do not install a service to discover after launch that methods, hard deadlines or durable reservation are missing.
 
 Validation: [document receipt](review/20261105-1201-1230-document-validation.json) records milestone/property/route coverage, resolved local links, original prompt preservation, pilot input metadata and unchanged sibling checkout state. These checks validate the plans; implementation qualification remains pending.
 
@@ -175,7 +175,7 @@ please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.
 
 ## M0 document validation
 
-M0, the human review brainstorm, the organized Lark Docs proposal and sample brief are ready for review. All 19 local plan/tracker Markdown documents use YYMMDD-HHMM names. [Mermaid grammar validation](review/261105-1629-m0-mermaid-validation-final.json) passed for all 16 diagrams, including nine in M0; browser layout and native Lark conversion remain untested. The [final document receipt](review/261105-1630-m0-documents-validation.json) records links, milestone/property coverage, verbatim prompts, revision histories and source checks. M1–M6 execution and cloud publication remain pending.
+M0, the human review brainstorm, the organized Lark Docs proposal and sample brief are ready for review. All 19 local plan/tracker Markdown documents use YYMMDD-HHMM names. [Mermaid grammar validation](review/261105-1629-m0-mermaid-validation-final.json) passed for all 16 diagrams, including nine in M0; browser layout and native Lark conversion remain untested. The [final document receipt](review/261105-1630-m0-documents-validation.json) records links, milestone/property coverage, verbatim prompts, revision histories and source checks. M1 has now started with scoped fixture observations; M2–M6 execution and cloud publication remain pending.
 
 
 ## Current Project Ownership / Autonomy Request, Verbatim
@@ -210,3 +210,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r18 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
 | r19 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r20 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r21 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |

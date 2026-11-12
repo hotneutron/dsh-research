@@ -1,6 +1,6 @@
 # Architecture revision meta loop and migration procedure
 
-Created: 2026-11-11 16:04 -0800. Updated: 2026-11-11 21:13:38 -0800. Status: proposed procedure; documentation alignment only. No runtime implementation, hosted-project migration, scientific execution or cloud publication is performed by this task.
+Created: 2026-11-11 16:04 -0800. Updated: 2026-11-11 21:39:00 -0800. Status: proposed procedure; no architecture entry or migration has been qualified. M1 package encoding/provider fixtures have started; no hosted-project migration or live scientific execution has occurred.
 
 ## User Prompt, Verbatim
 
@@ -50,7 +50,9 @@ Explorative work becomes deliberate when its purpose, scope/method, bounds, acce
 
 ## Current basis and scope
 
-The checked-out state/autonomy contract is [1705](261105-1705-contract-project-state-autonomy-and-feedback.md); no 1704 document was found. Use it with [M0/1616](261105-1616-m0-architecture-workflows-and-idempotency.md), [sharing/1621](261105-1621-plan-lark-research-review-and-sharing.md), and [clutter/1452](261109-1452-brainstorm-repo-clutter-and-team-artifacts.md). Older 1230/1555 drafts are refined by these contracts. M1–M6 implementation remains pending.
+Qualification/adoption binds the current compatibility_row_ref from [contract 2.3.3](../docs/contracts.md) and the exact [register](../docs/compatibility.json). Retrospective assessments remain labeled; envelope binding comes from the accepted declaration. M1 fixture checks provide scoped observations, not an automatic T1–T4 entry or completed structural review.
+
+The checked-out state/autonomy contract is [1705](261105-1705-contract-project-state-autonomy-and-feedback.md); no 1704 document was found. Use it with [M0/1616](261105-1616-m0-architecture-workflows-and-idempotency.md), [sharing/1621](261105-1621-plan-lark-research-review-and-sharing.md), and [clutter/1452](261109-1452-brainstorm-repo-clutter-and-team-artifacts.md). Older 1230/1555 drafts are refined by these contracts. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
 
 The meta loop revisits dsh-research's own architecture: its reusable research contracts, responsibility boundaries, helper interfaces, DSH/provider composition, review/admission policy, evidence and feedback integration, and project-ownership guarantees. Hosted-project failures are input evidence; revising their hypotheses, evaluators or scientific objectives remains project research. A qualified structural problem can justify a clean-sheet package design; a local defect does not. Project migration below describes adoption consequences of a revised dsh-research design.
 
@@ -212,3 +214,4 @@ After adoption, require original-witness non-reproduction and applicable propert
 | r9 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
 | r10 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r11 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r12 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |

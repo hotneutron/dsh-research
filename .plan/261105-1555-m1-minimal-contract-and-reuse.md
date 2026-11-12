@@ -1,8 +1,8 @@
 # M1 — Freeze the minimal contract and verify reuse
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r13. Status: planned; implementation not started.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r14. Status: in progress; encoding/native fixture checks passed, integrated admission qualification pending.
 
-Dependency: reviewed milestone breakdown. This milestone is pending; the source audit is preparation, not its runtime qualification.
+Dependency: reviewed milestone breakdown. This milestone is in progress. The pinned-alpha public consumer checks are recorded below; the source audit alone is not runtime qualification.
 
 Outcome: one reviewable contract and one exact, demonstrably compatible ordinary-worker route.
 
@@ -14,15 +14,23 @@ The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-fe
 
 Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
 
-Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. Current M1–M6 implementation remains pending.
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
 
 M1 must qualify explicit storage-sqlite Config.path, session-persistence-jsonl Config.root and superagent Config.stateDir under P. Test that a worktree/profile/clone cannot silently create a second project budget or exposure authority. No project record or Doc mapping is stored under dsh-research or a package-global default.
 
 The reviewer/capability checklist also checks a complete feedback scan, durable project capture, queued item recovery and no human_action during a normal author/reviewer cycle.
 
+## Implementation checkpoint
+
+The TypeScript package now exports the four confirmation-off record schemas and exact-byte/logical-action/compatibility/envelope binding checks. Contract 2.3.3 incorporates N13–N15: retrospective register labels, compatibility_row_ref and binding from the accepted envelope declaration. [Fixture scope](review/261111-2124-m1-scope.json) and [capability receipt](review/261111-2124-m1-runtime-capabilities.json) retain bounds, commands, hashes and limitations.
+
+Unchanged superagent with its 0.2.1-alpha.2 DSH dependencies passed typecheck, 1,197 tests and build. A public-name consumer exercised native SQLite serialized reservation/replay/reopen and the actual AgentLoop/SubagentRuntime with separate scripted author/reviewer Sessions and gated wait/list/selected-drain operations. Encoding fixtures refuse declared controlled violations. Raw traces and synthetic state stay in ignored package-development artifacts.
+
+M1 remains incomplete: independent contract/profile qualification review, Ticket-to-guarded-job integration, launcher order proof, uncertain-launch/restart reconciliation, resolved persistence/profile authority and the complete required capability coverage need evidence. No production route, live model review, hosted-project state migration, protected input or M5 pilot is enabled. The next implementation step is to bind the demonstrated public boundaries into M2’s guarded thin helper while retaining those gates.
+
 ## Work packages
 
-1. **Record and select the runtime pair.** Use the specified [research-loop contract 2.3.2](../docs/contracts.md) and write .plan/review/m1-runtime-capabilities.json. The normative document exists; M1 still must qualify its public provider mappings and actual runtime pair. Record checkout commits, package/export versions, effective profile and lock hashes, Node and per-repo pnpm versions. Prepare a supported Node >=24.9 environment when implementation is authorized; respect each repository's package-manager pin. First qualify unchanged superagent against a compatible pinned DSH release. Test the actual subagent wait/list/drain behavior rather than trusting a cast or a successful standalone typecheck. If only current harness source is acceptable, document an isolated prototype compatibility diff and its affected consumers for review before applying it. Keep framework source changes out of the core package.
+1. **Record and select the runtime pair.** Use the specified [research-loop contract 2.3.3](../docs/contracts.md) and retain [the timestamped capability receipt](review/261111-2124-m1-runtime-capabilities.json). The normative document exists; M1 still must qualify its public provider mappings and actual runtime pair. Record checkout commits, package/export versions, effective profile and lock hashes, Node and per-repo pnpm versions. Prepare a supported Node >=24.9 environment when implementation is authorized; respect each repository's package-manager pin. First qualify unchanged superagent against a compatible pinned DSH release. Test the actual subagent wait/list/drain behavior rather than trusting a cast or a successful standalone typecheck. If only current harness source is acceptable, document an isolated prototype compatibility diff and its affected consumers for review before applying it. Keep framework source changes out of the core package.
 
 2. **Freeze the public encoding of four semantic records.** Implement/profile-qualify the manifest, evidence receipt, review packet and checkpoint already specified in docs/contracts.md. Bind contract ID/version/content hash and supported assurance level along with the existing action identities. Use one schema/version and existing domain output wherever possible; require canonical project_root/authority identity independent of worker cwd or worktree. Manifest fields: project/stage; full original prompt; goal/context/plan revision and immutable plan snapshot/hash; architecture/profile revision; candidate commit/tree/config hashes; evaluator/verifier and interpreter identity; input hash/split/purpose; environment relevant to reproducibility; exact command/argv/cwd/env; timeout and attempt limits; declared result fields and acceptance policy. A dirty checkout needs an explicit content digest including relevant untracked files, or a frozen separate worktree. HEAD alone is insufficient.
 
@@ -135,3 +143,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r11 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
 | r12 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r13 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |

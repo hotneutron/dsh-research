@@ -1,6 +1,6 @@
 # M2 — Package the research skill and thin helpers
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 18:12 -0800. Revision: r9. Status: planned; implementation not started.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r10. Status: planned; implementation not started.
 
 Dependency: M1 contract, runtime pairing and public admission operations accepted. Pure helper work may be developed earlier against the draft schema; integrated completion still depends on M1.
 
@@ -14,7 +14,7 @@ The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-fe
 
 Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
 
-Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. Current M1–M6 implementation remains pending.
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. M1 encoding/provider checks have started; M2–M6 implementation remains pending.
 
 The package adapter resolves project state from the explicit project manifest/config and invokes existing providers. It owns no per-project DB or durable cache. The host project's record contains feedback cursor/queue/dispositions and Lark publication mappings; the shared consumer is a thin existing-CLI/source procedure, not another feedback store.
 
@@ -124,3 +124,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r7 | 2026-11-11 17:07 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority. |
 | r8 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
 | r9 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
+| r10 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |

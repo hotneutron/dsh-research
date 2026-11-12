@@ -1,12 +1,12 @@
 # dsh-research milestone execution tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r17. Status: M0 documentation ready for review; M1–M6 execution not started.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 21:39:00 -0800. Revision: r18. Status: M1 in progress; M2–M6 execution pending.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
 
 ## Canonical contract status
 
-[Research-loop contract 2.3.2](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, but public encodings, provider conformance and live qualifications remain pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the existing the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
+[Research-loop contract 2.3.3](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, with confirmation-off public encodings and scoped native fixture observations now implemented. Independent conformance review, integrated admission and live qualifications remain pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
 
 ## Current document alignment
 
@@ -22,14 +22,14 @@ This tracker owns reusable-package implementation/qualification only. The `Accor
 
 Current [persistent-state and autonomy contract](../261105-1705-contract-project-state-autonomy-and-feedback.md): all per-project state and resolved provider paths stay in the hosted project. Its research loop has no routine human approval/input dependency; human scientific direction is raised only after challenged exhaustion. M3 must prove autonomous feedback capture/disposition/effect/response and avoid the prototype's default person-stage handoff for ordinary negative/procedural results. M4 tests roots, feedback edit/replay, no comments/publication failure, recovery and exhaustion classification.
 
-No runtime state migration, cloud action or research experiment was performed in this documentation revision. Prior M0 validation is historical; new validation covers the revised diagrams and project links.
+M1 fixture execution stays in synthetic package-owned state; no hosted-project migration, cloud action or research experiment was performed. Prior M0 validation is historical; new validation covers the revised diagrams and project links.
 
 ## Milestone status
 
 | Milestone | Status | Dependency / next concrete work | Completion evidence |
 |---|---|---|---|
 | [M0](../261105-1616-m0-architecture-workflows-and-idempotency.md) | documentation ready for review | Team walkthrough of architecture, examples and idempotency; review the brief/collaboration proposal | Guide, nine Mermaid figures, [brainstorm](../261105-1616-brainstorm-human-research-review-and-collaboration.md) and `sample brief` (project-owned input pending) |
-| [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | planned; loop specified only | Select compatible runtime pair; qualify record encoding and public state/invocation path | Runtime compatibility + reviewed contracts + S1–S8 receipt |
+| [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | in progress; encoding/native fixture observations | Bind Ticket/job admission and obtain independent profile/conformance review | [M1 scope](../review/261111-2124-m1-scope.json) and [capabilities](../review/261111-2124-m1-runtime-capabilities.json); integrated S1–S8 not complete |
 | [M2](../261105-1555-m2-skill-and-thin-helpers.md) | planned | M1; package pure helpers and guarded delegation | Built package + actual synthetic ordinary-worker receipt |
 | [M3](../261105-1555-m3-automatic-planning-and-review.md) | planned | M2; configure effective research prompts/presets | Scripted automatic separate-review transition and stale-action refusal |
 | [M4](../261105-1555-m4-scientific-property-qualification.md) | planned | M2/M3; qualify real reused boundaries | the canonical property set scoped matrix + deadline/restart receipts |
@@ -42,7 +42,7 @@ Plans written does not mean milestones executed. Record dates, actual commands, 
 
 Track package signals separately from qualified T1–T4 entries: accepted requirement, versions, expected/observed facts, attempted/ruled-out repair, affected shared boundary, structural reviewer conclusion and bounded assessment cost. Package design authors own deliberate engineering entry decisions; hosted-project records retain scientific evidence/authority. The gate requires material core blockage, architectural cause and insufficient local repair. Routine failure or scientific exhaustion does not substitute for that evidence.
 
-No architecture trigger has been empirically qualified by these documentation updates. M1–M6 stay planned; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
+No architecture trigger has been empirically qualified by these documentation updates. M1 is in progress; M2–M6 stay planned; entry/triage coverage is prospective M1–M4 governance over existing tools, not a new runtime milestone. [Document check](../review/261111-1633-meta-loop-adoption-validation.json) is separate from deployment, trigger qualification and pilot evidence.
 
 ## Human-review corrections
 
@@ -50,7 +50,7 @@ No architecture trigger has been empirically qualified by these documentation up
 
 ## Coverage qualification status
 
-Contract 2.3.2 adds a frozen declared-scope coverage matrix. M1 must bind its cells/strata/assertions before evaluation; M4 closes all required cells with actual evidence, and M6 applies the same criterion during adoption. DATA-1 off-mode checks remain required; DATA-2 not_applicable needs retained proof. Matrix execution and native conformance are pending; [review-r5 closure](../review/261111-1859-contracts-review-r5-resolution-zh.md) records document effects only.
+The contract requires a frozen declared-scope coverage matrix. M1 must bind its cells/strata/assertions before evaluation; M4 closes all required cells with actual evidence, and M6 applies the same criterion during adoption. DATA-1 off-mode checks remain required; DATA-2 not_applicable needs retained proof. The M1 fixture subset has observations; full matrix qualification remains pending; [review-r5 closure](../review/261111-1859-contracts-review-r5-resolution-zh.md) records document effects only.
 
 ## Qualification cost accounting
 
@@ -81,7 +81,7 @@ The canonical contract uses category-specific predicates rather than legacy nume
 | DATA-1–2: protected data | M4 off-mode/disposable cases; M6 enabled-route gate | production confirmation disabled; enabled qualification pending |
 | LOOP-1–3: continuation | M2 decisions; M3 activation; M4 revisit/exhaustion cases | planned |
 | FB-1–4: collaboration | M3 capture/effect/publication; M4 replay/access cases | planned |
-| S1–S8: native routes | M1 capability receipt; M3 effective profile | source routes reviewed; runtime qualification pending |
+| S1–S8: native routes | M1 capability receipt; M3 effective profile | source routes reviewed; M1 public subset observed; integrated qualification pending |
 
 ## Recorded Nov 5 dependencies; refresh capability evidence in M1
 
@@ -93,7 +93,11 @@ The canonical contract uses category-specific predicates rather than legacy nume
 - Active legacy runtime/store/writer inventory has not been collected. The source review did not change campaign authority.
 - Model/source configuration and M5 live spending remain unexecuted.
 
-Benchmark attempts consumed by this planning task: 0. Model-provider experiment calls: 0. GPU collections: 0. Confirmation openings: 0. This documentation revision performs no service/profile installation, package implementation, scientific migration, commit or push. The repository was initialized/published earlier; those actions are not runtime qualification.
+Scientific benchmark attempts: 0. External model-provider calls: 0. GPU collections: 0. Confirmation openings: 0. The documentation baseline was committed locally and M1 package/dependency/fixture implementation performed. Scientific migration, production profile installation and push remain unexecuted. The repository was initialized/published earlier; those actions are not runtime qualification.
+
+## M1 execution checkpoint
+
+See [capability evidence](../review/261111-2124-m1-runtime-capabilities.json). Unchanged prototype checks passed on the alpha pairing; the core package encodes four records and N13–N15 bindings. Native SQLite and real AgentLoop/SubagentRuntime fixtures use synthetic project authority and scripted answers. Retain the initial unsupported-depth refusal, subsequent successful checks and original costs. Independent scope/profile review and production launch remain held; fixture results do not qualify all 23 properties or the M5 pilot.
 
 ## Recording format for execution
 
@@ -162,3 +166,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r15 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
 | r16 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
 | r17 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |
+| r18 | 2026-11-11 21:39:00 -0800  | Recorded local documentation commit, M1 encoding/N13–N15 bindings and bounded public-runtime observations; kept independent review, integrated admission and all M2–M6/live gates pending. |
