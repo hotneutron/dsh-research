@@ -1,18 +1,26 @@
 # Justifications for AGENTS.md rules
 
-One entry per rule in `AGENTS.md`, with the date it was introduced and why.
-This file also serves as the revision history for `AGENTS.md`.
+The five active entries below match the current AGENTS.md. Each records why the
+rule exists and its introduction or observed revision date. Inherited dates are
+preserved as historical provenance.
 
-## Rule: Any amendment to an existing artifact must add/update timestamped `## Revision History`.
+This file also serves as AGENTS.md's revision history. Rules removed from
+AGENTS.md are retained separately with their original rationale and requests.
+Removing an entry from the instruction file does not rewrite historical plans or
+supersede the project-specific contracts that govern research.
 
-- Added: 2026-07-29
-- Why: Artifacts (design docs, plans, reports) evolve across many agent runs;
-  a timestamped revision history makes changes auditable and lets a later reader
-  reconstruct what changed and when without diffing git.
-- Historical source note: the copied rationale recorded a 2026-08-01 agent-facing
-  exemption. The current AGENTS.md does not include it; amendments here also record
-  a timestamped Revision History. This note preserves the copied history without
-  applying that obsolete exemption.
+## Rule: Amendments to an existing artifact must add/update a timestamped `## Revision History`; agent-facing artifacts are exempted.
+
+- Added: 2026-07-29 (original artifact-history requirement).
+- Updated: 2026-11-11 23:37:26 -0800 (current wording and agent-facing exemption recorded).
+- Why: Timestamped history makes changes to plans, reports and other maintained
+  artifacts auditable. Agent-facing instruction and guidance files are exempt so
+  routine maintenance does not accumulate administrative text in their working
+  instructions. This rationale file still records rule changes because it also
+  serves as the revision history for AGENTS.md.
+- Historical context: the inherited rationale recorded an agent-facing exemption
+  dated 2026-08-01. The Nov 5 version of AGENTS.md omitted it; the current cleanup
+  explicitly includes it. Prior revision entries below retain that earlier state.
 
 ## Rule: No `Co-Authored-By` trailer in commits.
 
@@ -35,59 +43,9 @@ This file also serves as the revision history for `AGENTS.md`.
   understand, and easier to debug. They also encourage concrete, thoughtful
   prompting and support sharing the user's thought process.
 
-## User Prompt, Verbatim
+## Rule: Do not number headings or subheadings.
 
-~~~text
-~/wk/dsh-superagent-prototype and ~/wk/deepseek-harness are checked out.
-~/wk/accorde and ~/wk/autoresearch are also checked out.
-reivew the 1201 brainstorms and 1230 plans and write actionable plans for each milestone.
-~~~
-
-## Rule: Use `{YYMMDD}-{HHMM}-*` for plan and tracker filenames.
-
-- Added: 2026-11-05 16:26:56 -0800
-- Why: A consistent compact date/time prefix makes plans and trackers easier to
-  sort and locate. Existing explicit time prefixes are retained; files without a
-  time prefix use their recorded creation or snapshot time. The user explicitly
-  requested this format for the current workspace.
-
-## Filename Convention Request, Verbatim
-
-~~~text
-please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.
-~~~
-
-
-## Rule: Keep hosted-project research artifacts and persistent scientific state in that project workspace; dsh-research owns reusable code and its own development artifacts.
-
-- Added: 2026-11-05 17:11:14 -0800
-- Why: The hosted project must retain its own research decisions, evidence,
-  accounting and feedback history without depending on a shared-tool checkout.
-  This confines the reusable package to implementation and its own engineering
-  artifacts. Existing legacy authorities are preserved until a verified handoff.
-
-## Rule: Within standing project authority, research flows continue autonomously; request human scientific steering only after reviewed scientific exhaustion.
-
-- Added: 2026-11-05 17:11:14 -0800
-- Why: Routine iterations and technical review must not create human approval
-  bottlenecks. The author diagnoses, recovers and evaluates alternatives under
-  the project policy. Scientific direction is requested after reviewed scoped
-  exhaustion; hard guards and operational holds still apply and are not mislabeled
-  as exhaustion.
-
-## Current User Prompt, Verbatim
-
-~~~text
-I think the project related artifacts and decision should stay in the project workspace (i.e. accorde/), so it's self-contained, try to minimize the states stored in the dsh-research. Please confirm that, and be explicit about Responsibility/Owner/Location of Persistent State.
-"organized live Lark Docs" is not convincing. I don't see the feedback loop.
-Also please confirm that for most execution and iterations, human intervention is not required, nor blocking. Human input is required only when the direction is "scientifically exhausted".
-~~~
-
-
-## Revision History
-
-| Revision | Timestamp | Change |
-|---|---|---|
-| r1 | 2026-11-05 15:56:32 -0800 | Aligned the copied revision-history rationale with the current AGENTS.md rule, which has no agent-facing exemption. Preserved inherited rule dates/reasons and the obsolete exemption as historical context; all four current rules retain justification entries. AGENTS.md unchanged. |
-| r2 | 2026-11-05 16:26:56 -0800 | Justified the new plan/tracker filename rule and preserved its exact user request; existing rule rationale and history retained. |
-| r3 | 2026-11-05 17:11:14 -0800 | Justified the project-owned state and autonomous scientific-steering rules; preserved standing-authority limits, legacy continuity and the exact user instruction. |
+- Recorded: 2026-11-11 23:37:26 -0800 (introduced in this repository's current AGENTS.md cleanup).
+- Why: Descriptive, unnumbered headings remain readable when sections are inserted
+  or reordered and avoid manual renumbering. Use lists or tables when the content
+  itself needs an ordered sequence; the rule applies to heading titles.
