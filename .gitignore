@@ -1,0 +1,5 @@
+# Local package-development artifacts; shared summaries remain under .plan/.
+/local_artifacts/dsh-research/
+
+## Revision History
+# 2026-11-09 16:01 -0800: Ignore detailed local development artifacts while retaining curated plans and summaries.

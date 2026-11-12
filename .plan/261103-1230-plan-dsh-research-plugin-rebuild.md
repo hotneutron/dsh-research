@@ -1,8 +1,12 @@
 # Plan: minimal dsh-research over dsh-superagent
 
-Created: 2026-11-03 12:30 -0800. Updated: 2026-11-05 16:26:56 -0800. Revision: r8. Status: planning only; implementation and cutover not executed.
+Created: 2026-11-03 12:30 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r15. Status: planning only; implementation and cutover not executed.
 
 This revision **supersedes the r1–r6 full-stack rebuild scope**. Historical revision entries remain provenance, not current requirements. See the [exhaustive dist-exec drop matrix](261103-1637-dist-exec-drop-matrix.md) and [earlier comparison](261103-1201-brainstorm-autoresearch-versus-dsh-superagent.md).
+
+The [canonical research-loop contract 2.3.2](../docs/contracts.md) now specifies records, stages, invariants and observed-trace requirements for this minimal design. M1–M6 implementation/provider qualification remains pending; these plans and examples do not replace its versioned normative semantics.
+
+The older eight-part design exposition below is background, not canonical conformance numbering. Contract 2.3.2 owns the testable predicates and counterexamples; qualify those properties in their declared profile without legacy aliases.
 
 ## 1. Decision: reuse the runtime; keep only the research gist
 
@@ -36,7 +40,7 @@ Optional future capabilities require a separate justified need, not inherited di
 | Repository | Audited revision | Current role |
 |---|---|---|
 | `~/wk/autoresearch` | `ead1ae507934a6da5e914a2559d6fcac99c505c4`, clean `dist-exec`, runtime 0.6.0 | Behavior/evidence reference; keep active legacy campaigns pinned |
-| dist-exec base | `33ef750face59b42f9663c8e355a77600d1765e7` | Two-commit delta: 65 changed paths; [inventory](../../accorde/local_artifacts/autoresearch/dist-exec-drop-audit/20261103-1637/branch-inventory.json) |
+| dist-exec base | `33ef750face59b42f9663c8e355a77600d1765e7` | Two-commit delta: 65 changed paths; `inventory` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-drop-audit/20261103-1637/branch-inventory.json`) |
 | `~/wk/dsh-superagent-prototype` | `8c32a9dc5d72c033816c6a8110b37f40cf94fba4`, clean | Required orchestration/team runtime to configure and reuse |
 | `~/wk/accorde` | `7c85e7541a3d8dfbb25fec46d96ff644c1ae72b5` | Existing scientific tools/verifiers and released-input pilot |
 | `~/wk/dsh-research` | Not created | Proposed contained skills, policy and thin helpers |
@@ -129,12 +133,12 @@ Repeated completion/review delivery is harmless at the reused persistent boundar
 
 ## 5. Actionable sequence: six reduced milestones
 
-The order survives; **deliverables and release gates are reduced**. A future implementation tracker should record M1–M6, P01–P08, reused-route checks, actual usage and deviations; the old C01–C28/fleet list is not the implementation backlog. No implementation tracker is claimed to exist yet.
+The order survives; **deliverables and release gates are reduced**. A future implementation tracker should record M1–M6, the canonical property set, reused-route checks, actual usage and deviations; the old C01–C28/fleet list is not the implementation backlog. No implementation tracker is claimed to exist yet.
 
 ### M1 — Lock the minimal contract and reuse checklist
 
 - Pin the above baselines and use the 65-path matrix as the no-port list.
-- Specify one small manifest/result/checkpoint/review packet and P01–P08; use existing benchmark/verifier outputs wherever possible.
+- Specify one small manifest/result/checkpoint/review packet and the canonical property set; use existing benchmark/verifier outputs wherever possible.
 - Verify S1–S8 in the target profile: worker job tools, subagents/reviewer launch, completion delivery, prompt overrides, state access, source permissions and watchdog configuration.
 - Resolve published interface availability. First try the configuration/skill route; document any *single narrow missing export/atomic operation*, rather than introducing services.
 
@@ -152,9 +156,9 @@ The order survives; **deliverables and release gates are reduced**. A future imp
 ### M3 — Configure automatic planning and independent review
 
 - Add a research-specific worker procedure rather than new planner/reviewer lifecycle machinery.
-- At a declared checkpoint, existing completion delivery wakes the worker; it validates P01–P03, computes a bounded next action and writes an immutable packet.
+- At a declared checkpoint, existing completion delivery wakes the worker; it validates provenance/execution predicates, computes a bounded next action and writes an immutable packet.
 - **Automatically launch a separate reviewer agent through the existing configured subagent/review route** when policy requires it. The reviewer gets the exact manifest, output/verifier evidence and proposed action; it does not author that candidate or control budget/exposure. Use read-only/procedurally separated access supported by the target profile; do not invent sandbox guarantees.
-- The existing worker receives the review, checks P04–P06/P08, then submits the next ordinary job or stops. Missing reviewer capability/subject mismatch means defer, not self-approval.
+- The existing worker receives the review, checks review/admission, protected-data and continuity predicates, then submits the next ordinary job or stops. Missing reviewer capability/subject mismatch means defer, not self-approval.
 - Use an action identity derived from subject/checkpoint/action in reused state so replay does not relaunch or reuse approval. Configuration is tested, not merely described as automatic.
 - Human follow-ups stay in existing channels. No human board redesign, reviewer service or webhook bus.
 
@@ -162,13 +166,13 @@ The order survives; **deliverables and release gates are reduced**. A future imp
 
 ### M4 — Test only the scientific properties at reused boundaries
 
-- Add focused positive/negative tests for **P01–P08**; retain properties from fork regressions, not Python classes/test count.
+- Add focused positive/negative tests for **the canonical property set**; retain properties from fork regressions, not Python classes/test count.
 - Cover changed identity, SIGTERM-zero/timeout invalidity, corrupted and non-finite output, valid negative outcomes, stale/action-mismatched review, exhausted/replayed admission, changed-context revisit and stop.
 - Use disposable state for confirmation tests: consume-before-access, failure still consumed, rename/profile overlap rejection and continuity. Production confirmation remains disabled until the real authority is reconciled.
 - Check ordinary completion/review replay/restart via supported superagent facilities. Do not re-test or rebuild generic claim/grant/HTTP/TLS/fleet machinery as plugin features.
 - Validate actual settings and distinguish worker limits from job/resource limits. Record any missing reusable operation and keep affected capability disabled.
 
-**Done:** eight scientific properties pass with recorded evidence; capability/assurance limits are truthful. No compulsory two-host deployment, UI suite or legacy test-count parity.
+**Done:** the canonical property set has scoped conformance evidence; capability/assurance limits are truthful. No compulsory two-host deployment, UI suite or legacy test-count parity.
 
 ### M5 — Run one bounded released-input Accorde pilot
 
@@ -201,9 +205,9 @@ Advanced search/frontier ranking, universal statistical methods, containers/remo
 
 This revision is a **source/documentation audit**, not a successful dsh-research deployment. Framework working trees remained clean; no code, dependencies, services, models, GPUs, staging, commits or pushes were changed for this revision.
 
-Earlier dist-exec audit evidence remains historical: [26 focused distributed tests, 2 ephemeral loopback tests and fleet UI check](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/tests.json), [124-test Python regression](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/full-python-regression.json) and [source manifest](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/source-manifest.json). These do not certify the new plugin, real remote deployment, service installation or fresh confirmation.
+Earlier dist-exec audit evidence remains historical: `26 focused distributed tests, 2 ephemeral loopback tests and fleet UI check` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/tests.json`), `124-test Python regression` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/full-python-regression.json`) and `source manifest` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/source-manifest.json`). These do not certify the new plugin, real remote deployment, service installation or fresh confirmation.
 
-The graceful-timeout flaw is fixed at this dist-exec HEAD; retain its invalid-on-interruption property. Other recorded integrity/review/publication gaps are **not** declared fixed. Dropping the duplicate runtime avoids copying their implementation; P01–P08 must still be tested on the reused route. See the [prior disposable publication reproduction](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/reserved-state-publication-reproduction.json) and matrix for precise boundaries.
+The graceful-timeout flaw is fixed at this dist-exec HEAD; retain its invalid-on-interruption property. Other recorded integrity/review/publication gaps are **not** declared fixed. Dropping the duplicate runtime avoids copying their implementation; the canonical property set must still be tested on the reused route. See the `prior disposable publication reproduction` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/reserved-state-publication-reproduction.json`) and matrix for precise boundaries.
 
 ## User Prompts, Verbatim
 
@@ -275,3 +279,10 @@ please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.
 
 | r7 | 2026-11-03 16:49 -0800 | Superseded the full-stack/standalone/fleet rebuild with a superagent-dependent skill/policy/helper core. Reused watchdog, worker routing, communication, concurrency, recovery, review and persistence; replaced C01–C28 parity with P01–P08 scientific properties; removed review-board/UI work and mandatory two-host pilot. Linked an exhaustive 65-path dist-exec disposition plus unchanged legacy-core coverage; preserved prompts/history, continuity and zero default superagent source changes. No implementation or deployed state changed. |
 | r8 | 2026-11-05 16:26:56 -0800 | Renamed 20261103-1230-plan-dsh-research-plugin-rebuild.md to 261103-1230-plan-dsh-research-plugin-rebuild.md using YYMMDD-HHMM; updated 3 local links and repaired 5 copied Accorde audit references. Preserved original prompt/code blocks and scientific content; recorded the filename request verbatim. |
+| r9 | 2026-11-11 17:10 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority; marked unavailable external project references honestly. |
+| r10 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
+| r11 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
+| r12 | 2026-11-11 19:01:22 -0800 | Adopted contract 2.2.0 applicability/coverage clarification and review-r5 residual closure; retained prospective provider qualification and historical evidence. |
+| r13 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
+| r14 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
+| r15 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |

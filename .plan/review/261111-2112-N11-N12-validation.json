@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T21:15:11.935506-08:00",
+  "status": "passed",
+  "scope": "N11-N12 documentation resolution only",
+  "review": {
+    "path": "local_artifacts/dsh-research/architecture-revision/contracts-human-review-zh.md",
+    "sha256": "ef3b315d3c586eb6271dc7b44e35f2d3efb0fe8b250ce4ffed6bf6a670f1120a",
+    "unchanged": true
+  },
+  "reviewed_contract": {
+    "version": "2.3.1",
+    "sha256": "87e6d84f8cafe6a8c1d3b2913d54174831859ccec7855479f09bc4756c29e795",
+    "snapshot": "local_artifacts/dsh-research/contract-history/261111-2112-reviewed-contract-2.3.1-87e6d84f8caf.md"
+  },
+  "contract": {
+    "version": "2.3.2",
+    "path": "docs/contracts.md",
+    "sha256": "ebfafa15545bc6925052772e95d26247c2b86c497a637ceb08949eb5aefd6f9b",
+    "assurance": "specified",
+    "versions_assessed": [
+      "1.0.0",
+      "2.0.0",
+      "2.1.0",
+      "2.2.0",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2"
+    ],
+    "properties_unchanged": 23,
+    "last_content_write": "2026-11-11 21:12:18 -0800"
+  },
+  "resolution": {
+    "path": ".plan/review/261111-2112-N11-N12-resolution-zh.md",
+    "sha256": "8d4956e74219ec2c9cd0d8bf31633e131c0fc577d5459ca0db7e4e5f5119205c",
+    "findings": [
+      "N-11",
+      "N-12"
+    ]
+  },
+  "updated_documents": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "a3b758f1147c5ecacb4c41cc4e0aa20041027b43eb9112078f14834151e31611",
+      "after_sha256": "54552015adb41d50a2bdb3d720fa71b5a837ec45ac3d31edb8d4fa888fb23af1",
+      "revision": 13,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "2cfdce01481636896609661d01debb63534a8533358611600fae0ee7a508c3a9",
+      "after_sha256": "9dd9dbdc4754d8a768e0b367ca0dd5c9f6e4772af29a398ea12df497c7b61165",
+      "revision": 13,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "71cee83ace04b54910470fe7c6f45ed1468431a3d2ab649981da65ac29ebf5ea",
+      "after_sha256": "163eac6691266946f8d2fab917605ff0f9d4c6871236449e83ad1828ed52e8e0",
+      "revision": 14,
+      "links": 7
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "94dad55f9289cc0f92a75dc832938a67dd392dace279790aeae87c58566cc4dc",
+      "after_sha256": "17f863a4aa765c729e12b296889364b225f147c5524e7fe31ddfdc1b69f11b78",
+      "revision": 12,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "644a05da21394a2e7d2f155122c3b3ed11fd26dd23c59f95ef54bf5311d15f78",
+      "after_sha256": "1c054f13eeaa4296215e7d8fb9428bc4431df3532422a457ebcf25ffb0c2a627",
+      "revision": 20,
+      "links": 54
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "ae86db382d29fc4f401b9661ef759c8588117f156075c3018d05d350e637024f",
+      "after_sha256": "388880c63b2d0e386ab67c96bd83bbbcb489de6536593f26a23f333ae600e332",
+      "revision": 17,
+      "links": 26
+    },
+    {
+      "path": ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+      "before_sha256": "490b5b3560cd91daa1074d57f4bedf8c4aeec78a527ed6eaf64f8a53ab0f0fc6",
+      "after_sha256": "958d14056611b24fb9c654a740336cec6b9ef70036022a8548646d7d9972239f",
+      "revision": 10,
+      "links": 1
+    },
+    {
+      "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+      "before_sha256": "307127b40beddda1e458b707c75e536f65940b4f205e1b984ec4ad9280e6de1a",
+      "after_sha256": "a8b0968667cfac969966853163baa37ac48cbfd81ef7379fb06135a89dc53f53",
+      "revision": 11,
+      "links": 12
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "before_sha256": "c293e371a385731286004a56d1ad49c82831a32c46f5a634732135b022465a62",
+      "after_sha256": "35f34650a8980746d86300fba2e2cae1ce3d6a67c187a9e1b7b4f66567c6b67d",
+      "revision": 15,
+      "links": 24
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "before_sha256": "3ba64a1e48388bea143efac7bf67780efbced6130f4d9b08935e3b2dba51c061",
+      "after_sha256": "6ff3dd3dc91297a6184c1893f24c633800281dcafd7e7fe9fe7e7988cd49ac60",
+      "revision": 14,
+      "links": 25
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "925cde1f30779c1b3ed4595e8efa000d328c5ee025aba620ec3289b691e319d1",
+      "after_sha256": "19785ea0c484bf8f2515f8c61ea635fa349ce522618a411c662715126f634812",
+      "revision": 9,
+      "links": 12
+    },
+    {
+      "path": "docs/contracts.md",
+      "before_sha256": "87e6d84f8cafe6a8c1d3b2913d54174831859ccec7855479f09bc4756c29e795",
+      "after_sha256": "ebfafa15545bc6925052772e95d26247c2b86c497a637ceb08949eb5aefd6f9b",
+      "revision": 8,
+      "links": 14
+    }
+  ],
+  "checks": [
+    "review_and_snapshot_preserved",
+    "cumulative_current_version_compatibility_gate",
+    "budget_envelope_qualification_arbitration",
+    "C_qual_retained_no_cost_only_auto_T4",
+    "property_stage_prompt_history_and_figure_preserved",
+    "consumer_adoption_rules_and_links",
+    "pilot_bounds_and_git_diff_check"
+  ],
+  "pending": [
+    "runtime/public mapping",
+    "qualification execution and attribution",
+    "adopter compatibility",
+    "profile/state migration",
+    "cloud publication"
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T19:04:17.300705-08:00",
+  "status": "passed",
+  "scope": "review-r5 documentation residual closure only",
+  "review": {
+    "path": "local_artifacts/dsh-research/architecture-revision/contracts-human-review-zh.md",
+    "sha256": "9f283c3c4dd7d5560e38f8dae4ced38f0432c5c93076b6bf033325301fe890ff",
+    "unchanged": true
+  },
+  "reviewed_contract": {
+    "version": "2.1.0",
+    "sha256": "089b8d9b6652f212cc6ae5b18d9f8a5f7bc25be817e0619f36fcbad1c14b2f96",
+    "snapshot": "local_artifacts/dsh-research/contract-history/261111-1859-reviewed-contract-2.1.0-089b8d9b6652.md"
+  },
+  "contract": {
+    "version": "2.2.0",
+    "path": "docs/contracts.md",
+    "sha256": "ef684ac90fc50186f32d6a6f020044212416b9d061527608a1bce7732b2b1e32",
+    "assurance": "specified",
+    "properties_unchanged": 23,
+    "last_content_write": "2026-11-11 18:59:17 -0800",
+    "mtime_at_validation": "2026-11-11T18:59:17.666950-08:00"
+  },
+  "resolution": {
+    "path": ".plan/review/261111-1859-contracts-review-r5-resolution-zh.md",
+    "sha256": "43e500e7a2cf922fd307aacb4178e01b65a9ef711155fa77190a55eccca33819",
+    "addressed": [
+      "N-1",
+      "N-2",
+      "N-3",
+      "F-8 residual"
+    ]
+  },
+  "updated_documents": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "6d057d5d15536787ca2755bb92dbe83248a9b9fdf51c5b17821da8a5c2ebd85b",
+      "after_sha256": "b3c9ba906ff65311de2b73b5e1159343e7c94ef08159e13a809c086bbd7ae254",
+      "revision": 10,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "c244c480bad0f2affc3eb39c399bc662104778cab5f17430768a6a8fc0319efc",
+      "after_sha256": "a6c3432ab6d1b3085d91efe3a6d9e8a82fae0fa6d3a49f958be29d839aa06abe",
+      "revision": 10,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "d926b9f24834c769806df852ab8a4db5bcb9ef703c559cb842533024c9cd249b",
+      "after_sha256": "58c34e033e43133ee418edc61a63d6b52548aa25c3fee8cce22bd6b05d3c4fb1",
+      "revision": 11,
+      "links": 7
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "304bc353965b6fca23c8f6ffe367ff5bf6de0bc3bdeb02f30fc201d0b74a90b6",
+      "after_sha256": "1158f7b98343ec8402085bcd90804081c349ba481c8a67c27fec2d9e69c3e470",
+      "revision": 9,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "f2635749067d9591f7edac02a57c68e1b5e000adeb5af292335241a5e0b236c2",
+      "after_sha256": "0e84b1bc5ea179e358685a471770b0a0bd1c8e4f6488e76272aaa6084e17e5b4",
+      "revision": 17,
+      "links": 51
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "6408b6570ea3fbff16011e8c9bb97c9f1add2c496cc0baa1571b475e712a3bb3",
+      "after_sha256": "5f932f3b8cae40350346b75d507923941e8fe09cf366d222e4c58bf9ba1c261d",
+      "revision": 14,
+      "links": 26
+    },
+    {
+      "path": ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+      "before_sha256": "989e935c834affcee427b93f0cc345893a01092290de2f5f851488e8a4512d72",
+      "after_sha256": "1bb0ca69ac87ec00f589a4fb8aad883f81a6ec792d0766c63e6d67f37b9582fa",
+      "revision": 7,
+      "links": 1
+    },
+    {
+      "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+      "before_sha256": "e1faa56cdb125d7fa7f3c6a0643c8713bde6c5260cba3c7ee3a3eeef5d042a3d",
+      "after_sha256": "0a715223b664aa731bee20c376082fa2eba5478fb739a62a1d6c2892e2f90b0e",
+      "revision": 8,
+      "links": 10
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "before_sha256": "a45bc13d18dec70209a6d9daf12f666459522850f1b0479110978ce205edb837",
+      "after_sha256": "801a8d5be09d0bb757a728306c585ec65354a9b3dbc26bbb703b7124ac449dbb",
+      "revision": 12,
+      "links": 24
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "before_sha256": "1608da28565eada35716d20e8e91b0b042a1d5a5fbcea0b4c7d1186d8164e8ab",
+      "after_sha256": "21d0adabea9e03b4371948e1e474a5767cf5d811718bcfd3941e731332fab912",
+      "revision": 11,
+      "links": 25
+    },
+    {
+      "path": "docs/contracts.md",
+      "before_sha256": "089b8d9b6652f212cc6ae5b18d9f8a5f7bc25be817e0619f36fcbad1c14b2f96",
+      "after_sha256": "ef684ac90fc50186f32d6a6f020044212416b9d061527608a1bce7732b2b1e32",
+      "revision": 5,
+      "links": 6
+    }
+  ],
+  "checks": [
+    "review_and_2_1_snapshot_preserved",
+    "DATA2_example_DATA1_off_guard",
+    "frozen_required_coverage_cells_and_closure",
+    "property_boundary_mode_lifecycle_interaction_cases",
+    "negative_test_and_assurance_semantics",
+    "actual_final_write_timestamp_with_later_validation",
+    "consumer_links_prompts_history_and_README_figure",
+    "unchanged_pilot_bounds",
+    "git_diff_check"
+  ],
+  "pending": [
+    "scope/case design and public encoding",
+    "native/provider conformance",
+    "fixture/live coverage execution",
+    "profile/state migration",
+    "cloud publication"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T21:20:29.520867-08:00",
+  "request_verbatim": "ready to impl?",
+  "scope": "read-only readiness assessment",
+  "planning_ready": true,
+  "ready_stage": "M1 contract encoding and compatible-runtime spike",
+  "runtime_integration_ready": false,
+  "live_pilot_ready": false,
+  "contract": {
+    "version": "2.3.2",
+    "sha256": "ebfafa15545bc6925052772e95d26247c2b86c497a637ceb08949eb5aefd6f9b",
+    "document_validation": ".plan/review/261111-2112-N11-N12-validation.json",
+    "hash_matches": true
+  },
+  "toolchain": {
+    "node": "v26.5.0",
+    "node_meets_recorded_engines": true,
+    "pnpm_available": false
+  },
+  "checkouts": {
+    "dsh-superagent-prototype": {
+      "head": "8c32a9dc5d72c033816c6a8110b37f40cf94fba4",
+      "version": "0.1.0",
+      "engines": {
+        "node": "^22.19.0 || >=24.0.0",
+        "dsh": "^0.2.1-alpha.2"
+      },
+      "packageManager": "pnpm@11.7.0",
+      "dependencies_installed": false
+    },
+    "deepseek-harness": {
+      "head": "fcc0ad462172522aaf5c93a7b2e01f6b9f0b0159",
+      "version": "0.2.2-rc.1",
+      "engines": {
+        "node": ">=24.9.0"
+      },
+      "packageManager": "pnpm@11.28.5",
+      "dependencies_installed": false
+    }
+  },
+  "confirmed_source_gap": {
+    "prototype": [
+      "waitForChildren(parent)",
+      "listChildren(parentSessionId)",
+      "drainChildren(parent, childIds)"
+    ],
+    "current_harness": [
+      "waitForTreeWork(root)",
+      "listDescendants(rootSessionId)",
+      "drainDescendants(parents)"
+    ],
+    "consequence": "A compatible pinned pairing or scoped semantic adapter must be qualified; method renaming alone is insufficient."
+  },
+  "remaining_work": [
+    "prepare repo-pinned pnpm and dependencies",
+    "qualify actual public storage/admission durability and subagent operations",
+    "encode semantic records and a keyless CPU contract trace",
+    "include latest N13-N15 metadata/compatibility-row/envelope-binding points in M1",
+    "resolve project-owned pilot/evaluator inputs before M5"
+  ],
+  "unexecuted": [
+    "package implementation",
+    "dependency installation",
+    "runtime qualification",
+    "model spending",
+    "project state migration"
+  ]
+}

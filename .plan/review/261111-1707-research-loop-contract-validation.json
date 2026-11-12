@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T17:15:30.910324-08:00",
+  "scope": "contract/documentation consistency only",
+  "status": "passed",
+  "contract": {
+    "path": "docs/contracts.md",
+    "id": "dsh-research/research-loop",
+    "version": "1.0.0",
+    "sha256": "9d446e0011dab8c05e93f78d248e5e60257fe041e00edbe58312033356c8e44c",
+    "assurance": "specified",
+    "records": 4,
+    "invariants": 8,
+    "normative_stages": 9,
+    "feedback_stages": 3,
+    "meta_audit_mappings": 4,
+    "local_links": 2
+  },
+  "related_documents": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "44084452a236c00104e279c7beff3304be83d5a6b2af9f7e02be9cce8331cf2b",
+      "after_sha256": "f2aa29d4ba9be926a6c1ec21cea14dcfe0273f8d22172ed7a49e3bf04436230f",
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 6,
+      "revision": 7,
+      "local_links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m2-skill-and-thin-helpers.md",
+      "before_sha256": "7cf8578cab2a82a7a5bd857f49c09637e2d0418099e0996c5b482a230aa9b438",
+      "after_sha256": "0d589376a3022495288d530ac4b424857ef80f500cc4c6d6d4fe843c19a3dcd9",
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 6,
+      "revision": 7,
+      "local_links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m3-automatic-planning-and-review.md",
+      "before_sha256": "a26fe598460369bda81b6a31b649f499ae8d30d2c78bb404ad32a1f87853977e",
+      "after_sha256": "5367c618e502b383a46a7e9389d8372ce2f72e506bcc8b3494b34452465710d1",
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 7,
+      "revision": 8,
+      "local_links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "13da48f279d32bba8f0552f4e2945eca31f0901c32803a7ab40a64a820e06354",
+      "after_sha256": "8e8d5c4e845c9ff3fa2a32cc110c1d2fbf0b8dd3289d3747c463cebe1962ad51",
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 6,
+      "revision": 7,
+      "local_links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "a9b99cde52f61b2500d570a045e458ef60bf9c1428017c7973e122e71699bf01",
+      "after_sha256": "fa0c3914eb710a810de07f0bd3a5d7ab8f2e0c7727efcc50ac4ba96ca54215f4",
+      "preserved_fenced_blocks": 4,
+      "preserved_revision_rows": 7,
+      "revision": 8,
+      "local_links": 7
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "e0e721ca43d7fe4f250a81c28b4b3a5fd66bbb1aa4079c82721c9b7be66aab2b",
+      "after_sha256": "2dc8095d4b979b01f6e649e20837c1d1f01621b5bbf372a133ebe7cc6a9ec03f",
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 6,
+      "revision": 7,
+      "local_links": 9
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "b939b4775e4186dd549c60bd6ba80edbf13f67d31407354dfbea80ad1c7acfae",
+      "after_sha256": "b01e2dc642a853a3c54c7a3a40b5e2d0ccd50d916613576859ff7610104bf8d0",
+      "preserved_fenced_blocks": 6,
+      "preserved_revision_rows": 13,
+      "revision": 14,
+      "local_links": 49
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "723f793f29dc141690a7156c093a54a23ccc4f33c7fe470901ff94c61485729a",
+      "after_sha256": "6f4da2376365bb43bc2d055932360092e57e4529b28d70ef907063b1ad82d3bb",
+      "preserved_fenced_blocks": 5,
+      "preserved_revision_rows": 10,
+      "revision": 11,
+      "local_links": 24
+    },
+    {
+      "path": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "before_sha256": "9dbbe304ecf411ceb84db64ac41c0be12ea109159a842841a912f4e65a1e0135",
+      "after_sha256": "47ede52b41cb773a37cf9fa513dc8d44d99cbc628977f9b362da92e1152fd550",
+      "preserved_fenced_blocks": 7,
+      "preserved_revision_rows": 6,
+      "revision": 7,
+      "local_links": 4
+    },
+    {
+      "path": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "before_sha256": "8f429056d349209f01af6272956a76fad5241179dcf447df007aef5880e7b9a0",
+      "after_sha256": "e1409654c908a1a08a940bea359399262d16b94be697d506f5df181f8d93e3c5",
+      "preserved_fenced_blocks": 14,
+      "preserved_revision_rows": 7,
+      "revision": 8,
+      "local_links": 3
+    },
+    {
+      "path": ".plan/261105-1621-plan-lark-research-review-and-sharing.md",
+      "before_sha256": "e7dcf8e20ce094d015ab99ad1b0ff8c03b649692dd62ae5774a57d38d80b6b36",
+      "after_sha256": "bbc9c5396a40fcdd3ada016ac3a88cbea4780fa412575b03cb93d04e39697f00",
+      "preserved_fenced_blocks": 7,
+      "preserved_revision_rows": 4,
+      "revision": 5,
+      "local_links": 2
+    },
+    {
+      "path": ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+      "before_sha256": "205e5559190b632ec228ed48e69ea5561a5eea228b2d7be144a458c9a2a6b269",
+      "after_sha256": "cffe11d152647f61145853866cdf6b94e65fbdc4456fae20c5e5e5519a6d8a50",
+      "preserved_fenced_blocks": 2,
+      "preserved_revision_rows": 3,
+      "revision": 4,
+      "local_links": 1
+    },
+    {
+      "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+      "before_sha256": "5d73f3eebe4acd6b311922c7e1b130b79b2c9c2d08d800a57a0478a4a5800fc5",
+      "after_sha256": "e3abca4d3cb632f1c18e95af7ad4bf5b1294a9b8c380c5884aac5fd59bb1fdc6",
+      "preserved_fenced_blocks": 5,
+      "preserved_revision_rows": 4,
+      "revision": 5,
+      "local_links": 8
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "before_sha256": "8c9c4e1fdb493608135975b85c882595641b3c38e56ab08f54ae55d7f5b81498",
+      "after_sha256": "92a3e8cf947a32dd399982f222a1551d92cdf2aba270f1bf7df8696b19d1d2bf",
+      "preserved_fenced_blocks": 10,
+      "preserved_revision_rows": 8,
+      "revision": 9,
+      "local_links": 24
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "before_sha256": "6bbdf84b3176f4eca5ea28d6fbdd2decc178a720486446f70324625a432a1f6c",
+      "after_sha256": "9937728bb546bcb249efe4b5cdf1d155f3f6c0a7562a0735151d1f6213b10d27",
+      "preserved_fenced_blocks": 14,
+      "preserved_revision_rows": 12,
+      "revision": 8,
+      "local_links": 25
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "f64017c53c26b889143d20890181b6be6f18216bdb43fa7fdd3302c6d5989038",
+      "after_sha256": "a738881daf75550376ddcb04a7b1c0dbd16253b3765d4e0616b4065d58841b18",
+      "preserved_fenced_blocks": 4,
+      "preserved_revision_rows": 4,
+      "revision": 5,
+      "local_links": 12
+    }
+  ],
+  "checks": [
+    "contract_ID_version_and_specified_status",
+    "four_semantic_records",
+    "RL_I1_I8_to_P01_P08",
+    "L0_L8_and_F1_F3",
+    "T1_T4_expected_observed_mappings",
+    "meta_table_contract_ref_binding",
+    "original_prompt_and_history_preservation",
+    "all_local_links_resolve",
+    "README_branching_and_Mermaid_unchanged",
+    "M0_Mermaid_unchanged",
+    "pilot_bounds_preserved",
+    "only_related_tracked_documents_modified",
+    "git_diff_check"
+  ],
+  "pending": [
+    "public record encoding",
+    "runtime/provider pairing and implementation",
+    "fixture/live conformance",
+    "empirical T1_T4 qualification",
+    "hosted-project migration"
+  ],
+  "project_evidence": "Unavailable historical/project references are disclosed; no private inputs or scientific state opened or moved.",
+  "new_request_verbatim": "Persist the formalized research-loop to docs/contracts.md, so that we can audit meta-loop (T1-T4). update related docs."
+}

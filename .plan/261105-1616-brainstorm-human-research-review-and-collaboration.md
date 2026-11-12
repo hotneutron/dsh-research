@@ -1,10 +1,10 @@
 # Brainstorm — Effective feedback and autonomous project research
 
-Created: 2026-11-05 16:16:16 -0800. Updated: 2026-11-05 17:09:58 -0800. Revision: r5. Status: revised design; implementation and project authority migration pending.
+Created: 2026-11-05 16:16:16 -0800. Updated: 2026-11-11 17:07 -0800. Revision: r7. Status: revised design; implementation and project authority migration pending.
 
 A human review surface is useful when feedback changes the next project action and the team can see the resulting evidence. “Organized live Docs” describes presentation; the essential design is a project-owned closed feedback loop with autonomous research.
 
-The [contract](261105-1705-contract-project-state-autonomy-and-feedback.md) makes state ownership explicit. The [Lark feedback proposal](261105-1621-plan-lark-research-review-and-sharing.md) defines collection, assessment, decisions/effects and response. [Accorde's plan](../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md) owns the concrete project implementation. dsh-research keeps reusable logic and its own engineering records only.
+The [contract](261105-1705-contract-project-state-autonomy-and-feedback.md) makes state ownership explicit. The [Lark feedback proposal](261105-1621-plan-lark-research-review-and-sharing.md) defines collection, assessment, decisions/effects and response. `Accorde's plan` (project-owned input pending) owns the concrete project implementation. dsh-research keeps reusable logic and its own engineering records only.
 
 ## What a person reads first
 
@@ -19,6 +19,9 @@ A short brief says what was learned, what evidence/counterevidence supports it, 
 | Newcomer | What are we trying and why this direction? | Goal, brief branch history and next autonomous action |
 
 ## Core feedback cycle
+
+Use the [canonical loop contract](../docs/contracts.md) to distinguish L-stage scientific transitions from F1–F3 feedback/publication facts. Link each claimed disposition/effect to an observed receipt on its pinned contract/profile; a requested action, read receipt or Doc update alone is not execution. These observations also supply permitted evidence to the separate 1604 package gate.
+
 
 ~~~mermaid
 flowchart LR
@@ -46,6 +49,12 @@ The writer must show received, assessed, adopted/rejected/deferred/stale, execut
 | Contact a person when scientifically exhausted | Existing human_action/attention route | Reviewed scoped exhaustion and a concrete requested scientific context |
 
 Native message feedback is log-only and not model-visible by itself; an explicit consumer must capture/adapt it before an author can assess it. Agent Teams is optional agent coordination, not a human decision store. LiveShare remains optional for a curated review Session; its view mode is interactive and needs qualified restrictions. The first design needs neither an Agent Team board nor LiveShare.
+
+## Package architecture signals and team feedback
+
+The [1604 meta loop](261111-1604-architecture-meta-loop-and-migration.md) concerns dsh-research's reusable architecture. Keep ordinary project science, optional comments and local fixes on their existing feedback route. A captured comment or repeated complaint is a signal, not qualified architecture entry.
+
+A package-relevant signal links its accepted core requirement, pinned versions, expected/observed facts, local-fix evidence and affected contract/consumers. The package design author plus separate reviewer applies T1–T4 and the material-blockage/architectural-cause/insufficient-repair gate. Keep project scientific evidence in P and package design/entry decisions in dsh-research. Reply with triaged/local-repair/qualified-assessment status and actual effect; do not confuse a package design review with project scientific exhaustion or require a human reply to continue.
 
 ## Autonomous steering first
 
@@ -85,7 +94,7 @@ A successful trial must show an optional suggestion arriving, being assessed, af
 
 Then ask an owner/reviewer/newcomer to find the claim, evidence, suggestion disposition, next action and exhaustion/hold distinction. Record navigation effort and misunderstandings before adding richer UI. A pretty Doc or completed upload alone does not establish useful review.
 
-The concrete [Accorde brief](../../accorde/.plan/examples/261105-1616-research-brief-example.md) and project tracker hold the example state. Package plans contain the reusable workflow and qualification rules, with no per-project progress or scientific decision database.
+The concrete `Accorde brief` (project-owned input pending) and project tracker hold the example state. Package plans contain the reusable workflow and qualification rules, with no per-project progress or scientific decision database.
 
 ## Earlier User Prompts and Quoted Examples, Verbatim
 
@@ -121,3 +130,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r3 | 2026-11-05 16:26:56 -0800 | Renamed 20261105-brainstorm-human-research-review-and-collaboration.md to 261105-1616-brainstorm-human-research-review-and-collaboration.md using YYMMDD-HHMM; updated 3 local links. Preserved original prompt/code blocks and scientific content; recorded the filename request verbatim. |
 | r4 | 2026-11-05 17:05:50 -0800 | Updated live references after moving the project-specific brief into Accorde; original quoted requests/history retained. |
 | r5 | 2026-11-05 17:09:58 -0800 | Focused review design on comment-to-effect closure, autonomous continuation and scientific exhaustion; made hosted projects own all research decisions/state and kept optional views subordinate. |
+| r6 | 2026-11-11 16:36 -0800 | Adopted 1604's package-architecture scope, T1–T4 evidence gate and maintainer/reviewer ownership; kept routine project triage, scientific autonomy and deployment qualification separate. |
+| r7 | 2026-11-11 17:07 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority. |

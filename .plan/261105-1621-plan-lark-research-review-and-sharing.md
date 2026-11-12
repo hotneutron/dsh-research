@@ -1,10 +1,10 @@
 # Proposal — Project-owned feedback loop with Lark review views
 
-Created: 2026-11-05 16:21:35 -0800. Updated: 2026-11-05 17:09:58 -0800. Revision: r4. Status: revised design; implementation and project authority migration pending.
+Created: 2026-11-05 16:21:35 -0800. Updated: 2026-11-11 17:44 -0800. Revision: r6. Status: revised design; implementation and project authority migration pending.
 
 Lark Docs is an optional feedback source and human-readable projection of project-owned research. Its organization alone provides little value; acceptance requires a complete comment-to-decision-to-action-to-effect-to-response loop.
 
-The [project-state/autonomy/feedback contract](261105-1705-contract-project-state-autonomy-and-feedback.md) owns persistence and escalation policy. The [Accorde integration plan](../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md) owns the concrete project implementation/evidence. dsh-research supplies reusable procedures, not Doc mappings, goal decisions or feedback storage.
+The [project-state/autonomy/feedback contract](261105-1705-contract-project-state-autonomy-and-feedback.md) owns persistence and escalation policy. The `Accorde integration plan` (project-owned input pending; source reference `../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md`) owns the concrete project implementation/evidence. dsh-research supplies reusable procedures, not Doc mappings, goal decisions or feedback storage.
 
 ## Responsibility / owner / persistent location
 
@@ -20,6 +20,9 @@ The [project-state/autonomy/feedback contract](261105-1705-contract-project-stat
 P is the canonical project root. Worktree/cwd/profile changes cannot create a second feedback queue, budget or opening authority. The same existing storage root/persistence decisions apply across all project campaigns.
 
 ## Exact feedback loop
+
+The [research-loop contract](../docs/contracts.md) specifies F1 capture, F2 assessment/action/effect and F3 publication/reply, alongside the category-scoped property IDs and L0–L8. Capture the contract/profile binding and actual source/queue/publication associations in project records. Partial scans, lost wakeups and publication retries must remain truthful trace facts, not synthesized progress. Native integration qualification remains pending.
+
 
 ~~~mermaid
 flowchart LR
@@ -150,3 +153,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r2 | 2026-11-05 16:26:56 -0800 | Renamed 20261105-plan-lark-research-review-and-sharing.md to 261105-1621-plan-lark-research-review-and-sharing.md using YYMMDD-HHMM; updated 2 local links. Preserved original prompt/code blocks and scientific content; recorded the filename request verbatim. |
 | r3 | 2026-11-05 16:28:21 -0800 | Corrected 3 Mermaid message/label semicolons to commas after parser validation; workflow meaning and verbatim user prompts retained. Diagram syntax verification rerun. |
 | r4 | 2026-11-05 17:09:58 -0800 | Replaced presentation-first review with automatic project capture, assessment, disposition, successor/effect proof and response; removed routine human gates and package-owned Doc/feedback state. |
+| r5 | 2026-11-11 17:10 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority; marked unavailable external project references honestly. |
+| r6 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |

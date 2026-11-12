@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T16:45:49.501454-08:00",
+  "request_verbatim": "Add \"Architecture: reusable code, project-owned research\" mermaid figure to README.md?",
+  "source": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+  "source_sha256": "8f429056d349209f01af6272956a76fad5241179dcf447df007aef5880e7b9a0",
+  "diagram_sha256": "d5ad054d5a736f04c6093f666880a61e7806d4e44bc99312c9cd796c0813e1d1",
+  "output": "README.md",
+  "output_sha256": "f64017c53c26b889143d20890181b6be6f18216bdb43fa7fdd3302c6d5989038",
+  "checks": [
+    "exact_M0_diagram_body_reused",
+    "local_links_resolve",
+    "Markdown_fences_balanced",
+    "revision_rows_preserved",
+    "brief_branching_section_preserved"
+  ],
+  "scope": "documentation only; no runtime or rendering qualification"
+}

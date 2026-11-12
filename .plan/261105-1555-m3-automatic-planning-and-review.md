@@ -1,6 +1,6 @@
 # M3 — Configure automatic planning and independent review
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-05 17:15:48 -0800. Revision: r4. Status: planned; implementation not started.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 18:12 -0800. Revision: r10. Status: planned; implementation not started.
 
 Dependency: M2 integrated synthetic worker example. Use M1-pinned runtime operations; resolve prototype/harness compatibility before relying on subagent completion.
 
@@ -10,9 +10,13 @@ Parent: [source review and milestone index](261105-1555-review-1201-1230-and-mil
 
 ## Project ownership and autonomous execution
 
-The [project-state/autonomy/feedback contract](261105-1705-contract-project-state-autonomy-and-feedback.md) owns current semantics. P is the explicitly configured canonical hosted-project root. Actual manifests, budgets/action consumption, reviewer/feedback records, resolved configuration, evidence and scientific decisions live in P; package .plan/review receipts are only reusable-code qualification, never project campaign authority.
+The [state/autonomy contract](261105-1705-contract-project-state-autonomy-and-feedback.md), [M0/1616](261105-1616-m0-architecture-workflows-and-idempotency.md), [sharing/1621](261105-1621-plan-lark-research-review-and-sharing.md), [layout/1452](261109-1452-brainstorm-repo-clutter-and-team-artifacts.md) and [architecture meta loop](261111-1604-architecture-meta-loop-and-migration.md) define the current basis. P is the canonical hosted project across worktrees; its scientific state, resolved profiles, evidence, feedback and decisions stay there.
 
-Normal research execution, diagnosis, alternatives, recovery and separate agent review continue under standing project policy without a human approval or feedback wait. A campaign limit/failure is a checkpoint. Required human scientific steering follows a reviewed exhaustion assessment; hard guard/external holds stay operational and automatically resume when their conditions permit.
+Classify by purpose: deliberate project branches have defined scope/deliverables and versioned plans, contracts and useful milestone evidence in P/.plan/. Explorative alternatives/per-attempt plans stay ignored under P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/, with frozen snapshots/hashes, backups and team access. Large/raw outputs stay in project artifacts in either case. dsh-research owns its deliberate engineering plans and compact qualification receipts in .plan/review/; raw fixture logs/supporting alternatives may remain local. Purpose and acceptance, not the mere existence of a Git branch, determine the planning treatment.
+
+Normal execution, diagnosis, separate agent review, alternatives and covered recovery are autonomous. Optional feedback or failed publication never blocks admissible work. Human scientific steering follows reviewed scoped exhaustion; operational holds preserve their unmet condition. Current M1–M6 implementation remains pending.
+
+
 
 ## Required automatic feedback loop and host reporting
 
@@ -40,13 +44,16 @@ No new reviewer manager, planner server, watcher daemon, channel connector or bo
 
 ## Automatic transition sequence
 
+The [research-loop contract](../docs/contracts.md) defines normative L0–L8 transitions and F1–F3 side channels. Bind its exact version/hash and profile mapping to review/action records, and associate actual dispatch/start/terminal/capture events from existing providers. Requested, delivered, observed, invalid and unresolved transitions remain distinct; a publication or review retry cannot mint a new scientific action.
+
+
 | Step | Worker action / persisted association | Fail-closed outcome |
 |---|---|---|
 | 1. Design freeze | Write immutable manifest and first-action proposal; bind original human scope | Missing scope or changed identity → defer |
 | 2. Review dispatch | Start a separate reviewer via configured existing subagent route; bind review_request ID to exact packet/action | No provider or uncertain dispatch → pending/defer; no self-review |
 | 3. Review collection | Receive existing completion result; validate terminal outcome, reviewer identity and complete subject hashes | Interrupted or stale review → cannot authorize |
 | 4. Admission | M2 checks approved exact action, validity, remaining bounds and stop state; durable single-record consumption before execute | Concurrent/replayed action → same status or refusal |
-| 5. Result checkpoint | Actual tool/job completion returns to existing author; validate P01–P03 and emit bounded next proposal | Invalid/unresolved result → preserve evidence and defer/diagnose |
+| 5. Result checkpoint | Actual tool/job completion returns to existing author; validate provenance/execution predicates and emit bounded next proposal | Invalid/unresolved result → preserve evidence and defer/diagnose |
 | 6. Successor review | Automatically dispatch the independent reviewer again for that new checkpoint/action; use a new scoped packet | Prior approval cannot authorize the successor |
 | 7. Continue or end | Existing worker submits only the admitted next ordinary job, or records pivot/defer/stop | Human stop and exhausted bounds terminate admission |
 
@@ -54,9 +61,23 @@ The re-steering policy remains in dsh-research; activation and communications re
 
 Record subject-derived action/review_request identities through M1's state operation. A crash after review dispatch intent but before child association is unresolved: inspect the existing subagent/session catalog before retrying. If dispatch cannot be reconciled, defer instead of producing duplicate reviewers or inventing authorization. Duplicate completed review delivery is harmless and does not consume another attempt.
 
+## Architecture revision and publication checkpoints
+
+At safe project checkpoints, the author triages local defects and may send permitted integration evidence to the dsh-research design author. A failed job, negative result, routine API/configuration change, inaccessible asset or milestone is not automatic architecture entry. The package design author and separate reviewer qualify T1–T4 only with material blockage of an accepted core requirement, an architectural cause and a failed or concretely ruled-out narrower repair. Keep signal/local-repair/architecture-review-qualified status and supporting evidence distinct.
+
+Only a qualified package episode compares baseline, narrow repair and an end-to-end alternative, with its own exact reviewed design/cost/migration scope. Existing worker/review routes activate it; no new planner/scheduler or waiver of M1–M4 is introduced. Project operations continue when admissible, affected unresolved routes remain held, and a package architecture review does not establish project scientific exhaustion. Shadow review never launches or writes scientific authority.
+
+Review the exact deliberate plan revision or retained explorative snapshot and evidence; a mutable Doc or live checklist cannot substitute. For optional team publication, preserve human comment-bearing regions, fetch current revisions, patch narrowly and refetch. Store stable checkpoint/operation associations and actual permitted asset bytes in P; verify intended audience access. Reconcile uncertain publication before retrying; publication retry cannot mint another experiment.
+
+## Reviewer unavailability and structural decision validity
+
+Unavailable/failed/unknown review is an owned operational hold on the dependent action. Retain request/cost identity, exit/revisit conditions and reassessment deadline; use qualified bounded retry/fallback only, and reconcile unknown dispatch before relaunch. No self-approval or human-signoff substitution; unrelated admissible work continues.
+
+Package architecture-entry and requirement-revision decisions reuse the completed separate review receipt with explicit subject kind, packet/contract/profile/evidence/repair-matrix/scope/cost hashes. Changes to applied bindings or superseding evidence require reassessment; they do not rewrite historical decisions. T2 individually missing capability and T3 joint-conflict evidence share no shortcut or duplicate episode budget.
+
 ## Reviewer packet and authority
 
-The packet includes project/stage, original prompt/goal revision, candidate/verifier/input identities, immutable evidence hashes, checkpoint/plan revision, exact next command/purpose/timeout and remaining attempt budget. Attach useful public rationale and uncertainty; the reviewer evaluates stated evidence, not private reasoning.
+The packet includes project/stage, original prompt/goal revision, candidate/verifier/input identities, immutable evidence hashes, checkpoint/plan snapshot/hash and architecture/profile revision, exact next command/purpose/timeout and remaining attempt budget. Attach useful public rationale and uncertainty; the reviewer evaluates stated evidence, not private reasoning.
 
 The reviewer result includes its own Session/provider reference, request/subject/action hashes, decision and concise evidence-backed reason. Advisory discussion in a source thread is not the scoped result. An agent approve result cannot waive source drift, invalid evidence, uncovered hard limits, human stop or confirmation-off policy. Already granted project recovery rules remain applicable. Technical review and human authorization remain distinct; no new human decision is needed for each attempt already covered by an exact approved M5 packet.
 
@@ -104,3 +125,9 @@ Also please confirm that for most execution and iterations, human intervention i
 | r2 | 2026-11-05 16:26:56 -0800 | Renamed 20261105-m3-automatic-planning-and-review.md to 261105-1555-m3-automatic-planning-and-review.md using YYMMDD-HHMM; updated 2 local links. Preserved original prompt/code blocks and scientific content; recorded the filename request verbatim. |
 | r3 | 2026-11-05 17:07:31 -0800 | Added the automatic project-local comment-to-disposition-to-execution feedback loop; specified native reporting that avoids routine person stages and human approval waits. |
 | r4 | 2026-11-05 17:15:48 -0800 | Specified explicit clearing of obsolete attention, preservation of unresolved exhaustion/user stop, and automatic context-change reassessment using native reporting semantics. |
+| r5 | 2026-11-11 16:04 -0800 | Aligned with 1616/1621/1705/1452: ignored detailed planning and receipts, frozen identity, accessible team exports, focused integration and bounded architecture revision/migration; preserved prompts/history and pending runtime gates. |
+| r6 | 2026-11-11 16:14 -0800 | Distinguished deliberate scoped/versioned plans from explorative retained detail; restored package-owned compact qualification receipts and purposeful project migration/pilot plans without changing scientific authority or execution status. |
+| r7 | 2026-11-11 16:36 -0800 | Adopted 1604's package-architecture scope, T1–T4 evidence gate and maintainer/reviewer ownership; kept routine project triage, scientific autonomy and deployment qualification separate. |
+| r8 | 2026-11-11 17:07 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority. |
+| r9 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
+| r10 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |

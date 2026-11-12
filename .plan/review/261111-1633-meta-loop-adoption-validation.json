@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T16:38:46.743406-08:00",
+  "scope": "documentation adoption consistency only",
+  "status": "passed",
+  "basis": {
+    "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+    "sha256": "5d73f3eebe4acd6b311922c7e1b130b79b2c9c2d08d800a57a0478a4a5800fc5"
+  },
+  "targets": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "bb0ec59022d71f3aa49cef2f3df25626cfd10833a0971f7897347d29ccea4280",
+      "after_sha256": "44084452a236c00104e279c7beff3304be83d5a6b2af9f7e02be9cce8331cf2b",
+      "revision": 6,
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 5,
+      "local_links": 7,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m2-skill-and-thin-helpers.md",
+      "before_sha256": "ca28cc8b9407e5c3c0a1fb0c98eee6376b6c69469cfccd761cc0c0b81e3b62fd",
+      "after_sha256": "7cf8578cab2a82a7a5bd857f49c09637e2d0418099e0996c5b482a230aa9b438",
+      "revision": 6,
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 5,
+      "local_links": 7,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m3-automatic-planning-and-review.md",
+      "before_sha256": "873bdfb9949bc675b0cc3aee5e616aec3a0d17f8e6166bf5da097a76731162d6",
+      "after_sha256": "a26fe598460369bda81b6a31b649f499ae8d30d2c78bb404ad32a1f87853977e",
+      "revision": 7,
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 6,
+      "local_links": 7,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "3967075832cd35fae603b848e888f3e159d2d4b41466b3363046c7bf33f35e9f",
+      "after_sha256": "13da48f279d32bba8f0552f4e2945eca31f0901c32803a7ab40a64a820e06354",
+      "revision": 6,
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 5,
+      "local_links": 7,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "cef6b268cf37b8b97ec7373dbb90e965e9d5cb8b051ee85e88049b9b14e855ef",
+      "after_sha256": "a9b99cde52f61b2500d570a045e458ef60bf9c1428017c7973e122e71699bf01",
+      "revision": 7,
+      "preserved_fenced_blocks": 4,
+      "preserved_revision_rows": 6,
+      "local_links": 6,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "ef5293a853a2dd881c2e23c7a60f266ae254a5a52e3d40f7c1c19de944d24cd0",
+      "after_sha256": "e0e721ca43d7fe4f250a81c28b4b3a5fd66bbb1aa4079c82721c9b7be66aab2b",
+      "revision": 6,
+      "preserved_fenced_blocks": 3,
+      "preserved_revision_rows": 5,
+      "local_links": 8,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "6700baa5861e7bd19e16c8d4b8b3cc4c0b5765d95451ee101bbaca962d83033c",
+      "after_sha256": "b939b4775e4186dd549c60bd6ba80edbf13f67d31407354dfbea80ad1c7acfae",
+      "revision": 13,
+      "preserved_fenced_blocks": 6,
+      "preserved_revision_rows": 12,
+      "local_links": 47,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "1b0bf054e1da5267a4a97932fe86a6e6a72c0feed3f9eb10b89214bca18e5f4b",
+      "after_sha256": "723f793f29dc141690a7156c093a54a23ccc4f33c7fe470901ff94c61485729a",
+      "revision": 10,
+      "preserved_fenced_blocks": 5,
+      "preserved_revision_rows": 9,
+      "local_links": 22,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md",
+      "before_sha256": "a3667401b93d9ba7c09d3eac16c4a871ac8d4bcd8ccc4b5788dfd20c2213b76d",
+      "after_sha256": "9dbbe304ecf411ceb84db64ac41c0be12ea109159a842841a912f4e65a1e0135",
+      "revision": 6,
+      "preserved_fenced_blocks": 7,
+      "preserved_revision_rows": 5,
+      "local_links": 3,
+      "implementation_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md",
+      "before_sha256": "4575ddc1c9c7e5e0d45d7c848eb2e4119162241b22b7a13831307f2fc15c3239",
+      "after_sha256": "8f429056d349209f01af6272956a76fad5241179dcf447df007aef5880e7b9a0",
+      "revision": 7,
+      "preserved_fenced_blocks": 13,
+      "preserved_revision_rows": 6,
+      "local_links": 2,
+      "implementation_status": "pending"
+    }
+  ],
+  "README": {
+    "sha256": "a105d3c057396334fc08c8f2bcfb28c034866ef1acfc154d89857ec6c1afaf72",
+    "branching_section_words": 66,
+    "local_links": 9
+  },
+  "checks": [
+    "ten_target_coverage",
+    "original_prompts_and_figures_preserved",
+    "nine_M0_diagrams_unchanged",
+    "historical_revision_rows_preserved",
+    "headers_and_links",
+    "1604_scope_gate_and_package_ownership",
+    "M3_no_direct_project_redesign",
+    "M4_positive_negative_entry_cases",
+    "M5_limits_and_M6_adoption",
+    "concise_README_branching_section",
+    "git_diff_check"
+  ],
+  "unexecuted": [
+    "empirical trigger qualification",
+    "runtime implementation",
+    "live pilot",
+    "hosted-project migration",
+    "cloud publication"
+  ],
+  "pending_inputs": "Unavailable legacy Accorde references are marked pending; no project state or placeholder plans created."
+}

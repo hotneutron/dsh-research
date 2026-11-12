@@ -1,6 +1,6 @@
 # Contract — Project-owned persistent state, autonomy and feedback
 
-Created: 2026-11-05 17:05:50 -0800. Updated: 2026-11-05 17:18:37 -0800. Revision: r3. Status: design/implementation plan; no runtime or cloud action executed.
+Created: 2026-11-05 17:05:50 -0800. Updated: 2026-11-11 21:13:38 -0800. Revision: r10. Status: design/implementation plan; no runtime or cloud action executed.
 
 The hosted project owns its research record and persistent state. For Accorde, that workspace is /home/cliu/wk/accorde. dsh-research supplies reusable schemas, procedures and thin adapters; it owns no per-project runtime database, feedback queue, budget, candidate inventory or decision history. Its own package-development plans/test receipts can stay here.
 
@@ -30,6 +30,10 @@ P means the explicitly configured canonical project_root, not the current worker
 Public source supports placement: storage-sqlite Config.path, session-persistence-jsonl Config.root, and superagent Config.stateDir. Their actual consumer/version compatibility is still an M1 qualification task. The coupled scientific record and native operational store serve distinct responsibilities; the latter never refunds budget or grants scientific acceptance.
 
 For an active legacy H3 loop, the existing program refers to local_artifacts/autoresearch/h3-autonomous-loop-v1/state.json and linked campaign stores. Keep that authority/pins until a verified handoff. Creating the target SQLite path is not an import and must not initialize a fresh budget against existing work.
+
+## Canonical research-loop reference
+
+[docs/contracts.md](../docs/contracts.md) specifies reusable research-loop contract 2.3.2, stage/record/invariant semantics and the trace audit interface. This policy remains the owner/standing-authority boundary; the loop cannot override project stop, scope, scientific criteria or legacy consumption. Each adopted project action pins the exact contract/profile and assurance in its project-owned manifest, with observed native traces retained in P. Contract specification does not establish an implemented or live-qualified provider.
 
 ## Scope and zero package-owned research state
 
@@ -86,13 +90,13 @@ Qualification must demonstrate: a received suggestion changes or is rejected by 
 
 Test cross-project roots/worktrees, preservation of aggregate costs, clone/rename resistance, unavailable Docs with continued autonomous work, and reconstruction using only the hosted project record. Lark organization is optional presentation; this feedback proof is the essential capability.
 
-The [Accorde integration plan](../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md) and its project-local pilot own the concrete project implementation/evidence. Package milestones reference this contract and own only reusable code qualification.
+The `Accorde integration plan` (project-owned input pending; source reference `../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md`) and its project-local pilot own the concrete project implementation/evidence. Package milestones reference this contract and own only reusable code qualification.
 
 ## Retention and final document checks
 
 Track plans, pins, resolved non-secret configuration and compact released reports according to project policy. Keep runtime databases, Session logs, raw/sensitive snapshots and large evidence ignored inside the project workspace and use supported backup/export procedures. Project-local placement does not require committing raw state or cloning credentials.
 
-The [project-local validation receipt](../../accorde/.plan/receipts/261105-1718-project-state-feedback-document-validation.json) records document ownership/links/prompt/history checks. [Mermaid grammar validation](../../accorde/.plan/receipts/261105-1714-project-state-feedback-mermaid-validation.json) passed for the revised figures. Runtime/provider/feedback-effect qualification remains pending; no active state, ledger, source code or cloud data was changed.
+The `project-local validation receipt` (historical project evidence unavailable here; source reference `../../accorde/.plan/receipts/261105-1718-project-state-feedback-document-validation.json`) records document ownership/links/prompt/history checks. `Mermaid grammar validation` (historical project evidence unavailable here; source reference `../../accorde/.plan/receipts/261105-1714-project-state-feedback-mermaid-validation.json`) passed for the revised figures. Runtime/provider/feedback-effect qualification remains pending; no active state, ledger, source code or cloud data was changed.
 
 ## User Prompt, Verbatim
 
@@ -109,3 +113,10 @@ Also please confirm that for most execution and iterations, human intervention i
 | r1 | 2026-11-05 17:05:50 -0800 | Recorded explicit logical owners/locations, zero package-owned research state, autonomous iteration/scientific exhaustion policy and the comment-to-decision-to-effect feedback contract. |
 | r2 | 2026-11-05 17:15:48 -0800 | Bound scientific action identity independently of transport/comment IDs so repeated feedback cannot mint another unchanged experiment; retained project ownership and original prompt. |
 | r3 | 2026-11-05 17:18:37 -0800 | Recorded project-local retention and document/diagram validation; all runtime/feedback-effect implementation and authority migration remain pending. |
+| r4 | 2026-11-11 17:10 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority; marked unavailable external project references honestly. |
+| r5 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
+| r6 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
+| r7 | 2026-11-11 19:01:22 -0800 | Adopted contract 2.2.0 applicability/coverage clarification and review-r5 residual closure; retained prospective provider qualification and historical evidence. |
+| r8 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
+| r9 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
+| r10 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |

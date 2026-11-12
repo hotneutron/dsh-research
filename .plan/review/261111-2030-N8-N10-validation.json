@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T20:33:18.106032-08:00",
+  "status": "passed",
+  "scope": "N8-N10 documentation closure only",
+  "review": {
+    "path": "local_artifacts/dsh-research/architecture-revision/contracts-human-review-zh.md",
+    "sha256": "bf4a3e69955c753d3d43fc49370f12b00757df2c9639545e61eb8f6263f9f8ec",
+    "unchanged": true
+  },
+  "reviewed_contract": {
+    "version": "2.3.0",
+    "sha256": "681a105d83893f8fa956df1f98792544d86c9753a61d9c1520dbde5e4819f452",
+    "snapshot": "local_artifacts/dsh-research/contract-history/261111-2030-reviewed-contract-2.3.0-681a105d8389.md"
+  },
+  "contract": {
+    "version": "2.3.1",
+    "path": "docs/contracts.md",
+    "sha256": "87e6d84f8cafe6a8c1d3b2913d54174831859ccec7855479f09bc4756c29e795",
+    "assurance": "specified",
+    "properties_unchanged": 23,
+    "last_content_write": "2026-11-11 20:30:26 -0800"
+  },
+  "resolution": {
+    "path": ".plan/review/261111-2030-N8-N10-resolution-zh.md",
+    "sha256": "1cb8d5dfc14905309d73bd717a36a7aee8acc9496ea8a65984bdf15dc8882620",
+    "findings": [
+      "N-8",
+      "N-9",
+      "N-10"
+    ]
+  },
+  "updated_documents": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "a11985e65888ae43ea8d747fa36bd07011b21a4e016ce76a7bf2d925b6f19967",
+      "after_sha256": "a3b758f1147c5ecacb4c41cc4e0aa20041027b43eb9112078f14834151e31611",
+      "revision": 12,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "620071e74f296c85983aa218b8edabfe11c70f8bcd796662f4477f561f9a185b",
+      "after_sha256": "2cfdce01481636896609661d01debb63534a8533358611600fae0ee7a508c3a9",
+      "revision": 12,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "1f819df29482524f1b2e0a4f5e8669d809d72a7b8f6fff8722abbf50f6aaf949",
+      "after_sha256": "71cee83ace04b54910470fe7c6f45ed1468431a3d2ab649981da65ac29ebf5ea",
+      "revision": 13,
+      "links": 7
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "2bd2f59a4ab128aaa6d3d3fea2bd795959c25af9eb1ce5434e1292655ece72f3",
+      "after_sha256": "94dad55f9289cc0f92a75dc832938a67dd392dace279790aeae87c58566cc4dc",
+      "revision": 11,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "89136c25b377b17b92ecd41fc17ff1655916cd37622a02c485f405af98640b17",
+      "after_sha256": "644a05da21394a2e7d2f155122c3b3ed11fd26dd23c59f95ef54bf5311d15f78",
+      "revision": 19,
+      "links": 53
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "1bdaa781b47866af9befa2f20908056d4c4370b2dc8897de7a3ce0fdc696854b",
+      "after_sha256": "ae86db382d29fc4f401b9661ef759c8588117f156075c3018d05d350e637024f",
+      "revision": 16,
+      "links": 26
+    },
+    {
+      "path": ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+      "before_sha256": "28e3e0b2bdd6fd91800f3011f50f395442daa29e577d93f37e4f20fa00aa8e40",
+      "after_sha256": "490b5b3560cd91daa1074d57f4bedf8c4aeec78a527ed6eaf64f8a53ab0f0fc6",
+      "revision": 9,
+      "links": 1
+    },
+    {
+      "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+      "before_sha256": "9171bf9fd8c87b17037ddc9f6c0d17c76de0ccee0de1696447cf1947e6701d8a",
+      "after_sha256": "307127b40beddda1e458b707c75e536f65940b4f205e1b984ec4ad9280e6de1a",
+      "revision": 10,
+      "links": 11
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "before_sha256": "b49d446a065d542c7a3e50f85b70e715fed2cf65dac99fff4309ea68fc5fa47f",
+      "after_sha256": "c293e371a385731286004a56d1ad49c82831a32c46f5a634732135b022465a62",
+      "revision": 14,
+      "links": 24
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "before_sha256": "7b017fc604d719d63f62c3678cd22879317f3da65d298931b362d41fbc2221d5",
+      "after_sha256": "3ba64a1e48388bea143efac7bf67780efbced6130f4d9b08935e3b2dba51c061",
+      "revision": 13,
+      "links": 25
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "31bed4abf0f9d224fa2a334f033711c32bc2b39fed58085d663b843511a74f09",
+      "after_sha256": "925cde1f30779c1b3ed4595e8efa000d328c5ee025aba620ec3289b691e319d1",
+      "revision": 8,
+      "links": 12
+    },
+    {
+      "path": "docs/contracts.md",
+      "before_sha256": "681a105d83893f8fa956df1f98792544d86c9753a61d9c1520dbde5e4819f452",
+      "after_sha256": "87e6d84f8cafe6a8c1d3b2913d54174831859ccec7855479f09bc4756c29e795",
+      "revision": 7,
+      "links": 11
+    }
+  ],
+  "checks": [
+    "review_and_snapshot_preserved",
+    "original_envelope_horizon_denominator_binding",
+    "extended_horizon_separate_review_and_original_failure_retained",
+    "qualification_owned_hold_requirements",
+    "T4_explicit_C_run_C_qual_rule_link",
+    "property_stage_prompt_history_and_figure_preserved",
+    "fragment_and_file_links",
+    "pilot_bounds_and_git_diff_check"
+  ],
+  "pending": [
+    "qualification budget/trace execution",
+    "native/provider conformance",
+    "profile/state migration",
+    "cloud publication"
+  ]
+}

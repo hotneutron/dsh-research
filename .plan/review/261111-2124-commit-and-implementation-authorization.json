@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T21:24:30.319132-08:00",
+  "request_verbatim": "commit then impl",
+  "scope": "Commit the existing documentation baseline, then start bounded M1 implementation",
+  "contract": {
+    "version": "2.3.2",
+    "path": "docs/contracts.md",
+    "sha256": "ebfafa15545bc6925052772e95d26247c2b86c497a637ceb08949eb5aefd6f9b",
+    "assurance": "specified",
+    "versions_assessed": [
+      "1.0.0",
+      "2.0.0",
+      "2.1.0",
+      "2.2.0",
+      "2.3.0",
+      "2.3.1",
+      "2.3.2"
+    ],
+    "properties_unchanged": 23,
+    "last_content_write": "2026-11-11 21:12:18 -0800"
+  },
+  "checks": {
+    "json_receipts_parsed": 20,
+    "current_contract_hash_matches": true,
+    "git_diff_check": "passed"
+  },
+  "commit_scope": [
+    ".gitignore",
+    "README.md",
+    "docs/contracts.md",
+    ".plan/"
+  ],
+  "exclusions": [
+    "ignored local artifacts",
+    "sibling repositories"
+  ],
+  "implementation_at_commit": "not started",
+  "publication": "local commit only"
+}

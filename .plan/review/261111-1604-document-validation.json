@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T16:17:44.998330-08:00",
+  "scope": "documentation validation only",
+  "status": "passed",
+  "baseline_commit": "9d7dea678c4e6e45abdbf35491aee3b5319502da",
+  "sources": {
+    ".plan/261105-1616-m0-architecture-workflows-and-idempotency.md": "4575ddc1c9c7e5e0d45d7c848eb2e4119162241b22b7a13831307f2fc15c3239",
+    ".plan/261105-1616-brainstorm-human-research-review-and-collaboration.md": "a3667401b93d9ba7c09d3eac16c4a871ac8d4bcd8ccc4b5788dfd20c2213b76d",
+    ".plan/261105-1621-plan-lark-research-review-and-sharing.md": "e7dcf8e20ce094d015ab99ad1b0ff8c03b649692dd62ae5774a57d38d80b6b36",
+    ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md": "205e5559190b632ec228ed48e69ea5561a5eea228b2d7be144a458c9a2a6b269",
+    ".plan/261109-1452-brainstorm-repo-clutter-and-team-artifacts.md": "edb95b083914f58cca1ebc94dcaeb6f7c9905c696ce41eea5f496ed34156c03d"
+  },
+  "resolved_1704": "No 1704 file exists here; use 1705.",
+  "targets": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "f2f30eae047a587f21a6a43c21d9d3e3b3446e7d5a83cd5fbd5331b98d80b749",
+      "after_sha256": "bb0ec59022d71f3aa49cef2f3df25626cfd10833a0971f7897347d29ccea4280",
+      "revision": 5,
+      "preserved_prompt_blocks": 3,
+      "preserved_revision_rows": 3,
+      "local_links": 7,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m2-skill-and-thin-helpers.md",
+      "before_sha256": "0044ee8a03c185724544e0087822f73f07707b768fb3a3449def733c95842ee2",
+      "after_sha256": "ca28cc8b9407e5c3c0a1fb0c98eee6376b6c69469cfccd761cc0c0b81e3b62fd",
+      "revision": 5,
+      "preserved_prompt_blocks": 3,
+      "preserved_revision_rows": 3,
+      "local_links": 7,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m3-automatic-planning-and-review.md",
+      "before_sha256": "2e4f21fe4686d876b3140775ff28b170aeda43727ec8d7533d8401c9ed1725c1",
+      "after_sha256": "873bdfb9949bc675b0cc3aee5e616aec3a0d17f8e6166bf5da097a76731162d6",
+      "revision": 6,
+      "preserved_prompt_blocks": 3,
+      "preserved_revision_rows": 4,
+      "local_links": 7,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "f46f58a3897516f473acd319a41b75f3f908681984c686b745f6326f6d35e40b",
+      "after_sha256": "3967075832cd35fae603b848e888f3e159d2d4b41466b3363046c7bf33f35e9f",
+      "revision": 5,
+      "preserved_prompt_blocks": 3,
+      "preserved_revision_rows": 3,
+      "local_links": 7,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "346b9c0a4a2f127585276845f564d01c2ab962575fc73f4eddcaa935162bb3ff",
+      "after_sha256": "cef6b268cf37b8b97ec7373dbb90e965e9d5cb8b051ee85e88049b9b14e855ef",
+      "revision": 6,
+      "preserved_prompt_blocks": 4,
+      "preserved_revision_rows": 3,
+      "local_links": 6,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "9d5269c6d1639387461207e80c999547d0a93437963bf3b6dda6af2d20f160e8",
+      "after_sha256": "ef5293a853a2dd881c2e23c7a60f266ae254a5a52e3d40f7c1c19de944d24cd0",
+      "revision": 5,
+      "preserved_prompt_blocks": 3,
+      "preserved_revision_rows": 3,
+      "local_links": 8,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "4c266a8d7dadfef0e1dc2c9e63d4caabd297b8bd37ef16b399e65dcaf4a2d98b",
+      "after_sha256": "6700baa5861e7bd19e16c8d4b8b3cc4c0b5765d95451ee101bbaca962d83033c",
+      "revision": 12,
+      "preserved_prompt_blocks": 6,
+      "preserved_revision_rows": 9,
+      "local_links": 46,
+      "runtime_status": "pending"
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "725fead77ec8548de4db358caf999e22c24827e2c8a41d9b9cc1b0f4faf96cfe",
+      "after_sha256": "1b0bf054e1da5267a4a97932fe86a6e6a72c0feed3f9eb10b89214bca18e5f4b",
+      "revision": 9,
+      "preserved_prompt_blocks": 5,
+      "preserved_revision_rows": 7,
+      "local_links": 21,
+      "runtime_status": "pending"
+    }
+  ],
+  "new_documents": {
+    ".plan/261111-1604-architecture-meta-loop-and-migration.md": {
+      "sha256": "4a37f0e37fd55976490a9035ed06a632736c011572e8ef59c36391ab0c0bfa13",
+      "local_links": 6
+    },
+    "README.md": {
+      "sha256": "f6c74e005ea7ed8248b21150ed8d3c299734e1299905d5d7dbe08957ff443d77",
+      "local_links": 8
+    }
+  },
+  "checks": [
+    "eight_target_coverage",
+    "original_prompt_fences_and_revision_rows_preserved",
+    "revision_headers_and_local_links",
+    "latest_design_basis",
+    "purpose_based_branching_scope",
+    "versioned_compact_package_receipts",
+    "pilot_bounds",
+    "self_contained_1604_architecture_proposal",
+    "README_scope_and_pending_status",
+    "1452_detail_hash_and_old_snapshots",
+    "git_diff_check"
+  ],
+  "pending_project_inputs": "Accorde integration/pilot/brief/tracker and related receipts are unavailable in this checkout; resolve project-owned references before live qualification.",
+  "unexecuted": [
+    "runtime implementation",
+    "provider qualification",
+    "live pilot",
+    "hosted-project migration",
+    "confirmation opening",
+    "cloud publication"
+  ],
+  "retention": "Compact deliberate package qualification receipt; raw baselines and initial drafts remain local supporting artifacts."
+}

@@ -1,5 +1,7 @@
 # 计划：基于 dsh-superagent 的最小 dsh-research
 
+本次契约引用更新：2026-11-11 21:13:38 -0800（r8）。[规范研究循环契约 2.3.2](../docs/contracts.md) 已定义记录、阶段、不变量与实际轨迹要求；本次仅更新引用，M1–M6 实施、提供方兼容性及实机验证仍待完成。既有翻译/同步元数据保留为历史。
+
 创建时间：2026-11-03 12:30 -0800。英文源计划更新时间：2026-11-03 16:49 -0800（r7）。中文同步时间：2026-11-03 16:55:15 -0800（r6）。状态：仅作规划；尚未执行实施或切换。
 
 本地命名/导航更新：2026-11-05 16:26:56 -0800（r7）。来源与既有同步元数据保留；本次仅重命名及修复引用。
@@ -11,6 +13,8 @@
 创建时间：2026-11-03 12:30 -0800。更新时间：2026-11-03 12:37 -0800（原文）。状态：可执行的实施计划；尚未执行。
 
 此前同步元数据（仅作沿革，不是当前范围）：英文源计划更新时间为 2026-11-03 15:09 -0800（r6），中文同步时间为 2026-11-03 15:10:22 -0800（r5）。历史 0.5.8 对比基线为 `d47eabdb1aeb433492563a5abcfbeaae43c75209`，不是当前 dist-exec 的能力或缺陷判据。
+
+下文原八项设计说明保留为背景，不作为规范验收编号。契约 2.3.2 定义按类别分组的可测试性质及反例；验收使用其性质 ID，不提供旧编号别名。
 
 ## 1. 决策：复用运行时，只保留研究核心要义
 
@@ -44,7 +48,7 @@
 | 仓库 | 已审计版本 | 当前职责 |
 |---|---|---|
 | `~/wk/autoresearch` | `ead1ae507934a6da5e914a2559d6fcac99c505c4`，干净的 `dist-exec`，runtime 0.6.0 | 行为/证据参考；活跃旧版研究活动保持版本锁定 |
-| dist-exec 基线 | `33ef750face59b42f9663c8e355a77600d1765e7` | 两次提交的差异：65 个变更路径；[清单](../../accorde/local_artifacts/autoresearch/dist-exec-drop-audit/20261103-1637/branch-inventory.json) |
+| dist-exec 基线 | `33ef750face59b42f9663c8e355a77600d1765e7` | 两次提交的差异：65 个变更路径；`清单` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-drop-audit/20261103-1637/branch-inventory.json`) |
 | `~/wk/dsh-superagent-prototype` | `8c32a9dc5d72c033816c6a8110b37f40cf94fba4`，干净 | 必须配置并复用的编排/团队运行时 |
 | `~/wk/accorde` | `7c85e7541a3d8dfbb25fec46d96ff644c1ae72b5` | 现有科学工具/验证器及已公开输入试点 |
 | `~/wk/dsh-research` | 尚未创建 | 建议的隔离技能、策略及薄辅助模块 |
@@ -137,12 +141,12 @@ dsh-research/
 
 ## 5. 可执行顺序：六个缩减里程碑
 
-顺序保留；**交付物及发布门槛缩减**。未来的实施跟踪文档应记录 M1–M6、P01–P08、复用途径检查、实际用量及偏离；旧 C01–C28/fleet 清单不是实施 backlog。不宣称实施跟踪文档已存在。
+顺序保留；**交付物及发布门槛缩减**。未来的实施跟踪文档应记录 M1–M6、the canonical property set、复用途径检查、实际用量及偏离；旧 C01–C28/fleet 清单不是实施 backlog。不宣称实施跟踪文档已存在。
 
 ### M1 — 冻结最小契约及复用检查清单
 
 - 锁定上述基线，并将 65 路径矩阵作为禁止移植清单。
-- 定义一套小型 manifest/result/checkpoint/review packet 及 P01–P08；尽可能使用现有基准/验证器输出。
+- 定义一套小型 manifest/result/checkpoint/review packet 及 the canonical property set；尽可能使用现有基准/验证器输出。
 - 在目标 profile 中验证 S1–S8：工作者任务工具、subagents/评审器启动、完成交付、提示覆盖、状态访问、source 权限及 watchdog 配置。
 - 明确已发布接口是否可用。先尝试配置/技能路径；记录任何*单一、狭窄的缺失导出/原子操作*，而不是引入服务。
 
@@ -160,9 +164,9 @@ dsh-research/
 ### M3 — 配置自动规划及独立评审
 
 - 添加研究专用工作者过程，不新增规划器/评审器生命周期机制。
-- 在已声明的检查点，现有完成交付唤醒工作者；其验证 P01–P03、计算有界下一步 action，并写出不可变数据包。
+- 在已声明的检查点，现有完成交付唤醒工作者；其验证 provenance/execution predicates、计算有界下一步 action，并写出不可变数据包。
 - 策略要求评审时，**通过现有已配置 subagent/review 路径自动启动一个独立评审 agent**。评审器获得精确清单、输出/验证器证据及拟议 action；它不编写该候选，也不控制预算/数据揭示。使用目标 profile 支持的只读/流程分离访问；不虚构沙箱保证。
-- 现有工作者接收评审、检查 P04–P06/P08，随后提交下一项普通任务或停止。缺少评审器能力/subject 不匹配意味着暂缓，而非自行批准。
+- 现有工作者接收评审、检查 review/admission, protected-data and continuity predicates，随后提交下一项普通任务或停止。缺少评审器能力/subject 不匹配意味着暂缓，而非自行批准。
 - 在复用状态中使用由 subject/checkpoint/action 派生的 action 身份，使重放不重新启动或复用批准。须测试配置，不仅文字宣称自动化。
 - 人工后续沟通留在现有渠道。不改版人工看板，不新建评审器服务或 webhook 总线。
 
@@ -170,7 +174,7 @@ dsh-research/
 
 ### M4 — 仅在复用边界测试科学性质
 
-- 为 **P01–P08** 添加聚焦的正/反例测试；保留分支回归背后的性质，而不是 Python 类或测试数量。
+- 为 **the canonical property set** 添加聚焦的正/反例测试；保留分支回归背后的性质，而不是 Python 类或测试数量。
 - 覆盖身份变化、SIGTERM-zero/超时无效性、损坏及非有限输出、有效负面结果、过期/action 不匹配评审、限额耗尽/重放准入、上下文变化后的重访及停止。
 - 确认测试使用可丢弃状态：访问前消耗、失败仍已消耗、拒绝重命名/profile 重叠及连续性。在真实权威完成核对前，生产确认保持禁用。
 - 通过 superagent 支持的设施检查普通完成/评审的重放/重启。不要将通用 claim/grant/HTTP/TLS/fleet 机制作为插件功能重测或重建。
@@ -209,9 +213,9 @@ Karpathy 的 baseline → propose → run → evaluate → keep/discard/iterate 
 
 本修订是**源码/文档审计**，不是成功的 dsh-research 部署。框架工作区保持干净；本次英文修订未改变代码、依赖、服务、模型、GPU、暂存、提交或推送。
 
-此前 dist-exec 审计证据仍仅是历史记录：[26 项聚焦分布式测试、2 项临时 loopback 测试及 fleet UI 检查](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/tests.json)、[124 项 Python 回归](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/full-python-regression.json)及[源码清单](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/source-manifest.json)。它们不认证新插件、真实远程部署、服务安装或全新确认。
+此前 dist-exec 审计证据仍仅是历史记录：`26 项聚焦分布式测试、2 项临时 loopback 测试及 fleet UI 检查` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/tests.json`)、`124 项 Python 回归` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/full-python-regression.json`)及`源码清单` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/source-manifest.json`)。它们不认证新插件、真实远程部署、服务安装或全新确认。
 
-该 dist-exec HEAD 已修复优雅超时缺陷；保留中断即无效的性质。其他已记录的完整性/评审/发布缺口**不宣称已修复**。舍弃重复运行时避免复制其实现；P01–P08 仍须在复用途径上测试。精确边界参见[此前可丢弃发布复现](../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/reserved-state-publication-reproduction.json)及矩阵。
+该 dist-exec HEAD 已修复优雅超时缺陷；保留中断即无效的性质。其他已记录的完整性/评审/发布缺口**不宣称已修复**。舍弃重复运行时避免复制其实现；the canonical property set 仍须在复用途径上测试。精确边界参见`此前可丢弃发布复现` (historical project evidence unavailable here; source reference `../../accorde/local_artifacts/autoresearch/dist-exec-audit/20261103-1448/reserved-state-publication-reproduction.json`)及矩阵。
 
 ## 用户提示，逐字记录
 
@@ -326,3 +330,10 @@ please use {YYMMDD}-{HHMM}-* as the format of the plan/tracker file name.
 | r5 | 2026-11-03 15:10:22 -0800 | 小幅同步英文 r6（2026-11-03 15:09 -0800）：更新来源及中文同步时间，补入完整本地 Python 回归 124 项测试/23.192 秒、full-python-regression.json 与 source-manifest.json 引用，并逐字保留补充指示。六里程碑、C01–C28、复用优先、匿名读写/身份限制及尚未执行原生计划的状态不变；保留原中文 r1–r4，不把新增回归证据当作 POC 缺口已修复或真实团队/后端资格验证已通过。仅修改中文文档。 |
 | r6 | 2026-11-03 16:55:15 -0800 | 将中文当前正文同步至规范英文 r7（2026-11-03 16:49 -0800）：缩减为依赖已配置 superagent 的技能/策略及四个薄辅助模块，复用 S1–S8，不再重建协调器/存储/outbox/调度器/grants/HostAgent/CAS/HTTP/UI/评审器管理器，省略评审看板改版但保留通过现有配置路径自动启动独立评审器；以 P01–P08 和缩减 M1–M6 取代 C01–C28/独立运行功能对等。试点仅限串行 CPU 4 次尝试×60 秒、240 秒已准入基准超时预算，maxWorkers 不是任务/资源硬上限；保留已有项目全局扣账/数据揭示，原子性及连续性证明前禁用全新确认。SourceContext 现有 atomic/KV 不是已发布 SDK；默认零 superagent 源码变更，确需 facade 时单独批准。补入 65 路径矩阵链接及最新用户原文（含前三行行尾空格），保留原翻译提示、既有全部引用块、r1–r5 历史行和源修订沿革；仅修改中文文档，未执行测试、服务、模型、安装或部署。 |
 | r7 | 2026-11-05 16:26:56 -0800 | Renamed 20261103-1230-plan-dsh-research-plugin-rebuild-zh.md to 261103-1230-plan-dsh-research-plugin-rebuild-zh.md using YYMMDD-HHMM; updated 4 local links and repaired 5 copied Accorde audit references. Preserved original prompt/code blocks and scientific content; recorded the filename request verbatim. |
+| r8 | 2026-11-11 17:10 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority; marked unavailable external project references honestly. |
+| r9 | 2026-11-11 17:44 -0800 | Adopted contract 2.0.0 category-scoped predicates/counterexamples in current conformance and audit references; preserved historical source numbering and evidence without canonical aliases. |
+| r10 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
+| r11 | 2026-11-11 19:01:22 -0800 | Adopted contract 2.2.0 applicability/coverage clarification and review-r5 residual closure; retained prospective provider qualification and historical evidence. |
+| r12 | 2026-11-11 20:22:19 -0800 | Adopted 2.3.0 obligation/compatibility and qualification-budget/T4 accounting references without executing runtime changes. |
+| r13 | 2026-11-11 20:31:48 -0800 | Adopted 2.3.1 accepted-envelope amortization, owned qualification holds and explicit T4 C_run/C_qual evidence without runtime activation. |
+| r14 | 2026-11-11 21:13:38 -0800 | Adopted cumulative 2.3.2 compatibility assessment and explicit qualification-budget/envelope arbitration without runtime execution. |

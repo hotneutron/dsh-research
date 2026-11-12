@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-11T18:22:31.166401-08:00",
+  "status": "passed",
+  "scope": "human-review documentation resolution only",
+  "review_input": {
+    "path": "local_artifacts/dsh-research/architecture-revision/contracts-human-review-zh.md",
+    "sha256": "4bb1c6bdc0cd92cd8a00b4d6da9dea228d4b54c04a39717a307ba5618cf9e6fd",
+    "unchanged": true
+  },
+  "reviewed_contract": {
+    "snapshot": "local_artifacts/dsh-research/contract-history/261111-1808-reviewed-contract-2.0.0-3815ee13ebed.md",
+    "version": "2.0.0",
+    "sha256": "3815ee13ebed220bfa31b7b7f719c90d91de6fa4e2f405ed8ad56aa7c53b5502"
+  },
+  "contract": {
+    "path": "docs/contracts.md",
+    "version": "2.1.0",
+    "sha256": "089b8d9b6652f212cc6ae5b18d9f8a5f7bc25be817e0619f36fcbad1c14b2f96",
+    "properties_unchanged": 23,
+    "assurance": "specified"
+  },
+  "F1_check": {
+    "path": ".plan/review/261111-1742-property-validation.json",
+    "sha256": "0bb0d1526f8637482502db733b485143cde247f52fbd6edb98db10b45862d25b",
+    "matches_reviewed_contract": true,
+    "disposition": "already resolved; stale finding"
+  },
+  "resolution": {
+    "path": ".plan/review/261111-1808-contracts-human-review-resolution-zh.md",
+    "sha256": "1a37e3b0f326a62adaf44801c0333c53131fa527814d10d8e95690765d12e27c",
+    "findings": 8,
+    "suggestions": 8
+  },
+  "updated_documents": [
+    {
+      "path": ".plan/261105-1555-m1-minimal-contract-and-reuse.md",
+      "before_sha256": "a6490f5011ad2ebc6b16d7a95985815a32362ee2cba7652f00ef9a385f724c33",
+      "after_sha256": "6d057d5d15536787ca2755bb92dbe83248a9b9fdf51c5b17821da8a5c2ebd85b",
+      "revision": 9,
+      "preserved_fences": 3,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m2-skill-and-thin-helpers.md",
+      "before_sha256": "356bfa470d7706482346e34562ba173634b8eda10e715e120e700153b6a564f8",
+      "after_sha256": "b0f573e94af895974d0836c27873310c376110b6c53dcdd2290c42a6d82f0612",
+      "revision": 9,
+      "preserved_fences": 3,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m3-automatic-planning-and-review.md",
+      "before_sha256": "5c41fdc1e4c517ca2100ee1508589c01d5c74a3113ce30cfd45f10fa8e42bcec",
+      "after_sha256": "b41bb61943af8aa8f80af504556b65bdfda9f4c88ee06371df8dc7a3c925903e",
+      "revision": 10,
+      "preserved_fences": 3,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m4-scientific-property-qualification.md",
+      "before_sha256": "4a2ec13ba241b858b65225cdba557172be639d6fce3790d01156d78f73d9d77c",
+      "after_sha256": "c244c480bad0f2affc3eb39c399bc662104778cab5f17430768a6a8fc0319efc",
+      "revision": 9,
+      "preserved_fences": 3,
+      "links": 8
+    },
+    {
+      "path": ".plan/261105-1555-m5-bounded-accorde-cpu-pilot.md",
+      "before_sha256": "0be57aa34ffb359107aaa9f2ad0c8377d2ae2a522146b7b158c499fadb2324e1",
+      "after_sha256": "d926b9f24834c769806df852ab8a4db5bcb9ef703c559cb842533024c9cd249b",
+      "revision": 10,
+      "preserved_fences": 4,
+      "links": 7
+    },
+    {
+      "path": ".plan/261105-1555-m6-new-work-cutover-and-continuity.md",
+      "before_sha256": "2dc8095d4b979b01f6e649e20837c1d1f01621b5bbf372a133ebe7cc6a9ec03f",
+      "after_sha256": "304bc353965b6fca23c8f6ffe367ff5bf6de0bc3bdeb02f30fc201d0b74a90b6",
+      "revision": 8,
+      "preserved_fences": 3,
+      "links": 9
+    },
+    {
+      "path": ".plan/261105-1555-review-1201-1230-and-milestones.md",
+      "before_sha256": "3ab4bcef48ea3f5f05411c2d3bf444fd74c2a2b751e1c91c2a1037ffa9c5b0a6",
+      "after_sha256": "f2635749067d9591f7edac02a57c68e1b5e000adeb5af292335241a5e0b236c2",
+      "revision": 16,
+      "preserved_fences": 6,
+      "links": 50
+    },
+    {
+      "path": ".plan/tracker/261105-1555-milestone-execution.md",
+      "before_sha256": "78476f93deebc553dde81de431699cdb04826f056dde2695002049c71bdf8c3e",
+      "after_sha256": "6408b6570ea3fbff16011e8c9bb97c9f1add2c496cc0baa1571b475e712a3bb3",
+      "revision": 13,
+      "preserved_fences": 5,
+      "links": 25
+    },
+    {
+      "path": ".plan/261105-1705-contract-project-state-autonomy-and-feedback.md",
+      "before_sha256": "3ac32dfaa931d699d8bf883e631773578ee6e26fc14f8e853c32b5af4c5f2f36",
+      "after_sha256": "989e935c834affcee427b93f0cc345893a01092290de2f5f851488e8a4512d72",
+      "revision": 6,
+      "preserved_fences": 2,
+      "links": 1
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild.md",
+      "before_sha256": "63232425137a2eaed33459b83216a8ea91ef297b65a21e9233a15ef8ca8b0d8b",
+      "after_sha256": "a45bc13d18dec70209a6d9daf12f666459522850f1b0479110978ce205edb837",
+      "revision": 11,
+      "preserved_fences": 10,
+      "links": 24
+    },
+    {
+      "path": ".plan/261103-1230-plan-dsh-research-plugin-rebuild-zh.md",
+      "before_sha256": "b7e9909d4c850430d8911a1ef726bbba0a754c9387e211a006ca031bd7f0f19c",
+      "after_sha256": "1608da28565eada35716d20e8e91b0b042a1d5a5fbcea0b4c7d1186d8164e8ab",
+      "revision": 10,
+      "preserved_fences": 14,
+      "links": 25
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "a738881daf75550376ddcb04a7b1c0dbd16253b3765d4e0616b4065d58841b18",
+      "after_sha256": "73481d24f56711db67fda497224d0b246173bb85f0a5d4aadcb97a4c0ee8649c",
+      "revision": 6,
+      "preserved_fences": 4,
+      "links": 12
+    },
+    {
+      "path": "docs/contracts.md",
+      "before_sha256": "3815ee13ebed220bfa31b7b7f719c90d91de6fa4e2f405ed8ad56aa7c53b5502",
+      "after_sha256": "089b8d9b6652f212cc6ae5b18d9f8a5f7bc25be817e0619f36fcbad1c14b2f96",
+      "revision": 4,
+      "preserved_fences": 3,
+      "links": 5
+    },
+    {
+      "path": ".plan/261111-1604-architecture-meta-loop-and-migration.md",
+      "before_sha256": "58bd4e20038216f4acc5f48e957d1f860bb0df91e06683d8fa5f2093ace4a1b5",
+      "after_sha256": "e1faa56cdb125d7fa7f3c6a0643c8713bde6c5260cba3c7ee3a3eeef5d042a3d",
+      "revision": 7,
+      "preserved_fences": 5,
+      "links": 9
+    }
+  ],
+  "checks": [
+    "review_input_and_snapshot_preserved",
+    "F1_existing_JSON_hash_verified",
+    "F2_translation_absence_verified",
+    "property_and_stage_IDs_unchanged",
+    "ordering_review_schema_applicability_rules",
+    "requirement_lane_finite_repair_and_scoped_stale_review",
+    "T4_T2_T3_witness_and_owned_hold_rules",
+    "all_16_review_dispositions",
+    "M4_priority_without_waiver",
+    "prompts_history_README_figure_preserved",
+    "links_and_git_diff_check"
+  ],
+  "deferred": [
+    "Chinese normative translation if the declared audience requires it",
+    "query concordance when a concrete legacy trace case requires it"
+  ],
+  "unexecuted": [
+    "runtime implementation",
+    "native/provider ordering proof qualification",
+    "empirical property and original-witness regression",
+    "profile/state migration",
+    "cloud publication"
+  ]
+}

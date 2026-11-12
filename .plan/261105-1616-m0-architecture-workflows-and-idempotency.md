@@ -1,12 +1,27 @@
 # M0 — Project-owned architecture, autonomous workflows and feedback
 
-Created: 2026-11-05 16:16:16 -0800. Updated: 2026-11-05 17:09:58 -0800. Revision: r6. Status: revised design; implementation and project authority migration pending.
+Created: 2026-11-05 16:16:16 -0800. Updated: 2026-11-11 17:07 -0800. Revision: r8. Status: revised design; implementation and project authority migration pending.
 
 The hosted project owns its science and persistent state. dsh-research supplies reusable skills, schemas and thin adapters with no per-project runtime database. For Accorde, canonical project_root is /home/cliu/wk/accorde even when a worker uses another worktree.
 
 Most execution, technical review, diagnosis, alternative selection and iteration are autonomous inside standing project scope/resource policy. Human feedback is optional and nonblocking. Required human scientific steering follows a challenged scientific-exhaustion assessment; ordinary trial/campaign failure does not trigger it.
 
-The [state/autonomy/feedback contract](261105-1705-contract-project-state-autonomy-and-feedback.md) is the exact responsibility/location authority. [Accorde's integration plan](../../accorde/.plan/261105-1705-plan-dsh-research-project-integration.md) owns its concrete project adoption and evidence. This is a design, not a claim that the new runtime is deployed.
+The [state/autonomy/feedback contract](261105-1705-contract-project-state-autonomy-and-feedback.md) is the exact responsibility/location authority. `Accorde's integration plan` (project-owned input pending) owns its concrete project adoption and evidence. This is a design, not a claim that the new runtime is deployed.
+
+## Canonical loop contract
+
+The [research-loop contract](../docs/contracts.md) owns normative stage, record and invariant semantics. This guide and its figures explain that contract; 1705 retains project ownership/authority policy and 1604 governs package architecture assessment. Project manifests pin the contract version/hash and actual provider/profile assurance. The specification exists; implementation and live conformance remain pending.
+
+## Two loops and their owners
+
+The [1604 meta loop](261111-1604-architecture-meta-loop-and-migration.md) revises dsh-research's own architecture; the figures below show the hosted-project scientific/feedback loop. A project signal does not automatically start package redesign.
+
+| Loop | Changed subject and owner | Entry and record |
+|---|---|---|
+| Scientific loop | Project hypothesis/method/evidence and next action; project author plus separate review | Existing scientific admission/validity/budget rules; records and state stay in canonical P |
+| Package architecture meta loop | Reusable dsh-research contracts, responsibility boundaries and DSH composition; package design author plus separate reviewer | A T1–T4 trigger with material core blockage, architectural cause and insufficient narrower repair; deliberate plan/compact entry receipt versioned in dsh-research |
+
+Project actors contain failures and attempt local repairs, retaining permitted frozen evidence. Package maintainers qualify structural signals with the 1604 Justification/Evidence requirements. A routine bug, API rename, new hardware, negative result, inaccessible asset or milestone is not entry; package assessment also cannot declare a project's scientific objective exhausted. Revised-package adoption follows qualified M6 continuity, keeping active project pins/consumption intact. This separation introduces no new service, scientific database or mandatory architecture review at every campaign.
 
 ## Architecture: reusable code, project-owned research
 
@@ -38,7 +53,7 @@ P is the canonical hosted project, not cwd. These are target paths for the quali
 | Responsibility / state | Owner | Persistent location |
 |---|---|---|
 | Reusable helper/skill implementation and its own code-qualification receipts | dsh-research maintainers | dsh-research/src, skills, tests, its package-development .plan/ |
-| Goal, original request, standing scope/recovery policy and scientific plans | Hosted project research agent | P/.autoresearch/project.json, program.md, P/.plan/ and trackers |
+| Goal, original request, standing scope/recovery policy and scientific plans | Hosted project research agent | P/.autoresearch/project.json and program.md; deliberate plans/compact records in P/.plan/, explorative detail in ignored project artifacts |
 | Coupled aggregate charges, actions/reviews consumed, feedback queue/dispositions/cursors and publication mappings | One hosted-project writer via existing DSH storage | P/.autoresearch/dsh/state.sqlite3, or active legacy authority until handoff |
 | Frozen action/result/reviewer/decision/checkpoint/comment snapshots | Project author/reviewer/feedback consumer | P/local_artifacts/autoresearch/dsh/<goal>/ |
 | Tickets, source cursors, effects/outbox and runtime ownership | Existing superagent | P/.autoresearch/dsh/superagent/orchestrator.sqlite with native stateDir lock |
@@ -204,11 +219,17 @@ flowchart LR
 
 Figure: the scientific record remains readable/reconstructable from the project if the shared package's checkout or the Doc view is absent. Publication state is association data in the project record.
 
-The [Accorde sample brief](../../accorde/.plan/examples/261105-1616-research-brief-example.md) and project integration tracker show the intended record. Source-backed provider routes and the full owner/location matrix are in the contract. Current implementation, bot access and active-authority migration remain pending.
+The `Accorde sample brief` (project-owned input pending) and project integration tracker show the intended record. Source-backed provider routes and the full owner/location matrix are in the contract. Current implementation, bot access and active-authority migration remain pending.
 
 ## M0 acceptance
 
-M0 explains who owns every persistent item, how an optional comment produces a project decision and effect, why no human waits in routine execution, and when scoped scientific exhaustion raises a question. M1–M6 must implement/test these meanings using existing runtime seams, without a package DB or parallel control plane.
+M0 explains who owns every persistent item, how an optional comment produces a project decision and effect, why no human waits in routine execution, and when scoped scientific exhaustion raises a question. M1–M6 must implement/test these meanings using existing runtime seams, without a package DB or parallel control plane. They also distinguish project triage from T1–T4 package entry, preserving the three-part gate and package/project record ownership; document adoption is not empirical trigger or runtime qualification.
+
+## 1604 Adoption Request, Verbatim
+
+~~~text
+Any 1555 and 1616 needs to be changed to adopt 1604-meta-loop?
+~~~
 
 ## Earlier User Prompts and Quoted Examples, Verbatim
 
@@ -245,3 +266,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r4 | 2026-11-05 16:28:21 -0800 | Corrected 7 Mermaid message/label semicolons to commas after parser validation; workflow meaning and verbatim user prompts retained. Diagram syntax verification rerun. |
 | r5 | 2026-11-05 17:05:50 -0800 | Updated live references after moving the project-specific brief into Accorde; original quoted requests/history retained. |
 | r6 | 2026-11-05 17:09:58 -0800 | Reworked the architecture around explicit project-owned persistent locations, zero package research state, closed feedback effects and autonomous review/iteration; retained nine explanatory Mermaid figures and prior prompts/history. |
+| r7 | 2026-11-11 16:36 -0800 | Adopted 1604's package-architecture scope, T1–T4 evidence gate and maintainer/reviewer ownership; kept routine project triage, scientific autonomy and deployment qualification separate. |
+| r8 | 2026-11-11 17:07 -0800 | Linked canonical research-loop contract 1.0.0, pinned stage/invariant/trace semantics and retained prospective runtime qualification and project authority. |
