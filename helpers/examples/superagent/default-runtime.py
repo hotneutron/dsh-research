@@ -2,6 +2,7 @@
 """Exercise the unchanged default web/Source/Store/DshExecutor in a fresh profile."""
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -16,6 +17,8 @@ import uuid
 
 
 def run(args):
+    if args.fault:
+        args.automatic = True
     if args.automatic:
         args.research = True
     runtime = Path(args.runtime).resolve(strict=True)
@@ -42,15 +45,24 @@ def run(args):
         profile_tool = helper / 'scripts/default-profile.py'
     shutil.copyfile(profile_tool, output / 'default-profile.py')
     shutil.copyfile(Path(__file__), output / 'default-runtime.py')
+    fault_module = None
+    if args.fault:
+        path = Path(__file__).with_name('default-faults.py')
+        shutil.copyfile(path, output / 'default-faults.py')
+        spec = importlib.util.spec_from_file_location('default_qualification_faults', path)
+        fault_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(fault_module)
+        if args.fault not in fault_module.CASES: raise ValueError('Unknown bounded fault case')
     cmd = ['python3', str(profile_tool), '--project', str(output), '--runtime', str(runtime),
            '--home', str(home), '--state', str(state), '--profile', profile, '--port', str(port), '--qualification-provider', str(provider)]
     prepared = json.loads(subprocess.check_output(cmd, text=True))
     env = {**os.environ, 'DSH_HOME': str(home), 'DSH_RESEARCH_DISPOSABLE_QUALIFICATION': str(output),
            'DSH_RESEARCH_GUARDED_QUALIFICATION': '1' if args.research else '0',
            'DSH_RESEARCH_AUTOMATIC_QUALIFICATION': '1' if args.automatic else '0',
+           'DSH_RESEARCH_FAULT_QUALIFICATION': args.fault or '',
            'PATH': str(node.parent) + os.pathsep + os.environ['PATH']}
     log = (output / 'runtime.log').open('w')
     process = None
+    receipt_to_publish = None
     calls, cases = [], []
     started_at = time.monotonic()
     qualification_plan = None
@@ -76,6 +88,7 @@ def run(args):
             'source_pins': {str(p.relative_to(helper)): hashlib.sha256(p.read_bytes()).hexdigest() for p in
                             [helper / 'examples/superagent/research-worker.mjs', helper / 'examples/superagent/automatic-worker.mjs',
                              helper / 'examples/synthetic-cpu/fixture.mjs']}}
+        if fault_module: qualification_plan = fault_module.qualification_plan(args.fault, helper)
         (output / 'qualification-plan.json').write_text(json.dumps(qualification_plan, indent=2) + '\n')
 
     def api(path, method='GET', body=None, expected=200):
@@ -91,7 +104,16 @@ def run(args):
                 value = json.loads(raw)
             except ValueError:
                 value = {'error': raw.decode(errors='replace')[:500]}
-        calls.append({'path': path, 'method': method, 'status': status, 'response': value})
+        recorded = value
+        if method == 'GET' and path == '/default-qualification' and status == 200:
+            research = value.get('research') or {}
+            state_view = research.get('state') or {}
+            recorded = {'snapshot_summary': True, 'ready': research.get('ready'), 'reported': value.get('reported'),
+                        'tickets': len(value.get('tickets', [])), 'requests': len(value.get('requests', [])),
+                        'state_revision': state_view.get('revision'), 'consumed_attempts': state_view.get('consumed_attempts'),
+                        'reserved_timeout_ms': state_view.get('reserved_timeout_ms')}
+        if len(calls) < 1024:
+            calls.append({'path': path, 'method': method, 'status': status, 'response': recorded})
         assert status == expected, (path, status, value)
         return value
 
@@ -112,6 +134,16 @@ def run(args):
     def start():
         return subprocess.Popen([str(node), str(cli), '--profile', profile, '--no-open'],
                                 cwd=runtime, env=env, stdout=log, stderr=subprocess.STDOUT)
+
+    def restart_fault(crash=False, after_stop=None):
+        nonlocal process
+        process.send_signal(signal.SIGKILL if crash else signal.SIGINT)
+        process.wait(timeout=30)
+        if after_stop: after_stop()
+        if crash:
+            # The existing native writer lock has a 30-second stale interval.
+            time.sleep(35)
+        process = start()
 
     def save(block, value):
         current = api('/orchestrator/api/settings')
@@ -153,6 +185,20 @@ def run(args):
         assert paused['tickets'] == [] and len(paused['requests']) == len(baseline['requests'])
         cases.append({'id': 'source-normalization-allowlist-dedup-paused', 'status': 'passed'})
         api('/orchestrator/api/executor/pause', 'POST', {'paused': False})
+        if fault_module:
+            result = fault_module.run_fault(args.fault, api, wait, restart_fault, output, runtime, home, profile, env, node, cli)
+            result.update({'schema_version': 1, 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
+                'scope': 'bounded native default fault stratum; no scientific authority or protected inputs',
+                'prepared': prepared, 'qualification_wall_seconds': time.monotonic() - started_at,
+                'qualification_plan_sha256': hashlib.sha256((output / 'qualification-plan.json').read_bytes()).hexdigest(),
+                'external_model_calls': 0, 'scientific_dispatches': 0, 'external_messages': 0,
+                'cases': [{'id': args.fault, 'status': 'passed'}],
+                'limitations': ['This finite fault stratum cannot qualify semantic science, enabled confirmation or legacy authority handoff']})
+            assert result['qualification_wall_seconds'] <= qualification_plan['budget']['max_wall_seconds']
+            assert result['state']['consumed_attempts'] <= qualification_plan['budget']['max_admissions']
+            assert result['state']['consumed_review_requests'] <= qualification_plan['budget']['max_review_requests']
+            receipt_to_publish = result
+            return result
         if args.research:
             initialized = wait(lambda: (lambda x: x if x.get('research', {}).get('ready') else None)(api('/default-qualification')), 'Guarded default worker initialization')
             assert initialized['research']['state']['consumed_attempts'] == 0
@@ -251,14 +297,27 @@ def run(args):
                    'limitations': ['Native Source transport is a disposable CLI fixture; production account and human intake acceptance remain separate',
                                    'Scripted native model answers qualify mechanics, not scientific reasoning or independent scientific review',
                                    'Synthetic qualification state is explicit; no hosted scientific authority/budget or GPU campaign is initialized or migrated']}
-        (output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+        receipt_to_publish = receipt
         return receipt
     finally:
-        (output / 'api-trace.json').write_text(json.dumps(calls, indent=2) + '\n')
-        if process and process.poll() is None:
-            process.send_signal(signal.SIGINT)
-            process.wait(timeout=30)
-        log.close()
+        cleanup_ok = False
+        try:
+            if process and process.poll() is None:
+                process.send_signal(signal.SIGINT)
+                try: process.wait(timeout=30)
+                except subprocess.TimeoutExpired:
+                    process.kill(); process.wait(timeout=10)
+                    raise RuntimeError('Disposable runtime required forced cleanup; native graceful settlement is unqualified')
+            cleanup_ok = True
+        finally:
+            log.close()
+            (output / 'api-trace.json').write_text(json.dumps(calls, indent=2) + '\n')
+            if cleanup_ok and receipt_to_publish is not None:
+                receipt_to_publish['qualification_wall_seconds'] = time.monotonic() - started_at
+                if qualification_plan:
+                    assert receipt_to_publish['qualification_wall_seconds'] <= qualification_plan['budget']['max_wall_seconds'], 'Whole qualification including cleanup exceeded its frozen window'
+                receipt_to_publish['runtime_cleanup'] = 'graceful_complete_before_receipt_publication'
+                (output / 'receipt.json').write_text(json.dumps(receipt_to_publish, indent=2) + '\n')
 
 
 if __name__ == '__main__':
@@ -267,5 +326,6 @@ if __name__ == '__main__':
     parser.add_argument('--output', required=True)
     parser.add_argument('--research', action='store_true', help='Qualify guarded research tools inside the default worker')
     parser.add_argument('--automatic', action='store_true', help='Qualify native automatic proposal/review/feedback and bounded validity drills')
+    parser.add_argument('--fault', help='Qualify one bounded native failure/recovery stratum')
     result = run(parser.parse_args())
     print(json.dumps({'status': 'passed', 'cases': len(result['cases'])}))

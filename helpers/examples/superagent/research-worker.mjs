@@ -14,6 +14,7 @@ import { NativeResearchAdapter, researchDomain } from 'dsh-research/native'
 import { createCpuFixture, ScriptedAdapter } from '../synthetic-cpu/fixture.mjs'
 import { installAutomatic } from './automatic-worker.mjs'
 import { defaultCoverage } from './default-coverage.mjs'
+import { faultTable, installFault, instrumentProtectedReads } from './fault-worker.mjs'
 
 export async function assertDefaultTicketAuthority(owner, author, readTicket, expectedMandate, readPause) {
   assert.equal(owner, author)
@@ -29,6 +30,9 @@ export async function install(ctx, audit) {
   const root = process.env.DSH_RESEARCH_DISPOSABLE_QUALIFICATION
   const registration = join(root, 'research-worker.json')
   const automaticMode = process.env.DSH_RESEARCH_AUTOMATIC_QUALIFICATION === '1'
+  const faultKind = process.env.DSH_RESEARCH_FAULT_QUALIFICATION || null
+  const faultControl = { entered: false, release: null, protectedReads: [] }
+  let fault
   const authorTools = ['research_run', 'orchestrator_report', 'skill', ...(automaticMode ? ['research_propose', 'research_review', 'research_feedback'] : [])]
   let automatic
   let coverage
@@ -66,14 +70,28 @@ export async function install(ctx, audit) {
       fixture = await createCpuFixture(root, { context: ctx, author, authorLLM: new ScriptedAdapter(),
         authorTools, registration: { toolScope: 'author', inheritedTools: ['skill'] },
         ...(automaticMode ? { automaticReview: true, nativeReview: { provider: 'spawn' }, deadlineMs: 1000, maxAttempts: 5, maxReviews: 6, maxTotalTimeoutMs: 10000 } : {}),
+        ...(faultKind ? { maxAttempts: 1, maxReviews: 2, maxTotalTimeoutMs: 16000,
+          executionSandbox: { mode: ['tree-deadline', 'running-loss'].includes(faultKind) ? 'workspace-write' : 'read-only',
+            workspaceRoot: ticket.execution.directory, sessionId: author.id },
+          executionSandboxResolver: () => ctx.sandboxPolicy.resolve({ session: author.session, mode: ['tree-deadline', 'running-loss'].includes(faultKind) ? 'workspace-write' : 'read-only' }),
+          actionTimeoutMs: faultKind === 'running-loss' ? 8000 : faultKind === 'tree-deadline' ? 1500 : 2000,
+          reviewTimeout: faultKind === 'review-timeout' ? 250 : 2000,
+          ...(faultKind === 'review-unavailable' ? { reviewProvider: 'unavailable-qualified-route' } : {}),
+          evaluatorPath: fileURLToPath(new URL('./fault-evaluate.mjs', import.meta.url)), allowedOperations: ['positive'],
+          inputMetadata: { qualification_case: faultKind, project_root: root, process_marker: join(ticket.execution.directory, 'fault-process.json') } } : {}),
         executionShell: shell, assertActiveAuthority: authority, originalPrompt: source().triggers.get(ticket.origin.triggerId).text })
       const original = source().triggers.get(ticket.origin.triggerId)
       const originalRef = await fixture.json('snapshots/original-source.json', original)
       packet = automaticMode ? { request: { mode: 'automatic' } } : await fixture.prepare('negative')
       const context = await fixture.json('snapshots/default-ticket-binding.json', { ticket_id: ticketId, mandate: ticket.mandate, original_source: originalRef, manifest: packet.manifestRef ?? null })
       await writeFile(registration, JSON.stringify({ author: author.id, ticket_id: ticketId, mandate, policy: fixture.policyRef,
-        verifier: fixture.policy.verifier, binding: fixture.binding, packet, context }, null, 2) + '\n', { flag: 'wx' })
+        verifier: fixture.policy.verifier, binding: fixture.binding, packet, context,
+        ...(faultKind ? { process_marker: join(ticket.execution.directory, 'fault-process.json') } : {}) }, null, 2) + '\n', { flag: 'wx' })
       fixture.config.observe = observe
+      if (faultKind) {
+        fixture.config.table = faultTable(fixture.table, faultKind, faultControl, false)
+        fixture.config.artifacts = instrumentProtectedReads(fixture.artifacts, faultControl.protectedReads)
+      }
       // Reopen the adapter with diagnostics bound before any actual research call.
       fixture.unregister?.()
       fixture.adapter = await NativeResearchAdapter.open(ctx, fixture.config)
@@ -90,6 +108,11 @@ export async function install(ctx, audit) {
       const config = { artifacts, table, projectKey: 'synthetic-m2', policy: retained.policy, authorSessionId: author.id,
         authorTools, executionShell: shell, assertActiveAuthority: authority,
         verifier: { identity: retained.verifier, verify }, observe }
+      if (faultKind) {
+        config.table = faultTable(table, faultKind, faultControl, true)
+        config.artifacts = instrumentProtectedReads(artifacts, faultControl.protectedReads)
+        config.executionSandbox = { profile: retained.binding.profile.effective, resolve: () => ctx.sandboxPolicy.resolve({ session: author.session, mode: ['tree-deadline', 'running-loss'].includes(faultKind) ? 'workspace-write' : 'read-only' }) }
+      }
       const adapter = await NativeResearchAdapter.open(ctx, config)
       unregister = adapter.register({ toolScope: 'author', inheritedTools: ['skill'] })
       fixture = { root, artifacts, table, adapter, config, binding: retained.binding, json: (uri, value) => artifacts.write(uri, Buffer.from(canonicalJson(value))) }
@@ -100,7 +123,8 @@ export async function install(ctx, audit) {
     }
     if (automaticMode) {
       coverage = await defaultCoverage(fixture)
-      automatic = await installAutomatic(fixture, ctx, author, observe, Boolean(retained))
+      if (faultKind) fault = await installFault(fixture, ctx, author, faultKind, faultControl, observe, coverage, Boolean(retained))
+      else automatic = await installAutomatic(fixture, ctx, author, observe, Boolean(retained))
     }
     const skill = await scopedSkills.get('research', { cwd: root })
     assert.ok(skill?.content.includes('research_run'))
@@ -119,6 +143,7 @@ export async function install(ctx, audit) {
     if (author) { author.cancel({ kind: 'user' }, { keepInbox: true }); await author.whenIdle() }
     fixture?.unregister?.(); unregister?.()
     automatic?.close()
+    fault?.close()
     await (fixture?.domain ?? domain)?.close()
     await (fixture?.backend ?? backend)?.close()
     fixture?.removeBackend?.(); removeBackend?.()
@@ -129,6 +154,12 @@ export async function install(ctx, audit) {
     async step(messages) {
       await pending
       if (!packet || !JSON.stringify(messages).includes('EXACT_RESEARCH_PACKET')) return null
+      if (fault) {
+        const next = await fault.step(messages)
+        packet = fault.packet()
+        if (next?.name === 'orchestrator_report') audit.reported = true
+        return next
+      }
       if (automaticMode) {
         const next = await automatic.step(messages)
         packet = automatic.packet()
@@ -143,24 +174,26 @@ export async function install(ctx, audit) {
         summary: `Settled guarded research action ${action.action_id}; evidence ${canonicalJson(action.evidence)}` } }
       return null
     },
-    async packet() { await pending; return automatic?.packet() ?? packet },
+    async packet() { await pending; return fault?.packet() ?? automatic?.packet() ?? packet },
     async snapshot() {
       if (!author) {
         const ticket = source().tickets.open()[0]
         if (ticket) await ctx.sessionController.resolveAgent(SessionId(`worker-${ticket.id}`))
       }
       await pending
-      packet = automatic?.packet() ?? packet
+      packet = fault?.packet() ?? automatic?.packet() ?? packet
       const liveReviewer = ctx.agents.get(SessionId('m2-reviewer'))
       let reviewerEvents = liveReviewer?.session.snapshotEvents() ?? null
-      if (!reviewerEvents && automaticMode && fixture?.table.get('synthetic-m2')?.consumed_review_requests > 0) {
+      if (!reviewerEvents && automaticMode && Object.values(fixture?.table.get('synthetic-m2')?.review_requests ?? {}).some(r => r.completion || r.native_message_id)) {
         const cut = await ctx.sessionQuery.observeSession(SessionId('m2-reviewer'), { projectionMode: 'none' })
         try { reviewerEvents = cut.events } finally { cut[Symbol.dispose]() }
       }
       return { ready: Boolean(packet), author: author?.id, packet, state: fixture?.table.get('synthetic-m2'), checks, trace,
         reviewer_events: reviewerEvents,
+        fault: fault ? await fault.inspect() : null,
         native_review_provider: automaticMode ? { name: 'spawn', capabilities: ctx.subagents.getProvider('spawn')?.capabilities } : null }
     },
+    async fault(operation) { await pending; assert.ok(fault); return fault.drill(operation) },
     async drill(kind) {
       await pending
       const count = fixture.table.get('synthetic-m2').consumed_attempts

@@ -141,6 +141,34 @@ The [coverage recipe](../helpers/examples/superagent/default-coverage.mjs) freez
 
 This released-input scripted stratum covers eleven specified native cells. The full property set, semantic decisions, actual recipient access, enabled confirmation, running-process crash recovery and scientific GPU adoption retain their separate gates in the tracker. All qualification profiles require an explicit disposable marker and remain outside hosted scientific authority.
 
+## Default failure strata and sandbox ownership
+
+Run one isolated declared failure stratum with `default-runtime.py --fault <case>`. The available cases cover reviewer timeout/unavailability/stale answers/lost association/acknowledgement, delayed or lost action acknowledgement, protected/off-mode and source-drift refusals, process-tree deadlines, running loss, competing runtime locks and complete private cold-tree restoration. Every case freezes its own matrix and bounds before dispatch. Retained earlier passes keep their historical pins; a changed consumer needs its own current-source qualification.
+
+The default executor applies a saved permission preset after worker creation. Direct shell calls otherwise fall back to the deployment sandbox policy. A host can bind `executionSandbox` to the immutable effective profile and resolve the existing calling Session policy with an explicitly approved narrower mode. The adapter verifies mode, Session, project writable root, current authority and resolved spec before dispatch. The qualification witnesses use workspace-write only for their declared worker workspace; the author/reviewer tool and stop guards remain active.
+
+Process witnesses record PID namespace, namespace PID, start ticks and boot identity. Host observation maps those facts to the owning process; unobservable identities stay unresolved. Operator cleanup uses pidfd with identity revalidation, and never releases an uncertain reservation. A crashed runtime's missing native job/terminal stays held even if process cleanup succeeds. Resumed report delivery may remain pending on its native binding; a presentation attempt is not delivered evidence.
+
+Private recovery sets include registration, frozen plan, Source/provider/runner, profiles, native Store, scientific record, Sessions, artifacts and workspace files, preserving executable modes. Dependency links stay declared references. The cold-tree rehearsal quarantines the live tree before restoring; it cannot pass by relying on omitted live files. Actual legacy writer handoff is a separate project gate.
+
+Diagnostic GET snapshots are summarized and bounded. Successful receipts are written after runtime cleanup and trace writing, and the final whole-run time is checked against the frozen window. Raw private histories stay in project artifacts and may be compressed/archived with verified byte identity rather than duplicated on every poll.
+
+## TraeX planning model transport
+
+`dsh-research/traex` exports `TraexTextAdapter`, a text-only native DSH planning adapter using the user's existing authenticated `traecli exec` route and the approved DeepSeek-V4.1-Flash model. Configure explicit project/artifact roots, request count and deadline. Native tools are refused by this text-only route. Output-token caps are not applied; a legacy `maxTokens` hint is accepted without enforcement and recorded as `legacy_max_tokens_ignored`, alongside `output_token_cap=null`. Model replies carry validated disjoint native usage before finish; raw CLI and Session histories remain private.
+
+This can qualify planning and separate review without a separate API credential. It does not enable a scientific GPU policy or the native execution tool loop. Those require the project's exact producer/verifier/environment/budget/authority packet and applicable qualification. User-identity Doc capture queues original source versions durably before advancing its cursor; missing author delivery is retained pending rather than invented.
+
+## TraeX model-selected native tools
+
+`dsh-research/traex-tools` exports `TraexToolAdapter`. It asks the same authenticated CLI for a structured text response containing a public reply and requested native tool names/JSON arguments. The CLI's own tools remain disabled. The adapter projects a fully validated selection envelope into DSH tool blocks, assigning correlation IDs and retaining the original response and usage. DSH's existing tools service validates each argument schema and applies its normal role, stop and project-authority checks before execution.
+
+Configure the exact approved model, canonical project/artifact roots, request count/deadline and `maxToolCallsPerTurn` (1–4). All selection names and JSON-object argument strings are checked before any block is emitted. This does not provide atomic execution of a batch: native validation and admission remain per call. Use one call per turn for the qualified engineering route. Sampling/stop/reasoning controls with no supported mapping, undeclared tools and model substitution are refused. Output-token caps are not applied; legacy token hints are recorded as ignored. Request counts, deadlines, capture limits and actual usage remain enforced or recorded as appropriate.
+
+The [native model qualification recipe](../helpers/examples/traex-tools/run.mjs) executes one exact model-selected guarded `research_run`, retains a valid synthetic negative and verifies replay preserves its single admission. Its author uses real DeepSeek-V4.1-Flash; its separate native review completion is scripted. This is a disposable public AgentLoop harness, with four model requests maximum, a 120-second deadline per request, one native call per turn and one 2000-ms evaluator allowance. It does not qualify the production/default worker or Accorde science.
+
+The native review policy requires a finite `max_requests` and `timeout_ms`; it does not require `max_tokens`. The optional legacy field remains readable in frozen older policies, and the driver does not pass it to new reviewer Sessions. TraeX bounds requests with counts/deadlines/capture limits and retains authoritative usage. A carried native `maxTokens` hint is explicitly recorded as ignored; no output-token enforcement is claimed. Earlier failed override witnesses remain historical evidence and no longer block readiness solely on token control. Existing reviewer Sessions and scientific records are not rewritten or refunded.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -153,3 +181,6 @@ This released-input scripted stratum covers eleven specified native cells. The f
 | r6 | 2026-11-12 15:00 -0800 | Added actual default Source/Store/DshExecutor qualification, project-owned Linux service controls and recovery/stop checks, explicit consumer pins and paused scientific/adoption boundaries. |
 | r7 | 2026-11-12 16:20 -0800 | Documented author-local guarded registration, scoped native execution and fresh host-authority checks, and the packed default-worker research qualification mode with retained uncertainty and context ownership. |
 | r8 | 2026-11-12 18:03:35 -0800 | Documented default native automatic planning/review/feedback, fresh review authority checks, retained child evidence and finite qualification scope. |
+| r9 | 2026-11-12T20:15:20.440063-08:00 | Added bounded default failure/cold restore, exact per-call sandbox ownership, cleanup-before-receipt and text-only authenticated TraeX planning semantics; scientific/tool/token-bounded gates remain. |
+| r10 | 2026-11-12T21:17:00-08:00 | Added structured-text native tool projection, per-call validation/bounds and reproducible engineering recipe; preserved unsupported token-control and scientific/default-worker gates. |
+| r11 | 2026-11-12T22:16:54.920421-08:00 | Removed mandatory reviewer output-token caps and TraeX cap refusals; documented legacy metadata, retained request/deadline/capture/usage controls and historical witness preservation. |

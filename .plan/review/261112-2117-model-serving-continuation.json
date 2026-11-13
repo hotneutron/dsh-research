@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T22:04:36.950681-08:00",
+  "scope": "Continuation engineering: real model-selected native tools and project serving GPU producer; scientific/default-worker/profile/adoption holds retained",
+  "plan": {
+    "path": ".plan/261112-1828-path-forward-m4-m5-m6.md",
+    "sha256": "978dc4fad0afd1c13e81898b95f11af99f93bb6f09e2e81e238894f1ca315354",
+    "size_bytes": 2242
+  },
+  "baseline_commit": "a1c405d",
+  "contract_version": "2.3.3",
+  "package": {
+    "version": "0.2.0",
+    "sha256": "11ffd0d5b6c3d122e58cdab0987f64d8b8ce1648044d64dcb6a7e673958d9175",
+    "size_bytes": 152509,
+    "packed_files": 68,
+    "selected_current_member_checks": 8,
+    "private_artifacts_included": false
+  },
+  "helper_sources": {
+    "helpers/src/traex-tools.ts": {
+      "path": "helpers/src/traex-tools.ts",
+      "sha256": "a4f9be438ca876ec940bd43c8770ed3d8de4a85b77a06c5a42404fa18fd8e9dd",
+      "size_bytes": 6925
+    },
+    "helpers/tests/traex-tools.test.ts": {
+      "path": "helpers/tests/traex-tools.test.ts",
+      "sha256": "be74f04ef2088e4f549a6167f523808ce5dc7237bdfe1ce73d5cd823e5cae365",
+      "size_bytes": 4130
+    },
+    "helpers/examples/traex-tools/run.mjs": {
+      "path": "helpers/examples/traex-tools/run.mjs",
+      "sha256": "f814e57d68e021f291348ebc1fdb678c52cfd45d5ebd4780aa7884fc10a7f12a",
+      "size_bytes": 4821
+    },
+    "helpers/examples/synthetic-cpu/fixture.mjs": {
+      "path": "helpers/examples/synthetic-cpu/fixture.mjs",
+      "sha256": "0c91bbba169e580aabee56646c87b13384577b17c6b3b6532104c9b526bcc53d",
+      "size_bytes": 19475
+    },
+    "helpers/package.json": {
+      "path": "helpers/package.json",
+      "sha256": "446e88c53a4d80e705f4125930b2d670184ac50ec5d8dcc8f214fe882477f4b7",
+      "size_bytes": 4118
+    }
+  },
+  "project_sources": {
+    "tools/dsh_research/serving_gpu.py": {
+      "path": "/Users/bytedance/wk/accorde/tools/dsh_research/serving_gpu.py",
+      "sha256": "2943c0ffda2a9dab5afa5e560636be7bb2aefdfdbb92c215771bc7f88b52af70",
+      "size_bytes": 14398
+    },
+    "tools/dsh_research/serving_verify.py": {
+      "path": "/Users/bytedance/wk/accorde/tools/dsh_research/serving_verify.py",
+      "sha256": "ce48944ee590eba285f2657902d6daf4ef9fc8c36cc66e2714de49e37051e8d5",
+      "size_bytes": 2799
+    },
+    "tools/dsh_research/value_contract.py": {
+      "path": "/Users/bytedance/wk/accorde/tools/dsh_research/value_contract.py",
+      "sha256": "61e8485ae5928bbc8edfcabacf42863036d4041ac8097d4c133e1127b3df0d8c",
+      "size_bytes": 3624
+    },
+    "tools/dsh_research/pilot_binding.py": {
+      "path": "/Users/bytedance/wk/accorde/tools/dsh_research/pilot_binding.py",
+      "sha256": "4b4f81d8ccd0930007391d187e71d0fcef086613fc83543bece2c508cd1140c9",
+      "size_bytes": 4660
+    }
+  },
+  "validation": {
+    "build": "passed",
+    "typecheck": "passed",
+    "tests": 58,
+    "failed": 0,
+    "receipt": {
+      "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/validation-receipt.json",
+      "sha256": "ccfc173f3121f03e65c784524608a7c4420da021a59f4c0a54edde11bc817ee0",
+      "size_bytes": 788
+    },
+    "original_M2_compatibility_groups": 11
+  },
+  "native_model_tools": {
+    "receipt": {
+      "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/native-tools-3/receipt.json",
+      "sha256": "fab1bcd881714d989d6ba9cb86f8e82f1bcffa3dd8727953d1e119de0dba773a",
+      "size_bytes": 50690
+    },
+    "approved_model": "DeepSeek-V4.1-Flash",
+    "transport": "Existing authenticated TraeX CLI, structured text projected into DSH tool blocks; CLI tools disabled",
+    "actual_requests": 2,
+    "native_guarded_calls": 1,
+    "synthetic_admissions": 1,
+    "verdict": "valid_negative",
+    "replay_preserves_admission": true,
+    "reviewer": "separate scripted native completion",
+    "usage_recorded": true,
+    "current_source_pins": {
+      "src/traex-tools.ts": "a4f9be438ca876ec940bd43c8770ed3d8de4a85b77a06c5a42404fa18fd8e9dd",
+      "src/traex.ts": "406bb6701227c5ce2da8c27743448d67819eeadde0cdf38be4ef7b5bbdbad172",
+      "src/native.ts": "bd2a7051683115ba287a4968e951f082bd7bbdfded24b6449885035dedd17e95",
+      "examples/synthetic-cpu/fixture.mjs": "0c91bbba169e580aabee56646c87b13384577b17c6b3b6532104c9b526bcc53d",
+      "examples/traex-tools/run.mjs": "f814e57d68e021f291348ebc1fdb678c52cfd45d5ebd4780aa7884fc10a7f12a"
+    },
+    "bounds": {
+      "model_requests": 4,
+      "per_request_ms": 120000,
+      "native_calls_per_turn": 1,
+      "synthetic_admissions": 1,
+      "evaluator_ms": 2000
+    },
+    "default_production_worker_qualified": false,
+    "historical_cuts": [
+      {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/native-tools-1/receipt.json",
+        "sha256": "48df5d5b122ebcd6d2bf11b311fc697914242213a7661bc02be1ea111d04e5d5",
+        "size_bytes": 49865
+      },
+      {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/native-tools-2/receipt.json",
+        "sha256": "66b94904181256b7fe47eb2ca20e722cd9f0e0e1b54b9d04bb5b62a4c7f131db",
+        "size_bytes": 51302
+      }
+    ],
+    "repair": "Concurrent CLI receipt association isolated per request; one instance-wide prospective allowance retained"
+  },
+  "project_gpu_producer": {
+    "project": "accorde",
+    "host": "h100sjc0",
+    "device_uuid": "GPU-b356e84d-b220-a33c-dd68-3ea01ec109ea",
+    "batch": {
+      "path": "/Users/bytedance/wk/accorde/local_artifacts/autoresearch/dsh/accorde-gpu-pilot/producer-integration/261112-2102/batch-receipt.json",
+      "sha256": "ee621a28437fe990958afcf3453f5a65b98d4c9178910fe6aa98234c01912c76",
+      "size_bytes": 1134
+    },
+    "case_count": 4,
+    "cases": [
+      "constant-stride1",
+      "alternating-stride1",
+      "alternating-stride3",
+      "uniform-stride3"
+    ],
+    "elements_per_case": 257,
+    "kernel_launches": 124,
+    "direct_event_windows": 12,
+    "unit_whole_seconds": [
+      1.4533135200035758,
+      1.3451327829970978,
+      1.3477672589942813,
+      1.4528153919964097
+    ],
+    "batch_seconds": 7.4631833170424215,
+    "bounds": {
+      "whole_unit_seconds": 180,
+      "aggregate_seconds": 720,
+      "max_units": 4,
+      "gpu_retry_allowed": false
+    },
+    "CPU_mutation_refusals": 16,
+    "CPU_verification": {
+      "path": "/Users/bytedance/wk/accorde/local_artifacts/autoresearch/dsh/accorde-gpu-pilot/producer-integration/261112-2102/cpu-oracle-verification.json",
+      "sha256": "23e9a71684cf19a9a55315778c6c7bd38c2d2cdae0a5a6e93399ba74a5219978",
+      "size_bytes": 1981
+    },
+    "oracle": "Independent CPU float32 indexed gather and ReLU",
+    "lease_through_teardown": true,
+    "post_unit_device_quiescence": true,
+    "scientific_context_released": false,
+    "formal_labels": 0,
+    "timeout_and_device_failure_paths_qualified": false,
+    "native_scientific_GPU_default_worker_mapping_qualified": false
+  },
+  "authority_continuity": {
+    "receipt": {
+      "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/authority-continuity.json",
+      "sha256": "9fb374b8011ee6bcee6f6a7caf851087c757f49937feda66d9067c8fc5d1d3a2",
+      "size_bytes": 473
+    },
+    "admissions": 385,
+    "reserved_seconds": 0,
+    "remaining_seconds": 75862.61898075882,
+    "goal_context_and_exposure_fingerprints_equal": true,
+    "H3_resumed": false,
+    "authority_writes": 0
+  },
+  "review": {
+    "skill": "bits-code-guard",
+    "open_P0_P2": 0,
+    "historical_P1_resolved": 1,
+    "acceptance": {
+      "acceptance_cross.md": {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/review/acceptance_cross.md",
+        "sha256": "e6d3d024b6a1d8def36ad3b322ba326f51505dd0ac1d636050bde844f2981686",
+        "size_bytes": 22592
+      },
+      "acceptance_gpu.md": {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/review/acceptance_gpu.md",
+        "sha256": "21c23346f54b387510aa97009f2c9be4a85d81b6cb6bc5aae27cf4236eea83c1",
+        "size_bytes": 8542
+      },
+      "acceptance_native.md": {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/review/acceptance_native.md",
+        "sha256": "489636f2df5e2c58541c21d6a7f35aaaf4d134a17d2c86c8909fac75db52a70a",
+        "size_bytes": 17592
+      }
+    },
+    "report": {
+      "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/review/report.html",
+      "sha256": "92e1fa2f6885ce52e6a860d55b0b63a304e695793d3c67fc9d468b94b1c4cf9e",
+      "size_bytes": 14152
+    },
+    "cross_group_findings": {
+      "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/review/cross-group.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "final_source_pins_verified": 12
+  },
+  "owned_holds": [
+    {
+      "kind": "native_model_control",
+      "owner": "dsh-research transport maintainer",
+      "evidence": {
+        "path": "local_artifacts/dsh-research/path-forward/continuation-261112-2051/token-control-probe/receipt.json",
+        "sha256": "ecc3d789a0666d29c8f465dfcf5c111b4ed4a8b134e3b1cd0752deb7a8910a5b",
+        "size_bytes": 851
+      },
+      "trigger": "strict CLI provider override max_tokens=512 completed with output_tokens=6139",
+      "actual_output_tokens": 6139,
+      "exit_condition": "Demonstrate a supported hard per-request output bound and native completion/tool handling; retain failed witness; adapters continue refusal",
+      "status": "resolved_by_user_requirement_change",
+      "resolution": {
+        "timestamp": "2026-11-12T22:19:15.946860-08:00",
+        "request": {
+          "path": "local_artifacts/dsh-research/token-cap-removal/261112-2215/request.md",
+          "sha256": "05b34de6c6965f86e23f7704123724978994dcd5a89b8c32d389455926eec560",
+          "size_bytes": 749
+        },
+        "evidence": {
+          "path": "local_artifacts/dsh-research/token-cap-removal/261112-2215/receipt.json",
+          "sha256": "e8434e15c1ab37eb787be94e464efd4badfb29d64ef9a8a95887c147fdf3286d",
+          "size_bytes": 3357
+        },
+        "rule": "Output-token ceiling is no longer required; requests/deadlines/capture/usage bound this route. Original failed override remains historical; no old consumption is refunded."
+      }
+    },
+    {
+      "kind": "scientific_context_and_profile",
+      "owner": "Accorde author and independent scientific reviewer",
+      "exit_condition": "Accept a serving-context alternative with substantive target-free scientific evidence, full applicable GPU/default-worker profile and existing aggregate admission mapping"
+    },
+    {
+      "kind": "M6_adoption",
+      "owner": "Accorde writer/operator",
+      "exit_condition": "Accepted M5 evidence plus qualified single-writer fencing and complete current-state rollback; confirmation and retirement remain separate"
+    }
+  ],
+  "team_sharing": {
+    "identity": "user",
+    "new_uploads": 0,
+    "bot_grants": 0,
+    "existing_release_scope": "Earlier permitted engineering archive only; new private CLI/Session/authority traces stay project-owned and are excluded from package"
+  },
+  "scientific_project_dispatches": 0,
+  "scientific_context_releases": 0,
+  "confirmation_openings": 0,
+  "authority_handoffs": 0,
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T22:04:36.950681-08:00",
+      "change": "Recorded final current-source native model/tool and serving GPU engineering evidence, concurrent receipt repair,58 tests, unchanged authority and concrete token/profile/adoption holds"
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T22:07:43.504924-08:00",
+      "change": "Closed final independent cross-group acceptance and refreshed exact note/report hashes; no current source changes or additional scientific qualification"
+    },
+    {
+      "revision": "r3",
+      "timestamp": "2026-11-12T22:19:42.866767-08:00",
+      "change": "Resolved token-control hold by explicit user-authorized cap removal; linked59-test current interface qualification without rewriting historical model/GPU witnesses or scientific/profile/adoption holds"
+    }
+  ],
+  "current_token_cap_policy": {
+    "output_token_cap": null,
+    "native_review_limits": [
+      "max_requests",
+      "timeout_ms"
+    ],
+    "legacy_max_tokens": "readable metadata, not forwarded by review driver; carried native hints explicitly ignored by TraeX",
+    "qualification": {
+      "path": "local_artifacts/dsh-research/token-cap-removal/261112-2215/receipt.json",
+      "sha256": "e8434e15c1ab37eb787be94e464efd4badfb29d64ef9a8a95887c147fdf3286d",
+      "size_bytes": 3357
+    },
+    "note": "Earlier package/model/GPU receipt pins remain historical; this amendment does not relabel their source bytes as current."
+  }
+}

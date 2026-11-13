@@ -1,0 +1,564 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T20:33:35.437354-08:00",
+  "scope": "Executed approved engineering path forward; exact default fault and text planning/documentation scopes; scientific pilot and authority cutover held",
+  "baseline_commit": "a1c405d",
+  "plan": ".plan/261112-1828-path-forward-m4-m5-m6.md",
+  "package": {
+    "name": "dsh-research",
+    "version": "0.2.0",
+    "sha256": "3cd333168ecf53425a57a58941cd693737be55f2e41c785886cfdeeedc5107db",
+    "contract_version": "2.3.3"
+  },
+  "validation": {
+    "build": "passed",
+    "typecheck": "passed",
+    "behavior_tests": 55,
+    "behavior_log_sha256": "6cc1e2c7303e8d6c21c4a462877c9735225a3d4e5449ff65f0fa961a18ffc71f",
+    "default_fault_cases": 14,
+    "native_cells": 61,
+    "case_receipts": [
+      {
+        "case": "admission-ack-delayed",
+        "receipt_sha256": "78ea14115cb6c4aa0afe55c6b86e5a12657ad51bb0da057fbd9b10619d888d95",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "039d4c607f05a787692f4fa71bba92029da1b787a2588855f8ee8cea05d5db06",
+          "size_bytes": 5248
+        },
+        "covered": [
+          "AUTH-2:admission-ack-delayed:primary",
+          "AUTH-4:admission-ack-delayed:replay",
+          "STATE-2:admission-ack-delayed:reopen",
+          "AUTH-3:admission-ack-delayed:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.742929273983464,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "admission-ack-lost",
+        "receipt_sha256": "98ed071dd9f404ec436603abb3f3ccde000dc0486ebd6f3b55a3275a49cd1cbd",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "9e370de787d90a0fca51a24ea7e1af4234bf4a0a010dff15b4526d23877b21b1",
+          "size_bytes": 5408
+        },
+        "covered": [
+          "AUTH-2:admission-ack-lost:primary",
+          "AUTH-4:admission-ack-lost:replay",
+          "STATE-2:admission-ack-lost:reopen",
+          "AUTH-3:admission-ack-lost:stop",
+          "LOOP-3:admission-ack-lost:expired-hold"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.65771797398338,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 2000,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "backup-restore",
+        "receipt_sha256": "2443269833fc84bbefcc3dca583c56e21016de0a98dd0dd9ddb302728d189095",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "c819f8c0673a7a66919615ac17e5c7e5b5e20202cf207cb99ad4bde43f27aa25",
+          "size_bytes": 5215
+        },
+        "covered": [
+          "STATE-2:backup-restore:primary",
+          "AUTH-4:backup-restore:replay",
+          "STATE-2:backup-restore:reopen",
+          "AUTH-3:backup-restore:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 21.49086314800661,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "competing-runtime",
+        "receipt_sha256": "1acecb160e854f1d5bd034ab509ace4f612936953747028c3528330350b7c3ad",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "d1a8a6330294e47364aabf164d76a22836c5b4c2171af7c14427a1e9f2e58619",
+          "size_bytes": 5230
+        },
+        "covered": [
+          "STATE-1:competing-runtime:primary",
+          "AUTH-4:competing-runtime:replay",
+          "STATE-2:competing-runtime:reopen",
+          "AUTH-3:competing-runtime:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 25.2722728200024,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "confirmation-off",
+        "receipt_sha256": "20efb7f623888422e68100a670236814adf61f291beb61e7b532cb3e9aa1eccc",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "8fb97b64bca77079f43864b31164db683dfb15712fbef57438104a8dd2235406",
+          "size_bytes": 5223
+        },
+        "covered": [
+          "DATA-1:confirmation-off:primary",
+          "AUTH-4:confirmation-off:replay",
+          "STATE-2:confirmation-off:reopen",
+          "AUTH-3:confirmation-off:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.86874855798669,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 0,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "protected-off",
+        "receipt_sha256": "476593cf92003fadff5bb0bf8955239f594011f86607914478a10fbf915a76e9",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "eac5de24a21a757333bcc05541b9555fe4ced2c04d693eb439e98c13d3ef7e64",
+          "size_bytes": 5208
+        },
+        "covered": [
+          "DATA-1:protected-off:primary",
+          "AUTH-4:protected-off:replay",
+          "STATE-2:protected-off:reopen",
+          "AUTH-3:protected-off:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.61074776703026,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 0,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "review-ack-lost",
+        "receipt_sha256": "2162289c7d71a918dba7d720ad1041fbb0952f92d458e9738754c33199456120",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "908a8acd7cbb6da4d865dce41f7b640e7ccc1e894fe41aa0dc0b3ed5e67665e2",
+          "size_bytes": 5390
+        },
+        "covered": [
+          "AUTH-1:review-ack-lost:primary",
+          "AUTH-4:review-ack-lost:replay",
+          "STATE-2:review-ack-lost:reopen",
+          "AUTH-3:review-ack-lost:stop",
+          "LOOP-3:review-ack-lost:expired-hold"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 23.004600621003192,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "review-association",
+        "receipt_sha256": "0fdf9a8e7d50a567936149bcec27c558c35c7cbcf85080b2e3cd595b1f96584e",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "e12a0d59978ad6301406d0568bca7fde55bc4eb8bb3c93e294ef3a79c317aaf3",
+          "size_bytes": 5233
+        },
+        "covered": [
+          "AUTH-1:review-association:primary",
+          "AUTH-4:review-association:replay",
+          "STATE-2:review-association:reopen",
+          "AUTH-3:review-association:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.331844721047673,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "review-timeout",
+        "receipt_sha256": "09c044117eb1a0c7b703e28324d96f5fbf26d8d6569b5645f3a98a3370b24e2e",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "86d900f0d8066afcdedfbce823036e1dd6896beaa1ccf9a5238e4e4177ba6e63",
+          "size_bytes": 5384
+        },
+        "covered": [
+          "AUTH-1:review-timeout:primary",
+          "AUTH-4:review-timeout:replay",
+          "STATE-2:review-timeout:reopen",
+          "AUTH-3:review-timeout:stop",
+          "LOOP-3:review-timeout:expired-hold"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.751547439955175,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "review-unavailable",
+        "receipt_sha256": "53363d65addb022ef4e173934a30c638d294cb96e491e5465299ce9f56adc471",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "b1cab1c57cbb35f0120b54eae58b06ff0678b12df400996ef788ae8f3fc779ef",
+          "size_bytes": 5408
+        },
+        "covered": [
+          "AUTH-1:review-unavailable:primary",
+          "AUTH-4:review-unavailable:replay",
+          "STATE-2:review-unavailable:reopen",
+          "AUTH-3:review-unavailable:stop",
+          "LOOP-3:review-unavailable:expired-hold"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.301188011013437,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "running-loss",
+        "receipt_sha256": "3b5dab629bf975edae8f56dddb8e154ddf01af75ee3ab92e56c0657df64b4f28",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "12239545cd7c52d6e03c428ae31e70affeabb2dcee3f513207f1091c7af878b9",
+          "size_bytes": 5203
+        },
+        "covered": [
+          "EXEC-3:running-loss:primary",
+          "AUTH-4:running-loss:replay",
+          "STATE-2:running-loss:reopen",
+          "AUTH-3:running-loss:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 65.16275290900376,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 8000,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "source-drift",
+        "receipt_sha256": "000074aa99f25cdfef5a99a49a6cb4b2912e681d148fa612d12f381d739b5dbe",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "3df50d44935efad9953cdd54d225061426c3455e04c55308ee57f701bbb3a927",
+          "size_bytes": 5203
+        },
+        "covered": [
+          "PROV-1:source-drift:primary",
+          "AUTH-4:source-drift:replay",
+          "STATE-2:source-drift:reopen",
+          "AUTH-3:source-drift:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 23.122996473975945,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "stale-review",
+        "receipt_sha256": "336204106da5c09e1bf5a94e50de67ae259fbfdee6ef7561ab56f70d909212ab",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "164e41bbce9d4aa3b0ee55c3c0be94bcbbd6fe4961ebad16701b3446dbbc0713",
+          "size_bytes": 5372
+        },
+        "covered": [
+          "AUTH-1:stale-review:primary",
+          "AUTH-4:stale-review:replay",
+          "STATE-2:stale-review:reopen",
+          "AUTH-3:stale-review:stop",
+          "LOOP-3:stale-review:expired-hold"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 22.30763786501484,
+        "consumed_attempts": 0,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      },
+      {
+        "case": "tree-deadline",
+        "receipt_sha256": "2612572163badb4dbd3912ed71624fc78e9bde2c96a384da83e856ef1b61db77",
+        "matrix": {
+          "uri": "snapshots/default-coverage/matrix.json",
+          "sha256": "cf2b69a436794369352525310487c2ab1ff5d650213c84b99f090f690ae47b4b",
+          "size_bytes": 5208
+        },
+        "covered": [
+          "EXEC-1:tree-deadline:primary",
+          "AUTH-4:tree-deadline:replay",
+          "STATE-2:tree-deadline:reopen",
+          "AUTH-3:tree-deadline:stop"
+        ],
+        "failed": [],
+        "unresolved": [],
+        "assurance": [
+          "fixture_verified"
+        ],
+        "whole_wall_seconds": 25.529591217986308,
+        "consumed_attempts": 1,
+        "reserved_timeout_ms": 0,
+        "consumed_review_requests": 1,
+        "runtime_cleanup": "graceful_complete_before_receipt_publication",
+        "source_pins": {
+          "examples/superagent/fault-worker.mjs": "9cdb9fe3f73cb2b09e682a2ddd9e98d5728e14f72e2258c02025595ae4c32e50",
+          "examples/superagent/fault-evaluate.mjs": "1812853b994d768bded7a46afc9588ee83c5dac2385b2e95bb2d6f02b760e2e7",
+          "examples/superagent/default-faults.py": "b963fa23a805bb7ec31b6e08f9b736edd9277277254ef08e709148d7be201ea6",
+          "examples/superagent/research-worker.mjs": "e60f7589cfb29244be6b4846f50d91cea86c965ed57a667d160838a30b48d61e",
+          "examples/synthetic-cpu/fixture.mjs": "824fb0d5d1eea2962ca538b4988d0280fdaaa1fa1d6894279ff09e6c2528b088"
+        }
+      }
+    ],
+    "evidence_archive_sha256": "5e8d4c7a3a91d80688cfe846a888966b871c896743f056679f7d1b2da4f05416",
+    "source_pins_match_current": true,
+    "full_original_property_matrix": "not closed by these finite strata",
+    "pidfd_controlled_scope": {
+      "receipt": "local controlled owner-PID primitive; host namespace",
+      "signal_branch_exercised": true,
+      "wrong_identity_refused": true,
+      "sandbox_survivor_signal_branch": "not observed by native crash witness"
+    }
+  },
+  "project_preparation": {
+    "native_model_planning_receipt_sha256": "12dd959ee95a99896f519a7dbe5e728acc0f747380606660eb4f49a0b0417075",
+    "model": "DeepSeek-V4.1-Flash",
+    "transport": "existing authenticated TraeX",
+    "financial_cap": "unbounded by explicit user authorization",
+    "native_text_sessions": 2,
+    "native_usage_retained": true,
+    "unsupported_native_tools_and_token_bounds": "refused; no pilot requirement waived",
+    "value_contract": "built and structurally exercised; GPU producer integration/context release unqualified",
+    "pilot_design": "project-owned exact held draft",
+    "metadata_backups": "two current H100 original goal/exposure backups restored read-only; no handoff"
+  },
+  "team": {
+    "folder": "https://bytedance.larkoffice.com/drive/folder/I7R6fcvbGlZDhpdLCGAcQcWLn3e",
+    "document": "https://bytedance.us.larkoffice.com/docx/Snkzd6QnfoO9knxdQ5ouD7q8sQh",
+    "archive": "https://bytedance.us.larkoffice.com/file/YekXbQzq9oZ8i6xmnLvuJoDrsTc",
+    "identity": "user",
+    "bot_grants": false,
+    "authenticated_archive_download_hash_verified": true,
+    "feedback_effect_receipt_sha256": "318edab36cc501647bd1da319d6a8962256e94d9aaab018ec03b2d3322e60ad5",
+    "effect_scope": "controlled documentation-only advisory; scientific author wakeup/effect still pending",
+    "private_goal_store_session_login_data_in_release": false
+  },
+  "review": {
+    "status": "native/fault/model-project/cross engineering acceptance complete",
+    "open_P0_P1_P2": 0,
+    "fixed": [
+      "late concurrent review acknowledgement downgraded completion",
+      "incomplete overlay recovery set",
+      "passing receipt before cleanup",
+      "unsupported native output-token limit ignored",
+      "native usage omitted",
+      "undeclared LLM runtime peer"
+    ],
+    "cross_reference_checks": 470,
+    "uniform_source_pin_checks": 70,
+    "note_sha256": {
+      "acceptance_native.md": "94c3bb27ede77f03cf1847276a846f4c43adbee093477da114127db106623ac9",
+      "acceptance_faults.md": "42e5ff250163817671ff817fb5a34e7724517ffa21002cf587352c95f9b50878",
+      "acceptance_model_project.md": "3781bf4b1351afcff0891e9b6aca7f58f233b20e151ff97cadb15dc3209ae5a8",
+      "acceptance_cross.md": "4d50584af05d300a3f0621e0901e6c4d25aae752b981b12fafcc4aea6afc26d5"
+    },
+    "scientific_acceptance": false
+  },
+  "remaining_gates": [
+    "Complete applicable scientific/GPU profile matrix and substantive domain review",
+    "Serving value/access producer integration and independently qualified original context-change release",
+    "Accepted GPU unit/environment/verifier/budget and existing aggregate admission mapping",
+    "Native TraeX tool-call/token-bounded execution support remains unqualified",
+    "Qualified live writer fencing, current-state rollback and M5 evidence before M6 adoption",
+    "Enabled confirmation and legacy retirement remain separate",
+    "Resumed native scientific report binding remains pending; control process tests do not qualify sandbox-survivor signalling under all fault shapes"
+  ],
+  "scientific_dispatches": 0,
+  "scientific_state_mutations": 0,
+  "authority_handoffs": 0,
+  "retained_witnesses": [
+    "Original model maxTokens overrun and absent usage remain archived failures",
+    "Read-only/direct-shell sandbox mismatches and failed observer runs retained",
+    "Native crash report presentation may remain pending_native_binding; no delivery invented",
+    "H100 filesystem exhaustion diagnosed; only own27 traces archived after byte/hash verification, originals removed; no unrelated user data purged"
+  ],
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T20:33:35.437354-08:00",
+      "change": "Recorded exact uniform14-case/61-cell final-source engineering evidence, project preparation, user Doc feedback and retained scientific/adoption gates"
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T20:35:28.099723-08:00",
+      "change": "Added actual controlled pidfd signalling/wrong-identity witness while retaining native sandbox survivor and report-binding limits"
+    },
+    {
+      "revision": "r3",
+      "timestamp": "2026-11-12T20:37:37.056494-08:00",
+      "change": "Closed grouped/cross engineering review with final uniform61-cell evidence; updated project ownership/status without scientific activation"
+    }
+  ]
+}

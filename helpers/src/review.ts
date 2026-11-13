@@ -126,7 +126,8 @@ export class NativeReviewDriver {
       profile: manifest.binding.profile.effective, contract: manifest.binding.contract_ref, author_session_id: author.id, reviewer_session_id: this.policy.reviewer.session_id }
     const request = await this.config.artifacts.writeOnce(`snapshots/reviews/${requestId}.json`, Buffer.from(canonicalJson(requestData)))
     const token = randomUUID()
-    const committed = await this.config.table.update(this.config.projectKey, current => {
+    let committed: ResearchState
+    try { committed = await this.config.table.update(this.config.projectKey, current => {
       if (current.review_requests[requestId]) return current
       if (current.stopped || current.hold !== null || current.active_action_id !== null || current.consumed_review_requests >= limits.max_requests) throw new Error('Review scope/budget is unavailable')
       if (Object.values(current.review_requests).some(r => ['dispatching', 'observed', 'unknown'].includes(r.phase))) throw new Error('Concurrent review requires reconciliation')
@@ -134,7 +135,13 @@ export class NativeReviewDriver {
         review_requests: { ...current.review_requests, [requestId]: { request_id: requestId, review_id: reviewId, request, manifest: manifestRef, action_id: manifest.action_id,
           subject_sha256: subject, dispatch_token: token, reviewer_session_id: this.policy.reviewer.session_id, parent_session_id: author.id,
           phase: 'dispatching', native_message_id: null, completion: null, receipt: null } } })
-    })
+    }) } catch (error) {
+      // An update may become durable before its acknowledgement is lost. Never publish from that uncertainty.
+      const retained = this.config.table.get(this.config.projectKey)?.review_requests[requestId]
+      if (retained?.dispatch_token !== token) throw error
+      await this.hold(requestId, 'unknown', 'Review intent acknowledgement was lost; reconcile the original intent without redispatch')
+      return this.association(requestId, false)
+    }
     if (committed.review_requests[requestId]!.dispatch_token !== token) return this.association(requestId, true)
     this.notify('review_intent_acknowledged', { request_id: requestId, consumed_review_requests: committed.consumed_review_requests })
     const bounded = AbortSignal.any([signal, AbortSignal.timeout(limits.timeout_ms)])
@@ -164,12 +171,17 @@ export class NativeReviewDriver {
           const activation = await this.ctx.subagents.startActivation({ provider: limits.subagent_provider, childId: SessionId(this.policy.reviewer.session_id),
             label: 'Separate bounded research reviewer', delivery: 'caller', signal: bounded,
             request: { parent: author, prompt: content, maxDepth: 1, persona: REVIEW_INSTRUCTIONS,
-              agentOptions: { provider: this.policy.reviewer.provider, model: limits.model, maxTokens: limits.max_tokens }, toolFilter: { deny: [...this.config.deniedTools] } } })
+              agentOptions: { provider: this.policy.reviewer.provider, model: limits.model }, toolFilter: { deny: [...this.config.deniedTools] } } })
           messageId = activation.messageId
         }
       }
-      await this.config.table.update(this.config.projectKey, current => ResearchStateSchema.parse({ ...current, revision: current.revision + 1,
-        review_requests: { ...current.review_requests, [requestId]: { ...current.review_requests[requestId]!, phase: 'observed', native_message_id: messageId } } }))
+      await this.config.table.update(this.config.projectKey, current => {
+        const old = current.review_requests[requestId]!
+        if (old.native_message_id !== null && old.native_message_id !== messageId) throw new Error('Review publication conflicts with the retained native message identity')
+        return ResearchStateSchema.parse({ ...current, revision: current.revision + 1,
+          review_requests: { ...current.review_requests, [requestId]: { ...old,
+            phase: old.receipt !== null ? old.phase : 'observed', native_message_id: old.native_message_id ?? messageId } } })
+      })
       this.notify('native_review_observed', { request_id: requestId, reviewer_session_id: this.policy.reviewer.session_id, message_id: messageId })
       const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
       if (!reviewer) throw new Error('Reviewer disappeared before completion')

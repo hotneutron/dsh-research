@@ -13,7 +13,9 @@ export const DevelopmentPolicySchema = z.strictObject({
   domain_policy: ByteRef, verifier: ByteRef, entrypoint: ByteRef, reviewer: z.strictObject({
     session_id: Id, provider: Id, preset: ByteRef, permissions: ByteRef,
   }),
-  review_limits: z.strictObject({ max_requests: Count.positive(), timeout_ms: Count.positive(), max_tokens: Count.positive(),
+  review_limits: z.strictObject({ max_requests: Count.positive(), timeout_ms: Count.positive(),
+    // Read-only legacy metadata: current reviews use request/deadline bounds, not an output-token cap.
+    max_tokens: Count.positive().optional(),
     subagent_provider: Id, model: Id }).optional(),
   allowed_read_prefixes: z.array(z.enum(['snapshots/', 'local_artifacts/autoresearch/dsh/'])).min(1),
   gpu: GpuPolicySchema.optional(),

@@ -35,6 +35,11 @@ export interface NativeResearchConfig {
   authorTools?: readonly string[]
   /** Host-selected existing shell, e.g. the default worker's scoped shell. */
   executionShell?: ShellExecutor
+  /** Existing host-owned Session policy, bound to the immutable effective profile. */
+  executionSandbox?: {
+    profile: ArtifactReference
+    resolve: () => NonNullable<ReturnType<ShellExecutor['resolve']>['sandboxPolicy']>
+  }
   /** Existing host authority check, e.g. current Ticket mandate and operator pause. Rechecked before dispatch. */
   assertActiveAuthority?: (owner: Agent) => void | Promise<void>
   /** Existing project domain verifier; its pinned code supplies scientific meaning. */
@@ -168,8 +173,22 @@ export class NativeResearchAdapter {
     }
     signal.throwIfAborted()
     const token = randomUUID()
-    const committed = await this.config.table.update(this.config.projectKey, current => reserveAction(current, manifest, request.manifest, review, request.review,
-      this.policy, this.config.policy, request.expected_revision, token))
+    let committed: ResearchState
+    try { committed = await this.config.table.update(this.config.projectKey, current => reserveAction(current, manifest, request.manifest, review, request.review,
+      this.policy, this.config.policy, request.expected_revision, token)) } catch (error) {
+      const retained = this.config.table.get(this.config.projectKey)?.actions[manifest.action_id]
+      if (retained?.dispatch_token !== token) throw error
+      await this.config.table.update(this.config.projectKey, current => {
+        const old = current.actions[manifest.action_id]!
+        if (old.dispatch_token !== token || old.phase !== 'admitted') return current
+        return ResearchStateSchema.parse({ ...updateAction(current, manifest.action_id, a => ({ ...a, phase: 'unknown' })),
+          hold: { kind: 'unknown_execution', owner: owner.id, reason: 'Admission acknowledgement was lost; no dispatch is authorized',
+            evidence: [request.manifest, request.review], affected: [manifest.action_id],
+            exit_condition: 'Reconcile original durable admission and native execution facts without a new attempt',
+            next_check: 'Read original state and native job/process evidence', reassess_at: new Date(Date.now() + 60_000).toISOString() } })
+      })
+      return this.association(manifest.action_id, false)
+    }
     const action = committed.actions[manifest.action_id]!
     if (action.dispatch_token !== token) return this.association(manifest.action_id, true)
     this.observe('admission_acknowledged', { revision: action.admitted_revision, action_id: action.action_id, attempt_id: action.attempt_id })
@@ -190,10 +209,30 @@ export class NativeResearchAdapter {
       signal.throwIfAborted()
       const command = [manifest.invocation.executable, ...manifest.invocation.argv].map(shellLiteral).join(' ')
       const shell = this.config.executionShell ?? this.ctx.shell
+      let sandboxPolicy: NonNullable<ReturnType<ShellExecutor['resolve']>['sandboxPolicy']> | undefined
+      if (this.config.executionSandbox) {
+        if (!equalIdentity(this.config.executionSandbox.profile, manifest.binding.profile.effective)) throw new Error('Sandbox profile identity differs')
+        const profile = JSON.parse(Buffer.from(await this.config.artifacts.read(this.config.executionSandbox.profile)).toString())
+        sandboxPolicy = this.config.executionSandbox.resolve()
+        if (!equalIdentity(profile.execution_sandbox, sandboxPolicy)) throw new Error('Session sandbox policy differs from the frozen host profile')
+        if (sandboxPolicy.mode !== 'read-only' && sandboxPolicy.mode !== 'workspace-write') throw new Error('Sandbox mode has no qualified research route')
+        if (sandboxPolicy.sessionId !== owner.id) throw new Error('Sandbox policy belongs to another Session')
+        const workspaceRoot = resolve(sandboxPolicy.workspaceRoot)
+        if (sandboxPolicy.mode === 'workspace-write' && workspaceRoot !== this.config.artifacts.root
+          && !workspaceRoot.startsWith(this.config.artifacts.root + '/')) throw new Error('Sandbox writable root must belong to the canonical project')
+        await this.config.assertActiveAuthority?.(owner)
+        const current = this.config.table.get(this.config.projectKey)!, currentAction = current.actions[manifest.action_id]!
+        if (current.stopped || current.hold !== null || currentAction.dispatch_token !== token
+          || currentAction.admitted_revision !== action.admitted_revision || currentAction.manifest.sha256 !== request.manifest.sha256
+          || current.authority.authority_id !== manifest.binding.authority.authority_id) throw new Error('Authority changed during sandbox-policy verification')
+      }
+      signal.throwIfAborted()
       const spec = shell.resolve({ command, workdir: manifest.invocation.cwd, timeoutMs: manifest.bounds.timeout_ms,
-        onExpiry: 'kill', stdoutMaxBytes: this.policy.max_output_bytes, env: manifest.invocation.env, signal })
+        onExpiry: 'kill', stdoutMaxBytes: this.policy.max_output_bytes, env: manifest.invocation.env, signal,
+        ...(sandboxPolicy ? { sandboxPolicy } : {}) })
       if (spec.command !== command || resolve(spec.workdir) !== resolve(manifest.invocation.cwd) || spec.onExpiry !== 'kill'
         || spec.timeoutMs !== manifest.bounds.timeout_ms) throw new Error('Resolved shell spec differs from the frozen invocation/deadline')
+      if (sandboxPolicy && !equalIdentity(spec.sandboxPolicy, sandboxPolicy)) throw new Error('Resolved shell sandbox policy differs')
       let running: Promise<ShellExecution> | null = null
       let terminal: ShellRunResult | null = null
       let nativeFailure: string | null = null

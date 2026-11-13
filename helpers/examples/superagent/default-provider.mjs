@@ -3,7 +3,7 @@ import { LlmAdapter, ToolCallId } from '@deepseek-ai/dsh-llm'
 import { commentTrigger, githubKind } from 'dsh-superagent/github-watch'
 
 export const name = 'dsh-research-default-qualification'
-export const inject = ['llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'skills', 'sessionController', 'subagents', 'sessionQuery']
+export const inject = ['llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'skills', 'sessionController', 'subagents', 'sessionQuery', 'sandboxPolicy']
 const text = value => [{ type: 'block-start', index: 0, blockType: 'text' },
   { type: 'text-delta', index: 0, text: value }, { type: 'block-end', index: 0, block: { type: 'text', text: value } },
   { type: 'finish', reason: { kind: 'stop' } }]
@@ -65,6 +65,7 @@ export async function apply(ctx) {
         return json(200, { result: await source.receive(input), packet: packet.request })
       }
       if (researchMode && req.method === 'POST' && req.url.startsWith('/default-qualification/research/')) {
+        if (req.url.startsWith('/default-qualification/research/fault/')) return json(200, await research.fault(req.url.split('/').at(-1)))
         return json(200, await research.drill(req.url.split('/').at(-1)))
       }
       if (req.method === 'POST' && req.url === '/default-qualification/filtered') {
@@ -74,7 +75,8 @@ export async function apply(ctx) {
         return json(200, { result: await source.receive(input) })
       }
       if (req.method === 'POST' && req.url === '/default-qualification/inject') {
-        const input = commentTrigger({ id: 900001, body: researchMode ? '@fixture-agent Run the bounded synthetic negative research case' : '@fixture-agent Validate the frozen default runtime request; manifest=sha256:fixture-identity',
+        const input = commentTrigger({ id: 900001, body: researchMode ? (process.env.DSH_RESEARCH_FAULT_QUALIFICATION
+          ? `@fixture-agent Exercise the bounded native fault ${process.env.DSH_RESEARCH_FAULT_QUALIFICATION}` : '@fixture-agent Run the bounded synthetic negative research case') : '@fixture-agent Validate the frozen default runtime request; manifest=sha256:fixture-identity',
           user: { login: 'fixture-owner', type: 'User' }, created_at: '2026-11-12T00:00:00Z',
           html_url: 'https://github.com/fixture/default-runtime/issues/1#issuecomment-900001' }, { number: 1, isPr: false }, 'conversation', 'fixture-agent')
         audit.original = input
@@ -93,6 +95,7 @@ export async function apply(ctx) {
         if (agent) events[ticket.id] = agent.session.snapshotEvents()
       }
       return json(200, { ...audit, tickets, events, stored_original: audit.original && source.triggers.get(audit.original.id),
+        master_events: ctx.agents.get(host.masterId)?.session.snapshotEvents() ?? [],
         ...(researchMode ? { research: await research.snapshot() } : {}) })
     } catch (error) { return json(500, { error: String(error) }) }
   } }))

@@ -16,6 +16,14 @@
     "./native": {
       "types": "./dist/native.d.ts",
       "import": "./dist/native.js"
+    },
+    "./traex": {
+      "types": "./dist/traex.d.ts",
+      "import": "./dist/traex.js"
+    },
+    "./traex-tools": {
+      "types": "./dist/traex-tools.d.ts",
+      "import": "./dist/traex-tools.js"
     }
   },
   "files": [
@@ -68,6 +76,7 @@
     "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2"
   },
   "peerDependencies": {
+    "@deepseek-ai/dsh-llm": "0.2.1-alpha.2",
     "@deepseek-ai/cordis": "4.0.5-alpha.1",
     "@deepseek-ai/dsh-agent": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-jobs": "0.2.1-alpha.2",
@@ -80,6 +89,9 @@
     "@deepseek-ai/dsh-session-query": "0.2.1-alpha.2"
   },
   "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-llm": {
+      "optional": true
+    },
     "@deepseek-ai/cordis": {
       "optional": true
     },
