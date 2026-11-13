@@ -1,6 +1,6 @@
 # M3 — Configure automatic planning and independent review
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r12. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 18:09:38 -0800. Revision: r13. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: M2 integrated synthetic worker example. Use M1-pinned runtime operations; resolve prototype/harness compatibility before relying on subagent completion.
 
@@ -93,6 +93,10 @@ One live author/reviewer receipt is required in M5; a scripted M3 demonstration 
 
 M3 is complete when the configured existing route automatically launches the separate reviewer and accepts only the exact valid transition; stale/replayed output defers and recovery cannot duplicate scientific action. Configuration text and a promise of automatic review are insufficient. Hand effective profile/prompt/preset hashes and replay fixtures to M4.
 
+## Default-worker qualification reference
+
+[The compact M3–M4 receipt](review/261112-1809-m3-m4-default-worker.json) binds the current scripted default-worker engineering evidence and finite scope. [Integration guidance](../docs/integration.md#automatic-planning-on-the-default-worker) provides the reproducible command and installed-service recipe. The canonical tracker owns status and remaining gates; no broader scientific/property qualification follows from this reference.
+
 ## User Prompt, Verbatim
 
 ~~~text
@@ -133,3 +137,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r10 | 2026-11-11 18:12 -0800 | Adopted human-review contract 2.1.0 clarifications in current references/qualification plans; retained pending runtime guarantees and historical bindings. |
 | r11 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r12 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r13 | 2026-11-12 18:09:07 -0800 | Linked exact default automatic worker/finite qualification receipt and integration recipe; retained original scope and gates. |

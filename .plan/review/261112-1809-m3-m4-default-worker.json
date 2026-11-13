@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T18:09:07.449180-08:00",
+  "scope": "M3 automatic planning/review/feedback on unchanged default worker; M4 finite scripted released-input engineering stratum",
+  "baseline_commit": "dca94ef",
+  "contract": {
+    "version": "2.3.3",
+    "sha256": "c9200005507399b64a1ea1338c5fe1e3ab7da72a45a17f3e10eb3526d3dc911b"
+  },
+  "source_pins": {
+    "helpers/src/review.ts": "fec54e4285cbc5b8b60be521e65d25658d0049d657d5f4fb9cf59a1b0ff3cec7",
+    "helpers/examples/synthetic-cpu/fixture.mjs": "cb29eb0d217fb8c8ee89d439a0c9d7dbf1fa57b16d583447ca3c63550fdd78b0",
+    "helpers/examples/superagent/research-worker.mjs": "8bd87e95d8cbf914fee2b94b2d672117c879c36edba1105017293e8040f6a11b",
+    "helpers/examples/superagent/automatic-worker.mjs": "ccec2cba52d5388e0c8d9d87b2b23bbf91823f9f5945d9b963204bf834b40c6c",
+    "helpers/examples/superagent/default-coverage.mjs": "f086f5c9c11bf32d97569a2fb919a19eea691dc782c9db41ba7f314272e95919",
+    "helpers/examples/superagent/default-provider.mjs": "4afa6eff309b0453651af6b9bdf5770df564533c94a8b5858a11fbf3c7a6b997",
+    "helpers/examples/superagent/default-runtime.py": "da8d76e62915e793892f3fe7e09b76a677b9867e34e801b13d14ee6aada27b9b",
+    "helpers/tests/review-authority.test.ts": "562814a1a68ad58c36683f0e8c25d59fbf85758028a508113122150c1c880da3",
+    "helpers/package.json": "f19f3df22f63def064d3dd4c4185f1c76a6f5a9247dd7bfe824e0b6054d502a1",
+    "docs/integration.md": "6f71fa6bec828a46ab1407b480d12c497ee1ce0a0c6fab09a4bfe366493c3271"
+  },
+  "package": {
+    "name": "dsh-research",
+    "version": "0.2.0",
+    "sha256": "21a06eb7c445cf785c6d0573f4847ea2ad99acf7ab221edad66a7a9373edc3dd",
+    "native_family": "0.2.1-alpha.2",
+    "prototype_head": "8c32eeb98d3b3f3cfc13be0fd8c1b366e0b72d59",
+    "framework_source_modified": false,
+    "packed_sources_and_modules_equal_current": true
+  },
+  "commands": [
+    {
+      "host": "local",
+      "cwd": "/Users/bytedance/wk/dsh-research/helpers",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ]
+    },
+    {
+      "host": "local",
+      "cwd": "/Users/bytedance/wk/dsh-research/helpers",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ]
+    },
+    {
+      "host": "local",
+      "cwd": "/Users/bytedance/wk/dsh-research/helpers",
+      "argv": [
+        "npm",
+        "test"
+      ]
+    },
+    {
+      "host": "h100sjc0",
+      "cwd": "/home/cliu",
+      "argv": [
+        "python3",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/consumer/package/examples/superagent/default-runtime.py",
+        "--runtime",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/consumer",
+        "--output",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/run-10",
+        "--automatic"
+      ]
+    },
+    {
+      "host": "h100sjc0",
+      "cwd": "/home/cliu",
+      "argv": [
+        "python3",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/consumer/package/examples/superagent/default-runtime.py",
+        "--runtime",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/consumer",
+        "--output",
+        "/home/cliu/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/m2-regression",
+        "--research"
+      ],
+      "evidence_cut": "prior package; subsequent5/6 changes preserve M2 default policy"
+    },
+    {
+      "host": "local",
+      "cwd": "/Users/bytedance/wk/dsh-research",
+      "argv": [
+        "node",
+        "helpers/examples/synthetic-cpu/faults.mjs",
+        "/Users/bytedance/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/faults-final"
+      ]
+    },
+    {
+      "host": "local",
+      "cwd": "/Users/bytedance/wk/dsh-research",
+      "argv": [
+        "node",
+        "helpers/examples/synthetic-cpu/run.mjs",
+        "/Users/bytedance/wk/dsh-research/local_artifacts/dsh-research/m3-m4-default-worker/validity-standalone"
+      ]
+    }
+  ],
+  "validation": {
+    "build": "passed",
+    "typecheck": "passed",
+    "behavior_tests": {
+      "passed": 51,
+      "failed": 0,
+      "log_sha256": "140d48f53533ddefac678637574f76a7eff5811cbf9b1b2cd03f354783b4ceb5"
+    },
+    "default_worker_groups": [
+      {
+        "id": "source-normalization-allowlist-dedup-paused",
+        "status": "passed"
+      },
+      {
+        "id": "default-DshExecutor-native-session-source-input-report",
+        "status": "passed",
+        "ticket_id": "6a678b092e3dd8bab495a0d81582dd8b"
+      },
+      {
+        "id": "default-worker-guarded-native-research-and-replay",
+        "status": "passed"
+      },
+      {
+        "id": "default-automatic-separate-review-negative-feedback-successor",
+        "status": "passed"
+      },
+      {
+        "id": "default-native-deadline-and-malformed-output-refusal",
+        "status": "passed"
+      },
+      {
+        "id": "default-worker-unknown-launch-retains-charge",
+        "status": "passed"
+      },
+      {
+        "id": "default-worker-reopen-preserves-research-authority",
+        "status": "passed"
+      },
+      {
+        "id": "default-Store-graceful-reopen-retains-ticket-input-pause",
+        "status": "passed"
+      },
+      {
+        "id": "management-revision-conflict-and-human-stop",
+        "status": "passed"
+      }
+    ],
+    "native_coverage": {
+      "matrix": {
+        "uri": "snapshots/default-coverage/matrix.json",
+        "sha256": "a5b6a0bcea1545ad9ae17d41281ab34c6c491b0aa2e24a9ec55c011b5b1a7f29",
+        "size_bytes": 6820
+      },
+      "matrix_id": "default-worker-released-scripted",
+      "required": [
+        "AUTH-1:native-separate-review",
+        "LOOP-1:native-changed-successor",
+        "FB-1:native-edit-capture",
+        "FB-2:native-actual-effect",
+        "FB-3:publication-retry",
+        "AUTH-4:native-replay",
+        "EXEC-1:native-deadline",
+        "PROV-3:native-malformed-output",
+        "EXEC-3:native-unknown",
+        "STATE-2:native-reopen",
+        "AUTH-3:native-stop"
+      ],
+      "covered": [
+        "AUTH-1:native-separate-review",
+        "LOOP-1:native-changed-successor",
+        "FB-1:native-edit-capture",
+        "FB-2:native-actual-effect",
+        "FB-3:publication-retry",
+        "AUTH-4:native-replay",
+        "EXEC-1:native-deadline",
+        "PROV-3:native-malformed-output",
+        "EXEC-3:native-unknown",
+        "STATE-2:native-reopen",
+        "AUTH-3:native-stop"
+      ],
+      "failed": [],
+      "unresolved": [],
+      "not_applicable": [],
+      "complete": true,
+      "scope": {
+        "uri": "snapshots/default-coverage/scope.json",
+        "sha256": "5f9bfc022691bf632462ccdb4c4b353a7f422750ffa725c2e1d996a8246f0c35",
+        "size_bytes": 2546
+      },
+      "assurance": [
+        "fixture_verified"
+      ],
+      "limitation": "Only this frozen scripted released-input stratum; all other properties and semantic/live strata remain unqualified"
+    },
+    "qualification_plan_sha256": "5f9bfc022691bf632462ccdb4c4b353a7f422750ffa725c2e1d996a8246f0c35",
+    "receipt_sha256": "bfd601e3f4cfbe34e3733cdca103f067ae17cb356a46c5380aa9f60acc7c08f1",
+    "evidence_archive_sha256": "b73d631210022fa1f74fc19dd5f4c6252b0cf50f3bc810d943c16ba70891e11f",
+    "m2_regression_groups": 7,
+    "m2_regression_receipt_sha256": "8d178e3709fe060068ee3de19b9b4d8f57780f240e2de07d3b6b1588500c40f0",
+    "standalone_fault_receipt_sha256": "9b3b6cf4b673eb54742dd12537523355d01124660b30fe4ee1b160d90b658bd6",
+    "standalone_validity_receipt_sha256": "ce6b721f2f2189f6001d720d7e343ab97585cd5a06d642f0d442ccf2c59ca38a"
+  },
+  "observed": {
+    "default_native_subagent_provider": "spawn",
+    "replacement_subagent_service": false,
+    "replacement_session_query": false,
+    "author_local_tools": [
+      "research_propose",
+      "research_review",
+      "research_run",
+      "research_feedback",
+      "orchestrator_report"
+    ],
+    "reviewer_execution_tools": [],
+    "request_changes_materially_changed_proposal": true,
+    "valid_negative_reviewed_successor": true,
+    "feedback_two_versions_disposition_and_settled_effect": true,
+    "publication_retry_no_scientific_charge": true,
+    "research_record_equal_after_reopen": true,
+    "synthetic_admissions": 5,
+    "synthetic_settled_evaluators": 4,
+    "synthetic_controlled_unknown": 1,
+    "consumed_review_requests": 6,
+    "consumed_timeout_ms": 9000,
+    "reserved_timeout_ms": 2000,
+    "qualification_wall_seconds": 20.612419952987693,
+    "ordinary_reports_human_action_null": true,
+    "scientific_dispatches": 0,
+    "external_model_calls": 0,
+    "external_messages": 0
+  },
+  "prospective_bounds": {
+    "admissions": 5,
+    "review_requests": 6,
+    "aggregate_action_timeout_ms": 10000,
+    "author_router_requests_per_process": 40,
+    "wall_seconds": 180,
+    "enforced_by": "coupled admission/review policy, scripted provider ceiling and frozen runner window"
+  },
+  "independent_review": {
+    "status": "accepted for exact scoped engineering route",
+    "skill": "bits-code-guard",
+    "open_P0_P1_P2": 0,
+    "artifact_reference_checks": 119,
+    "packed_module_checks": 12,
+    "closed_findings": [
+      "review publication after awaited child-catalog stop; final synchronous authority/state proof and three stop-race regressions"
+    ],
+    "note_sha256": {
+      "acceptance_native.md": "e893aa5fb28d785e27ac7246ec28c59c28cc8f7e2b9c11b3e7391a07e3b7c307",
+      "acceptance_workflow.md": "28f43ecdfcd3547180fdb4ad748914ed0839a886623dc0e4a7c3367eb2eb1ef3",
+      "acceptance_cross.md": "5eb94879af7087dba9b73d2c63fc83cef99543e9c8779794353dc781e6ed3727"
+    }
+  },
+  "retained_limitations": [
+    "Eleven native cells are not the full23-property matrix or semantic/live qualification",
+    "Scripted Source/model/reviewer and memory publication transport do not establish scientific judgment or real team access",
+    "Default deadline terminal reported SIGTERM/ineligible; graceful-zero laundering is separately demonstrated on the standalone native fixture; prior expected-zero failures remain retained",
+    "Default reviewer timeout/lost-ack fault stratum remains qualified by separate standalone public-service drills, not this default profile",
+    "Crash while a producer/child is running, enabled confirmation, legacy writer handoff and full target-profile/GPU qualification remain held",
+    "M2 backward-compatibility run is a prior packed evidence cut; subsequent default policy changes preserve its defaults and final51 tests cover these sources"
+  ],
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T18:10:09.590107-08:00",
+      "change": "Recorded exact native default route, argv/workdirs, final scoped evidence and review resolution; cross verification pending"
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T18:12:36.444001-08:00",
+      "change": "Closed native/workflow/cross review with119 references and12 module pins; bound final51-test log and archived resolved catalog-stop finding"
+    }
+  ]
+}

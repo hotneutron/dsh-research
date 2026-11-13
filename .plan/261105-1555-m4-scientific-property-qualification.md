@@ -1,6 +1,6 @@
 # M4 — Qualify the categorized research-loop properties on reused boundaries
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:31:07 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 18:09:38 -0800. Revision: r17. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: M2/M3 integrated route; test-case design may begin with M1. This is bounded offline protocol qualification, not a hardware/model study.
 
@@ -122,6 +122,10 @@ Run package-focused behavior tests, keyless recorded/scripted Session output che
 
 M4 is complete for the M5 scope when P01–P05/P07–P08 pass through the integrated route, confirmation-off refusal passes before access, the full-confirmation gap is recorded, restart/timeout drills have receipts and no remaining gap can violate pilot bounds or acceptance. Any unresolved launch/accounting/validity gap blocks M5. Freeze the package/profile versions and hand the property receipt to the pilot reviewer.
 
+## Default-worker qualification reference
+
+[The compact M3–M4 receipt](review/261112-1809-m3-m4-default-worker.json) binds the current scripted default-worker engineering evidence and finite scope. [Integration guidance](../docs/integration.md#automatic-planning-on-the-default-worker) provides the reproducible command and installed-service recipe. The canonical tracker owns status and remaining gates; no broader scientific/property qualification follows from this reference.
+
 ## User Prompt, Verbatim
 
 ~~~text
@@ -166,3 +170,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r15 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
 | r16 | 2026-11-12 00:31:07 -0800 | Made bounded-campaign assessment independent of the superseded Accorde CPU four-attempt example; declared project GPU bounds remain required. |
+| r17 | 2026-11-12 18:09:07 -0800 | Linked exact default automatic worker/finite qualification receipt and integration recipe; retained original scope and gates. |

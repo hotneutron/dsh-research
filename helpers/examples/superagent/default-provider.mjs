@@ -3,7 +3,7 @@ import { LlmAdapter, ToolCallId } from '@deepseek-ai/dsh-llm'
 import { commentTrigger, githubKind } from 'dsh-superagent/github-watch'
 
 export const name = 'dsh-research-default-qualification'
-export const inject = ['llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'skills', 'sessionController']
+export const inject = ['llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'skills', 'sessionController', 'subagents', 'sessionQuery']
 const text = value => [{ type: 'block-start', index: 0, blockType: 'text' },
   { type: 'text-delta', index: 0, text: value }, { type: 'block-end', index: 0, block: { type: 'text', text: value } },
   { type: 'finish', reason: { kind: 'stop' } }]
@@ -24,7 +24,7 @@ export async function apply(ctx) {
       return { provider, id: model, name: model }
     }
     async *stream(options) {
-      if (audit.requests.length >= 24) throw new Error('Default qualification model-call ceiling reached')
+      if (audit.requests.length >= 40) throw new Error('Default qualification model-call ceiling reached')
       const serialized = JSON.stringify(options.messages)
       audit.requests.push({ model: options.model, messages: options.messages, system: options.system })
       let chunks = text('Disposable engineering qualification; no scientific claim.')

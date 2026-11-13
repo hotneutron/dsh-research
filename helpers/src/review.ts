@@ -30,6 +30,8 @@ export interface NativeReviewConfig {
   policy: ArtifactReference
   authorSessionId: string
   deniedTools: readonly string[]
+  /** Existing host authority must still permit the author after asynchronous reads and durable acknowledgement. */
+  assertActiveAuthority?: (owner: Agent) => Promise<void>
   observe?: (event: string, detail: unknown) => void
 }
 export class NativeReviewDriver {
@@ -117,6 +119,8 @@ export class NativeReviewDriver {
     const limits = this.policy.review_limits!
     if (before.stopped || before.active_action_id !== null || before.hold !== null) throw new Error('Current stop or operational hold blocks a new review')
     if (Object.values(before.review_requests).some(r => ['dispatching', 'observed', 'unknown'].includes(r.phase))) throw new Error('An earlier reviewer dispatch must be reconciled first')
+    await this.config.assertActiveAuthority?.(author)
+    signal.throwIfAborted()
     const reviewId = `review-${requestId}`
     const requestData = { review_id: reviewId, action_id: manifest.action_id, manifest: manifestRef, subject_sha256: subject,
       profile: manifest.binding.profile.effective, contract: manifest.binding.contract_ref, author_session_id: author.id, reviewer_session_id: this.policy.reviewer.session_id }
@@ -137,12 +141,24 @@ export class NativeReviewDriver {
     const interrupt = () => { try { this.ctx.subagents.interrupt(SessionId(this.policy.reviewer.session_id), { kind: 'ancestor', agent: author }) } catch {} }
     bounded.addEventListener('abort', interrupt, { once: true })
     try {
+      const assertMayDispatch = () => {
+        bounded.throwIfAborted()
+        const current = this.config.table.get(this.config.projectKey)!
+        if (current.stopped || current.hold !== null || current.active_action_id !== null
+          || current.review_requests[requestId]?.dispatch_token !== token)
+          throw new Error('Acknowledged review intent or current stop state no longer permits dispatch')
+      }
+      await this.config.assertActiveAuthority?.(author)
+      assertMayDispatch()
       const content = [{ type: 'text' as const, text: `${REVIEW_INSTRUCTIONS}\nREVIEW_PACKET_JSON\n${JSON.stringify({ ...requestData, request_sha256: request.sha256, manifest_sha256: manifestRef.sha256, frozen_manifest: manifest })}` }]
       let messageId: string
       const live = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
       if (live) messageId = await this.ctx.subagents.sendMessage(author, live.id, content, { signal: bounded })
       else {
         const catalog = await this.ctx.subagents.listChildren(author.id)
+        // Catalog reads may await persisted Session observation. Recheck after that final lookup before publication.
+        await this.config.assertActiveAuthority?.(author)
+        assertMayDispatch()
         if (catalog.some(child => child.id === this.policy.reviewer.session_id)) messageId = await this.ctx.subagents.sendMessage(author, SessionId(this.policy.reviewer.session_id), content, { signal: bounded })
         else {
           const activation = await this.ctx.subagents.startActivation({ provider: limits.subagent_provider, childId: SessionId(this.policy.reviewer.session_id),

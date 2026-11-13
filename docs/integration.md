@@ -119,6 +119,28 @@ Its isolated consumer includes the packed helper plus the pinned native storage-
 
 An existing-context synthetic fixture requires the explicit disposable marker and refuses to overwrite an existing scientific record. Reopen uses the retained registration and the same project row. Error cleanup removes the fixture's registration and does not dispose the caller's context. This qualifies the synthetic ordinary-worker protocol; Accorde's live scientific workload, aggregate authorities and domain/profile qualification remain separate adoption work.
 
+## Automatic planning on the default worker
+
+Use the installed default `SubagentRuntime`, its `spawn` provider and the public Session query alongside the ordinary worker:
+
+```sh
+python3 helpers/examples/superagent/default-runtime.py \
+  --runtime /absolute/isolated-pinned-consumer \
+  --output /absolute/fresh-qualification-project --automatic
+```
+
+The [automatic worker recipe](../helpers/examples/superagent/automatic-worker.mjs) registers `research_propose`, `research_review` and `research_feedback` on the author's scoped context alongside `research_run`, the native report tool and the research skill. The author inherits only `skill`; existing worker masks and monotonic tool guards continue to apply. The reviewer child inherits a legal `skill` deny filter and the package guard denies every reviewer execution tool, including late local registrations. Local research tool names must not be passed to an inherited-tool filter: the native tool service rejects such names.
+
+The disposable fixture verifies the installed provider's detached child creation, isolated parent context, agent options, persona, depth and tool-filter capabilities. It reuses the default subagent and Session query services. Its scripted model transport drives proposal → separate review → exact admission; request_changes produces a changed proposal, and a valid negative produces a newly reviewed successor. A complete two-page feedback capture retains both comment versions, records rejection/adoption and associates the adopted version with the actual settled effect. Publication outage/reconciliation changes only the publication record. These transports exercise protocol mechanics; team publication and scientific reasoning require their own evidence.
+
+Pass the host's existing `assertActiveAuthority` to `NativeReviewDriver.open` as well as `NativeResearchAdapter.open`. Review verifies it before consuming the bounded intent and again after durable acknowledgement, then reads fresh scientific stop/hold/action state before native dispatch. If revocation wins that race, the consumed intent stays unresolved and replay cannot start a second reviewer. Review and evaluator limits remain separate.
+
+The default executor may unload a reviewer after an ordinary worker turn ends. Read its persisted Session cut through the public query; a missing or interrupted cut cannot authorize an action. A reopened qualification reads the same registration, final packet, coverage observations and coupled row without reseeding or minting a successor.
+
+The [coverage recipe](../helpers/examples/superagent/default-coverage.mjs) freezes the declared scope and budget before reviewer/evaluator dispatch, binds the native matrix to the exact project/profile, retains per-cell evidence and verifies its bytes before auditing. The runner reports covered/failed/unresolved IDs. It caps the default stratum at five synthetic admissions, four evaluator publications, six review requests, forty scripted router/author requests per process and a 180-second window. The 1000 ms deadline fixture remains within the 2000 ms per-action policy. Native terminal signals and the standalone graceful-zero witness are separate observations; both must retain invalidity on timeout.
+
+This released-input scripted stratum covers eleven specified native cells. The full property set, semantic decisions, actual recipient access, enabled confirmation, running-process crash recovery and scientific GPU adoption retain their separate gates in the tracker. All qualification profiles require an explicit disposable marker and remain outside hosted scientific authority.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -130,3 +152,4 @@ An existing-context synthetic fixture requires the explicit disposable marker an
 | r5 | 2026-11-12 14:02:31 -0800 | Added reproducible public-export S1–S8 consumer qualification and precise default-deployment/scientific acceptance exclusions. |
 | r6 | 2026-11-12 15:00 -0800 | Added actual default Source/Store/DshExecutor qualification, project-owned Linux service controls and recovery/stop checks, explicit consumer pins and paused scientific/adoption boundaries. |
 | r7 | 2026-11-12 16:20 -0800 | Documented author-local guarded registration, scoped native execution and fresh host-authority checks, and the packed default-worker research qualification mode with retained uncertainty and context ownership. |
+| r8 | 2026-11-12 18:03:35 -0800 | Documented default native automatic planning/review/feedback, fresh review authority checks, retained child evidence and finite qualification scope. |

@@ -34,7 +34,8 @@
     "gpu:smoke": "node examples/gpu/run.mjs",
     "m1:integrated": "node scripts/m1-integrated.mjs",
     "m1:default": "python3 examples/superagent/default-runtime.py",
-    "m2:default": "python3 examples/superagent/default-runtime.py --research"
+    "m2:default": "python3 examples/superagent/default-runtime.py --research",
+    "m3:default": "python3 examples/superagent/default-runtime.py --automatic"
   },
   "dependencies": {
     "zod": "4.4.3"

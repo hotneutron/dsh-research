@@ -15,9 +15,12 @@ The execution adapter accepts synthetic CPU and bounded GPU qualification polici
 
 Building also distributes default profile/service preparation and GET-only Source transport tools in `dist/`. The default web-bundle qualification example uses the public prototype plugin's persistent Store and native DshExecutor; its fixture CLI and scripted models are confined to a fresh disposable project. See [integration guidance](../docs/integration.md) for installed-consumer pins and project-owned deployment controls.
 
+The `m3:default` script runs the automatic proposal, separate review and feedback workflow on a pinned disposable default consumer. It accepts `--runtime` and `--output` paths, freezes a finite qualification matrix and reports exact evidence coverage. The standalone `m4:smoke` script exercises reviewer timeout, lost association and delayed acknowledgement; its scope remains separate from default-worker observations.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
 |---|---|---|
 | r1 | 2026-11-12 11:04:59 -0800 | Added GPU qualification and state/guard integration to the package overview. |
 | r2 | 2026-11-12 15:00 -0800 | Documented distributed default-deployment tools and the actual public-plugin qualification consumer. |
+| r3 | 2026-11-12 18:03:35 -0800 | Added automatic default-worker and scoped fault qualification entry points. |

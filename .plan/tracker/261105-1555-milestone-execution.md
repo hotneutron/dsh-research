@@ -1,6 +1,6 @@
 # dsh-research milestone implementation tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 16:20 -0800. Revision: r27. Status: GPU qualification guard/state-v3 implemented; two H100 cases pass; scientific M5 and authority cutover remain unqualified.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 18:28:04 -0800. Revision: r30. Status: GPU qualification guard/state-v3 implemented; two H100 cases pass; scientific M5 and authority cutover remain unqualified.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
 
@@ -33,9 +33,9 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 | Milestone | Status | Dependency / next concrete work | Completion evidence |
 |---|---|---|---|
 | [M1](../261105-1555-m1-minimal-contract-and-reuse.md) | selected synthetic default-worker reuse qualified; full profile acceptance held | Broader required property/semantic scope and actual scientific authority/profile qualification | [Guarded worker receipt](../review/261112-1620-m1-m2-default-worker.json); actual source/Ticket/manifest/reviewer/native job/order/reopen/stop checks; production infrastructure acceptance retained separately |
-| [M2](../261105-1555-m2-skill-and-thin-helpers.md) | implemented; packed default-worker engineering qualification passed | M3 automatic planning/review integration on this worker; hosted scientific adoption remains gated | [Guarded worker receipt](../review/261112-1620-m1-m2-default-worker.json); native skill, local guarded tool, captured negative/evidence/checkpoint, two charged admissions and retained unknown reservation |
-| [M3](../261105-1555-m3-automatic-planning-and-review.md) | implemented; scoped fixture observations, acceptance pending | Independent target-profile/Ticket/semantic qualification | [M3/M4 receipt](../review/261111-2244-m3-m4-package-receipt.json): automatic native proposal/review/feedback/effect loop |
-| [M4](../261105-1555-m4-scientific-property-qualification.md) | audit code and scoped native drills passed; full route matrix incomplete | Close accepted target-profile property/semantic/single-writer/operating-scope cells under reviewed budget | [M3/M4 receipt](../review/261111-2244-m3-m4-package-receipt.json); unobserved cells remain unresolved |
+| [M2](../261105-1555-m2-skill-and-thin-helpers.md) | implemented; packed default-worker engineering qualification passed | Hosted scientific adoption remains gated; M3 default-worker engineering evidence is recorded below | [Guarded worker receipt](../review/261112-1620-m1-m2-default-worker.json); native skill, local guarded tool, captured negative/evidence/checkpoint, two charged admissions and retained unknown reservation |
+| [M3](../261105-1555-m3-automatic-planning-and-review.md) | default-worker automatic engineering route qualified; semantic/live acceptance held | Actual scientific/domain review, configured cloud feedback and target-profile gates | [Default M3/M4 receipt](../review/261112-1809-m3-m4-default-worker.json); installed spawn provider, changed/reviewed successors, captured edit and settled feedback effect, no routine human question |
+| [M4](../261105-1555-m4-scientific-property-qualification.md) | eleven frozen native cells and scoped fault/validity strata pass; full matrix incomplete | Close remaining applicable original property/semantic/operating cells prospectively; retain enabled-confirmation and running-crash gaps | [Default M3/M4 receipt](../review/261112-1809-m3-m4-default-worker.json); exact11-cell closure,51 tests, three stop races, retained reservation and reopen |
 | [M5](../261105-1555-m5-bounded-accorde-gpu-pilot.md) | GPU guard/native qualification implemented; scientific acceptance pending | Bind GPU workload/device/environment, complete unit and budget; qualify resource ownership, terminal/device quiescence and independent domain review | [Deferred implementation](../review/261112-1100-deferred-gpu-implementation.json); two live H100 engineering cases, no Accorde scientific study launched |
 | [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | inventory/audit/recovery preparation implemented; live held | M5 acceptance; reconcile actual legacy writers/charges/exposure and qualify compatibility/fencing | [Layout/adoption receipt](../review/261112-0004-layout-and-adoption-receipt.json); H100 goal/exposure authority inventoried and private SQLite backups restored; native state-v3 fixture restore/rollback refusal; no authority handoff |
 
@@ -43,7 +43,7 @@ Plans written does not mean milestones executed. Record dates, actual commands, 
 
 ## Current implementation and remaining gates
 
-Package 0.2.0 adds the bounded qualification-only GPU policy/guard, exact native facts retained before fallible settlement, state/domain version 3 with explicit historical v1/v2 readers, non-mutating GPU settlement inspection and a bounded team reproduction-bundle tool. The helpers layout and exact generated docs/skill/lock remain reproducible. Package 0.1.2 introduced the native automatic proposal/reviewer tools, same-record review/feedback/publication associations, effect checkpoint versions, persisted reviewer prefix verification, and read-only coverage/continuity/budget audits. The current 45 behavior tests and relocated M2/M6 regressions pass; two H100 producer/guard cases also pass under a two-unit, 60-second engineering reservation. Earlier 36-test receipts remain historical; M6 includes the M3 automatic workflow and extracted-package recovery. Exact new sources/package/evidence are in the [layout/adoption receipt](../review/261112-0004-layout-and-adoption-receipt.json). The [0.1.2 receipt](../review/261111-2244-m3-m4-package-receipt.json) retains the earlier 21-test checkpoint.
+Package 0.2.0 adds the bounded qualification-only GPU policy/guard, exact native facts retained before fallible settlement, state/domain version 3 with explicit historical v1/v2 readers, non-mutating GPU settlement inspection and a bounded team reproduction-bundle tool. The helpers layout and exact generated docs/skill/lock remain reproducible. Package 0.1.2 introduced the native automatic proposal/reviewer tools, same-record review/feedback/publication associations, effect checkpoint versions, persisted reviewer prefix verification, and read-only coverage/continuity/budget audits. The earlier GPU/layout checkpoint passed 45 behavior tests and relocated M2/M6 regressions; the latest default-worker checkpoint below passes 51 tests; two H100 producer/guard cases also pass under a two-unit, 60-second engineering reservation. Earlier 36-test receipts remain historical; M6 includes the M3 automatic workflow and extracted-package recovery. Exact new sources/package/evidence are in the [layout/adoption receipt](../review/261112-0004-layout-and-adoption-receipt.json). The [0.1.2 receipt](../review/261111-2244-m3-m4-package-receipt.json) retains the earlier 21-test checkpoint.
 
 M3 uses an actual separate native subagent and retained Session evidence; request_changes leads to a fresh changed proposal, a valid negative leads to an independently reviewed feedback-driven successor, and no additional human reply is required. Replayed review/feedback/publication causes no new scientific launch. M4's scoped drills cover reviewer timeout, lost dispatch association, delayed durable acknowledgement, same-attempt replay and stale snapshot rollback refusal. The finite coverage auditor never promotes missing, conflicting or weaker-assurance observations to a pass.
 
@@ -89,13 +89,13 @@ The canonical contract uses category-specific predicates rather than legacy nume
 
 | Requirement | Owner | Present state |
 |---|---|---|
-| PROV-1–3: provenance | M1 bindings; M2 capture; M4 drift/type cases | planned |
-| AUTH-1–4: review/admission | M2 guard; M3 review; M4 replay/bounds | planned |
-| EXEC-1–4: execution/uncertainty | M2 terminal mapping; M4 timeout/unknown/negative cases | planned |
-| STATE-1–3: continuity | M1 authority; M4 recovery; M6 handoff | planned |
+| PROV-1–3: provenance | M1 bindings; M2 capture; M4 drift/type cases | implemented with scoped binding/capture/schema/drift evidence; full target-profile coverage pending |
+| AUTH-1–4: review/admission | M2 guard; M3 review; M4 replay/bounds | scoped default-worker review/admission/replay/stop qualified; remaining default fault cells pending |
+| EXEC-1–4: execution/uncertainty | M2 terminal mapping; M4 timeout/unknown/negative cases | scoped native terminal/negative/timeout/unknown checks pass; running crash/tree-cleanup gaps pending |
+| STATE-1–3: continuity | M1 authority; M4 recovery; M6 handoff | same-record reopen and disposable restore/rollback checks pass; competing/live writers and handoff pending |
 | DATA-1–2: protected data | M4 off-mode/disposable cases; M6 enabled-route gate | production confirmation disabled; enabled qualification pending |
-| LOOP-1–3: continuation | M2 decisions; M3 activation; M4 revisit/exhaustion cases | planned |
-| FB-1–4: collaboration | M3 capture/effect/publication; M4 replay/access cases | planned |
+| LOOP-1–3: continuation | M2 decisions; M3 activation; M4 revisit/exhaustion cases | automatic changed/successor route qualified with scripted models; semantic revisit/exhaustion pending |
+| FB-1–4: collaboration | M3 capture/effect/publication; M4 replay/access cases | scoped capture/edit/disposition/actual-effect/publication-retry checks pass; real transport/recipient/semantic qualification pending |
 | S1–S8: native routes | M1 capability receipt; M3 effective profile | S1–S8 scoped public-core/native checks and actual default Store/worker + paused Source/service checks pass; scientific/profile/adoption acceptance remains gated |
 
 ## Recorded Nov 5 dependencies; refresh capability evidence in M1
@@ -108,7 +108,7 @@ The canonical contract uses category-specific predicates rather than legacy nume
 - Active legacy runtime/store/writer inventory has not been collected. The source review did not change campaign authority.
 - A paused project-owned Source/Store deployment is configured; paid model routes and M5 scientific spending remain disabled.
 
-Scientific benchmark attempts: 0. External model-provider calls: 0. GPU collections: 0. Confirmation openings: 0. The documentation baseline was committed locally and M1 package/dependency/fixture implementation performed. Scientific migration, production profile installation and push remain unexecuted. The repository was initialized/published earlier; those actions are not runtime qualification.
+Scientific benchmark attempts: 0. External model-provider calls: 0. Scientific GPU collections: 0; two disposable H100 engineering units are recorded above. Confirmation openings: 0. The documentation baseline was committed locally and M1 package/dependency/fixture implementation performed. Scientific migration remains unexecuted; paused production orchestration infrastructure was installed and separately qualified; no new push is implied. The repository was initialized/published earlier; those actions are not runtime qualification.
 
 ## M1 execution checkpoint
 
@@ -164,7 +164,17 @@ Scientific activation remains held: distinct agent/human intake, accepted model/
 
 Seven integration groups pass. Two synthetic admissions remain charged: one actual evaluator and one controlled uncertain publication, whose 2000ms reservation survives reopen. Duplicate calls preserve the same associations, role/argv/late-bypass refusals consume no attempt, and native Ticket stop blocks the guarded tool. Three targeted regressions cover inherited masks/late local bypass, scientific stop during the awaited authority check, and Ticket stop during the public management read. The full 48-test suite, build and typecheck pass.
 
-This closes the ready M1–M2 default-worker engineering integration. Full original property/semantic coverage, automatic M3 planning/feedback on this worker, live scientific/domain/GPU authority, existing-writer adoption, recipient access and reboot qualification retain their named gates. Accorde’s paused service and scientific ledgers were not changed by these disposable runs.
+This closes the ready M1–M2 default-worker engineering integration. Full original property/semantic coverage, live scientific/domain/GPU authority, existing-writer adoption, recipient access and reboot qualification retain their named gates. Automatic M3 planning/feedback on this worker is qualified by the later checkpoint below. Accorde’s paused service and scientific ledgers were not changed by these disposable runs.
+
+## Automatic default-worker M3–M4 checkpoint
+
+[The compact receipt](../review/261112-1809-m3-m4-default-worker.json) records the unchanged default Source/Store/DshExecutor worker using its installed native `spawn` subagent provider and persisted Session query. Three initial reviews produce request_changes → changed proposal → valid negative → feedback-driven reviewed successor. The author invokes local proposal/review/run/feedback tools; two captured comment versions retain rejection/adoption and the actual settled effect. Ordinary native reports have human_action=null. A publication outage/reconciliation preserves scientific charges.
+
+The final packed run passes nine groups and closes all eleven frozen cells for its declared released-input scripted stratum. Five admissions remain charged: four settled synthetic evaluators and one controlled unknown publication. The same scientific record retains six review requests and 9000 ms of charged timeout allowance, including the unknown attempt’s 2000 ms still held as a reservation, through native reopen. The profile enforces five admissions/six review requests/10000ms aggregate action allowance prospectively; the run took 20.612 seconds inside its180-second window. All51 behavior tests and build/typecheck pass. Three regressions cover review stop during authority read, durable acknowledgement and the native child-catalog lookup; the final scientific proof is synchronous immediately before publication.
+
+The existing M2 default route passes seven compatibility groups at its separately pinned prior cut. Refreshed standalone public-service strata retain graceful exit-zero timeout invalidity, malformed output, drift, unknown/replay, reviewer timeout, lost association, delayed acknowledgement and stale rollback witnesses. Default-host deadline output remains accurately SIGTERM/ineligible; it does not substitute for the separate graceful-zero witness. Failed initialization/refusal/deadline attempts remain in ignored development artifacts.
+
+This closes ready M3 automatic default-worker engineering work and adds scoped M4 evidence. It does not close the full original23-property matrix, semantic exhaustion/effect reviews, default-profile running-process crash and enabled-confirmation cases, actual recipient access, scientific GPU authority or M5/M6 handoff. Independent source review found and corrected one catalog-stop race; native/workflow/cross review is accepted with zero open P0–P2 findings and 119 verified artifact references in the receipt. README organization remains unchanged and raw qualification detail stays ignored.
 
 ## Filename Convention Request, Verbatim
 
@@ -225,3 +235,6 @@ use .plan/tracker/ for M1-M6 impl status tracking.
 | r25 | 2026-11-12 13:57:41 -0800 | Recorded scoped public-export S1–S8 runtime integration, native reviewer/child controls and exact persistence; kept default deployed Source/Store/watchdog and independent acceptance gates explicit. |
 | r26 | 2026-11-12 15:00 -0800 | Recorded actual default public-plugin worker/Store qualification, paused project-owned GitHub deployment, systemd stop/recovery evidence and separate engineering/scientific acceptance boundaries. |
 | r27 | 2026-11-12 16:20 -0800 | Recorded packed default-worker guarded research integration, seven groups and 48 regressions, inherited-mask/authority/cleanup fixes and retained unknown charges; kept full scientific/profile/adoption gates separate. |
+| r28 | 2026-11-12 18:09:07 -0800 | Recorded default native automatic M3, eleven scoped M4 cells and51 tests; preserved full scientific/profile/confirmation/access/handoff gaps and raw failure witnesses. |
+| r29 | 2026-11-12 18:12:36 -0800 | Closed independent scoped M3–M4 engineering review, verified119 artifact references/12 packed module pins and bound final51-test output; scientific/profile gates remain. |
+| r30 | 2026-11-12 18:28:04 -0800 | Reconciled historical planned/test-count/deployment wording against the latest receipts and persisted the approved [path forward](../261112-1828-path-forward-m4-m5-m6.md); further qualification is next. |

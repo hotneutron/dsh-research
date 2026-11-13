@@ -16,6 +16,8 @@ import uuid
 
 
 def run(args):
+    if args.automatic:
+        args.research = True
     runtime = Path(args.runtime).resolve(strict=True)
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -45,10 +47,36 @@ def run(args):
     prepared = json.loads(subprocess.check_output(cmd, text=True))
     env = {**os.environ, 'DSH_HOME': str(home), 'DSH_RESEARCH_DISPOSABLE_QUALIFICATION': str(output),
            'DSH_RESEARCH_GUARDED_QUALIFICATION': '1' if args.research else '0',
+           'DSH_RESEARCH_AUTOMATIC_QUALIFICATION': '1' if args.automatic else '0',
            'PATH': str(node.parent) + os.pathsep + os.environ['PATH']}
     log = (output / 'runtime.log').open('w')
     process = None
     calls, cases = [], []
+    started_at = time.monotonic()
+    qualification_plan = None
+    if args.automatic:
+        # Frozen before any provider request, reviewer dispatch or evaluator admission.
+        qualification_plan = {'schema_version': 1, 'scope': 'scripted released-input default worker; confirmation off',
+            'budget': {'max_admissions': 5, 'max_evaluator_dispatches': 4, 'max_review_requests': 6,
+                       'max_scripted_author_router_requests_per_process': 40, 'max_wall_seconds': 180,
+                       'external_model_calls': 0, 'scientific_gpu_dispatches': 0},
+            'required_cells': [
+                {'id': 'AUTH-1:native-separate-review', 'assertions': ['distinct_reviewer', 'completed_exact_reviews', 'reviewer_has_no_tools']},
+                {'id': 'LOOP-1:native-changed-successor', 'assertions': ['request_changes_then_new_subject', 'negative_then_reviewed_successor', 'human_action_null']},
+                {'id': 'FB-1:native-edit-capture', 'assertions': ['two_source_versions', 'durable_cursor_and_dispositions']},
+                {'id': 'FB-2:native-actual-effect', 'assertions': ['changed_frozen_action', 'settled_evidence_link']},
+                {'id': 'FB-3:publication-retry', 'assertions': ['outage_no_research_hold', 'same_scientific_charge']},
+                {'id': 'AUTH-4:native-replay', 'assertions': ['same_action_no_new_charge']},
+                {'id': 'EXEC-1:native-deadline', 'assertions': ['terminal_timeout', 'terminal_stopped', 'ineligible', 'no_running_job']},
+                {'id': 'PROV-3:native-malformed-output', 'assertions': ['bool_score_refused', 'ineligible']},
+                {'id': 'EXEC-3:native-unknown', 'assertions': ['hold_preserves_reservation', 'replay_no_new_charge']},
+                {'id': 'STATE-2:native-reopen', 'assertions': ['identical_state', 'retained_feedback_reviews_publications']},
+                {'id': 'AUTH-3:native-stop', 'assertions': ['ended_ticket_refuses_tool']}],
+            'assurance': 'scripted native engineering; no semantic or universal property qualification',
+            'source_pins': {str(p.relative_to(helper)): hashlib.sha256(p.read_bytes()).hexdigest() for p in
+                            [helper / 'examples/superagent/research-worker.mjs', helper / 'examples/superagent/automatic-worker.mjs',
+                             helper / 'examples/synthetic-cpu/fixture.mjs']}}
+        (output / 'qualification-plan.json').write_text(json.dumps(qualification_plan, indent=2) + '\n')
 
     def api(path, method='GET', body=None, expected=200):
         request = urllib.request.Request(f'http://127.0.0.1:{port}' + path, method=method,
@@ -128,7 +156,8 @@ def run(args):
         if args.research:
             initialized = wait(lambda: (lambda x: x if x.get('research', {}).get('ready') else None)(api('/default-qualification')), 'Guarded default worker initialization')
             assert initialized['research']['state']['consumed_attempts'] == 0
-            api('/default-qualification/research/refusals', 'POST', {})
+            if not args.automatic:
+                api('/default-qualification/research/refusals', 'POST', {})
             api('/default-qualification/research/start', 'POST', {})
         snapshot = wait(lambda: (lambda x: x if x['tickets'] and x['reported'] and any(a.get('report') for a in x['tickets'][0]['assignments']) else None)(api('/default-qualification')),
                         'Native worker assignment/report')
@@ -141,20 +170,36 @@ def run(args):
         cases.append({'id': 'default-DshExecutor-native-session-source-input-report', 'status': 'passed', 'ticket_id': ticket['id']})
         if args.research:
             scientific = snapshot['research']
-            assert scientific['state']['consumed_attempts'] == 1
+            assert scientific['state']['consumed_attempts'] == (2 if args.automatic else 1)
             association = next(iter(scientific['state']['actions'].values()))
             assert association['phase'] == 'settled' and association['evidence'] and association['checkpoint']
             research_calls = {e['data']['callId'] for e in worker_events if e['type'] == 'tool/call' and e['data']['name'] == 'research_run'}
             assert any(e['type'] == 'tool/result' and e['data']['message']['toolCallId'] in research_calls
                        and not e['data']['message'].get('isError') for e in worker_events)
+            if args.automatic:
+                reviewer_events = scientific['reviewer_events']
+                assert reviewer_events and not any(e['type'] == 'tool/call' for e in reviewer_events)
+                assert scientific['author'] != 'm2-reviewer'
+                reviews = list(scientific['state']['review_requests'].values())
+                assert len(reviews) == 3 and [r['phase'] for r in reviews] == ['request_changes', 'completed', 'completed']
+                assert all(r['native_message_id'] and r['completion'] and r['receipt'] for r in reviews)
+                assert 'human_action' not in ticket or ticket['human_action'] is None
             api('/default-qualification/research/replay', 'POST', {})
             cases.append({'id': 'default-worker-guarded-native-research-and-replay', 'status': 'passed'})
         wait(lambda: api('/orchestrator/api/state')['load']['running'] == 0, 'Worker turn completion')
         if args.research:
+            if args.automatic:
+                api('/default-qualification/research/automatic', 'POST', {})
+                api('/default-qualification/research/refusals', 'POST', {})
+                cases.append({'id': 'default-automatic-separate-review-negative-feedback-successor', 'status': 'passed'})
+                api('/default-qualification/research/validity', 'POST', {})
+                cases.append({'id': 'default-native-deadline-and-malformed-output-refusal', 'status': 'passed'})
             unknown = api('/default-qualification/research/unknown', 'POST', {})
-            assert unknown['state']['consumed_attempts'] == 2 and unknown['state']['reserved_timeout_ms'] == 2000
+            assert unknown['state']['consumed_attempts'] == (5 if args.automatic else 2) and unknown['state']['reserved_timeout_ms'] == 2000
             cases.append({'id': 'default-worker-unknown-launch-retains-charge', 'status': 'passed'})
         api('/orchestrator/api/executor/pause', 'POST', {'paused': True})
+        if args.automatic:
+            api('/default-qualification/research/continuity-snapshot', 'POST', {})
         before = api('/default-qualification')
         process.send_signal(signal.SIGINT)
         process.wait(timeout=30)
@@ -165,6 +210,8 @@ def run(args):
         assert after['tickets'] == before['tickets']
         if args.research:
             assert after['research']['state'] == before['research']['state']
+            if args.automatic:
+                api('/default-qualification/research/continuity', 'POST', {})
             api('/default-qualification/research/replay', 'POST', {})
             cases.append({'id': 'default-worker-reopen-preserves-research-authority', 'status': 'passed'})
         # Source input persists, even though the disposable provider's in-memory audit resets on restart.
@@ -177,12 +224,24 @@ def run(args):
         api('/orchestrator/api/tickets/' + ticket['id'] + '/stop', 'POST', {})
         detail = api('/orchestrator/api/tickets/' + ticket['id'])
         assert detail['stage'] == 'ended'
+        native_coverage = None
         if args.research:
-            api('/default-qualification/research/stop', 'POST', {})
+            stopped = api('/default-qualification/research/stop', 'POST', {})
+            native_coverage = stopped.get('coverage')
+            if args.automatic:
+                assert native_coverage['complete'], native_coverage
         cases.append({'id': 'management-revision-conflict-and-human-stop', 'status': 'passed'})
+        elapsed = time.monotonic() - started_at
+        if qualification_plan:
+            assert elapsed <= qualification_plan['budget']['max_wall_seconds']
+            assert after['research']['state']['consumed_review_requests'] <= qualification_plan['budget']['max_review_requests']
         receipt = {'schema_version': 1, 'timestamp': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'scope': 'unchanged default web bundle, Source kind, Store and DshExecutor',
                    'prepared': prepared, 'cases': cases, 'before_restart': before, 'after_restart': after, 'restored_source': restored_source,
                    'guarded_research': bool(args.research),
+                   'automatic_research': bool(args.automatic),
+                   'native_coverage': native_coverage,
+                   'qualification_plan_sha256': hashlib.sha256((output / 'qualification-plan.json').read_bytes()).hexdigest() if qualification_plan else None,
+                   'qualification_wall_seconds': elapsed,
                    'synthetic_admitted_attempts': after['research']['state']['consumed_attempts'] if args.research else 0,
                    'retained_unknown_reservation_ms': after['research']['state']['reserved_timeout_ms'] if args.research else 0,
                    'external_messages': 0, 'external_model_calls': 0, 'scientific_dispatches': 0,
@@ -207,5 +266,6 @@ if __name__ == '__main__':
     parser.add_argument('--runtime', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--research', action='store_true', help='Qualify guarded research tools inside the default worker')
+    parser.add_argument('--automatic', action='store_true', help='Qualify native automatic proposal/review/feedback and bounded validity drills')
     result = run(parser.parse_args())
     print(json.dumps({'status': 'passed', 'cases': len(result['cases'])}))

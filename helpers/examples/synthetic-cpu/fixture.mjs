@@ -95,11 +95,18 @@ export async function createCpuFixture(outputArg, options = {}) {
   const author = options.author ?? await harness.create(SessionId('m2-author'), { provider: 'synthetic-author', model: 'scripted' }, { cwd: root })
   const reviewerId = 'm2-reviewer'
   const reviewer = options.automaticReview ? null : await harness.create(SessionId(reviewerId), { provider: 'synthetic-reviewer', model: 'scripted' }, { cwd: root })
-  if (options.automaticReview) {
+  if (options.automaticReview && !options.nativeReview) {
     class ReadOnlyQuery extends SessionQuery { async searchSessions() { throw new Error('Search not supported in fixture') }; async searchEvents() { throw new Error('Search not supported in fixture') } }
     await ctx.plugin(ReadOnlyQuery, {})
     await ctx.plugin(Subagents, { maxDepth: 1, maxActiveSubagents: 1 })
     ctx.subagents.registerProvider({ name: 'synthetic-review', capabilities: { ...NO_START_CAPABILITIES, agentOptions: true, toolFilter: true, persona: true, depthLimit: true }, inheritsParentContext: false, prepareContinuable: async () => ({}) })
+  }
+  if (options.nativeReview) {
+    if (!options.context || !options.automaticReview) throw new Error('Native review reuse requires the disposable default context and automatic review')
+    const provider = ctx.subagents.getProvider(options.nativeReview.provider)
+    if (!provider?.prepareContinuable || provider.inheritsParentContext !== false
+      || !['agentOptions', 'toolFilter', 'persona', 'depthLimit'].every(key => provider.capabilities[key]))
+      throw new Error('Installed reviewer provider lacks the required isolated native capabilities')
   }
 
   const contract = await source('snapshots/contracts.md', join(packageRoot, 'dist/docs/contracts.md'))
@@ -119,6 +126,8 @@ export async function createCpuFixture(outputArg, options = {}) {
   for (const module of ['records', 'bindings', 'manifest', 'admission', 'evaluate', 'loop', 'native', 'collaboration', 'coordination', 'publication', 'review', 'gpu']) moduleHashes[module] = sha256(await readFile(join(packageRoot, `dist/${module}.js`)))
   const profile = await json('snapshots/profile.json', { scope: 'synthetic_released_cpu', confirmation: 'off', author_tools: options.authorTools ?? ['research_run'], reviewer_tools: [], maxConcurrentJobsPerOwner: 1,
     tool_registration: options.registration ?? { toolScope: 'host' }, default_worker: Boolean(options.context),
+    native_review: options.nativeReview ?? null,
+    qualification_limits: { max_attempts: options.maxAttempts ?? 8, max_review_requests: options.maxReviews ?? 8, max_total_timeout_ms: options.maxTotalTimeoutMs ?? 16000 },
     package_modules: moduleHashes, example_driver_sha256: sha256(await readFile(fileURLToPath(import.meta.url))) })
   const registration = await json('snapshots/registration.json', { project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', scope: 'synthetic development only' })
   const authority = { project_id: 'synthetic-m2', project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', registration }
@@ -132,11 +141,11 @@ export async function createCpuFixture(outputArg, options = {}) {
   const domainPolicy = await json('snapshots/domain-policy.json', { scope: 'synthetic released inputs only', score_meaning: 'positive/negative support relative to a zero synthetic baseline', verifier })
   const reviewerPreset = await json('snapshots/reviewer-preset.json', { session_id: reviewerId, provider: 'synthetic-reviewer', model: 'scripted' })
   const permissions = await json('snapshots/reviewer-permissions.json', { tools: [], boundary: 'native tool guard; trusted same account' })
-  const policy = { scope: 'synthetic_released_cpu', authority, binding, goal_id: 'synthetic-cpu', goal_revision: 'r1', max_attempts: 8,
-    max_timeout_ms: 2000, max_total_timeout_ms: 16000, max_output_bytes: 8192, allowed_executables: [process.execPath],
+  const policy = { scope: 'synthetic_released_cpu', authority, binding, goal_id: 'synthetic-cpu', goal_revision: 'r1', max_attempts: options.maxAttempts ?? 8,
+    max_timeout_ms: 2000, max_total_timeout_ms: options.maxTotalTimeoutMs ?? 16000, max_output_bytes: 8192, allowed_executables: [process.execPath],
     allowed_operations: ['negative', 'positive', 'timeout-zero', 'invalid-output', 'drift', 'unknown-launch', 'baseline'], domain_policy: domainPolicy, verifier, entrypoint: evaluator,
     reviewer: { session_id: reviewerId, provider: 'synthetic-reviewer', preset: reviewerPreset, permissions },
-    ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, max_tokens: 512, subagent_provider: 'synthetic-review', model: 'scripted' } } : {}),
+    ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, max_tokens: 512, subagent_provider: options.nativeReview?.provider ?? 'synthetic-review', model: 'scripted' } } : {}),
     allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'] }
   const policyRef = await json('snapshots/policy.json', policy)
   if (table.get('synthetic-m2')) throw new Error('Synthetic fixture cannot overwrite an existing authority; use retained-state reopen')
@@ -167,7 +176,7 @@ export async function createCpuFixture(outputArg, options = {}) {
       candidate: { commit: 'synthetic-frozen-content', tree: evaluator, configuration: context, snapshot_kind: 'content_snapshot', content_inventory: inventory },
       evaluator: { verifier, interpreter, environment }, inputs: [{ artifact: input, version: 'synthetic-v1', split: 'synthetic', purpose: 'C_qual', access: 'released' }],
       invocation: { executable: process.execPath, argv: [join(root, evaluator.uri), join(root, input.uri), mode], cwd: root, env: {} },
-      bounds: { timeout_ms: mode === 'timeout-zero' ? 200 : 2000, max_attempts: 8, timeout_reservation_ms: 16000, concurrency: 1, resource_policy: policyRef },
+      bounds: { timeout_ms: mode === 'timeout-zero' ? (options.deadlineMs ?? 200) : 2000, max_attempts: policy.max_attempts, timeout_reservation_ms: policy.max_total_timeout_ms, concurrency: 1, resource_policy: policyRef },
       output: { schema: outputSchema, required_fields: { score: 'finite_number' }, additional_fields: false }, domain_policy: domainPolicy,
       proposal: { decision: 'continue', operation: mode, prerequisites: [], retry: null } }
     return subject
