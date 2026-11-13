@@ -17,6 +17,15 @@ export async function apply(ctx) {
   if (ctx.webServer.host !== '127.0.0.1') throw new Error('Qualification requires loopback')
   const audit = { requests: [], results: [], original: null, routed: false, reported: false }
   const researchMode = process.env.DSH_RESEARCH_GUARDED_QUALIFICATION === '1'
+  const realMode = process.env.DSH_RESEARCH_REAL_MODELS === '1'
+  const servingMode = process.env.DSH_RESEARCH_SERVING_GPU === '1'
+  let realWorker, realReviewer
+  if (realMode) {
+    const { RemoteTraexAdapter } = await import(new URL('../examples/traex-tools/remote-model.mjs', import.meta.resolve('dsh-research')))
+    realWorker = new RemoteTraexAdapter('tools'); realReviewer = new RemoteTraexAdapter('text')
+    ctx.llm.registerAdapter(['default-real-worker'], realWorker)
+    ctx.llm.registerAdapter(['default-real-reviewer'], realReviewer)
+  }
   let research
   class Scripted extends LlmAdapter {
     async resolveModel(provider, model) {
@@ -75,7 +84,7 @@ export async function apply(ctx) {
         return json(200, { result: await source.receive(input) })
       }
       if (req.method === 'POST' && req.url === '/default-qualification/inject') {
-        const input = commentTrigger({ id: 900001, body: researchMode ? (process.env.DSH_RESEARCH_FAULT_QUALIFICATION
+        const input = commentTrigger({ id: 900001, body: servingMode ? '@fixture-agent Qualify one serving-value/access GPU unit through the native guarded worker; scientific authority remains held.' : realMode ? '@fixture-agent Qualify a valid negative followed by a separately reviewed positive successor; baseline does not satisfy the negative objective.' : researchMode ? (process.env.DSH_RESEARCH_FAULT_QUALIFICATION
           ? `@fixture-agent Exercise the bounded native fault ${process.env.DSH_RESEARCH_FAULT_QUALIFICATION}` : '@fixture-agent Run the bounded synthetic negative research case') : '@fixture-agent Validate the frozen default runtime request; manifest=sha256:fixture-identity',
           user: { login: 'fixture-owner', type: 'User' }, created_at: '2026-11-12T00:00:00Z',
           html_url: 'https://github.com/fixture/default-runtime/issues/1#issuecomment-900001' }, { number: 1, isPr: false }, 'conversation', 'fixture-agent')
@@ -94,7 +103,8 @@ export async function apply(ctx) {
         const agent = ctx.agents.get(`worker-${ticket.id}`)
         if (agent) events[ticket.id] = agent.session.snapshotEvents()
       }
-      return json(200, { ...audit, tickets, events, stored_original: audit.original && source.triggers.get(audit.original.id),
+      return json(200, { ...audit, ...(realMode ? { reported: tickets.some(t => t.assignments.some(a => a.report)),
+        real_models: { worker: realWorker.receipts, reviewer: realReviewer.receipts } } : {}), tickets, events, stored_original: audit.original && source.triggers.get(audit.original.id),
         master_events: ctx.agents.get(host.masterId)?.session.snapshotEvents() ?? [],
         ...(researchMode ? { research: await research.snapshot() } : {}) })
     } catch (error) { return json(500, { error: String(error) }) }

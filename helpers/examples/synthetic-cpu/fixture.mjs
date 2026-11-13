@@ -89,12 +89,14 @@ export async function createCpuFixture(outputArg, options = {}) {
 
   const harness = options.context ? ctx.agentLoop : await mountAgentLoopTestHarness(ctx)
   const authorLLM = options.authorLLM ?? new ScriptedAdapter()
-  const reviewerLLM = new ScriptedAdapter()
+  const reviewerLLM = options.reviewerLLM ?? new ScriptedAdapter()
+  const reviewerProvider = options.reviewerProvider ?? 'synthetic-reviewer'
+  const reviewerModel = options.reviewerModel ?? 'scripted'
   ctx.llm.registerAdapter([options.authorProvider ?? 'synthetic-author'], authorLLM)
-  ctx.llm.registerAdapter(['synthetic-reviewer'], reviewerLLM)
+  if (!options.reviewerAdapterRegistered) ctx.llm.registerAdapter([reviewerProvider], reviewerLLM)
   const author = options.author ?? await harness.create(SessionId('m2-author'), { provider: options.authorProvider ?? 'synthetic-author', model: options.authorModel ?? 'scripted' }, { cwd: root })
   const reviewerId = 'm2-reviewer'
-  const reviewer = options.automaticReview ? null : await harness.create(SessionId(reviewerId), { provider: 'synthetic-reviewer', model: 'scripted' }, { cwd: root })
+  const reviewer = options.automaticReview ? null : await harness.create(SessionId(reviewerId), { provider: reviewerProvider, model: reviewerModel }, { cwd: root })
   if (options.automaticReview && !options.nativeReview) {
     class ReadOnlyQuery extends SessionQuery { async searchSessions() { throw new Error('Search not supported in fixture') }; async searchEvents() { throw new Error('Search not supported in fixture') } }
     await ctx.plugin(ReadOnlyQuery, {})
@@ -140,13 +142,13 @@ export async function createCpuFixture(outputArg, options = {}) {
   const verifier = await source('snapshots/verifier.mjs', join(packageRoot, 'examples/synthetic-cpu/verifier.mjs'))
   const verifyDomain = (await import(pathToFileURL(join(root, verifier.uri)).href)).verify
   const domainPolicy = await json('snapshots/domain-policy.json', { scope: 'synthetic released inputs only', score_meaning: 'positive/negative support relative to a zero synthetic baseline', verifier })
-  const reviewerPreset = await json('snapshots/reviewer-preset.json', { session_id: reviewerId, provider: 'synthetic-reviewer', model: 'scripted' })
+  const reviewerPreset = await json('snapshots/reviewer-preset.json', { session_id: reviewerId, provider: reviewerProvider, model: reviewerModel })
   const permissions = await json('snapshots/reviewer-permissions.json', { tools: [], boundary: 'native tool guard; trusted same account' })
   const policy = { scope: 'synthetic_released_cpu', authority, binding, goal_id: 'synthetic-cpu', goal_revision: 'r1', max_attempts: options.maxAttempts ?? 8,
     max_timeout_ms: options.actionTimeoutMs ?? 2000, max_total_timeout_ms: options.maxTotalTimeoutMs ?? 16000, max_output_bytes: 8192, allowed_executables: [process.execPath],
     allowed_operations: options.allowedOperations ?? ['negative', 'positive', 'timeout-zero', 'invalid-output', 'drift', 'unknown-launch', 'baseline'], domain_policy: domainPolicy, verifier, entrypoint: evaluator,
-    reviewer: { session_id: reviewerId, provider: 'synthetic-reviewer', preset: reviewerPreset, permissions },
-    ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, subagent_provider: options.reviewProvider ?? options.nativeReview?.provider ?? 'synthetic-review', model: 'scripted' } } : {}),
+    reviewer: { session_id: reviewerId, provider: reviewerProvider, preset: reviewerPreset, permissions },
+    ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, subagent_provider: options.reviewProvider ?? options.nativeReview?.provider ?? 'synthetic-review', model: reviewerModel } } : {}),
     allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'] }
   const policyRef = await json('snapshots/policy.json', policy)
   if (table.get('synthetic-m2')) throw new Error('Synthetic fixture cannot overwrite an existing authority; use retained-state reopen')

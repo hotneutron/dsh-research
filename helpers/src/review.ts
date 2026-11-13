@@ -171,7 +171,7 @@ export class NativeReviewDriver {
           const activation = await this.ctx.subagents.startActivation({ provider: limits.subagent_provider, childId: SessionId(this.policy.reviewer.session_id),
             label: 'Separate bounded research reviewer', delivery: 'caller', signal: bounded,
             request: { parent: author, prompt: content, maxDepth: 1, persona: REVIEW_INSTRUCTIONS,
-              agentOptions: { provider: this.policy.reviewer.provider, model: limits.model }, toolFilter: { deny: [...this.config.deniedTools] } } })
+              agentOptions: { provider: this.policy.reviewer.provider, model: limits.model }, toolFilter: { allow: [], deny: [...this.config.deniedTools] } } })
           messageId = activation.messageId
         }
       }

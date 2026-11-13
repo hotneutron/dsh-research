@@ -17,6 +17,12 @@ import uuid
 
 
 def run(args):
+    run_epoch = time.monotonic()
+    if args.serving_gpu:
+        if args.real_models or args.automatic or args.fault: raise ValueError('Serving GPU is a separately frozen qualification stratum')
+        args.research = True
+    if args.real_models:
+        args.automatic = True
     if args.fault:
         args.automatic = True
     if args.automatic:
@@ -55,17 +61,32 @@ def run(args):
     cmd = ['python3', str(profile_tool), '--project', str(output), '--runtime', str(runtime),
            '--home', str(home), '--state', str(state), '--profile', profile, '--port', str(port), '--qualification-provider', str(provider)]
     prepared = json.loads(subprocess.check_output(cmd, text=True))
+    if args.serving_gpu:
+        source_root = Path(os.environ['DSH_RESEARCH_SERVING_PROJECT_ROOT']).resolve(strict=True)
+        path = Path(__file__).with_name('serving-sandbox.py')
+        spec = importlib.util.spec_from_file_location('serving_device_sandbox', path)
+        sandbox_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(sandbox_module)
+        sandbox_module.configure(Path(prepared['profile_directory']), output, source_root)
     env = {**os.environ, 'DSH_HOME': str(home), 'DSH_RESEARCH_DISPOSABLE_QUALIFICATION': str(output),
            'DSH_RESEARCH_GUARDED_QUALIFICATION': '1' if args.research else '0',
            'DSH_RESEARCH_AUTOMATIC_QUALIFICATION': '1' if args.automatic else '0',
            'DSH_RESEARCH_FAULT_QUALIFICATION': args.fault or '',
+           'DSH_RESEARCH_REAL_MODELS': '1' if args.real_models else '0',
+           'DSH_RESEARCH_SERVING_GPU': '1' if args.serving_gpu else '0',
+           'DSH_RESEARCH_SERVING_CRASH': '1' if args.serving_crash else '0',
            'PATH': str(node.parent) + os.pathsep + os.environ['PATH']}
     log = (output / 'runtime.log').open('w')
     process = None
     receipt_to_publish = None
     calls, cases = [], []
-    started_at = time.monotonic()
+    started_at = run_epoch if args.serving_gpu else time.monotonic()
     qualification_plan = None
+    if args.serving_gpu:
+        path = Path(__file__).with_name('serving-runtime.py')
+        spec = importlib.util.spec_from_file_location('serving_default_runtime', path)
+        serving_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(serving_module)
+        qualification_plan = serving_module.qualification_plan(helper, crash=args.serving_crash)
+        (output / 'qualification-plan.json').write_text(json.dumps(qualification_plan, indent=2) + '\n')
     if args.automatic:
         # Frozen before any provider request, reviewer dispatch or evaluator admission.
         qualification_plan = {'schema_version': 1, 'scope': 'scripted released-input default worker; confirmation off',
@@ -88,6 +109,11 @@ def run(args):
             'source_pins': {str(p.relative_to(helper)): hashlib.sha256(p.read_bytes()).hexdigest() for p in
                             [helper / 'examples/superagent/research-worker.mjs', helper / 'examples/superagent/automatic-worker.mjs',
                              helper / 'examples/synthetic-cpu/fixture.mjs']}}
+        if args.real_models:
+            path = Path(__file__).with_name('real-runtime.py')
+            spec = importlib.util.spec_from_file_location('real_default_runtime', path)
+            real_module = importlib.util.module_from_spec(spec); spec.loader.exec_module(real_module)
+            qualification_plan = real_module.qualification_plan(helper)
         if fault_module: qualification_plan = fault_module.qualification_plan(args.fault, helper)
         (output / 'qualification-plan.json').write_text(json.dumps(qualification_plan, indent=2) + '\n')
 
@@ -161,7 +187,8 @@ def run(args):
         api('/orchestrator/api/executor/pause', 'POST', {'paused': True})
         # Save all non-account blocks while setup is pending; then resolve fixture accounts last.
         save('eval', {'mode': 'observe', 'model': {'provider': 'default-qualification', 'model': 'router'}})
-        save('executor', {'model': {'provider': 'default-qualification', 'model': 'worker'}, 'maxWorkers': 1,
+        save('executor', {'model': {'provider': 'default-real-worker' if args.real_models else 'default-qualification',
+                                   'model': 'DeepSeek-V4.1-Flash' if args.real_models else 'worker'}, 'maxWorkers': 1,
                           'directory': str(output / 'work'), 'prepare': '', 'blockedCommands': []})
         save('policy', {'rules': [], 'sources': {'github': {'allowed': [{'id': 'fixture-owner'}]}}})
         save('source:github', {'enabled': True, 'config': {'repository': 'fixture/default-runtime', 'cli': str(source)}})
@@ -205,6 +232,12 @@ def run(args):
             if not args.automatic:
                 api('/default-qualification/research/refusals', 'POST', {})
             api('/default-qualification/research/start', 'POST', {})
+        if args.real_models:
+            receipt_to_publish = real_module.run_real(api, wait, output, restart_fault, started_at, cases, injected, qualification_plan)
+            return receipt_to_publish
+        if args.serving_gpu:
+            receipt_to_publish = serving_module.run_serving(api, wait, output, restart_fault, started_at, cases, injected, qualification_plan, args.serving_crash)
+            return receipt_to_publish
         snapshot = wait(lambda: (lambda x: x if x['tickets'] and x['reported'] and any(a.get('report') for a in x['tickets'][0]['assignments']) else None)(api('/default-qualification')),
                         'Native worker assignment/report')
         ticket = snapshot['tickets'][0]
@@ -326,6 +359,11 @@ if __name__ == '__main__':
     parser.add_argument('--output', required=True)
     parser.add_argument('--research', action='store_true', help='Qualify guarded research tools inside the default worker')
     parser.add_argument('--automatic', action='store_true', help='Qualify native automatic proposal/review/feedback and bounded validity drills')
+    parser.add_argument('--real-models', action='store_true', help='Use bounded loopback TraeX relay for actual native author/reviewer calls')
+    parser.add_argument('--serving-gpu', action='store_true', help='Qualify project serving producer on guarded native default worker')
+    parser.add_argument('--serving-crash', action='store_true', help='Crash/reopen the GPU qualification runtime after a real CUDA context is created')
     parser.add_argument('--fault', help='Qualify one bounded native failure/recovery stratum')
-    result = run(parser.parse_args())
+    args = parser.parse_args()
+    if args.serving_crash and not args.serving_gpu: parser.error('--serving-crash requires --serving-gpu')
+    result = run(args)
     print(json.dumps({'status': 'passed', 'cases': len(result['cases'])}))

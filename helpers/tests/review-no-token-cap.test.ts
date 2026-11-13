@@ -18,6 +18,7 @@ test('native reviewer completes without a token cap, replays once and keeps its 
     assert.equal(DevelopmentPolicySchema.parse({ ...f.policy, review_limits: { ...f.policy.review_limits, max_tokens: 512 } }).review_limits?.max_tokens, 512)
     f.reviewerLLM.script.push((options: GenerateOptions) => {
       assert.equal(options.maxTokens, undefined)
+      assert.equal(options.tools?.length ?? 0, 0)
       const block = options.messages.flatMap(m => m.content).findLast(b => b.type === 'text' && b.text.includes('REVIEW_PACKET_JSON\n'))
       assert.ok(block && block.type === 'text')
       const packet = JSON.parse(block.text.split('REVIEW_PACKET_JSON\n').at(-1)!)

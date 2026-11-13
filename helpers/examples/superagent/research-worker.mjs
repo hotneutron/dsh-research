@@ -13,6 +13,7 @@ import { canonicalJson, ProjectArtifacts } from 'dsh-research'
 import { NativeResearchAdapter, researchDomain } from 'dsh-research/native'
 import { createCpuFixture, ScriptedAdapter } from '../synthetic-cpu/fixture.mjs'
 import { installAutomatic } from './automatic-worker.mjs'
+import { installRealAutomatic } from './real-automatic-worker.mjs'
 import { defaultCoverage } from './default-coverage.mjs'
 import { faultTable, installFault, instrumentProtectedReads } from './fault-worker.mjs'
 
@@ -30,6 +31,9 @@ export async function install(ctx, audit) {
   const root = process.env.DSH_RESEARCH_DISPOSABLE_QUALIFICATION
   const registration = join(root, 'research-worker.json')
   const automaticMode = process.env.DSH_RESEARCH_AUTOMATIC_QUALIFICATION === '1'
+  const realMode = process.env.DSH_RESEARCH_REAL_MODELS === '1'
+  const servingMode = process.env.DSH_RESEARCH_SERVING_GPU === '1'
+  const servingSandbox = () => ({ ...ctx.sandboxPolicy.resolve({ session: author.session, mode: 'workspace-write' }), workspaceRoot: root })
   const faultKind = process.env.DSH_RESEARCH_FAULT_QUALIFICATION || null
   const faultControl = { entered: false, release: null, protectedReads: [] }
   let fault
@@ -70,6 +74,8 @@ export async function install(ctx, audit) {
       fixture = await createCpuFixture(root, { context: ctx, author, authorLLM: new ScriptedAdapter(),
         authorTools, registration: { toolScope: 'author', inheritedTools: ['skill'] },
         ...(automaticMode ? { automaticReview: true, nativeReview: { provider: 'spawn' }, deadlineMs: 1000, maxAttempts: 5, maxReviews: 6, maxTotalTimeoutMs: 10000 } : {}),
+        ...(realMode ? { reviewerProvider: 'default-real-reviewer', reviewerModel: 'DeepSeek-V4.1-Flash', reviewerAdapterRegistered: true,
+          reviewTimeout: 120000 } : {}),
         ...(faultKind ? { maxAttempts: 1, maxReviews: 2, maxTotalTimeoutMs: 16000,
           executionSandbox: { mode: ['tree-deadline', 'running-loss'].includes(faultKind) ? 'workspace-write' : 'read-only',
             workspaceRoot: ticket.execution.directory, sessionId: author.id },
@@ -79,14 +85,26 @@ export async function install(ctx, audit) {
           ...(faultKind === 'review-unavailable' ? { reviewProvider: 'unavailable-qualified-route' } : {}),
           evaluatorPath: fileURLToPath(new URL('./fault-evaluate.mjs', import.meta.url)), allowedOperations: ['positive'],
           inputMetadata: { qualification_case: faultKind, project_root: root, process_marker: join(ticket.execution.directory, 'fault-process.json') } } : {}),
-        executionShell: shell, assertActiveAuthority: authority, originalPrompt: source().triggers.get(ticket.origin.triggerId).text })
+        executionShell: shell, assertActiveAuthority: authority,
+        originalPrompt: source().triggers.get(ticket.origin.triggerId).text })
+      if (servingMode) {
+        const moduleRef = await fixture.artifacts.write('local_artifacts/autoresearch/dsh/serving-module.mjs', await readFile(join(process.env.DSH_RESEARCH_SERVING_PROJECT_ROOT, 'tools/dsh_research/serving_integration.mjs')))
+        const { installServing } = await import(pathToFileURL(join(root, moduleRef.uri)).href)
+        fixture = await installServing(fixture, { sourceRoot: process.env.DSH_RESEARCH_SERVING_PROJECT_ROOT,
+          leaseRoot: '/home/cliu/.local/state/autoresearch/leases', workspaceRoot: ticket.execution.directory,
+          executionSandbox: servingSandbox(), executionSandboxResolver: servingSandbox,
+          deviceSandbox: { binding: await readFile(join(root, 'gpu-sandbox-binding.json'), 'utf8'), qualification: await readFile(join(root, 'gpu-sandbox-qualification.json'), 'utf8') },
+          registration: { toolScope: 'author', inheritedTools: ['skill'] } })
+        fixture.servingModule = moduleRef
+      }
       const original = source().triggers.get(ticket.origin.triggerId)
       const originalRef = await fixture.json('snapshots/original-source.json', original)
-      packet = automaticMode ? { request: { mode: 'automatic' } } : await fixture.prepare('negative')
+      packet = automaticMode ? { request: { mode: 'automatic' } } : await fixture.prepare(servingMode ? (process.env.DSH_RESEARCH_SERVING_CRASH === '1' ? 'running-loss' : 'positive') : 'negative')
       const context = await fixture.json('snapshots/default-ticket-binding.json', { ticket_id: ticketId, mandate: ticket.mandate, original_source: originalRef, manifest: packet.manifestRef ?? null })
       await writeFile(registration, JSON.stringify({ author: author.id, ticket_id: ticketId, mandate, policy: fixture.policyRef,
         verifier: fixture.policy.verifier, binding: fixture.binding, packet, context,
-        ...(faultKind ? { process_marker: join(ticket.execution.directory, 'fault-process.json') } : {}) }, null, 2) + '\n', { flag: 'wx' })
+        ...(faultKind ? { process_marker: join(ticket.execution.directory, 'fault-process.json') } : {}),
+        ...(servingMode ? { serving_module: fixture.servingModule } : {}) }, null, 2) + '\n', { flag: 'wx' })
       fixture.config.observe = observe
       if (faultKind) {
         fixture.config.table = faultTable(fixture.table, faultKind, faultControl, false)
@@ -104,7 +122,7 @@ export async function install(ctx, audit) {
       domain = await new DomainFacility(ctx, { backend: 'sqlite' }).open(researchDomain)
       const table = domain.table('projects'), stored = table.get('synthetic-m2')
       assert.ok(stored, 'Retained registration cannot recreate a missing authority')
-      const verify = (await import(pathToFileURL(join(root, retained.verifier.uri)).href)).verify
+      const verify = servingMode ? null : (await import(pathToFileURL(join(root, retained.verifier.uri)).href)).verify
       const config = { artifacts, table, projectKey: 'synthetic-m2', policy: retained.policy, authorSessionId: author.id,
         authorTools, executionShell: shell, assertActiveAuthority: authority,
         verifier: { identity: retained.verifier, verify }, observe }
@@ -113,18 +131,27 @@ export async function install(ctx, audit) {
         config.artifacts = instrumentProtectedReads(artifacts, faultControl.protectedReads)
         config.executionSandbox = { profile: retained.binding.profile.effective, resolve: () => ctx.sandboxPolicy.resolve({ session: author.session, mode: ['tree-deadline', 'running-loss'].includes(faultKind) ? 'workspace-write' : 'read-only' }) }
       }
-      const adapter = await NativeResearchAdapter.open(ctx, config)
-      unregister = adapter.register({ toolScope: 'author', inheritedTools: ['skill'] })
-      fixture = { root, artifacts, table, adapter, config, binding: retained.binding, json: (uri, value) => artifacts.write(uri, Buffer.from(canonicalJson(value))) }
+      if (servingMode) {
+        fixture = { root, ctx, artifacts, table, config, binding: retained.binding, json: (uri, value) => artifacts.write(uri, Buffer.from(canonicalJson(value))) }
+        await artifacts.read(retained.serving_module)
+        const { installServing } = await import(pathToFileURL(join(root, retained.serving_module.uri)).href)
+        fixture = await installServing(fixture, { sourceRoot: process.env.DSH_RESEARCH_SERVING_PROJECT_ROOT, reopened: true,
+          leaseRoot: '/home/cliu/.local/state/autoresearch/leases', workspaceRoot: ticket.execution.directory,
+          executionSandbox: servingSandbox(), executionSandboxResolver: servingSandbox, registration: { toolScope: 'author', inheritedTools: ['skill'] } })
+      } else {
+        const adapter = await NativeResearchAdapter.open(ctx, config)
+        unregister = adapter.register({ toolScope: 'author', inheritedTools: ['skill'] })
+        fixture = { root, artifacts, table, adapter, config, binding: retained.binding, json: (uri, value) => artifacts.write(uri, Buffer.from(canonicalJson(value))) }
+      }
       packet = retained.packet
       await ctx.plugin(FilesystemSkills, { includeDefaultRoots: false,
         customSkillDirs: [fileURLToPath(new URL('../../dist/skills', import.meta.url))], watch: false })
       // The reviewer can remain unloaded: the adapter verifies retained native Session bytes through the public query.
     }
     if (automaticMode) {
-      coverage = await defaultCoverage(fixture)
+      if (!realMode) coverage = await defaultCoverage(fixture)
       if (faultKind) fault = await installFault(fixture, ctx, author, faultKind, faultControl, observe, coverage, Boolean(retained))
-      else automatic = await installAutomatic(fixture, ctx, author, observe, Boolean(retained))
+      else automatic = realMode ? await installRealAutomatic(fixture, ctx, author) : await installAutomatic(fixture, ctx, author, observe, Boolean(retained))
     }
     const skill = await scopedSkills.get('research', { cwd: root })
     assert.ok(skill?.content.includes('research_run'))
@@ -197,6 +224,19 @@ export async function install(ctx, audit) {
     async drill(kind) {
       await pending
       const count = fixture.table.get('synthetic-m2').consumed_attempts
+      if (realMode && kind === 'real-model') return automatic.drill()
+      if (servingMode && ['serving-incomplete', 'serving-deadline'].includes(kind)) {
+        const operation = kind === 'serving-incomplete' ? 'incomplete' : 'deadline'
+        const p = await fixture.prepare(operation)
+        const result = await execute('research_run', p.request)
+        assert.ok(!result.error, canonicalJson(result))
+        if (operation === 'incomplete') {
+          const value = JSON.parse(Buffer.from(await fixture.artifacts.read(result.value.evidence)).toString())
+          assert.equal(value.evidence_status, 'invalid'); assert.equal(value.scientific_status, 'ineligible')
+        } else { assert.equal(result.value.status, 'unknown'); assert.equal(fixture.table.get('synthetic-m2').reserved_timeout_ms, 3000) }
+        const replay = await execute('research_run', p.request); assert.ok(!replay.error); assert.equal(replay.value.replay, true)
+        return { result: result.value, state: fixture.table.get('synthetic-m2'), manifest: p.manifestRef }
+      }
       packet = automatic?.packet() ?? packet
       if (kind === 'automatic') {
         assert.ok(automaticMode)
