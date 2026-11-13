@@ -58,13 +58,17 @@ export function auditContinuity(beforeInput: unknown, afterInput: unknown) {
       || next.admitted_revision !== old.admitted_revision || next.timeout_ms !== old.timeout_ms || next.dispatch_token !== old.dispatch_token) violations.push(`action_history_changed:${id}`)
     if (old.evidence && !same(next?.evidence, old.evidence)) violations.push(`evidence_rewritten:${id}`)
     if (old.checkpoint && !same(next?.checkpoint, old.checkpoint)) violations.push(`checkpoint_rewritten:${id}`)
+    if (before.schema_version === 3) {
+      const facts = before.actions[id]?.runtime_facts
+      if (facts && (after.schema_version !== 3 || !same(after.actions[id]?.runtime_facts, facts))) violations.push(`gpu_native_facts_lost:${id}`)
+    }
     if (old.phase === 'settled' && next?.phase !== 'settled') violations.push(`terminal_reopened:${id}`)
     const phases = ['admitted', 'dispatching', 'running', 'unknown', 'settled']
     if (next && phases.indexOf(next.phase) < phases.indexOf(old.phase)) violations.push(`dispatch_phase_rolled_back:${id}`)
     if (old.reservation_active && !next?.reservation_active && next?.phase !== 'settled') violations.push(`reservation_released_without_settlement:${id}`)
   }
-  if (before.schema_version === 2) {
-    if (after.schema_version !== 2) violations.push('coordination_history_dropped')
+  if (before.schema_version !== 1) {
+    if (after.schema_version === 1) violations.push('coordination_history_dropped')
     else {
       if (after.consumed_review_requests < before.consumed_review_requests) violations.push('review_requests_refunded')
       for (const [id, request] of Object.entries(before.review_requests)) {

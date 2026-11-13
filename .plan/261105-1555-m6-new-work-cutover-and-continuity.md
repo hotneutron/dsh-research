@@ -1,6 +1,6 @@
 # M6 — Adopt new work and preserve authority through cutover
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:31:07 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 11:09:45 -0800. Revision: r17. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: accepted M5 GPU workflow evidence. New-work adoption, enabled confirmation and legacy retirement are separate gates; a pilot pass cannot satisfy all three.
 
@@ -131,3 +131,4 @@ Also please confirm that for most execution and iterations, human intervention i
 | r14 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
 | r15 | 2026-11-12 00:09:54 -0800 | Linked concrete Accorde preparation, retained live qualification and authority gates, and delegated new inventory/continuity evidence to the canonical tracker. |
 | r16 | 2026-11-12 00:31:07 -0800 | Bound adoption to corrected GPU M5 evidence; helper CPU/storage fixtures remain scoped and do not qualify GPU or legacy authority handoff. |
+| r17 | 2026-11-12 11:09:45 -0800 | Linked current GPU qualification/state-v3 and actual H100 authority/recovery work through the tracker; retained full scientific/profile/compatibility/handoff gates. |

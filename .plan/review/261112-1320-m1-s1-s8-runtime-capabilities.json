@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12 13:57:41 -0800",
+  "request_verbatim": "Anything blocking M1's S1-S8 now? If no, proceed with S1-S8.",
+  "qualification": "scoped S1-S8 public-export/core-port and native-runtime integration passed",
+  "M1_complete": false,
+  "why_not_global_completion": "Independent profile/contract acceptance and default deployed prototype/source/store/watchdog gates are not inferred from this fixture",
+  "prototype": {
+    "head": "8c32a9dc5d72c033816c6a8110b37f40cf94fba4",
+    "package_sha256": "f5170d812137dd370c568decb481e19f4da9a3d1fd7bad341a0f07942020a559",
+    "entry_sha256": "98595370ab801ea54babc4a5df10394dc76cc41837d7c16e618c6ce31a2481c5",
+    "lock_sha256": "ba6b997c448984a04b28eeb5b620c14c7cfeff5eb170e1abd6e0734007405c39",
+    "source_modified": false
+  },
+  "runtime_pair": "unchanged dsh-superagent 0.1.0 + pinned DSH 0.2.1-alpha.2 family",
+  "capabilities": {
+    "S1": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "source-ticket-manifest-native-worker"
+      ]
+    },
+    "S2": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "allowlisted-source-duplicate-idempotent-outbox"
+      ],
+      "external_channels": {
+        "status": "disabled",
+        "reason": "No authorized target/account; fixture source/outbox only, zero external messages"
+      }
+    },
+    "S3": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "unchanged-service-script-intentional-stop-respected"
+      ],
+      "production_service": {
+        "status": "pending",
+        "reason": "Respect-stop behavior verified in an isolated profile; no production service/watchdog installed"
+      }
+    },
+    "S4": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "actual-native-job-evidence-completion-expiry-invalidity"
+      ]
+    },
+    "S5": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "serialized-one-author-overlap-refusal-canonical-cwd"
+      ]
+    },
+    "S6": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "native-record-session-reopen-preserves-unknown-charge"
+      ],
+      "default_prototype_ticket_store": {
+        "status": "source_available",
+        "reason": "Public MemoryRepositories is an explicit ephemeral fixture; native scientific record and Sessions are durably reopened. Default prototype Store/DshExecutor deployment remains unqualified."
+      }
+    },
+    "S7": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "native-review-cancel-launch-refusal-child-wait-list-selected-drain",
+        "separate-native-reviewer-exact-subject"
+      ],
+      "scientific_review": {
+        "status": "pending",
+        "reason": "Scripted native reviewers prove binding/cancellation/tool restrictions, not scientific adequacy"
+      }
+    },
+    "S8": {
+      "status": "runtime_verified",
+      "scope": "public superagent core ports/native disposable profile",
+      "cases": [
+        "public-config-prompt-delta-pause-policy-revision-stop"
+      ]
+    }
+  },
+  "verification": {
+    "distinct_routes": 8,
+    "route_assertion_groups": 9,
+    "final_admitted_attempts": 4,
+    "final_unknown_reservation_ms": 2000,
+    "earlier_fixture_failures": "Retained: Ticket mandate scope, explicit finite prompt projection, stale Eval rejection, serializable child filter and required public sessionQuery mounting",
+    "external_model_calls": 0,
+    "external_messages": 0,
+    "GPU_scientific_studies": 0
+  },
+  "retained_runtime_receipt": {
+    "uri": "local_artifacts/dsh-research/m1-s1-s8/261112-public-integration-r8/receipt.json",
+    "sha256": "7b233585deb552d03a336caf7dfdd29a326556469a56d785b1b8ecfd87697432",
+    "size_bytes": 27989
+  },
+  "consumer_pins": {
+    "uri": "local_artifacts/dsh-research/m1-s1-s8/261112-public-integration-r8/consumer-pins.json",
+    "sha256": "6d121d30b0130944854f632acc42aafcf69744618248aef1e79185406cb6fc25",
+    "size_bytes": 847
+  },
+  "remaining_deployment_gates": [
+    "Real source/account allowlist and transport/audience qualification",
+    "Actual default prototype persistent Ticket-store/DshExecutor source deployment",
+    "Production service/watchdog installation and health under respect-stop",
+    "Independent scientific/structural/profile review and full M4/M5 qualification"
+  ]
+}

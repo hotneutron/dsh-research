@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T16:20:12.458185-08:00",
+  "scope": "M1-M2 guarded synthetic ordinary-worker qualification on the unchanged public default prototype",
+  "source_pins": {
+    "helpers/src/native.ts": "ce201aa5bffef3f41310ae79d750c332973cef1381fcb0d66ecc5e6bb56da772",
+    "helpers/examples/superagent/research-worker.mjs": "d9bfdbb6d11e1c93279eadcabd88d1157451e567111606e0958d838feb6d23ca",
+    "helpers/examples/superagent/default-provider.mjs": "2de78f91b7a00447dcfdbafa3b5be388f2833a6c29f9687ec9cd2bdc62c077d0",
+    "helpers/examples/superagent/default-runtime.py": "84ce228f7c4e706f0aad09d2fa3057a91bf3dc2911a7bb56dbe6e1dd82530f71",
+    "helpers/examples/synthetic-cpu/fixture.mjs": "72c52f7a0da9e7805d1ba09e2b1cf931742fc8f107e3b6c3c969200e79bb0156",
+    "helpers/tests/native-registration.test.ts": "8b2a636ee64eb211674a4d0099d1915d06f3a9b88625772fe0a694fffbb2e612"
+  },
+  "package": {
+    "name": "dsh-research",
+    "version": "0.2.0",
+    "sha256": "7c959361af7be3df4c36cad393b0673e8882fe746ff16e6c59723e6f2b028041",
+    "native_family": "0.2.1-alpha.2",
+    "prototype_head": "8c32eeb98d3b3f3cfc13be0fd8c1b366e0b72d59",
+    "framework_source_modified": false
+  },
+  "validation": {
+    "build": "passed",
+    "typecheck": "passed",
+    "behavior_tests": {
+      "passed": 48,
+      "failed": 0
+    },
+    "default_worker_groups": [
+      {
+        "id": "source-normalization-allowlist-dedup-paused",
+        "status": "passed"
+      },
+      {
+        "id": "default-DshExecutor-native-session-source-input-report",
+        "status": "passed",
+        "ticket_id": "9789db96ef9fad3b8760e253d5623868"
+      },
+      {
+        "id": "default-worker-guarded-native-research-and-replay",
+        "status": "passed"
+      },
+      {
+        "id": "default-worker-unknown-launch-retains-charge",
+        "status": "passed"
+      },
+      {
+        "id": "default-worker-reopen-preserves-research-authority",
+        "status": "passed"
+      },
+      {
+        "id": "default-Store-graceful-reopen-retains-ticket-input-pause",
+        "status": "passed"
+      },
+      {
+        "id": "management-revision-conflict-and-human-stop",
+        "status": "passed"
+      }
+    ],
+    "receipt_sha256": "0cda73eff85b7e54ef540572975d7ab2e8dbec918fc6db9da04130ed72121ca5",
+    "evidence_archive_sha256": "8187b0933274d5535b6f7a5903b9747d3bcc16eabe836db8311cfff07c3ca857"
+  },
+  "observed": {
+    "native_skill_loaded": true,
+    "tool_registration": "author-local; inherited masks and monotonic Ticket/author/reviewer guards preserved",
+    "source_manifest_original_prompt_equal": true,
+    "separate_native_reviewer": true,
+    "admission_acknowledgement_before_native_dispatch": true,
+    "native_evaluator_executions": 1,
+    "controlled_unknown_publications": 1,
+    "synthetic_admitted_attempts": 2,
+    "unknown_reservation_ms": 2000,
+    "reopen_preserves_entire_research_state": true,
+    "replay_adds_no_charge": true,
+    "native_Ticket_stop_refuses_tool": true,
+    "external_model_calls": 0,
+    "hosted_scientific_dispatches": 0,
+    "GPU_dispatches": 0,
+    "confirmation_openings": 0
+  },
+  "independent_acceptance": {
+    "native_group": "accepted bounded scope",
+    "worker_group": "accepted bounded scope",
+    "open_group_defects": 0,
+    "cross_group": "accepted exact packed engineering scope",
+    "open_defects": 0,
+    "native_report_sha256": "891b34387a2ad19d9d7dd41e30b4f714e3e32bbc140739679b431eddbc23882e",
+    "worker_report_sha256": "c5f7f9f496da77ffadf5473dfc64bf93004192c1c055f11bd7a8df7a695b4a72",
+    "cross_group_report_sha256": "f2dda7e78935ad25a6892838f9b8a6aae6228f7760dca1f5f927549925320280"
+  },
+  "M1": {
+    "selected_default_worker_route": "qualified",
+    "full_original_profile_property_coverage": "pending",
+    "complete": false
+  },
+  "M2": {
+    "ordinary_worker_engineering_demo": "qualified",
+    "full_original_M1_dependent_acceptance": "pending"
+  },
+  "remaining": [
+    "M1 full original declared property/semantic/profile qualification",
+    "M3 automatic proposal/review/feedback on this default worker",
+    "Hosted scientific workload/domain/GPU/model/authority adoption",
+    "Safe scientific writer transfer and whole-project recovery",
+    "Actual team recipient access and host reboot qualification"
+  ],
+  "prompt_verbatim": "work on the M1-M2",
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T16:20:12.460657-08:00",
+      "change": "Recorded packed default-worker native execution, seven groups, 48 tests, exact-byte/authority/uncertainty evidence and scoped group acceptance."
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T16:21:13.043434-08:00",
+      "change": "Closed cross-group acceptance on exact final packed sources and39 checked byte references; no open P0-P2 defects; broader qualification and hosted scientific adoption remain held."
+    }
+  ]
+}

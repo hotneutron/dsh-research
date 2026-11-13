@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T15:03:49.557304-08:00",
+  "scope": "unchanged default web/Source/Store/DshExecutor and paused project-owned Linux deployment",
+  "prototype": {
+    "head": "8c32eeb98d3b3f3cfc13be0fd8c1b366e0b72d59",
+    "framework_source_modified": false,
+    "runtime_family": "0.2.1-alpha.2",
+    "node": "24.9.0"
+  },
+  "default_consumer": {
+    "assertion_groups": [
+      {
+        "id": "source-normalization-allowlist-dedup-paused",
+        "status": "passed"
+      },
+      {
+        "id": "default-DshExecutor-native-session-source-input-report",
+        "status": "passed",
+        "ticket_id": "e1cd2e6a2b7f48cf38b5d0e1c53b8fd4"
+      },
+      {
+        "id": "default-Store-graceful-reopen-retains-ticket-input-pause",
+        "status": "passed"
+      },
+      {
+        "id": "management-revision-conflict-and-human-stop",
+        "status": "passed"
+      }
+    ],
+    "receipt_sha256": "94067eb5a0436dac6289c8b4f36f5ef7abbe33342021d52c07d60c1c18cf1018",
+    "source_pins": {
+      "default-profile.py": "c0340d36ee7e6ac3b8057671a6e14c65cd6f73a1a45d8756a31e3466253d34f8",
+      "default-runtime.py": "e1b944344176e8ddd15dc1bc939739949aa214703328ac575e490bb798d7eb87",
+      "default-provider.mjs": "25df7bf3b3c38b6c64fcce123ae6039e260e917d717cdad525610f4324f86730",
+      "source-cli": "151f7e03b50c0d3f828e2f783336ef465a7cc107fc4417df44c4658365f8902c"
+    },
+    "restored_source_retained": true,
+    "ticket_state_retained": true,
+    "transport": "native fixture CLI; no GitHub traffic",
+    "models": "bounded native scripted models",
+    "scientific_dispatches": 0
+  },
+  "production": {
+    "host": "h100sjc0",
+    "project_root": "/home/cliu/wk/accorde",
+    "profile": "accorde-gpu-h100sjc0",
+    "unit": "accorde-dsh-h100sjc0.service",
+    "paused": true,
+    "runtime": "ready",
+    "source": "ready",
+    "workers": {
+      "running": 0,
+      "queued": 0,
+      "maxWorkers": 1
+    },
+    "account": "hotneutron",
+    "eval": "off",
+    "allowed_senders": [],
+    "model_routes": "disabled/unavailable",
+    "prepare": "/bin/false",
+    "persistence_root": "/home/cliu/wk/accorde/.autoresearch/dsh/deployment/accorde-gpu-h100sjc0",
+    "final_manifest_sha256": "a005176e6fd19d4b4106e580bd80425e1d4c53872340ef0a81bc6ca2489208f0",
+    "final_service_control_sha256": "1aac5d55f82f4814e575af1d10350e29482994a1128bf3b696484954c9fd0013",
+    "private_backup_integrity": "ok",
+    "idle_crash_recovery_seconds": 38.861215435958,
+    "earlier_crash_receipt_sha256": "d79b96a6550bc6040c899573f853f1da2614933d3a6f61e0cdf157ff69aafeff",
+    "user_manager_startup": "enabled; gated by persistent intentional-stop marker",
+    "host_reboot_tested": false
+  },
+  "independent_review": {
+    "status": "accepted for bounded engineering scope",
+    "scope": "engineering boundaries and implementation; excludes scientific reasoning",
+    "confirmed_fixes": [
+      "failed CUDA teardown lease ownership",
+      "late fixture failure retention",
+      "unique disposable service profile",
+      "resolved private bundle symlink target",
+      "retained default qualification provider"
+    ],
+    "timeout_cgroup_and_transport_drills": "passed",
+    "group2_open_defects": 0,
+    "group2_receipt_sha256": "1964436b8b8e3ba8d9c1caac3574cc642dfab8403be1ebda8a3fa10e5045fab6",
+    "open_defects": 0,
+    "default_report_sha256": "1964436b8b8e3ba8d9c1caac3574cc642dfab8403be1ebda8a3fa10e5045fab6",
+    "cross_group_report_sha256": "a30df15742200aa93f9f089bd33e21ae8d6ff8c84f9ec39e0d4ed8a9112eba1a",
+    "scientific_activation": "held"
+  },
+  "distribution": {
+    "package": "dsh-research@0.2.0",
+    "tarball_sha256": "07993ec652834a0eb3a366c65aa701e17142094140dea1ffd63d8b3e53172bb9",
+    "build": "passed",
+    "typecheck": "passed",
+    "exact_distributed_deployment_sources": "passed",
+    "generated_bytecode_excluded": true
+  },
+  "remaining_gates": [
+    "Approved autonomous agent versus human Source intake identity",
+    "Accepted scientific model/GPU envelope and complete qualified workload",
+    "Actual guarded research-tool adoption and separate scientific review in default worker",
+    "Existing scientific authority single-writer cutover and recovery",
+    "Team publication transport and real recipient access",
+    "Host reboot/user-manager lifetime qualification"
+  ],
+  "M1_complete": false,
+  "M5_scientific_activated": false,
+  "M6_authority_migrated": false,
+  "prompt_verbatim": "Work on \"production/default Source/Store deployment and independent acceptance\"",
+  "revision_history": [
+    {
+      "revision": "r1",
+      "timestamp": "2026-11-12T15:03:49.557765-08:00",
+      "change": "Recorded default consumer, paused production/service and private recovery evidence; independent final reports pending."
+    },
+    {
+      "revision": "r2",
+      "timestamp": "2026-11-12T15:04:26.345731-08:00",
+      "change": "Recorded completed independent default-deployment review and matching r12/final control evidence; cross-group final pending."
+    },
+    {
+      "revision": "r3",
+      "timestamp": "2026-11-12T15:05:03.516572-08:00",
+      "change": "Closed independent default and cross-group engineering acceptance with zero open P0-P2 defects; scientific/adoption/reboot/access gates retained."
+    }
+  ]
+}

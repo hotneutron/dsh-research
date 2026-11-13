@@ -1,6 +1,6 @@
 # M2 — Package the research skill and thin helpers
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r12. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 16:20 -0800. Revision: r14. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: M1 contract, runtime pairing and public admission operations accepted. Pure helper work may be developed earlier against the draft schema; integrated completion still depends on M1.
 
@@ -26,7 +26,7 @@ Package 0.1.1 implements src/manifest.ts, src/admission.ts, src/evaluate.ts, src
 
 The ordinary scripted author invokes research_run through the real model tool registry. The adapter verifies actual separate reviewer Session bytes, couples review/attempt/timeout consumption in the existing SQLite/domain record, awaits/queries the committed tuple and uses native bash jobs with onExpiry=kill. Complete captured bytes are hashed and parsed once; the project domain verifier owns the verdict. Synthetic cases cover valid negatives, duplicate/concurrent delivery, role/argv refusal, timeout-zero, bad typed output, drift, reviewer holds and unknown publication/reopen. Raw output/native state remains ignored.
 
-This is scoped development evidence, not full M2 acceptance: M1 independent/profile qualification and superagent Ticket/source wiring remain pending. Live review, broader environments/fault classes, automatic successor/feedback handling and M3–M6 are unqualified. The shipped native policy deliberately accepts only synthetic_released_cpu; it does not enable hosted-project scientific work.
+The [packed default-worker receipt](review/261112-1620-m1-m2-default-worker.json) now closes the selected M2 ordinary-worker engineering demo: actual Source/Ticket, research skill, separate native reviewer completion, local guarded entrypoint, native job/evidence/verdict/checkpoint and retained unknown/reopen/stop checks. Full original M1 profile/property qualification, live scientific review and broader M3–M6 adoption remain gated. The native policies support synthetic CPU and qualification-only project GPU execution; full hosted scientific adoption remains gated. State/domain v3 retains exact native facts before fallible GPU settlement and preserves historical v1/v2 readers; no implicit store migration is provided.
 
 ## Implementation order and owned files
 
@@ -135,3 +135,5 @@ Also please confirm that for most execution and iterations, human intervention i
 | r10 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r11 | 2026-11-11 22:08:03 -0800 | Implemented the M2 pure helpers, scoped native tool, research skill and packed synthetic consumer; retained M1-dependent acceptance and unqualified live/broader routes. |
 | r12 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r13 | 2026-11-12 11:09:45 -0800 | Linked current GPU qualification/state-v3 and actual H100 authority/recovery work through the tracker; retained full scientific/profile/compatibility/handoff gates. |
+| r14 | 2026-11-12 16:20 -0800 | Recorded the packed actual default-worker ordinary-research demo, scoped registration, host authority and cleanup corrections; handed the route to M3 without enabling hosted science. |

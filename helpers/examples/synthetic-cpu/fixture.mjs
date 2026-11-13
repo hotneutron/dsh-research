@@ -54,38 +54,45 @@ class FaultableBash extends LocalBashExecutor {
 
 
 export async function createCpuFixture(outputArg, options = {}) {
-  await mkdir(resolve(outputArg), { recursive: false })
+  if (!options.context) await mkdir(resolve(outputArg), { recursive: false })
+  else if (!options.author || !options.authorLLM) throw new Error('External default-worker qualification requires its exact live author and scripted provider')
   const root = await realpath(resolve(outputArg))
+  if (options.context) {
+    const marker = JSON.parse(await readFile(join(root, 'disposable-qualification.json'), 'utf8'))
+    if (marker.scientific_authority !== false) throw new Error('Existing-context synthetic setup requires an explicit disposable qualification marker')
+  }
   const artifacts = await ProjectArtifacts.open(root)
   const json = (uri, value) => artifacts.write(uri, Buffer.from(canonicalJson(value)))
   const source = async (uri, path) => artifacts.write(uri, await readFile(path))
-  const ctx = new Context()
+  const ctx = options.context ?? new Context()
   let domain, backend, removeBackend, unregister
   const trace = [], cases = []
   try {
+  if (!options.context) {
   await mountAgentLoopTestDependencies(ctx, { workingDirectory: true })
   await ctx.plugin(JsonlPersistence, { root: join(root, '.autoresearch/dsh/sessions'), compression: 'none' })
   await ctx.plugin(LocalJobs, { maxConcurrentJobsPerOwner: 1 })
   await ctx.plugin(LocalSubprocess)
-  await ctx.plugin(FaultableBash, { cwd: root, timeoutMs: 2000, maxTimeoutMs: 2000, graceMs: 50 })
+  await ctx.plugin(FaultableBash, { cwd: root, timeoutMs: options.timeoutMs ?? 2000, maxTimeoutMs: options.timeoutMs ?? 2000, graceMs: 50 })
   await ctx.plugin(Storage)
+  }
   backend = new SqliteStorageBackend({ path: join(root, '.autoresearch/dsh/state.sqlite3'), journalMode: 'wal' })
   removeBackend = ctx.storage.backend.register('sqlite', backend)
   const facility = new DomainFacility(ctx, { backend: 'sqlite' })
   domain = await facility.open(researchDomain)
   const table = domain.table('projects')
-  await ctx.plugin(Skills)
+  if (!options.context) await ctx.plugin(Skills)
   await ctx.plugin(FilesystemSkills, { includeDefaultRoots: false, customSkillDirs: [join(packageRoot, 'dist/skills')], watch: false })
   const skill = await ctx.skills.get('research', { cwd: root })
   assert.ok(skill && skill.content.includes('research_run'))
   cases.push({ id: 'filesystem-skill-loading', outcome: 'passed', path: skill.path, body_sha256: sha256(skill.content) })
 
-  const harness = await mountAgentLoopTestHarness(ctx)
-  const authorLLM = new ScriptedAdapter()
+  const harness = options.context ? ctx.agentLoop : await mountAgentLoopTestHarness(ctx)
+  const authorLLM = options.authorLLM ?? new ScriptedAdapter()
   const reviewerLLM = new ScriptedAdapter()
   ctx.llm.registerAdapter(['synthetic-author'], authorLLM)
   ctx.llm.registerAdapter(['synthetic-reviewer'], reviewerLLM)
-  const author = await harness.create(SessionId('m2-author'), { provider: 'synthetic-author', model: 'scripted' }, { cwd: root })
+  const author = options.author ?? await harness.create(SessionId('m2-author'), { provider: 'synthetic-author', model: 'scripted' }, { cwd: root })
   const reviewerId = 'm2-reviewer'
   const reviewer = options.automaticReview ? null : await harness.create(SessionId(reviewerId), { provider: 'synthetic-reviewer', model: 'scripted' }, { cwd: root })
   if (options.automaticReview) {
@@ -109,8 +116,9 @@ export async function createCpuFixture(outputArg, options = {}) {
   }
   releases.push({ name: 'dsh-research', version: packageJson.version, content: await source('snapshots/package.json', join(packageRoot, 'package.json')) })
   const moduleHashes = {}
-  for (const module of ['records', 'bindings', 'manifest', 'admission', 'evaluate', 'loop', 'native', 'collaboration', 'coordination', 'publication', 'review']) moduleHashes[module] = sha256(await readFile(join(packageRoot, `dist/${module}.js`)))
+  for (const module of ['records', 'bindings', 'manifest', 'admission', 'evaluate', 'loop', 'native', 'collaboration', 'coordination', 'publication', 'review', 'gpu']) moduleHashes[module] = sha256(await readFile(join(packageRoot, `dist/${module}.js`)))
   const profile = await json('snapshots/profile.json', { scope: 'synthetic_released_cpu', confirmation: 'off', author_tools: options.authorTools ?? ['research_run'], reviewer_tools: [], maxConcurrentJobsPerOwner: 1,
+    tool_registration: options.registration ?? { toolScope: 'host' }, default_worker: Boolean(options.context),
     package_modules: moduleHashes, example_driver_sha256: sha256(await readFile(fileURLToPath(import.meta.url))) })
   const registration = await json('snapshots/registration.json', { project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', scope: 'synthetic development only' })
   const authority = { project_id: 'synthetic-m2', project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', registration }
@@ -131,12 +139,14 @@ export async function createCpuFixture(outputArg, options = {}) {
     ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, max_tokens: 512, subagent_provider: 'synthetic-review', model: 'scripted' } } : {}),
     allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'] }
   const policyRef = await json('snapshots/policy.json', policy)
-  await table.put('synthetic-m2', ResearchStateSchema.parse({ schema_version: 2, consumed_review_requests: 0, review_requests: {}, rejected_subjects: {}, feedback: { cursors: {}, items: {} }, publications: {}, authority, binding, policy: policyRef,
+  if (table.get('synthetic-m2')) throw new Error('Synthetic fixture cannot overwrite an existing authority; use retained-state reopen')
+  await table.put('synthetic-m2', ResearchStateSchema.parse({ schema_version: 3, consumed_review_requests: 0, review_requests: {}, rejected_subjects: {}, feedback: { cursors: {}, items: {} }, publications: {}, authority, binding, policy: policyRef,
     revision: 0, stopped: false, consumed_attempts: 0, consumed_timeout_ms: 0, reserved_timeout_ms: 0, consumed_reviews: [], active_action_id: null, actions: {}, hold: null }))
   const config = { artifacts, table, projectKey: 'synthetic-m2', policy: policyRef, authorSessionId: author.id, authorTools: options.authorTools ?? ['research_run'],
+    ...(options.context ? { executionShell: options.executionShell ?? author.ctx.shell, assertActiveAuthority: options.assertActiveAuthority } : {}),
     verifier: { identity: verifier, verify: verifyDomain }, observe: (event, detail) => trace.push({ event, detail }) }
   const adapter = await NativeResearchAdapter.open(ctx, config)
-  if (!options.automaticReview) unregister = adapter.register()
+  if (!options.automaticReview) unregister = adapter.register(options.registration)
   const context = await json('snapshots/context.json', { purpose: 'M2 qualification; no scientific project data' })
   const interpreter = await json('snapshots/interpreter.json', { executable: process.execPath, version: process.version, platform: process.platform, arch: process.arch })
   const environment = await json('snapshots/environment.json', { cwd: root, explicit_env: {} })
@@ -152,7 +162,7 @@ export async function createCpuFixture(outputArg, options = {}) {
     const inputBytes = Buffer.from(canonicalJson({ values: [1, 2, 3] }))
     const input = { uri: inputUri, sha256: sha256(inputBytes), size_bytes: inputBytes.length }
     try { await artifacts.write(inputUri, inputBytes) } catch (error) { if (error.code !== 'EEXIST') throw error; await artifacts.read(input) }
-    const subject = { schema_version: 1, kind: 'manifest', binding, author_session_id: author.id, original_prompt: `Run the frozen synthetic CPU ${mode} case`,
+    const subject = { schema_version: 1, kind: 'manifest', binding, author_session_id: author.id, original_prompt: options.originalPrompt ?? `Run the frozen synthetic CPU ${mode} case`,
       goal: { id: 'synthetic-cpu', revision: 'r1', context, checkpoint: extra.checkpoint ?? null }, plan: { revision: planRevision, snapshot: context, purpose: 'deliberate' }, architecture: profile,
       candidate: { commit: 'synthetic-frozen-content', tree: evaluator, configuration: context, snapshot_kind: 'content_snapshot', content_inventory: inventory },
       evaluator: { verifier, interpreter, environment }, inputs: [{ artifact: input, version: 'synthetic-v1', split: 'synthetic', purpose: 'C_qual', access: 'released' }],
@@ -185,6 +195,6 @@ export async function createCpuFixture(outputArg, options = {}) {
   }
 
   return { root, artifacts, ctx, table, domain, backend, removeBackend, unregister, config, adapter, binding, policy, policyRef, author, reviewer, reviewerId, authorLLM, reviewerLLM, trace, cases, json, prepare, collected, makeSubject,
-    close: async () => { unregister?.(); await domain.close(); await backend.close(); removeBackend?.(); await ctx.fiber.dispose() } }
-  } catch (error) { await domain?.close(); await backend?.close(); removeBackend?.(); await ctx.fiber.dispose(); throw error }
+    close: async () => { unregister?.(); await domain.close(); await backend.close(); removeBackend?.(); if (!options.context) await ctx.fiber.dispose() } }
+  } catch (error) { unregister?.(); await domain?.close(); await backend?.close(); removeBackend?.(); if (!options.context) await ctx.fiber.dispose(); throw error }
 }

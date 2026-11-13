@@ -1,6 +1,6 @@
 # M1 — Freeze the minimal contract and verify reuse
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-11 23:30:50 -0800. Revision: r16. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 16:20 -0800. Revision: r20. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Dependency: reviewed milestone breakdown. This milestone is in progress. The pinned-alpha public consumer checks are recorded below; the source audit alone is not runtime qualification.
 
@@ -26,7 +26,7 @@ The TypeScript package now exports the four confirmation-off record schemas and 
 
 Unchanged superagent with its 0.2.1-alpha.2 DSH dependencies passed typecheck, 1,197 tests and build. A public-name consumer exercised native SQLite serialized reservation/replay/reopen and the actual AgentLoop/SubagentRuntime with separate scripted author/reviewer Sessions and gated wait/list/selected-drain operations. Encoding fixtures refuse declared controlled violations. Raw traces and synthetic state stay in ignored package-development artifacts.
 
-M1 remains incomplete: independent contract/profile qualification review, Ticket-to-guarded-job integration, launcher order proof, uncertain-launch/restart reconciliation, resolved persistence/profile authority and the complete required capability coverage need evidence. No production route, live model review, hosted-project state migration, protected input or M5 pilot is enabled. M2’s [guarded native fixture](review/261111-2142-m2-package-receipt.json) now binds these public boundaries and demonstrates actual shell/jobs and project-root Session persistence. Independent M1 qualification and Ticket/source integration remain gates.
+The [guarded default-worker receipt](review/261112-1620-m1-m2-default-worker.json) adds actual Ticket-to-guarded-job, separate native review, acknowledgement-before-dispatch, skill/tool restrictions, uncertain-publication retention and reopen/stop evidence on the pinned pair. Full original property/semantic and live scientific/profile coverage remains incomplete; hosted scientific authority migration, protected inputs and M5 activation remain held. Earlier fixtures are retained as their historical scoped evidence.
 
 ## Work packages
 
@@ -73,6 +73,8 @@ Bind qualification/T4 accounting to the accepted envelope_ref: original window W
 
 
 Qualify deliberate/explorative plan classification and ignored exploratory-detail placement, immutable snapshot binding, restore/export references and intended-audience access to required plans/assets. A summary, local path or Session declaration alone is insufficient. Treat absent project integration/pilot artifacts as pending inputs before live freeze. Record current runtime/API observations in the package qualification receipt; historical Nov 5 source receipts are not fresh installed qualification.
+
+The [default-deployment acceptance receipt](review/261112-1500-default-deployment-acceptance.json) adds actual public-plugin Source/Store/DshExecutor mechanics and paused H100 infrastructure evidence. Scientific/domain/profile compatibility and guarded research-tool adoption retain their own gates in the canonical tracker.
 
 ## Reuse capability receipt
 
@@ -146,3 +148,7 @@ Also please confirm that for most execution and iterations, human intervention i
 | r14 | 2026-11-11 21:39:00 -0800  | Recorded M1 encoding/public-provider development and contract 2.3.3 bindings; kept independent conformance, integrated launch, M2–M6 and migration gates pending. |
 | r15 | 2026-11-11 22:08:03 -0800 | Linked M2 guarded native job and Session-persistence observations; kept independent M1 qualification, Ticket/source and broader authority/recovery checks pending. |
 | r16 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
+| r17 | 2026-11-12 11:09:45 -0800 | Linked current GPU qualification/state-v3 and actual H100 authority/recovery work through the tracker; retained full scientific/profile/compatibility/handoff gates. |
+| r18 | 2026-11-12 13:57:41 -0800 | Linked scoped S1–S8 public core/native profile evidence through the tracker; default production Store/Source/watchdog and independent acceptance remain unqualified. |
+| r19 | 2026-11-12 15:00 -0800 | Linked actual default deployed worker/Store and paused Source/service acceptance through the tracker; preserved scientific, compatibility, authority and adoption gates. |
+| r20 | 2026-11-12 16:20 -0800 | Recorded the actual default-worker guarded reuse route and retained uncertainty/authority restrictions; preserved broader property/scientific/profile qualification gates. |

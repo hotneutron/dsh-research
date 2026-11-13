@@ -1,6 +1,6 @@
 # M5 — Qualify a project-owned GPU research pilot
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 00:30:09 -0800. Revision: r18. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12 11:09:45 -0800. Revision: r19. Implementation status and next work: [canonical M1–M6 tracker](tracker/261105-1555-milestone-execution.md).
 
 Qualify one project-owned GPU research pilot through the reusable package. Accorde targets GPU performance modeling and CUDA execution/profiling; the legacy CPU replay is historical software evidence. The project-owned [Accorde integration/pilot charter](../../accorde/.plan/261112-0004-dsh-research-integration-and-continuity.md) now exists as preparation. Its accepted live bindings and qualification remain pending; the project owns scientific authority. This file is the package milestone definition, not a second Accorde campaign/decision store.
 
@@ -90,3 +90,4 @@ accorde is for GPU, not CPU.
 | r16 | 2026-11-11 23:30:50 -0800 | Delegated current implementation status and next work to .plan/tracker/; retained milestone scope, gates and historical evidence. |
 | r17 | 2026-11-12 00:09:54 -0800 | Linked concrete Accorde preparation, retained live qualification and authority gates, and delegated new inventory/continuity evidence to the canonical tracker. |
 | r18 | 2026-11-12 00:30:09 -0800 | Renamed the milestone to GPU pilot, withdrew borrowed CPU scope/budget and required exact complete-unit device/environment/resource/verifier qualification; historical prompts/receipts retained. |
+| r19 | 2026-11-12 11:09:45 -0800 | Linked current GPU qualification/state-v3 and actual H100 authority/recovery work through the tracker; retained full scientific/profile/compatibility/handoff gates. |

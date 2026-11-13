@@ -7,3 +7,7 @@ for (const name of ['contracts.md', 'compatibility.json', 'integration.md']) {
   await copyFile(new URL(`../../docs/${name}`, import.meta.url), new URL(`../dist/docs/${name}`, import.meta.url))
 }
 await cp(new URL('../../skills/', import.meta.url), new URL('../dist/skills/', import.meta.url), { recursive: true })
+await copyFile(new URL('./reproduction-bundle.py', import.meta.url), new URL('../dist/reproduction-bundle.py', import.meta.url))
+for (const name of ['default-profile.py', 'default-systemd.py', 'default-service.py', 'github-read-only.py']) {
+  await copyFile(new URL(`./${name}`, import.meta.url), new URL(`../dist/${name}`, import.meta.url))
+}

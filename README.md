@@ -4,38 +4,6 @@ dsh-research is a research skill, policy and thin-helper package over existing D
 
 The hosted project owns its scientific code, plans, decisions, evidence and persistent state. dsh-research owns reusable implementation and its own engineering records. Existing DSH facilities provide workers, jobs, communication, recovery and persistence; the package does not rebuild those services.
 
-## Development checks
-
-Use Node >=24.9 and the pinned pnpm version. The TypeScript package lives in `helpers/`; canonical docs and the research skill remain at the repository root. From this checkout:
-
-```sh
-cd helpers
-npx --yes pnpm@11.7.0 install --frozen-lockfile --ignore-scripts
-npx --yes pnpm@11.7.0 build
-npx --yes pnpm@11.7.0 typecheck
-npx --yes pnpm@11.7.0 test
-
-dsh_check_root=$(mktemp -d "${TMPDIR:-/tmp}/dsh-research-checks.XXXXXX")
-npx --yes pnpm@11.7.0 m1:smoke "$dsh_check_root/compatibility"
-npx --yes pnpm@11.7.0 m2:smoke "$dsh_check_root/synthetic-cpu"
-npx --yes pnpm@11.7.0 m3:smoke "$dsh_check_root/automatic"
-npx --yes pnpm@11.7.0 m4:smoke "$dsh_check_root/faults"
-npx --yes pnpm@11.7.0 m6:smoke "$dsh_check_root/continuity"
-```
-
-The smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling. The continuity example rehearses an idle SQLite backup, linked artifact export and native restore under the original canonical project identity.
-
-See the [native integration guide](docs/integration.md) for the proposal/review/feedback tools, project configuration and read-only audits.
-
-The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts the `synthetic_released_cpu` policy and requires registered project state. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
-
-## Deliberate branching vs explorative branching
-
-- **Deliberate:** work with a defined scope and deliverable. Version its accepted plans, contracts and useful compact evidence.
-- **Explorative:** work investigating uncertain alternatives. Retain detailed planning in project artifacts outside Git and summarize useful findings.
-
-Exploration becomes deliberate when its purpose, bounds and intended outcome are defined and reviewed. Large/raw outputs stay in artifacts for either category. See the [planning guidance](.plan/261109-1452-brainstorm-repo-clutter-and-team-artifacts.md) for the full criteria.
-
 ## What the package contributes
 
 The [research-loop contract](docs/contracts.md) defines four small responsibilities:
@@ -151,6 +119,38 @@ Keep active runs pinned until terminal/reconciled. Rehearse supported backup/res
 
 Implementation progress, qualification evidence and next work for M1–M6 are maintained in the [implementation tracker](.plan/tracker/261105-1555-milestone-execution.md). Repository policy is in [AGENTS.md](AGENTS.md).
 
+## Deliberate branching vs explorative branching
+
+- **Deliberate:** work with a defined scope and deliverable. Version its accepted plans, contracts and useful compact evidence.
+- **Explorative:** work investigating uncertain alternatives. Retain detailed planning in project artifacts outside Git and summarize useful findings.
+
+Exploration becomes deliberate when its purpose, bounds and intended outcome are defined and reviewed. Large/raw outputs stay in artifacts for either category. See the [planning guidance](.plan/261109-1452-brainstorm-repo-clutter-and-team-artifacts.md) for the full criteria.
+
+## Development checks
+
+Use Node >=24.9 and the pinned pnpm version. The TypeScript package lives in `helpers/`; canonical docs and the research skill remain at the repository root. From this checkout:
+
+```sh
+cd helpers
+npx --yes pnpm@11.7.0 install --frozen-lockfile --ignore-scripts
+npx --yes pnpm@11.7.0 build
+npx --yes pnpm@11.7.0 typecheck
+npx --yes pnpm@11.7.0 test
+
+dsh_check_root=$(mktemp -d "${TMPDIR:-/tmp}/dsh-research-checks.XXXXXX")
+npx --yes pnpm@11.7.0 m1:smoke "$dsh_check_root/compatibility"
+npx --yes pnpm@11.7.0 m2:smoke "$dsh_check_root/synthetic-cpu"
+npx --yes pnpm@11.7.0 m3:smoke "$dsh_check_root/automatic"
+npx --yes pnpm@11.7.0 m4:smoke "$dsh_check_root/faults"
+npx --yes pnpm@11.7.0 m6:smoke "$dsh_check_root/continuity"
+```
+
+The smoke commands require a fresh output directory and write their records and traces there. The compatibility check covers record encodings and public SQLite/DSH operations. The synthetic CPU example exercises the guarded worker/reviewer route, reservation, evidence, replay and failure handling. The continuity example rehearses an idle SQLite backup, linked artifact export and native restore under the original canonical project identity.
+
+See the [native integration guide](docs/integration.md) for the proposal/review/feedback tools, project configuration and read-only audits.
+
+The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts synthetic CPU and bounded `project_gpu_development` qualification policies and requires registered project state. GPU qualification binds an exact device, lease namespace and host-registered termination guard; scientific GPU adoption uses its separate project qualification gate. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -170,3 +170,4 @@ Implementation progress, qualification evidence and next work for M1–M6 are ma
 | r13 | 2026-11-11 23:30:50 -0800 | Added portable automatic workflow/fault check commands and stable integration guidance; implementation status remains solely in the tracked milestone record. |
 | r14 | 2026-11-12 00:07:50 -0800 | Grouped package configuration, source, tests, scripts and examples under helpers; build emits canonical docs and skill copies, and a portable native continuity rehearsal. |
 | r15 | 2026-11-12 00:30:09 -0800 | Clarified Accorde's GPU scientific target and the helper purpose of synthetic CPU examples. |
+| r16 | 2026-11-12 11:04:59 -0800 | Documented the bounded GPU qualification guard and retained stable usage/project ownership; current execution status remains in the tracker. |

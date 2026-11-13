@@ -33,7 +33,7 @@ test('historical state remains readable while rollback cannot refund consumed ac
     domain_policy: p.manifest.domain_policy, verifier: p.manifest.evaluator.verifier, entrypoint: p.manifest.candidate.tree,
     reviewer: { session_id: p.review.reviewer.session_id, provider: p.review.reviewer.provider, preset: p.review.reviewer.preset, permissions: p.review.reviewer.permissions }, allowed_read_prefixes: ['snapshots/'] })
   const policyRef = p.ref('policy', policy)
-  const zero = ResearchStateSchema.parse({ schema_version: 2, authority: p.binding.authority, binding: p.binding, policy: policyRef,
+  const zero = ResearchStateSchema.parse({ schema_version: 3, authority: p.binding.authority, binding: p.binding, policy: policyRef,
     revision: 0, stopped: false, consumed_attempts: 0, consumed_timeout_ms: 0, reserved_timeout_ms: 0, consumed_reviews: [], active_action_id: null, actions: {}, hold: null,
     consumed_review_requests: 0, review_requests: {}, rejected_subjects: {}, feedback: { cursors: {}, items: {} }, publications: {} })
   const active = reserveAction(zero, p.manifest, p.ref('manifest', p.manifest), p.review, p.ref('review', p.review), policy, policyRef, 0, 'claim')

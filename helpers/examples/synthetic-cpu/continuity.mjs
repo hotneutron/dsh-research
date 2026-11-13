@@ -58,7 +58,7 @@ try {
   const stale = { ...restored, publications: {} }
   assert.equal(auditContinuity(original, stale).preserved, false)
   await writeFile(join(root, 'receipt.json'), JSON.stringify({ schema_version: 1, timestamp: new Date().toISOString(),
-    scope: 'M6 disposable idle backup and version-two native restore; no live handoff', canonical_project_root: sourceRoot,
+    scope: 'M6 disposable idle backup and version-three native restore; no live handoff', canonical_project_root: sourceRoot,
     binding: original.binding, continuity: auditContinuity(original, restored), stale_rollback: auditContinuity(original, stale), files,
     synthetic_evaluator_dispatches: 2, external_model_calls: 0, source_writer_closed_before_backup: true,
     state_reseeded: false, confirmation: 'off', limitations: ['No live writer fencing or legacy exposure authority restored',

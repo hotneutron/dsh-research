@@ -5,7 +5,7 @@ import { z } from 'zod'
 import type { Context } from '@deepseek-ai/cordis'
 import type { Agent } from '@deepseek-ai/dsh-agent'
 import type { JobOutcome } from '@deepseek-ai/dsh-jobs'
-import type { ShellExecution, ShellRunResult } from '@deepseek-ai/dsh-shell'
+import type { ShellExecution, ShellRunResult, ShellExecutor } from '@deepseek-ai/dsh-shell'
 import { SessionId } from '@deepseek-ai/dsh-session'
 import type { SessionEvent } from '@deepseek-ai/dsh-session'
 import type {} from '@deepseek-ai/dsh-session-query'
@@ -21,8 +21,10 @@ import { ResearchStateSchema, DevelopmentPolicySchema, equalIdentity, reserveAct
 import type { ResearchState, DevelopmentPolicy } from './admission.js'
 import { checkCapture } from './evaluate.js'
 import { checkpointFor } from './loop.js'
+import { checkGpuPreflight, checkGpuSettlement } from './gpu.js'
+import type { NativeGpuGuard } from './gpu.js'
 
-export const researchDomain = defineDomain({ name: 'dsh_research_admission', version: 2, tables: { projects: domainTable<string, ResearchState>(ResearchStateSchema) } })
+export const researchDomain = defineDomain({ name: 'dsh_research_admission', version: 3, tables: { projects: domainTable<string, ResearchState>(ResearchStateSchema) } })
 export const RunActionSchema = z.strictObject({ manifest: ByteRef, review: ByteRef, expected_revision: Count })
 export interface NativeResearchConfig {
   artifacts: ProjectArtifacts
@@ -31,8 +33,13 @@ export interface NativeResearchConfig {
   policy: ArtifactReference
   authorSessionId: string
   authorTools?: readonly string[]
+  /** Host-selected existing shell, e.g. the default worker's scoped shell. */
+  executionShell?: ShellExecutor
+  /** Existing host authority check, e.g. current Ticket mandate and operator pause. Rechecked before dispatch. */
+  assertActiveAuthority?: (owner: Agent) => void | Promise<void>
   /** Existing project domain verifier; its pinned code supplies scientific meaning. */
   verifier: { identity: ArtifactReference; verify(result: Record<string, number | string | boolean>): Promise<'positive' | 'negative' | 'inconclusive'> }
+  gpu?: NativeGpuGuard
   observe?: (event: string, detail: unknown) => void
 }
 export interface RunAssociation {
@@ -44,7 +51,28 @@ export interface RunAssociation {
   checkpoint: ArtifactReference | null
   replay: boolean
 }
+export interface ResearchToolRegistration {
+  /** Agent-local tools coexist with a host's inherited-tool masks without weakening its guards. */
+  toolScope?: 'host' | 'author'
+  /** In author-local mode, retain only these explicitly named inherited capabilities (default: none). */
+  inheritedTools?: readonly string[]
+}
 class ReviewUnavailable extends Error {}
+async function boundedGuard<T>(operation: (signal: AbortSignal) => Promise<T>, timeoutMs: number, parent?: AbortSignal): Promise<T> {
+  const controller = new AbortController()
+  let timer: ReturnType<typeof setTimeout> | undefined
+  let rejectWait: (reason: unknown) => void = () => {}
+  const aborted = () => { controller.abort(parent?.reason); rejectWait(parent?.reason ?? new Error('GPU guard aborted')) }
+  try {
+    if (parent?.aborted) throw parent.reason
+    const deadline = new Promise<never>((_, reject) => {
+      rejectWait = reject
+      timer = setTimeout(() => { const error = new Error('GPU guard deadline'); controller.abort(error); reject(error) }, timeoutMs)
+      parent?.addEventListener('abort', aborted, { once: true })
+    })
+    return await Promise.race([operation(controller.signal), deadline])
+  } finally { if (timer) clearTimeout(timer); parent?.removeEventListener('abort', aborted) }
+}
 
 /** POSIX shell literals for the exact argv; no model-supplied shell program is accepted. */
 export const shellLiteral = (value: string): string => `'${value.replace(/'/g, `'"'"'`)}'`
@@ -59,6 +87,8 @@ export class NativeResearchAdapter {
     if (policy.authority.project_root !== config.artifacts.root || !equalIdentity(state.authority, policy.authority)
       || !equalIdentity(state.binding, policy.binding) || !equalIdentity(state.policy, config.policy)
       || !equalIdentity(config.verifier.identity, policy.verifier)) throw new Error('Project state/provider/profile registration mismatch')
+    if (policy.gpu && (!config.gpu || !equalIdentity(config.gpu.identity, policy.gpu.guard))) throw new Error('Exact host-registered GPU guard is required')
+    if (!policy.gpu && config.gpu) throw new Error('Synthetic scope cannot borrow a GPU guard')
     return new NativeResearchAdapter(ctx, { ...config, artifacts: config.artifacts.withReadPrefixes(policy.allowed_read_prefixes) }, policy)
   }
   private observe(event: string, detail: unknown): void {
@@ -103,11 +133,13 @@ export class NativeResearchAdapter {
     if (owner.id !== this.config.authorSessionId || this.ctx.agents.get(owner.id) !== owner) throw new Error('Only the exact configured live author can invoke research_run')
     const manifest = await loadManifest(request.manifest, this.config.artifacts)
     if (manifest.author_session_id !== owner.id) throw new Error('Manifest author and native tool owner differ')
-    if (resolve(manifest.invocation.cwd) !== this.config.artifacts.root || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/.test(manifest.goal.id)) throw new Error('Synthetic profile requires canonical project cwd and a safe goal ID')
+    if (resolve(manifest.invocation.cwd) !== this.config.artifacts.root || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]*$/.test(manifest.goal.id)) throw new Error('Execution profile requires canonical project cwd and a safe goal ID')
     if (manifest.inputs.length !== 1 || manifest.invocation.argv.length !== 3
       || manifest.invocation.argv[0] !== resolve(this.config.artifacts.root, this.policy.entrypoint.uri)
       || manifest.invocation.argv[1] !== resolve(this.config.artifacts.root, manifest.inputs[0]!.artifact.uri)
-      || manifest.invocation.argv[2] !== manifest.proposal.operation) throw new Error('Invocation does not match the synthetic evaluator/input template')
+      || manifest.invocation.argv[2] !== manifest.proposal.operation) throw new Error('Invocation does not match the pinned producer/input/operation template')
+    if (this.policy.gpu && (!equalIdentity(manifest.invocation.env, this.policy.gpu.environment)
+      || manifest.inputs.some(input => input.purpose !== this.policy.gpu!.purpose))) throw new Error('GPU invocation environment or cost/input purpose differs from the registered profile')
     const known = this.config.table.get(this.config.projectKey)?.actions[manifest.action_id]
     if (known) return this.association(manifest.action_id, true)
     const review = ReviewSchema.parse(JSON.parse(Buffer.from(await this.config.artifacts.read(request.review)).toString('utf8')))
@@ -126,6 +158,14 @@ export class NativeResearchAdapter {
     await verifyIdentity(manifest, this.config.artifacts)
     await this.config.artifacts.read(this.policy.entrypoint)
     await this.config.artifacts.read(this.config.policy)
+    await this.config.assertActiveAuthority?.(owner)
+    if (this.policy.gpu) {
+      for (const ref of [this.policy.gpu.guard, this.policy.gpu.qualification, this.policy.gpu.budget, this.policy.gpu.lease_namespace]) await this.config.artifacts.read(ref)
+      if (!manifest.proposal.prerequisites.some(ref => equalIdentity(ref, this.policy.gpu!.qualification))) throw new Error('Exact GPU qualification must be a reviewed manifest prerequisite')
+      const preflightRef = await boundedGuard(s => this.config.gpu!.preflight({ manifest, manifestRef: request.manifest }, s), Math.min(this.policy.max_timeout_ms, 5000), signal)
+      const preflight = checkGpuPreflight(JSON.parse(Buffer.from(await this.config.artifacts.read(preflightRef)).toString()), this.policy.gpu, request.manifest)
+      await this.config.artifacts.read(preflight.observation)
+    }
     signal.throwIfAborted()
     const token = randomUUID()
     const committed = await this.config.table.update(this.config.projectKey, current => reserveAction(current, manifest, request.manifest, review, request.review,
@@ -140,6 +180,8 @@ export class NativeResearchAdapter {
       const before = await this.config.artifacts.write(`${directory}/identity-before.json`, identityBytes)
       const ack = await this.config.artifacts.write(`${directory}/admission.json`, Buffer.from(canonicalJson({ authority: committed.authority, action })))
       await this.config.table.update(this.config.projectKey, current => updateAction(current, manifest.action_id, a => ({ ...a, phase: 'dispatching' })))
+      await this.config.assertActiveAuthority?.(owner)
+      signal.throwIfAborted()
       // The durable acknowledgement is awaited; the registered tuple is verified immediately before native dispatch.
       const live = this.config.table.get(this.config.projectKey)!
       const proof = live.actions[manifest.action_id]!
@@ -147,7 +189,8 @@ export class NativeResearchAdapter {
         || proof.manifest.sha256 !== request.manifest.sha256 || live.authority.authority_id !== manifest.binding.authority.authority_id) throw new Error('Committed admission proof or stop state no longer permits dispatch')
       signal.throwIfAborted()
       const command = [manifest.invocation.executable, ...manifest.invocation.argv].map(shellLiteral).join(' ')
-      const spec = this.ctx.shell.resolve({ command, workdir: manifest.invocation.cwd, timeoutMs: manifest.bounds.timeout_ms,
+      const shell = this.config.executionShell ?? this.ctx.shell
+      const spec = shell.resolve({ command, workdir: manifest.invocation.cwd, timeoutMs: manifest.bounds.timeout_ms,
         onExpiry: 'kill', stdoutMaxBytes: this.policy.max_output_bytes, env: manifest.invocation.env, signal })
       if (spec.command !== command || resolve(spec.workdir) !== resolve(manifest.invocation.cwd) || spec.onExpiry !== 'kill'
         || spec.timeoutMs !== manifest.bounds.timeout_ms) throw new Error('Resolved shell spec differs from the frozen invocation/deadline')
@@ -158,7 +201,7 @@ export class NativeResearchAdapter {
       this.observe('dispatch_after_verified_ack', { action_id: action.action_id, admitted_revision: action.admitted_revision })
       const id = this.ctx.jobs.start({ kind: 'bash', label: manifest.action_id, owner: owner.id,
         run: () => {
-          running = this.ctx.shell.execute(spec)
+          running = shell.execute(spec)
           const done: Promise<JobOutcome> = running.then(handle => handle.result()).then((result): JobOutcome => {
             terminal = result
             return { status: result.timedOut || result.aborted || result.signal !== null ? 'killed' : result.exitCode === 0 ? 'completed' : 'failed' }
@@ -178,10 +221,28 @@ export class NativeResearchAdapter {
       const capturedBytes = Buffer.from(facts.stdout.text, 'utf8')
       const captureRef = await this.config.artifacts.write(`${directory}/result.json`, capturedBytes)
       const checked = checkCapture(capturedBytes, manifest, !facts.stdout.truncated)
+      let settlementRef = terminalRef
+      let completeUnit = true
+      if (this.policy.gpu) {
+        // Retain exact native facts in the coupled record before fallible GPU settlement.
+        // An interrupted callback/reopen cannot discard or replace the original capture.
+        await this.config.table.update(this.config.projectKey, current => updateAction(current, manifest.action_id, old => ({ ...old,
+          runtime_facts: { admission: ack, identity: before, terminal: terminalRef, capture: captureRef } })))
+        const context = { manifest, manifestRef: request.manifest, action_id: action.action_id, attempt_id: action.attempt_id,
+          dispatch_token: action.dispatch_token, admitted_revision: action.admitted_revision, native_terminal: terminalRef, capture: captureRef }
+        // Settlement/reconciliation must remain observable even if the caller aborted.
+        const guardRef = await boundedGuard(s => this.config.gpu!.settle(context, s), Math.min(this.policy.max_timeout_ms, 5000))
+        const proof = checkGpuSettlement(JSON.parse(Buffer.from(await this.config.artifacts.read(guardRef)).toString()), this.policy.gpu, context)
+        for (const ref of [proof.lease, proof.observation, proof.guard]) await this.config.artifacts.read(ref)
+        completeUnit = proof.complete_unit
+        settlementRef = await this.config.artifacts.write(`${directory}/gpu-native-settlement.json`, Buffer.from(canonicalJson({ native_terminal: terminalRef, gpu: guardRef })))
+      }
       let matches = true
-      try { await verifyIdentity(manifest, this.config.artifacts); await this.config.artifacts.read(this.config.policy); await this.config.artifacts.read(this.policy.entrypoint) } catch { matches = false }
+      try { await verifyIdentity(manifest, this.config.artifacts); await this.config.artifacts.read(this.config.policy); await this.config.artifacts.read(this.policy.entrypoint)
+        if (this.policy.gpu) for (const ref of [this.policy.gpu.guard, this.policy.gpu.qualification, this.policy.gpu.budget, this.policy.gpu.lease_namespace]) await this.config.artifacts.read(ref)
+      } catch { matches = false }
       const after = await this.config.artifacts.write(`${directory}/identity-after.json`, matches ? identityBytes : Buffer.from('identity drift'))
-      const normal = job.status === 'completed' && facts.exitCode === 0 && !facts.timedOut && !facts.aborted && facts.signal === null
+      const normal = completeUnit && job.status === 'completed' && facts.exitCode === 0 && !facts.timedOut && !facts.aborted && facts.signal === null
       const verdict = checked.valid && matches && normal ? await this.config.verifier.verify(checked.result) : 'unavailable'
       const verifierResult = verdict === 'unavailable' ? null : await this.config.artifacts.write(`${directory}/verifier.json`, Buffer.from(canonicalJson({ verdict })))
       const current = this.config.table.get(this.config.projectKey)!
@@ -193,11 +254,11 @@ export class NativeResearchAdapter {
         native: { owner_session_id: owner.id, producer: '@deepseek-ai/dsh-shell+jobs', job_id: id, tool_call_id: null },
         terminal: { status: facts.timedOut ? 'timed_out' : facts.aborted ? 'cancelled' : facts.signal !== null || facts.exitCode !== 0 ? 'crashed' : 'completed',
           raw_status: job.status, exit_code: facts.exitCode, signal: facts.signal, timeout: facts.timedOut, abort: facts.aborted,
-          ownership_resolved: true, settlement: terminalRef },
+          ownership_resolved: true, settlement: settlementRef },
         identity: { expected: before, before, after, matches }, capture: { artifact: captureRef, complete: !facts.stdout.truncated, overflow: facts.stdout.truncated, parser_input_sha256: checked.sha256 },
         output_schema: manifest.output, result: checked.result, verifier: { identity: this.config.verifier.identity, result: verifierResult, verdict },
         evidence_status: checked.valid && matches && normal ? 'valid' : 'invalid', scientific_status: checked.valid && matches && normal ? 'eligible' : 'ineligible',
-        costs: [{ execution_id: id, purpose: 'C_qual', unit: 'process_elapsed_seconds', amount: elapsed, source: terminalRef, unresolved_reason: null }], remaining: balance,
+        costs: [{ execution_id: id, purpose: this.policy.gpu?.purpose ?? 'C_qual', unit: 'process_elapsed_seconds', amount: elapsed, source: terminalRef, unresolved_reason: null }], remaining: balance,
       })
       const evidenceRef = await this.config.artifacts.write(`${directory}/evidence.json`, Buffer.from(canonicalJson(evidence)))
       const settledState = { ...current, reserved_timeout_ms: balance.reserved_timeout_ms }
@@ -226,6 +287,24 @@ export class NativeResearchAdapter {
       return this.association(manifest.action_id, false)
     }
   }
+  /** Observe an unresolved GPU settlement without admitting, relaunching or releasing state. */
+  async inspectGpuSettlement(actionId: string, signal: AbortSignal) {
+    const state = this.config.table.get(this.config.projectKey)!
+    const action = state.actions[actionId]
+    if (!this.policy.gpu || !action?.runtime_facts) return { status: 'unresolved' as const, action_id: actionId, reason: 'No retained exact GPU native facts' }
+    const manifest = await loadManifest(action.manifest, this.config.artifacts)
+    if (!equalIdentity(manifest.binding, state.binding) || !equalIdentity(state.policy, this.config.policy)) throw new Error('Original GPU binding/policy changed')
+    await verifyIdentity(manifest, this.config.artifacts)
+    for (const ref of [this.policy.gpu.guard, this.policy.gpu.qualification, this.policy.gpu.budget, this.policy.gpu.lease_namespace]) await this.config.artifacts.read(ref)
+    for (const ref of Object.values(action.runtime_facts)) await this.config.artifacts.read(ref)
+    const context = { manifest, manifestRef: action.manifest, action_id: action.action_id, attempt_id: action.attempt_id,
+      dispatch_token: action.dispatch_token, admitted_revision: action.admitted_revision,
+      native_terminal: action.runtime_facts.terminal, capture: action.runtime_facts.capture }
+    const ref = await boundedGuard(s => this.config.gpu!.settle(context, s), Math.min(this.policy.max_timeout_ms, 5000), signal)
+    const proof = checkGpuSettlement(JSON.parse(Buffer.from(await this.config.artifacts.read(ref)).toString()), this.policy.gpu, context)
+    for (const artifact of [proof.lease, proof.observation]) await this.config.artifacts.read(artifact)
+    return { status: 'quiescent' as const, action_id: actionId, proof: ref, complete_unit: proof.complete_unit, reservation_released: false }
+  }
   tool(): ToolDefinition {
     const reference = { type: 'object' as const, additionalProperties: false, properties: {
       uri: { type: 'string' as const, required: true as const }, sha256: { type: 'string' as const, required: true as const }, size_bytes: { type: 'integer' as const, required: true as const } } }
@@ -238,7 +317,7 @@ export class NativeResearchAdapter {
       },
     })
   }
-  register(): () => void {
+  register(options: ResearchToolRegistration = {}): () => void {
     const author = this.ctx.agents.get(SessionId(this.config.authorSessionId))
     const reviewer = this.ctx.agents.get(SessionId(this.policy.reviewer.session_id))
     if (!author) throw new Error('Author must exist before installing this scoped fixture route')
@@ -252,9 +331,16 @@ export class NativeResearchAdapter {
         if (exec.agent?.id === this.config.authorSessionId && !authorTools.includes(exec.name)) return 'Research author must use the guarded frozen-action entrypoint'
         return undefined
       }))
-      disposers.push(this.ctx.tools.register(this.tool()))
-      disposers.push(author.ctx.tools.restrict({ allow: [...authorTools] }))
-      if (reviewer) disposers.push(reviewer.ctx.tools.restrict({ deny: [...authorTools] }))
+      const local = options.toolScope === 'author'
+      const inherited = options.inheritedTools ?? []
+      if (!local && options.inheritedTools !== undefined) throw new Error('Inherited-tool selection requires author-local registration')
+      if (inherited.some(name => !authorTools.includes(name))) throw new Error('Inherited capability is outside the registered author allowlist')
+      disposers.push((local ? author.ctx.tools : this.ctx.tools).register(this.tool()))
+      disposers.push(author.ctx.tools.restrict({ allow: local ? [...inherited] : [...authorTools] }))
+      if (reviewer) {
+        // Local tools are not valid names for inherited masks; the global reviewer guard also covers future reviewer instances.
+        disposers.push(reviewer.ctx.tools.restrict(local ? { allow: [] } : { deny: [...authorTools] }))
+      }
       return dispose
     } catch (error) { dispose(); throw error }
   }

@@ -7,7 +7,7 @@ import { packets } from './fixtures/packets.js'
 function history() {
   const p = packets()
   const ref = (name: string) => p.ref(`snapshots/${name}`, name)
-  return ResearchStateSchema.parse({ schema_version: 2, authority: p.binding.authority, binding: p.binding,
+  return ResearchStateSchema.parse({ schema_version: 3, authority: p.binding.authority, binding: p.binding,
     policy: ref('policy'), revision: 10, stopped: true, consumed_attempts: 0, consumed_timeout_ms: 0,
     reserved_timeout_ms: 0, consumed_reviews: [], active_action_id: null, actions: {}, hold: null,
     consumed_review_requests: 1, review_requests: { request: { request_id: 'request', review_id: 'review', request: ref('request'),
@@ -22,7 +22,7 @@ function history() {
       audience: 'team', status: 'verified', attempts: 2, verification: ref('access-proof') } } })
 }
 
-test('idle version-two history can survive a byte-preserving restore', () => {
+test('idle current-version history can survive a byte-preserving restore', () => {
   const before = history()
   assert.equal(auditContinuity(before, structuredClone(before)).preserved, true)
 })

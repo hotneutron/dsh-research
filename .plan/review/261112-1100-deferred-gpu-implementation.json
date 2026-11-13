@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "timestamp": "2026-11-12T11:13:15.736347-08:00",
+  "request_verbatim": "work on the deferred items.",
+  "host_instruction_verbatim": "you can use 'ssh h100sjc0' to access H100, same  ~/wk/<repo> paths.",
+  "package_version": "0.2.0",
+  "native_record_and_domain_version": 3,
+  "historical_readers": [
+    1,
+    2,
+    3
+  ],
+  "implemented": [
+    "Qualification-only GPU policy and host-registered preflight/lease/native settlement guard",
+    "Exact native facts retained before fallible GPU settlement; immutable downgrade checks",
+    "Bounded read-only GPU inspection without admission/reservation release",
+    "Read-only real project goal/exposure authority inventory and private SQLite recovery rehearsal",
+    "Bounded explicit source review/reproduction bundle with private/path/type/drift refusal"
+  ],
+  "validation": {
+    "build_typecheck": "passed",
+    "behavior_tests": 45,
+    "M2_native_cases": 11,
+    "native_version3_restore_files": 78,
+    "GPU_engineering_units": 2,
+    "positive_GPU_case": "eligible positive for disposable engineering claim",
+    "incomplete_GPU_case": "ineligible despite native exit zero and correct CUDA result",
+    "private_authority_backups_restored": 2,
+    "team_bundle_checks": 7
+  },
+  "actual_project_accounting": {
+    "base_max_seconds": 202400.9399431888,
+    "max_seconds": 203141.1234564744,
+    "recovery_extension_seconds": 740.1835132855922,
+    "remaining_seconds": 75862.61898075882,
+    "reserved_seconds": 0,
+    "spent_seconds": 127278.50447571557
+  },
+  "closed_project_admissions": 385,
+  "project_goal_context": {
+    "awaiting_context_change": [
+      "Release an independently varying numeric input/value/access contract that is serving-visible without target-label fitting or profiler features.",
+      "Qualify an independent complete direct unprofiled label/context bridge; failed partial rows and the profiled bridge remain ineligible.",
+      "Authorize an independent hardware/compiler target and freeze target-free descriptors and predictions before timing."
+    ],
+    "id": "context-availability-exhaustion-rebrainstorm-r1",
+    "kind": "rebrainstorm",
+    "selected_candidate": null
+  },
+  "scope": {
+    "C_science_admission": "disabled",
+    "Accorde_scientific_studies_launched": 0,
+    "scientific_dataset_and_confirmation_label_reads": 0,
+    "authority_handoffs": 0,
+    "real_GPU_model_calls": 0,
+    "H100_GPU_qualification_reservation_seconds": 60,
+    "private_backups_in_ordinary_team_bundle": false,
+    "recipient_access_verified": false
+  },
+  "limitations": [
+    "H100 root filesystem is full; isolated qualification ran in RAM and exact results were retained locally",
+    "Two supported backups certify individual metadata snapshots only, not a cross-authority transfer/full recovery cut",
+    "Scientific/profile/Ticket acceptance, funded independent review, writer fencing and actual team access remain pending"
+  ],
+  "retained_detail": {
+    "uri": "local_artifacts/dsh-research/deferred-gpu-integration/261112-deferred-implementation-detail.json",
+    "sha256": "1470bb18cf298823f550ecd6b55cc7445c4ee77d89301776f1a8e636de7d882e",
+    "size_bytes": 10480
+  },
+  "revision_history": [
+    {
+      "timestamp": "2026-11-12T11:18:47.323838-08:00",
+      "change": "Updated retained detail hash after verbatim host-reply preservation; result scope unchanged"
+    }
+  ]
+}

@@ -3,9 +3,10 @@ import { AuthorityRef, Binding, ByteRef, Count, Hold, Id } from './records.js'
 import type { ArtifactReference, BoundIdentity, Manifest, Review } from './records.js'
 import { canonicalJson, sha256 } from './bindings.js'
 import { ReviewIntentSchema, FeedbackStateSchema, PublicationSchema } from './collaboration.js'
+import { GpuPolicySchema } from './gpu.js'
 
 export const DevelopmentPolicySchema = z.strictObject({
-  scope: z.literal('synthetic_released_cpu'), authority: AuthorityRef, binding: Binding,
+  scope: z.enum(['synthetic_released_cpu', 'project_gpu_development']), authority: AuthorityRef, binding: Binding,
   goal_id: Id, goal_revision: Id, max_attempts: Count.positive(), max_timeout_ms: Count.positive(),
   max_total_timeout_ms: Count.positive(), max_output_bytes: Count.positive(),
   allowed_executables: z.array(Id).min(1), allowed_operations: z.array(Id).min(1),
@@ -15,31 +16,42 @@ export const DevelopmentPolicySchema = z.strictObject({
   review_limits: z.strictObject({ max_requests: Count.positive(), timeout_ms: Count.positive(), max_tokens: Count.positive(),
     subagent_provider: Id, model: Id }).optional(),
   allowed_read_prefixes: z.array(z.enum(['snapshots/', 'local_artifacts/autoresearch/dsh/'])).min(1),
+  gpu: GpuPolicySchema.optional(),
 }).superRefine((v, ctx) => {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'Policy binding and registered authority differ' })
+  if ((v.scope === 'project_gpu_development') !== (v.gpu !== undefined)) ctx.addIssue({ code: 'custom', message: 'GPU scope requires its exact resource/guard policy; synthetic scope cannot carry GPU authority' })
+  if (v.gpu && v.gpu.environment.CUDA_VISIBLE_DEVICES !== v.gpu.resource.device_uuid) ctx.addIssue({ code: 'custom', message: 'GPU environment must bind the exact device UUID' })
+  // This initial GPU mapping is qualification-only. A caller-set assurance label
+  // cannot enable scientific adoption before its full profile/authority gate.
 })
 export type DevelopmentPolicy = z.infer<typeof DevelopmentPolicySchema>
-export const ActionStateSchema = z.strictObject({
+const actionStateObject = z.strictObject({
   action_id: Id, attempt_id: Id, manifest: ByteRef, review: ByteRef, review_id: Id, dispatch_token: Id,
   admitted_revision: Count.positive(), timeout_ms: Count.positive(), reservation_active: z.boolean(),
   phase: z.enum(['admitted', 'dispatching', 'running', 'settled', 'unknown']), job_id: Id.nullable(),
   owner_session_id: Id, evidence: ByteRef.nullable(), checkpoint: ByteRef.nullable(),
 })
+export const ActionStateSchema = actionStateObject.extend({
+  runtime_facts: z.strictObject({ admission: ByteRef, identity: ByteRef, terminal: ByteRef, capture: ByteRef }).nullable().default(null),
+})
 const legacyStateObject = z.strictObject({
   schema_version: z.literal(1), authority: AuthorityRef, binding: Binding, policy: ByteRef,
   revision: Count, stopped: z.boolean(), consumed_attempts: Count, consumed_timeout_ms: Count,
   reserved_timeout_ms: Count, consumed_reviews: z.array(Id),
-  active_action_id: Id.nullable(), actions: z.record(Id, ActionStateSchema), hold: Hold.nullable(),
+  active_action_id: Id.nullable(), actions: z.record(Id, actionStateObject), hold: Hold.nullable(),
 })
 export const LegacyResearchStateSchema = legacyStateObject.superRefine(validateConsumption)
-export const ResearchStateSchema = legacyStateObject.extend({
+const version2StateObject = legacyStateObject.extend({
   schema_version: z.literal(2), consumed_review_requests: Count, review_requests: z.record(Id, ReviewIntentSchema),
   rejected_subjects: z.record(Id, ByteRef), feedback: FeedbackStateSchema, publications: z.record(Id, PublicationSchema),
-}).superRefine((v, ctx) => {
+})
+function validateCoordination(v: Omit<z.infer<typeof version2StateObject>, 'schema_version'>, ctx: z.RefinementCtx) {
   validateConsumption(v, ctx)
   if (v.consumed_review_requests !== Object.keys(v.review_requests).length) ctx.addIssue({ code: "custom", message: "Review request consumption differs from retained intents" })
-})
-export const HistoricalResearchStateSchema = z.union([LegacyResearchStateSchema, ResearchStateSchema])
+}
+export const Version2ResearchStateSchema = version2StateObject.superRefine(validateCoordination)
+export const ResearchStateSchema = version2StateObject.extend({ schema_version: z.literal(3), actions: z.record(Id, ActionStateSchema) }).superRefine(validateCoordination)
+export const HistoricalResearchStateSchema = z.union([LegacyResearchStateSchema, Version2ResearchStateSchema, ResearchStateSchema])
 
 function validateConsumption(v: Omit<z.infer<typeof legacyStateObject>, 'schema_version'>, ctx: z.RefinementCtx) {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'State binding and registered authority differ' })
@@ -101,7 +113,7 @@ export function reserveAction(current: ResearchState, manifest: Manifest, manife
   const revision = current.revision + 1
   const action: ActionState = { action_id: manifest.action_id, attempt_id: `attempt-${manifest.action_id}`, manifest: manifestRef, review: reviewRef, dispatch_token: Id.parse(dispatchToken),
     review_id: review.review_id, admitted_revision: revision, timeout_ms: manifest.bounds.timeout_ms, reservation_active: true,
-    phase: 'admitted', job_id: null, owner_session_id: manifest.author_session_id, evidence: null, checkpoint: null }
+    phase: 'admitted', job_id: null, owner_session_id: manifest.author_session_id, evidence: null, checkpoint: null, runtime_facts: null }
   return ResearchStateSchema.parse({ ...current, revision, hold: resolvedReviewHold ? null : current.hold, consumed_attempts: current.consumed_attempts + 1,
     consumed_timeout_ms: current.consumed_timeout_ms + manifest.bounds.timeout_ms, reserved_timeout_ms: current.reserved_timeout_ms + manifest.bounds.timeout_ms,
     consumed_reviews: [...current.consumed_reviews, review.review_id], active_action_id: manifest.action_id, actions: { ...current.actions, [manifest.action_id]: action } })
@@ -115,6 +127,7 @@ export function updateAction(current: ResearchState, actionId: string, transform
     || next.timeout_ms !== action.timeout_ms || next.attempt_id !== action.attempt_id || next.dispatch_token !== action.dispatch_token
     || next.owner_session_id !== action.owner_session_id || next.review_id !== action.review_id || !equalIdentity(next.review, action.review)
     || (action.evidence !== null && !equalIdentity(action.evidence, next.evidence))
+    || (action.runtime_facts !== null && !equalIdentity(action.runtime_facts, next.runtime_facts))
     || (action.checkpoint !== null && !equalIdentity(action.checkpoint, next.checkpoint))) throw new AdmissionError('identity', 'Consumed action identity cannot change')
   return ResearchStateSchema.parse({ ...current, revision: current.revision + 1, actions: { ...current.actions, [actionId]: next } })
 }
