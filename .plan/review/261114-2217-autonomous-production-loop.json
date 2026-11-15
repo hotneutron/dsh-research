@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "kind": "general_autonomous_production_loop_qualification",
+  "at": "2026-11-14T22:17:51.194095-08:00",
+  "request_verbatim": "work on \"Enable a general autonomous production research loop\"",
+  "helper_version": "0.3.0",
+  "contract_version": "2.4.0",
+  "scope": "Reusable project-owned production loop; real default-provider fixed released engineering trace; no arbitrary hosted scientific profile or Accorde new-work adoption claim",
+  "host": "h100sjc0",
+  "semantic_scope": {
+    "input_events": 1000,
+    "retained_versions": 200,
+    "metric": "calls to same comparator",
+    "excluded_metrics": [
+      "insertion/allocation",
+      "wall-clock speedup",
+      "GPU/scientific accuracy"
+    ]
+  },
+  "results": [
+    {
+      "action_id": "action-af935970ac93ad40bb0746db63421cae9d1ecddbb8e1364bbbc9260db0dc83b5",
+      "strategy": "history-list",
+      "verdict": "negative",
+      "validity": "valid",
+      "eligibility": "eligible",
+      "comparisons": 100300,
+      "retained_versions": 200,
+      "costs": [
+        {
+          "amount": 0.18638739199982957,
+          "execution_id": "bash-1",
+          "purpose": "C_qual",
+          "source": {
+            "sha256": "c1e207a7252facf643c615af8bfbab33cb057bdb4a98c42ce14f917951cdc964",
+            "size_bytes": 970,
+            "uri": "local_artifacts/autoresearch/dsh/dsh-production-engineering-v1/action-af935970ac93ad40bb0746db63421cae9d1ecddbb8e1364bbbc9260db0dc83b5/native-terminal.json"
+          },
+          "unit": "process_elapsed_seconds",
+          "unresolved_reason": null
+        }
+      ]
+    },
+    {
+      "action_id": "action-ec4a7f8f7f4c47bd525055dc9ded8500e5d1ee2b31f31c882d73f14386d0b9ea",
+      "strategy": "binary-index",
+      "verdict": "positive",
+      "validity": "valid",
+      "eligibility": "eligible",
+      "comparisons": 6654,
+      "retained_versions": 200,
+      "costs": [
+        {
+          "amount": 0.15513557900022715,
+          "execution_id": "bash-2",
+          "purpose": "C_qual",
+          "source": {
+            "sha256": "fd16e1f2a54fcc9029820e195d06865c17c060fc14d4255ba0bad3ffcea06ef6",
+            "size_bytes": 985,
+            "uri": "local_artifacts/autoresearch/dsh/dsh-production-engineering-v1/action-ec4a7f8f7f4c47bd525055dc9ded8500e5d1ee2b31f31c882d73f14386d0b9ea/native-terminal.json"
+          },
+          "unit": "process_elapsed_seconds",
+          "unresolved_reason": null
+        }
+      ]
+    }
+  ],
+  "state": {
+    "schema_version": 4,
+    "revision": 20,
+    "attempts": 2,
+    "reviews": 3,
+    "consumed_timeout_ms": 10000,
+    "reserved_ms": 0,
+    "stopped": true,
+    "decision": {
+      "kind": "goal_completion",
+      "subject": {
+        "uri": "local_artifacts/autoresearch/dsh/dsh-production-engineering-v1/decisions/subject-4cf4ffd2102289b5910e1d82a1678fc16889ca89a7abb729f3caf225694035ec.json",
+        "sha256": "4cf4ffd2102289b5910e1d82a1678fc16889ca89a7abb729f3caf225694035ec",
+        "size_bytes": 6181
+      },
+      "review": {
+        "uri": "local_artifacts/autoresearch/dsh/dsh-production-engineering-v1/reviews/review-request-e1c84d52239adde297640c2e7019ef5f067b56f27d19f0dd21a31f9855294c6c/review.json",
+        "sha256": "ee94f8e5e587a3a17e6966105a5191ee5252cd47cd0c1420a4ae421f11ac15b0",
+        "size_bytes": 8686
+      },
+      "checkpoint": {
+        "uri": "local_artifacts/autoresearch/dsh/dsh-production-engineering-v1/decisions/checkpoint-52b066d1dabb730571bc883dffded9425a900f4182357c54133889a0c3ba5ec2.json",
+        "sha256": "52b066d1dabb730571bc883dffded9425a900f4182357c54133889a0c3ba5ec2",
+        "size_bytes": 6268
+      },
+      "human_question": null
+    },
+    "open_tickets": 0
+  },
+  "model_transport": {
+    "model": "DeepSeek-V4.1-Flash",
+    "requests": 27,
+    "completed": 24,
+    "unresolved": 3,
+    "actual_usage_rows": 24,
+    "known_usage": {
+      "inputTokens": 404626,
+      "outputTokens": 39665,
+      "cacheReadTokens": 817920,
+      "cacheWriteTokens": 0,
+      "reasoningTokens": 34353,
+      "totalTokens": 1262211
+    },
+    "failed_transport_usage": "Not inferred as zero; original private CLI captures and failed records retained",
+    "output_token_cap": null,
+    "model_spending_authority": "Explicit user authorization, unlimited pilot spending; prospective request/deadline limits retained"
+  },
+  "deployment": {
+    "native_unit": "dsh-production-engineering.service",
+    "model_unit": "dsh-production-engineering-models.service",
+    "wake_timer": "dsh-production-engineering-wake.timer",
+    "native_port": 3094,
+    "model_port": 3097,
+    "linger": true,
+    "operator_paused": false,
+    "completed_goal_stays_inactive": true,
+    "current_native_helper": "helper-r7",
+    "resident_model_helper": "helper-r5",
+    "package_sha256": "874a7b0cb2bcecf415b583d0ae92470b491f085146d28822f6be1544dbb2dfb3"
+  },
+  "qualification": {
+    "regression_tests": 183,
+    "native_protocol_checks": 15,
+    "resident_lifecycle_checks": 6,
+    "default_Source_lifecycle_checks": 5,
+    "service_stop_guard_checks": 3,
+    "rollback_cuts": [
+      "current-r5",
+      "compatible-r3",
+      "current-r5"
+    ],
+    "all_required_checks_passed": true
+  },
+  "evidence": {
+    "deployment": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/deployment-final.json",
+      "sha256": "3b911d719db67db5b826c68b01e1a75524ef16f58543bf099e80be7d1585df78",
+      "size_bytes": 22000
+    },
+    "native_protocol": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/native-protocol-h100-r6.json",
+      "sha256": "06172c85089e36ae33e41da17a4aa63a2bc010263f0117bd60ad972e6e9d8690",
+      "size_bytes": 29654
+    },
+    "resident_lifecycle": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/resident-transport-h100-r4.json",
+      "sha256": "f47411c20c8e980423942679f71684a738d0a11c1174c581415eda4f305dadc9",
+      "size_bytes": 1225
+    },
+    "Source_lifecycle": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/source-lifecycle-h100-r10/receipt.json",
+      "sha256": "346b8d616d977731c74e91fba944ea35e7f354efe5fceb28472603603377ad29",
+      "size_bytes": 6634
+    },
+    "clone_refusal": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/source-lifecycle-h100-r10/clone-native-failure.json",
+      "sha256": "f736c08504c6b4ed0621f7682c986352ab2913ce6bf43f5f5b6c809ff4926970",
+      "size_bytes": 507
+    },
+    "service_operations": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/service-qualification-r1/operations.json",
+      "sha256": "4369752bf66dd0025c8d272e39d5c455ec6c9c67b7825181141eba2e2e885f39",
+      "size_bytes": 929
+    },
+    "rollback": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/h100/service-qualification-r1/rollback-continuity-r2.json",
+      "sha256": "ce8959547e5ec2534bb4ee236af006d09dfd6513db1b52e4bdc8c83a11b9369d",
+      "size_bytes": 893
+    },
+    "failed_restart_marker": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/service-stop-guard-checks.json",
+      "sha256": "7f6b5cbda7d4e7b66121e6a2a69821f83532f722c827e8f28867744974480b1a",
+      "size_bytes": 382
+    },
+    "tests": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/tests-final-r1.log",
+      "sha256": "50e99208f28076c54fd129a8908a5e6aa6fc21ec7cc4d3c9993181a51008d294",
+      "size_bytes": 18818
+    },
+    "execution_source_review": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/execution-review.md",
+      "sha256": "157c7bac66749816e88bb26c44b1f0aacac5e515cbec553d05353e8082a40cf3",
+      "size_bytes": 6431
+    },
+    "loop_source_review": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/loop-review.md",
+      "sha256": "68bd8861ba1fd2184fc8bcd76fb3717b8475280bb631dd651c64e5c65a8c7935",
+      "size_bytes": 19579
+    },
+    "Source_review": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/source-review.md",
+      "sha256": "20b7eff41ca28ddbbdacf4bc4fc9dd0643e82fd9df124c9d7b85b95845d69ab0",
+      "size_bytes": 14896
+    },
+    "transport_service_review": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/transport-service-review.md",
+      "sha256": "4d9a6d47ad9aadffd78709e334d79b813f5e791bd71fa9487cd60b329b1316ec",
+      "size_bytes": 10266
+    },
+    "cross_review": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/cross-review.md",
+      "sha256": "4756f7941029e161f2c5840a0356e05a68d27790863bcbf38571ab327ce8cd65",
+      "size_bytes": 24074
+    },
+    "review_report": {
+      "uri": "local_artifacts/dsh-research/production-loop/261114-1855/review/report.html",
+      "sha256": "864d9d5bf8017ef19450d7005614a0c04ec31d70bd4bad3eee24d1c184325aa8",
+      "size_bytes": 14325
+    }
+  },
+  "source_pins": {
+    "helpers/src/production.ts": "55f606f6835fdafe22c87dc8abb45c0151f17b1ef9ab2bb9c5243e8b99b30f98",
+    "helpers/src/execution.ts": "c1ff391ab12a98b20cbdc63d352b80ed60ba88d49e2ca5b29c7f11466e5d5060",
+    "helpers/src/decision.ts": "37bc88ad78a1365ff0c7751f9fcdf31eb511aba81422decfbef5768471e54ae5",
+    "helpers/src/admission.ts": "0abcb2193ba36067fb2eef9b5e6dff8342c583110bf0a36c632155a559ba16c0",
+    "helpers/src/native.ts": "89db4691bf5c9cd1a7d1265827dd230ba047deced2f678c5443f753144a4aaf5",
+    "helpers/src/review.ts": "7d9e8fb761baa78cad4368994f115d9b090ef2b9d1ae893551f9d5b39cf53183",
+    "helpers/src/coordination.ts": "93363146053dad19dec4935bfce7c588887ff937fdde51191fda85ebe6fd415a",
+    "helpers/src/qualification.ts": "035120da9c929ece43d78e34a0c0ecd038aa7a377da0c39f8c82d89f30cf3ae6",
+    "helpers/src/traex.ts": "39d8242e4adab7d5d61332da6f6fadd90b81287780388ccab8dcfc1a7a3d75f4",
+    "helpers/examples/production/source.mjs": "13d33c7f59fe439775b5363e038974f389b3dbf7120cf2b28c9bc5c12c298e95",
+    "helpers/examples/production/source-qualification.py": "4e3d26e652b22a108f6054828f2e5c95ba09ad21e9bd1f0db0c3107fabfab24b",
+    "helpers/examples/production/source-qualification.mjs": "0b5bd08d292fbdebc63c6fe00bc28f10d880df15c32617c35ce0f87bd8d6642e",
+    "helpers/examples/traex-tools/relay.mjs": "aec9b5906878583fff7f0ed641f9b74b8c0dfd40a7f94b43aeb7ecb1bf63ad06",
+    "helpers/examples/traex-tools/relay-state.mjs": "96cb8edebbbf69e8814348acf37fdb446e70aa22bce3a292e4e4eb9f05f6eace",
+    "helpers/scripts/production-systemd.py": "f33fa85ed5cfc4d11e8a3badc557cd3d0ee799452b49c871527e39e88f1d641d",
+    "helpers/scripts/production-wake.py": "8774756de9e36f2caaaf151549b9c1d7a6566345d18d6b80f611422deefd5e4f",
+    "helpers/scripts/default-service.py": "391f3e5f9323efaede5e5a6866ae9d82f1f6b05ded5a5e5071dcc932b12ef72b"
+  },
+  "limitations": [
+    "New scientific project needs its own accepted hooks, verifier, input/resource/authority and profile qualification",
+    "Existing V3 deployment remains pinned until explicit reviewed V4 retention and supported handoff",
+    "Confirmation stays off; no Accorde fifth admission or broadened M6 adoption",
+    "Private CLI/Session/state copies are not team releases"
+  ],
+  "git_publication": "Publication is separate from qualification; the user authorized commit and push, and Git history records the published source revision.",
+  "independent_review": {
+    "groups": 4,
+    "cross_review_complete": true,
+    "open_confirmed_P0_P1_P2": 0
+  },
+  "revision_history": [
+    {
+      "timestamp": "2026-11-14T22:21:21.661750-08:00",
+      "change": "Finalized four grouped reviews and cross review against actual mirrored native Source proof; all accepted source pins retained"
+    },
+    {
+      "timestamp": "2026-11-14T22:42:28.435817-08:00",
+      "change": "Recorded explicit user publication authorization; source pins and qualification evidence unchanged."
+    }
+  ]
+}

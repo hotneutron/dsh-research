@@ -169,6 +169,98 @@ The [native model qualification recipe](../helpers/examples/traex-tools/run.mjs)
 
 The native review policy requires a finite `max_requests` and `timeout_ms`; it does not require `max_tokens`. The optional legacy field remains readable in frozen older policies, and the driver does not pass it to new reviewer Sessions. TraeX bounds requests with counts/deadlines/capture limits and retains authoritative usage. A carried native `maxTokens` hint is explicitly recorded as ignored; no output-token enforcement is claimed. Earlier failed override witnesses remain historical evidence and no longer block readiness solely on token control. Existing reviewer Sessions and scientific records are not rewritten or refunded.
 
+## Qualified pre-dispatch recovery
+
+`reconcileNoDispatch` accepts a host registered source/ownership guard and independently observed native recovery-review Session. It reads the complete original tool prefix and original compressed source, exact control-flow qualification, original no-admission observation and current writer scope before a serialized invalid-coordination settlement. The actual tool result is retained with incomplete scientific output, unknown process terminal and null unresolved execution cost. All consumed attempts/reviews/time remain charged; only the exact active reservation can be released once through eligible policy settlement. Scientific completion and arbitrary empty-job observations cannot substitute for that proof.
+
+`NativeResearchConfig.recovery` registers the original-authority guard for a new reviewed replacement. The manifest's retry parent/failure/policy must match the retained settled pre-dispatch evidence/checkpoint, qualification prerequisites, current policy/revision and distinct immutable unit content. `reserveAction` refuses retry metadata without this verified guard proof. Prospective caps count the old consumption. Existing source profiles require separately reviewed forward binding; the original authority must supply a supported exact mandate/assessment and remains the scientific admission writer.
+
+Records/domain remain version3; qualified no-dispatch settlement and replay use their existing invalid/ineligible forms. Historical2.3.3 bindings are readable and retain exact original bytes; applying2.3.4 requires its fresh source/property/mapping review. Native rollback cannot drop the original failure, proof, budget or feedback history. Normal result settlement and confirmation-off restrictions remain in force.
+
+
+## Original approval gates before reservation
+
+Helper0.2.2 supplies optional `approvedReview` and `approvedReviewRef` to `NativeScienceGuard.preflight`. The native adapter authenticates that exact caller approval against the actual reviewer Session before invoking the guard, and passes detached copies so guard code cannot mutate the admission inputs. Existing guards can ignore these fields. Record/domain encoding remains version3 and the contract remains2.3.4.
+
+An adopter with a separate original review inbox must correlate this approval with the same original unit, packet and contract through its supported APIs, then verify that gate before native reservation. A goal-budget gate alone does not satisfy a pending original action-review gate. Missing, stale or mismatched approval must fail before another native attempt is consumed. Native callback fields grant no scientific admission or writer transfer; the original controller continues to own those operations.
+
+## Qualified dispatched scientific failure recovery
+
+A new profile may explicitly register `NativeRecoveryGuard.parentEvidenceKind: settled_scientific_failure` under contract2.3.5. The adapter verifies the exact retained settled parent and native admission/identity/terminal/capture facts, invalid scientific evidence, available pinned scientific cost and settlement before invoking the independently qualified original-authority guard. The guard must verify the original closed admission/checkpoint/current recovery policy and distinct updated unit; then a fresh native approval and original Inbox action gate precede reservation.
+
+The absent/default mode continues to require qualified pre-dispatch evidence. Selecting the new host mode supplies no attempt allowance by itself: the bound prospective policy and manifest still count all previous consumption. Existing schema/domain3 records and older action/review/source bytes remain immutable. Current legacy execution pins may be replaced only for qualified new actions through a preserved-history profile update, never by editing an old action or resetting its ledger.
+
+## Project-owned M6 operational qualification
+
+Retain the original scientific admission writer when the incoming route delegates to that same GoalLedger/Controller. A new orchestration profile does not require authority transfer by itself. Freeze its exact scope and separate new-work adoption, confirmation and dependency-retirement decisions.
+
+Rehearse compatible code/profile cuts on the same private current-state copy. Check current-action replay resolves its retained association, expected historical-profile refusals are specific, unknown execution retains reservation, and consumed review cannot authorize a new action. A stopped default profile must retain native Source bytes, ended Ticket/assignment identities, operator pause and current coupled history. Failed graceful shutdown invalidates the cut; cleanup must reap the owned process and restore the current selector even if shutdown fails.
+
+Source export must bind message/version/actor/content identities and complete queue membership to retained original scans. A retrospective association with an already executed scientific action needs explicit chronology and a separate effect checkpoint preserving the original checkpoint. It establishes its declared private mechanics; prospective live source capture and author/Ticket scientific effects require their own qualification.
+
+Operational mechanics and a valid negative pilot establish no quantified human-work savings or payback. Bind benefit/cost comparisons to a prospectively accepted cohort/horizon and preserve all earlier C_run/C_qual and unavailable costs. Project receipts own exact pins/results/holds; the [milestone tracker](../.plan/tracker/261105-1555-milestone-execution.md) links the current assessment.
+
+## Autonomous production research
+
+`NativeProductionResearch` installs the research tools and guards on an existing native author. Its `project_research` policy binds a typed execution template, released input count/purpose, cost purpose, separate reviewer route and prospective resource limits. The project supplies `ProductionProjectHooks`: proposal construction, permitted frozen reviewer context, decision subjects and domain-owned conclusion premises. A feedback reader also requires a domain-owned validator for the changed action.
+
+```js
+import { NativeProductionResearch } from 'dsh-research/native'
+
+const loop = await NativeProductionResearch.open(ctx, {
+  artifacts, table, projectKey, policy, authorSessionId,
+  artifactPrefix: 'local_artifacts/autoresearch/dsh/my-goal',
+  executionShell, executionSandbox, assertActiveAuthority,
+  verifier, hooks, reviewContextMaxBytes: 1048576,
+})
+```
+
+The host supplies the author's existing scoped shell and current Ticket/mandate/pause assertion. `executionSandbox` binds the accepted profile and its native resolver. `verifier` binds the exact domain verifier and result interpretation; project hooks decide which evidence can establish the goal. All references must resolve to retained bytes in the canonical project. A configuration field or model reply cannot register scientific authority.
+
+Use `productionResearchDomain` and `Version4ResearchStateSchema` for this loop. Version four retains prospective feedback capture revisions, durable native outcome notices and reviewed loop decisions. The version-three `researchDomain` remains available for pinned historical deployments. Do not open a V3 store as V4 or reconstruct it as an empty row. An existing-state adoption needs a separately reviewed retention mapping, writer fencing and supported backup/restore. Compatible rollback keeps the current record and all post-cutover consumption.
+
+The [Source recipe](../helpers/examples/production/source.mjs) reads an explicit project-owned configuration from `DSH_PRODUCTION_RESEARCH_CONFIG`. It loads the byte-pinned project module, keeps `science.sqlite3` inside the configured native `machine.stateDir` lock, and uses the actual native runtime lifetime. Its recovery resolves the retained author and installs on that same agent even after Source reload. New project registration requires `authority_registration=explicit_new_project`; the example's initial mandate requires an authenticated original CLI user item and its source metadata. Do not relabel an agent event or construct a user signature to pass this check. Existing hosted-project Sources can instead install the loop for their already authorized native author.
+
+The author uses `research_propose`, `research_review`, `research_run` and `research_status`. Status returns parsed retained evidence, checkpoints, costs, current bounds and captured source versions. An adopted reviewer/source suggestion must identify its captured version and a materially changed unadmitted manifest; separate review and actual execution then establish its effect. Optional publication/source failures remain recorded without blocking admissible research.
+
+`research_conclude` creates a non-executing decision subject and obtains separate native review. `goal_completion` additionally requires domain evidence satisfying the original goal. `scientific_exhaustion` requires the scoped alternatives, materially different rebrainstorm, domain assessment and exact steering question. Ordinary negative/procedural results use `human_action=null`; a terminal native report cannot close the Ticket before this reviewed conclusion. Unknown execution, exhausted budget or unavailable review cannot establish scientific exhaustion.
+
+The [engineering project module](../helpers/examples/production/engineering-project.mjs) illustrates these hooks over a fixed released versioned event trace and the [instrumented evaluator](../helpers/examples/production/evaluate.mjs). Its metric counts calls to the same comparator and excludes insertion, allocation and wall-clock cost. It establishes its declared engineering scope; another project's scientific workload needs its own accepted factory, verifier, input/resource policy and profile qualification.
+
+From a built source checkout, run the disposable native protocol and transport lifecycle checks in fresh output directories:
+
+```sh
+node helpers/examples/production/qualification.mjs /absolute/fresh-native-protocol
+node helpers/examples/traex-tools/resident-qualification.mjs /absolute/fresh-relay-check
+```
+
+Both commands use scripted models and package-owned qualification authority. The relay check exercises actual process-group crash, interrupted usage, duplicate listener refusal and overlapping graceful stop/start. They do not spend model tokens or admit hosted-project science.
+
+The [default Source lifecycle drill](../helpers/examples/production/source-qualification.py) accepts `--project`, `--runtime`, `--template` (an existing accepted engineering configuration) and `--output` under that project. It prepares an explicitly disposable profile with a fixture CLI, checks a public plugin restart against the same loaded author and one copy of each prompt, then verifies actual pause, ended Ticket, late-tool and cloned writer refusal. It observes native failed-Fiber evidence for the clone case and retains zero research admissions. This drill requires the pinned Linux consumer; it is separate from a real-model/domain pilot.
+
+### Linux service deployment
+
+After qualifying the exact project/profile and fencing its prior writer, prepare resident relay controls with `resident=true`, a fixed loopback `listenPort`, `maxRequests` and `perRequestMs`. When replacing a transport, include the frozen complete idle `predecessor` reference. Resident restart preserves all consumed requests and retained usage; it marks interrupted requests unresolved without authorizing tools or refunding them. Diagnostic CLI error items are retained only alongside a normal completed turn; native CLI tool operations and incomplete turns remain refused. Output tokens remain uncapped.
+
+Generate project-owned native, model and scheduled Source units:
+
+```sh
+python3 helpers/dist/production-systemd.py \
+  --project /absolute/P --runtime /absolute/P/pinned-runtime \
+  --home /absolute/P/native-home --helper /absolute/P/pinned-helper \
+  --config /absolute/P/research-config.json \
+  --relay-root /absolute/P/private-model-relay \
+  --relay-controls /absolute/P/model-controls.json \
+  --executable /absolute/protected/traecli --profile project-research \
+  --port 3094 --output /absolute/P/fresh-service-config
+```
+
+Register the generated units with the existing systemd user manager. The native unit requires its model unit; the model follows native stop/restart. The existing systemd timer invokes `production-wake.py` every 60 seconds. It only wakes retained authority, skips running/stopped work, and reconciles an exact existing reviewer association when possible. It creates no new goal, budget or scientific scheduler. An unattended user deployment requires an enabled persistent user manager; verify `loginctl show-user` and its `Linger` property.
+
+Use `default-service.py start|stop|restart|status --unit <profile>.service --home <native-home> --profile <profile>` for the native unit, including `restart --respect-stop`. Intentional stop is persistent and gates both services and scheduled wake. Refused or incomplete shutdown keeps its stop marker and blocks restart. Systemd's restart/start-rate limits are separate from consumed model requests; after a bounded operator maintenance drill hits a start-rate limit, verify both cgroups are empty before explicitly resetting those unit failures. Keep the model request history unchanged.
+
+The relay commits atomic fsynced request accounting before contacting TraeX and holds its fixed listener until all old handlers and final writes drain. Keep token files and CLI/Session histories private. Preparing services neither opens confirmation inputs nor grants a hosted project's scientific authority. A completed goal remains stopped on service restart; new work needs its own accepted scope/continuity transition.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -184,3 +276,13 @@ The native review policy requires a finite `max_requests` and `timeout_ms`; it d
 | r9 | 2026-11-12T20:15:20.440063-08:00 | Added bounded default failure/cold restore, exact per-call sandbox ownership, cleanup-before-receipt and text-only authenticated TraeX planning semantics; scientific/tool/token-bounded gates remain. |
 | r10 | 2026-11-12T21:17:00-08:00 | Added structured-text native tool projection, per-call validation/bounds and reproducible engineering recipe; preserved unsupported token-control and scientific/default-worker gates. |
 | r11 | 2026-11-12T22:16:54.920421-08:00 | Removed mandatory reviewer output-token caps and TraeX cap refusals; documented legacy metadata, retained request/deadline/capture/usage controls and historical witness preservation. |
+
+| r12 | 2026-11-13T20:59:55.944311-08:00 | Documented host-qualified no-dispatch/review settlement and original-authority replacement guard with record/domain3 retention; scoped2.3.4 adoption required. |
+
+- 2026-11-14T08:05:28.702163+00:00: Documented authenticated scientific preflight approval context and the required original inbox gate before reservation; retained record/domain3 and contract2.3.4.
+
+- 2026-11-14T09:09:09.852867-08:00: Documented contract2.3.5 explicit settled-scientific-parent host recovery class, exact native/original fact qualification, retained default behavior and cumulative allowance.
+
+- 2026-11-14T18:43:46.995064-08:00: Documented retained-owner M6 code/profile qualification, exact native Source/Ticket/replay and unconditional cleanup checks, original feedback-version export/retrospective scope and explicit benefit evidence.
+
+- 2026-11-14T21:59:03.959632-08:00: Added project-owned autonomous production hooks, explicit V3/V4 adoption, reviewed conclusion/prospective feedback and resident native/model/scheduled service lifecycle.

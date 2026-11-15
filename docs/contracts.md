@@ -1,8 +1,8 @@
 # Research-loop contract
 
 Contract ID: `dsh-research/research-loop`.
-Contract version: `2.3.3`.
-Created: 2026-11-11 17:02 -0800. Updated: 2026-11-12T22:16:54.920421-08:00.
+Contract version: `2.4.0`.
+Created: 2026-11-11 17:02 -0800. Updated: 2026-11-14T09:09:09.852867-08:00.
 Status: specified design baseline. M1 public encodings and keyless provider fixtures have scoped development checks; independent/full conformance and live qualification remain pending. This document grants no execution or deployment authority.
 
 ## Scope and authority
@@ -46,6 +46,28 @@ M1 freezes the public encoding/provider mappings and compatibility matrix for th
 Identifiers must be nonempty stable strings; content hashes are SHA-256 values over exact bytes. Counters are nonnegative integers, excluding booleans; limits/costs must be finite, nonnegative and bound to declared units/rates/rounding. Do not combine unlike dimensions or replace unavailable native facts/costs with zero. Required missing facts keep dependent acceptance/admission unresolved.
 
 Logical action identity derives from the frozen scientific subject and proposed action, not a fresh transport ID. Native IDs remain linked delivery/execution identities. A permitted fresh retry/replacement has its own admitted action/attempt and explicit parent/recovery-policy references; it preserves earlier failures and costs. Re-delivering or resuming the same admitted action is reconciliation, not another launch.
+
+## Qualified pre-dispatch reconciliation and replacement
+
+A recorded unknown attempt may be reconciled as invalid coordination when an independently qualified host policy establishes that its original execution never began. Positive proof binds the original complete native tool call/result prefix and actual tool-call identity, original immutable action/admission tuple and refusal snapshot, exact source/shell/hook control-flow pins proving the observed failure precedes every reachable dispatch or deferred continuation, stopped original ownership and an exclusive current writer, and the original scientific authority's absence of admission. Empty process/job lists, a later resolver probe, model rationale or caller-supplied flags alone are insufficient.
+
+The fresh recovery-policy review is a scoped contract_revision subject, separate from the original run approval. Its supplied completion must match independently observed native reviewer Session bytes under the accepted producer/preset/permissions and exact request/policy scope. Parsing a completion artifact cannot authenticate itself. Missing native provenance keeps the original hold and reservation.
+
+Eligible coordination settlement appends the original unknown snapshot, verified no-dispatch proof, actual native tool-result capture and invalid/ineligible Evidence/checkpoint. A scientific-output capture remains incomplete, no process terminal or scientific result is invented, and unavailable execution cost stays null with its unresolved reason. A verified zero scientific admission delta is an authority observation rather than an invented scientific execution cost. Reservation release occurs only through the serialized exact-identity settlement; consumed attempt/action/review and full timeout consumption remain unchanged. Replays cannot release twice or dispatch the parent.
+
+A replacement has a distinct immutable content identity; copying original bytes to a new URI does not qualify. Its reviewed parent failure, recovery-policy/qualification prerequisites, supported resolved execution limits and original-authority mandate must be bound before admission. Any prospective attempt/time allowance counts all prior consumption; no branch/profile/goal-context revision restores credit. If the original ledger requires a scientific checkpoint or selected-candidate binding that this pre-dispatch failure lacks, neither a fabricated checkpoint nor a new proposal ID bypasses it. A covered consecutive context revision or separately qualified authority procedure must preserve project, scientific scope and every historical charge/opening before a new original assessment/admission.
+
+These obligations add no new state/domain encoding. Applying this policy to an older bound attempt requires exact source/record/property compatibility and a fresh scoped mapping review; old fields and captured facts remain immutable. The current package adapters use the existing version3 domain/KV boundary. This document edit supplies no live reconciliation, scientific execution or adoption acceptance.
+
+## Qualified settled scientific failure replacement
+
+A dispatched scientific unit that finished with invalid/ineligible evidence may receive a distinct reviewed replacement only through an explicitly qualified host recovery route. The default recovery route remains limited to qualified pre-dispatch failures. A host selecting `NativeRecoveryGuard.parentEvidenceKind = settled_scientific_failure` must bind that choice to its reviewed guard source, qualification and current profile; author tool arguments cannot select or override it.
+
+Before host recovery preflight, verify the exact retained parent action/manifest/binding/admission/owner tuple, settled phase and released reservation, nonnull matching native job and immutable admission/identity/terminal/capture references. The complete native terminal/result bytes, scientific settlement and available nonnegative C_science amount/source must match the stored evidence. A normally completed wrapper does not make a crashed underlying scientific unit eligible. Missing or conflicting facts, unknown ownership, absent scientific settlement or unavailable science cost keep this route unqualified.
+
+The host guard additionally verifies the original scientific authority's closed invalid admission, actual checkpoint and exact charged process receipt, current goal/recovery policy and distinct replacement source/unit. Use its supported recovery/reorientation/proposal/assessment procedures with their real prerequisites. Do not replace the old scientific checkpoint, reuse an old approval, mint an unchanged unit at a different path, refund a failed unit or count a profile revision as fresh budget. Any newly authorized allowance retains every previous consumed attempt, review, charge and reservation in the same project authority.
+
+A fresh native scientific-action approval and original action-review gate still precede the new native reservation. Qualification covers only the selected failure class, profile and policy; it supplies no permit for unrelated retries, confirmation, scientific claims or writer transfer. Existing version3 record/domain forms and pre-dispatch recovery observations remain unchanged; adopting this new recovery class requires a fresh version-bound qualification and compatibility assessment.
 
 ## Invariants
 
@@ -291,6 +313,18 @@ C_qual remains in total package-coordination cost even when triage chooses the p
 
 A prospectively reviewed requirement/envelope revision may correct an unsound baseline but cannot rewrite the original-window failure, remove failed cells or refund consumption. All three 1604 entry conditions still apply; a budget pass does not certify an envelope pass, and an envelope failure does not by itself authorize redesign.
 
+## General production research profiles
+
+Contract2.4.0 adds an explicit project_research profile over the existing native author/AgentLoop, reviewer, Source, jobs and project storage. Freeze the producer/executable and typed argument template, every input slot/purpose, exact environment, native process cost purpose and standing operations/bounds. Historical profiles retain their one-input/three-argument semantics; parsing a new profile is not activation authority. A direct native CPU unit may use its genuinely registered native project admission as the scientific authority; GPU profiles retain their exact device/lease/termination and external scientific guard where declared. Every case remains project-qualified and released-input/confirmation-off.
+
+New production profiles use version-four coupled records and the existing native domain version-four descriptor. This retains all action/review/evidence/cost identity and adds authoritative feedback capture revisions, native outcome notification identities/durability proofs and reviewed loop decisions. No implicit version-three upgrade, copied empty authority or history reset is allowed. Version-three profiles/old SDK recipes remain pinned; reverse compatibility is not inferred from an unchanged underlying table name.
+
+Source capture records its committed project revision. First adoption must select an unadmitted changed action with the current author/profile, validate the scientific change through the registered project procedure, and preserve a materially changed subject for native reviewer feedback. An executed-effect receipt must have its actual corresponding admission strictly after capture. Identical retained replay is association only; late comments cannot claim an already executed action as a new prospective effect.
+
+The isolated reviewer receives exact project-permitted UTF-8 source/method/evidence bytes under an explicit context byte budget, not opaque reference names alone. Production completion cuts bind a validated actual native event range; old full-prefix receipts retain their original shape. Verified completion clears only its exact current review hold; interrupted review cannot erase another authority/qualification hold. Global coupled review request consumption covers scientific and non-executing decision reviews; only scientific_action approvals can authorize execution.
+
+The ordinary author can inspect bounded parsed evidence/checkpoints and actual costs, receive durable native outcome wakeups, and continue through a changed proposal and new review without a routine human dependency. Optional publication/source failures remain attributable and cannot grant or mint execution. Completing a goal or asking for scientific steering requires a frozen domain-assessed decision subject and separately completed native goal_completion/scientific_exhaustion review. Operational holds, uncovered budget and unknown jobs cannot become scientific exhaustion. Required steering matches that exact reviewed question; the reviewed checkpoint and original histories stay immutable.
+
 ## Compatibility assessment of new obligations
 
 This register was established in 2.3.2. Rows 1.0.0–2.3.1 are retrospective assessments recorded at that time; they do not claim a release-time review. Original decisions remain in each version’s revision history and retained snapshots. The 2.3.2 and later rows are contemporaneous with their contract revisions.
@@ -307,6 +341,9 @@ Maintain this cumulative register for every contract version, not only the lates
 | 2.3.1 | Amortization pinned to accepted W/D, owned qualification holds, explicit T4 combined cost evidence | Tightened cost/evidence/hold obligations despite unchanged IDs and patch label | M1/M4/M6 and T4 consumers reassess envelope and hold data; preserve original-window failure |
 | 2.3.2 | Cumulative version assessment and budget/envelope/qualification-cost arbitration | Added release/adoption completeness and triage rules; conformance remains prospective | Documentation gate requires this row; M1/M4/M6 and 1604 apply explicit cost classification before T4 |
 | 2.3.3 | Machine-checkable compatibility row binding, retrospective assessment labeling and accepted-declaration envelope binding | Added qualification/adoption reference encoding; parsing is not semantic compatibility or adoption approval | M1 encoding/checks bind register bytes, table and row hash; M4/M6 and T4 consumers retain review and accepted envelope authority |
+| 2.3.4 | Qualified pre-dispatch coordination settlement, independently observed native recovery review, immutable replacement identity and cumulative original-authority recovery scope | New source-proof and recovery mapping obligations; existing record/domain3 forms retained, old attempts require exact qualified mapping without refunded consumption or fabricated execution | M1/M4 qualify proof/review/CAS/replay and unchanged-unit refusals; M5/M6 pin current source/profile and original mandate before eligible replacement or adoption |
+| 2.3.5 | Explicit host opt-in for exact settled invalid scientific failure, native terminal/capture and original charged-checkpoint recovery qualification | Additional failure-class evidence and host qualification; default pre-dispatch behavior and record/domain3 forms retained, no attempt or cost refund | M1/M4 qualify dispatched-parent refusal and exact facts; M5/M6 bind fresh guard/profile/original recovery and cumulative allowance before a distinct reviewed replacement |
+| 2.4.0 | Explicit project research invocation/input/cost profiles, version-four prospective feedback and native wakeup/decision state, permitted reviewer source context and separate completion/exhaustion reviews | New profile and version-four encoding; historical version-three profiles/receipts remain unchanged, reverse adoption requires explicit compatibility and supported handoff | M1/M3/M4 qualify production installer, source/Ticket/role/feedback/context/replay/decision/restart boundaries; M6 pins exact project scope and preserved authority before enabling |
 
 Qualification/adoption records must carry compatibility_row_ref: register artifact URI/exact-byte hash/size, contract version, stable row ID, row content hash and compatibility table hash. [Machine-readable register](compatibility.json) mirrors the table and labels assessment timing. The binding checker rejects a missing current row, drifted register/table/row bytes or mismatched contract version. A checked reference is necessary but does not establish semantic compatibility.
 
@@ -380,3 +417,9 @@ The r4 value `2026-11-11 18:08 -0800` is retained from the initial edit, but is 
 | r10 | 2026-11-12 00:07:50 -0800 | Editorial source-link update for helpers layout; contract obligations, version 2.3.3 and compatibility table remain unchanged. Earlier frozen bytes retain their original hashes. |
 | r11 | 2026-11-12 00:30:09 -0800 | Corrected the illustrative CPU arithmetic to synthetic helper scope and removed its mistaken Accorde attribution; generic invariants, encoding, version 2.3.3 and compatibility table remain unchanged. |
 | r12 | 2026-11-12T22:16:54.920421-08:00 | Clarified existing declared model/reviewer bounds: request/deadline/capture limits and actual usage suffice; an output-token ceiling is not mandatory. Contract2.3.3 properties and compatibility obligations remain unchanged. |
+
+| r13 | 2026-11-13T20:59:55.944311-08:00 | Specified2.3.4 qualified no-dispatch coordination settlement/native review observation and distinct recovery content/cumulative authority; existing domain3 and historical bytes retained, live acceptance still separate. |
+
+| r14 | 2026-11-14T09:09:09.852867-08:00 | Specified2.3.5 explicit qualified settled-scientific-failure recovery class with exact native/original terminal/cost/checkpoint bindings; retained default pre-dispatch semantics, domain3 and cumulative authority, live adoption pending. |
+
+- 2026-11-14T19:26:07.266832-08:00: Added2.4.0 explicit production profile/version-four encoding, prospective feedback, reviewer context/native range, durable wakeup and independently reviewed conclusion semantics; old profiles/history retained, project qualification/activation required.

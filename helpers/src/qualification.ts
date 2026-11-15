@@ -58,9 +58,9 @@ export function auditContinuity(beforeInput: unknown, afterInput: unknown) {
       || next.admitted_revision !== old.admitted_revision || next.timeout_ms !== old.timeout_ms || next.dispatch_token !== old.dispatch_token) violations.push(`action_history_changed:${id}`)
     if (old.evidence && !same(next?.evidence, old.evidence)) violations.push(`evidence_rewritten:${id}`)
     if (old.checkpoint && !same(next?.checkpoint, old.checkpoint)) violations.push(`checkpoint_rewritten:${id}`)
-    if (before.schema_version === 3) {
+    if (before.schema_version === 3 || before.schema_version === 4) {
       const facts = before.actions[id]?.runtime_facts
-      if (facts && (after.schema_version !== 3 || !same(after.actions[id]?.runtime_facts, facts))) violations.push(`gpu_native_facts_lost:${id}`)
+      if (facts && ((after.schema_version !== 3 && after.schema_version !== 4) || !same(after.actions[id]?.runtime_facts, facts))) violations.push(`gpu_native_facts_lost:${id}`)
     }
     if (old.phase === 'settled' && next?.phase !== 'settled') violations.push(`terminal_reopened:${id}`)
     const phases = ['admitted', 'dispatching', 'running', 'unknown', 'settled']
@@ -85,7 +85,8 @@ export function auditContinuity(beforeInput: unknown, afterInput: unknown) {
       for (const [id, item] of Object.entries(before.feedback.items)) {
         const next = after.feedback.items[id]
         if (!next || next.item_id !== item.item_id || next.source_id !== item.source_id || next.message_id !== item.message_id
-          || next.source_version !== item.source_version || canonicalJson(next.content) !== canonicalJson(item.content)) violations.push(`feedback_version_lost:${id}`)
+          || next.source_version !== item.source_version || canonicalJson(next.content) !== canonicalJson(item.content)
+          || ('captured_revision' in item && (!('captured_revision' in next) || item.captured_revision !== next.captured_revision))) violations.push(`feedback_version_lost:${id}`)
         if (next && ((!['pending', 'deferred'].includes(item.disposition) && (next.disposition !== item.disposition || next.reason !== item.reason
           || canonicalJson(next.changed_action) !== canonicalJson(item.changed_action)))
           || (item.effect !== null && (canonicalJson(next.effect) !== canonicalJson(item.effect) || next.effect_status !== item.effect_status))
@@ -100,6 +101,18 @@ export function auditContinuity(beforeInput: unknown, afterInput: unknown) {
           || canonicalJson(next.checkpoint) !== canonicalJson(publication.checkpoint) || canonicalJson(next.release) !== canonicalJson(publication.release)
           || next.attempts < publication.attempts || (publication.status === 'verified' && (next.status !== 'verified'
             || canonicalJson(next.verification) !== canonicalJson(publication.verification)))) violations.push(`publication_history_lost:${id}`)
+      }
+    }
+  }
+  if (before.schema_version === 4) {
+    if (after.schema_version !== 4) violations.push('production_loop_state_dropped')
+    else {
+      if (before.loop.decision && !same(before.loop.decision, after.loop.decision)) violations.push('reviewed_loop_decision_changed')
+      for (const [id, notice] of Object.entries(before.loop.notifications)) {
+        const next = after.loop.notifications[id]
+        if (!next || next.action_id !== notice.action_id || next.message_id !== notice.message_id || !same(next.content, notice.content)
+          || !same(next.checkpoint, notice.checkpoint) || (notice.status === 'observed' && (next.status !== 'observed' || !same(next.observation, notice.observation))))
+          violations.push(`outcome_notification_lost:${id}`)
       }
     }
   }

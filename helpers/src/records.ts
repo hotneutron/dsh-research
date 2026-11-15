@@ -125,7 +125,7 @@ export const EvidenceSchema = z.strictObject({
 
 export const ReviewSchema = z.strictObject({
   schema_version: z.literal(1), kind: z.literal('review'), binding: Binding, review_id: Id,
-  subject_kind: z.enum(['scientific_action', 'architecture_entry', 'contract_revision']),
+  subject_kind: z.enum(['scientific_action', 'architecture_entry', 'contract_revision', 'goal_completion', 'scientific_exhaustion']),
   request: ByteRef, packet: ByteRef, subject: ByteRef, manifest: ByteRef.nullable(), checkpoint: ByteRef.nullable(),
   action_id: Id.nullable(), author_session_id: Id,
   reviewer: z.strictObject({ session_id: Id, provider: Id, preset: ByteRef, permissions: ByteRef, assurance: Assurance }),

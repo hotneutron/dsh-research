@@ -13,7 +13,7 @@ export interface PublicationTransport {
 }
 
 export async function publishCheckpoint(input: { artifacts: ProjectArtifacts; table: KvTable<string, ResearchState>; projectKey: string;
-  checkpoint: ArtifactReference; release: ArtifactReference; audience: string; maxAttempts: number; transport: PublicationTransport }) {
+  checkpoint: ArtifactReference; release: ArtifactReference; audience: string; maxAttempts: number; transport: PublicationTransport; artifactPrefix?: string }) {
   const { artifacts, table, projectKey, checkpoint, release, audience, transport } = input
   Count.positive().parse(input.maxAttempts); Id.parse(audience)
   await artifacts.read(checkpoint)
@@ -25,13 +25,14 @@ export async function publishCheckpoint(input: { artifacts: ProjectArtifacts; ta
     const fetched = await transport.fetch(operationId, audience)
     if (fetched === null) return null
     if (!fetched.access || sha256(fetched.bytes) !== release.sha256) throw new Error('Fetched release or audience access does not match')
-    const fetchedRef = await artifacts.write(`snapshots/publication/${operationId}-fetched-${sha256(fetched.bytes)}.bin`, fetched.bytes).catch(async error => {
+    const prefix = input.artifactPrefix ?? 'snapshots'
+    const fetchedRef = await artifacts.write(`${prefix}/publication/${operationId}-fetched-${sha256(fetched.bytes)}.bin`, fetched.bytes).catch(async error => {
       if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
-      const ref = { uri: `snapshots/publication/${operationId}-fetched-${sha256(fetched.bytes)}.bin`, sha256: sha256(fetched.bytes), size_bytes: fetched.bytes.byteLength }
+      const ref = { uri: `${prefix}/publication/${operationId}-fetched-${sha256(fetched.bytes)}.bin`, sha256: sha256(fetched.bytes), size_bytes: fetched.bytes.byteLength }
       await artifacts.read(ref); return ref
     })
     const proofBytes = Buffer.from(canonicalJson({ fetched: fetchedRef, audience, access: true, source: fetched.source }))
-    return artifacts.writeOnce(`snapshots/publication/${operationId}-proof-${sha256(proofBytes)}.json`, proofBytes)
+    return artifacts.writeOnce(`${prefix}/publication/${operationId}-proof-${sha256(proofBytes)}.json`, proofBytes)
   }
   try {
     if (!publication) {

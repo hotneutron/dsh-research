@@ -88,14 +88,15 @@ export class TraexTextAdapter extends LlmAdapter {
     signal.throwIfAborted()
     if (timedOut || overflow || code !== 0) throw new Error(`TraeX planning completion unresolved (exit=${code}, timeout=${timedOut}, overflow=${overflow}); no receipt may authorize execution`)
     const events = stdout.split('\n').filter(Boolean).map(line => JSON.parse(line) as Record<string, any>)
-    if (events.some(e => e.item && !['agent_message', 'reasoning'].includes(e.item.type))) throw new Error('TraeX planning attempted an unqualified tool or external operation')
+    if (events.some(e => e.item && !['agent_message', 'reasoning', 'error'].includes(e.item.type))) throw new Error('TraeX planning attempted an unqualified tool or external operation')
+    const diagnostics = events.filter(e => e.item?.type === 'error').map(e => e.item.message)
     const terminal = events.findLast(e => e.type === 'turn.completed')
     if (!terminal) throw new Error('TraeX has no completed native turn')
     const usage = mapTraexUsage(terminal.usage)
     const result = await readFile(answer, 'utf8')
     if (result.length > 128 * 1024) throw new Error('TraeX answer exceeds the declared planning capture limit')
     this.receipts.push({ model: this.config.model, transport: 'traecli exec', thread_id: events.find(e => e.type === 'thread.started')?.thread_id ?? null,
-      prompt_sha256: sha256(prompt), answer_sha256: sha256(result), usage: terminal.usage ?? null,
+      prompt_sha256: sha256(prompt), answer_sha256: sha256(result), usage: terminal.usage ?? null, diagnostics,
       wall_ms: performance.now() - start, artifacts: root, tool_calls: 0, scientific_execution_authorized: false,
       model_spending_limit: 'unbounded by explicit user authorization; finite request/deadline limits still apply',
       output_token_cap: null, legacy_max_tokens_ignored: options.maxTokens ?? null })

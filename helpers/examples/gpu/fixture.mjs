@@ -26,10 +26,12 @@ export async function createGpuFixture(output, options = {}) {
     const environment = { CUDA_VISIBLE_DEVICES: resource.device_uuid, PYTHONDONTWRITEBYTECODE: '1', CUDA_CACHE_DISABLE: '1' }
     const effective = await f.json('snapshots/gpu-profile.json', { scope: 'project_gpu_development', resource, guard, namespace, producer, qualification, budget, physical_GPU: !stub })
     const binding = { ...f.binding, profile: { ...f.binding.profile, revision: 'gpu-qualification-v1', effective, assurance: 'fixture_verified' } }
+    const scientific = options.scienceFactory ? await options.scienceFactory(f) : null
     const policy = { ...f.policy, scope: 'project_gpu_development', binding, entrypoint: producer, max_attempts: 2,
       max_timeout_ms: timeout, max_total_timeout_ms: timeout * 2, allowed_executables: [stub ? process.execPath : options.python ?? '/usr/bin/python3'],
       allowed_operations: ['positive', 'negative', 'incomplete'],
-      gpu: { resource, guard, qualification, budget, lease_namespace: namespace, environment, purpose: 'C_qual' } }
+      gpu: { resource, guard, qualification, budget, lease_namespace: namespace, environment,
+        ...(scientific ? { purpose: 'C_science', science: scientific.policy } : { purpose: 'C_qual' }) } }
     const policyRef = await f.json('snapshots/gpu-policy.json', policy)
     // This is an explicitly disposable engineering registration; never rebind Accorde's scientific authority.
     await f.table.update(f.config.projectKey, s => ResearchStateSchema.parse({ ...s, binding, policy: policyRef }))
@@ -56,7 +58,7 @@ export async function createGpuFixture(output, options = {}) {
       },
     }
     const gpu = options.guardFactory ? options.guardFactory(defaultStub) : stub ? defaultStub : createGpuGuard({ ctx: f.ctx, artifacts: f.artifacts, identity: guard, resource, namespace })
-    const adapter = await NativeResearchAdapter.open(f.ctx, { ...f.config, policy: policyRef, gpu })
+    const adapter = await NativeResearchAdapter.open(f.ctx, { ...f.config, policy: policyRef, gpu, ...(scientific ? { science: scientific.guard } : {}) })
     const unregister = adapter.register()
     const ptx = producerBytes.toString().match(/PTX = """([\s\S]*?)"""/)?.[1]
     if (!ptx) throw new Error('Frozen PTX definition missing')
@@ -71,10 +73,10 @@ export async function createGpuFixture(output, options = {}) {
       const interpreter = await json(`snapshots/gpu-interpreter-${ordinal}.json`, { executable: policy.allowed_executables[0], node: process.version, scope: 'disposable qualification; full interpreter closure remains a separate target-profile obligation' })
       const subject = { ...base, binding, architecture: effective,
         candidate: { ...base.candidate, tree: producer, content_inventory: inventory }, evaluator: { ...base.evaluator, interpreter },
-        inputs: [{ artifact: input, version: 'gpu-qualification-v1', split: 'synthetic', purpose: 'C_qual', access: 'released' }],
+        inputs: [{ artifact: input, version: 'gpu-qualification-v1', split: 'synthetic', purpose: policy.gpu.purpose, access: 'released' }],
         invocation: { executable: policy.allowed_executables[0], argv: [join(f.root, producer.uri), join(f.root, input.uri), operation], cwd: f.root, env: environment },
         bounds: { timeout_ms: timeout, max_attempts: 2, timeout_reservation_ms: timeout * 2, concurrency: 1, resource_policy: policyRef },
-        proposal: { decision: 'continue', operation, retry: null, prerequisites: [qualification] },
+        proposal: { decision: 'continue', operation, retry: null, prerequisites: [qualification, ...(scientific ? [scientific.policy.envelope] : [])] },
         ...(!stub ? { output: { schema, required_fields: { score: 'finite_number', gpu_receipt_uri: 'string', gpu_receipt_sha256: 'string', gpu_receipt_size: 'finite_number' }, additional_fields: false } } : {}) }
       const manifest = ManifestSchema.parse({ ...subject, action_id: deriveActionId(subject) })
       const manifestRef = await json(`snapshots/gpu-manifest-${ordinal}.json`, manifest)
@@ -89,7 +91,7 @@ export async function createGpuFixture(output, options = {}) {
         packet: manifestRef, subject: manifestRef, manifest: manifestRef, checkpoint: null, action_id: manifest.action_id, author_session_id: f.author.id,
         reviewer: { ...policy.reviewer, assurance: 'fixture_verified' }, completion, status: 'completed', decision: 'approve',
         reason: 'Scripted disposable engineering review; no paid/scientific review qualification', evidence: [],
-        scope: { consumable_once: true, proposal, bounds: manifest.bounds, prerequisites: [qualification] }, hold: null })
+        scope: { consumable_once: true, proposal, bounds: manifest.bounds, prerequisites: manifest.proposal.prerequisites }, hold: null })
       return { manifest, manifestRef, request: { manifest: manifestRef, review: await json(`snapshots/gpu-review-${ordinal}.json`, review), expected_revision: f.table.get(f.config.projectKey).revision } }
     }
     return { ...f, binding, policy, policyRef, adapter, prepare, gpu, close: async () => { unregister(); await f.close() } }

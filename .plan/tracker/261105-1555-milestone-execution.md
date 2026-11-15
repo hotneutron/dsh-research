@@ -1,6 +1,6 @@
 # dsh-research milestone implementation tracker
 
-Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-12T22:19:15.946860-08:00. Revision: r33. Status: real model-selected native tool and serving GPU producer mechanics qualified; scientific M5 and authority cutover remain held.
+Created: 2026-11-05 15:55:26 -0800. Updated: 2026-11-14T22:17:51.194095-08:00. Revision: r46. Status: helper0.3.0; autonomous production engineering loop and managed H100 deployment qualified; Accorde broader scientific adoption remains deferred.
 
 Parent: [review and index](../261105-1555-review-1201-1230-and-milestones.md). Source architecture: [local 1230 English](../261103-1230-plan-dsh-research-plugin-rebuild.md) / [Chinese](../261103-1230-plan-dsh-research-plugin-rebuild-zh.md), refined by the latest contracts below.
 
@@ -10,7 +10,7 @@ This is the canonical M1–M6 implementation status and next-work record under .
 
 ## Canonical contract status
 
-[Research-loop contract 2.3.3](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, with confirmation-off public encodings and scoped native fixture observations now implemented. M2 now demonstrates guarded native admission/job execution inside the unchanged default worker; broader scientific/profile/property qualification remains pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
+[Research-loop contract 2.4.0](../../docs/contracts.md) is specified. L0–L8, the category-scoped property IDs and F1–F3 now provide an audit baseline for T1–T4, with confirmation-off public encodings and scoped native fixture observations now implemented. M2 now demonstrates guarded native admission/job execution inside the unchanged default worker; broader scientific/profile/property qualification remains pending. Associate future receipts with exact contract/profile hashes and assurance; preserve the canonical property set and M1–M6 scope. [Document validation](../review/261111-2112-N11-N12-validation.json) is separate from runtime evidence.
 
 ## Current document alignment
 
@@ -18,11 +18,11 @@ Basis: [M0/1616](../261105-1616-m0-architecture-workflows-and-idempotency.md), [
 
 All eight 1555 documents were audited/updated in this documentation task. [Validation detail](../review/261111-1604-document-validation.json) is versioned compact package-development evidence; raw supporting data stays local. Deliberate package engineering plans/compact qualification receipts are versioned; project explorative plans/trackers use ignored P/local_artifacts/autoresearch/dsh/<goal>/paths/<path-id>/planning/. Deliberate project plans and useful goal/milestone records stay versioned and preserve frozen plan/source hashes, backup/export and intended team access.
 
-Accorde has a corrected project-owned GPU integration charter/tracker and non-executing GPU source/legacy-metadata intake. The previous CPU replay preparation is superseded. Accepted GPU workload/device/environment/resource/profile/budget bindings remain required before live freeze. No package copy substitutes for project authority.
+Accorde has a project-owned GPU integration charter/tracker, accepted caller inputs/source/profile and real native action review. The previous CPU replay preparation is superseded. Its original never-dispatched attempt is coordination-invalid settled with consumption preserved. The reviewed second attempt failed before timing collection; the newly authorized third attempt completed all144 rows but failed the frozen timing-quality gate. Fresh post-third metadata continuity passes. No package copy substitutes for project authority.
 
 ## Package versus project tracking
 
-This tracker owns reusable-package implementation/qualification only. The [Accorde tracker](../../../accorde/.plan/tracker/261112-0004-dsh-research-adoption.md) owns project preparation, pilot/feedback receipts and scientific decision history; accepted live inputs remain pending.
+This tracker owns reusable-package implementation/qualification only. The [Accorde tracker](../../../accorde/.plan/trackers/261112-0004-dsh-research-adoption.md) owns project preparation, pilot/feedback receipts and scientific decision history. Caller inputs and the native source/profile have scoped acceptance. Earlier replacements remain invalid; the fourth revised-precision run now has independently accepted valid negative evidence. Broader new-work adoption remains deferred.
 
 Current [persistent-state and autonomy contract](../261105-1705-contract-project-state-autonomy-and-feedback.md): all per-project state and resolved provider paths stay in the hosted project. Its research loop has no routine human approval/input dependency; human scientific direction is raised only after challenged exhaustion. M3 must prove autonomous feedback capture/disposition/effect/response and avoid the prototype's default person-stage handoff for ordinary negative/procedural results. M4 tests roots, feedback edit/replay, no comments/publication failure, recovery and exhaustion classification.
 
@@ -36,12 +36,48 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 | [M2](../261105-1555-m2-skill-and-thin-helpers.md) | implemented; packed default-worker engineering qualification passed | Hosted scientific adoption remains gated; M3 default-worker engineering evidence is recorded below | [Guarded worker receipt](../review/261112-1620-m1-m2-default-worker.json); native skill, local guarded tool, captured negative/evidence/checkpoint, two charged admissions and retained unknown reservation |
 | [M3](../261105-1555-m3-automatic-planning-and-review.md) | default-worker automatic engineering route qualified; semantic/live acceptance held | Actual scientific/domain review, configured cloud feedback and target-profile gates | [Default M3/M4 receipt](../review/261112-1809-m3-m4-default-worker.json); installed spawn provider, changed/reviewed successors, captured edit and settled feedback effect, no routine human question |
 | [M4](../261105-1555-m4-scientific-property-qualification.md) | default fault/recovery route qualified across14 cases/61 frozen cells; full scientific matrix incomplete | Target GPU/domain/semantic/exposure scope and applicable original cells | [Path-forward receipt](../review/261112-2033-path-forward-qualification.json);55 tests, exact sandbox/acknowledgement/replay, complete cold restore, actual PID/cleanup and whole-window qualification |
-| [M5](../261105-1555-m5-bounded-accorde-gpu-pilot.md) | GPU guard, real model-selected native tools and serving GPU producer built; scientific pilot held | Qualify context alternative, scientific GPU/default-worker mapping and existing aggregate admission | [Model/serving receipt](../review/261112-2117-model-serving-continuation.json); model-selected guarded synthetic call plus four serving GPU producer units; no scientific study |
-| [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | complete disposable native recovery and current legacy metadata backups qualified; live handoff held | Accepted M5, supported legacy/current writer fencing and aggregate/exposure mapping | [Path-forward receipt](../review/261112-2033-path-forward-qualification.json); cold-tree Store/scientific state/Session/profile/source restore, read-only original-authority metadata recovery; no transfer |
+| [M5](../261105-1555-m5-bounded-accorde-gpu-pilot.md) | bounded actual scientific pilot accepted negative | Broader scientific/property/feedback/adoption benefit remains separate; no fifth attempt or downstream route | [Recovery checkpoint](../review/261113-2232-m5-m6-recovery.json);144 correctness/quality passes,72 precision passes,max0.3382%<0.5%; valid eligible unsupported, native56/4/2600000ms/res0 |
+| [M6](../261105-1555-m6-new-work-cutover-and-continuity.md) | current metadata, adapter and stopped default-profile rollback qualified; broader new-work adoption deferred | Actual incoming scientific default Source/profile matrix, live feedback and benefit/cost gate; writer transfer applies only if ownership changes | [Accorde M6 receipt](../../../accorde/.plan/receipts/261114-1817-m6-operational-qualification.json); same current history across 0.2.3→0.2.2→0.2.3, stopped default Source/Ticket continuity and fallback-shutdown refusal; original authority retained |
 
 Plans written does not mean milestones executed. Record dates, actual commands, receipt links, limits and failures when work occurs; update this artifact's timestamped Revision History on every amendment.
 
-## Current implementation and remaining gates
+## Autonomous production loop
+
+The [production qualification receipt](../review/261114-2217-autonomous-production-loop.json) records helper0.3.0/contract2.4.0 and the explicit version-four project loop. Existing native Source/Store/author/reviewer/jobs remain in use; project hooks own proposal construction, inputs, verifier, feedback change and conclusion premises. Historical version-three deployments remain separate and retain their current authority.
+
+Actual DeepSeek-V4.1-Flash author and separate reviewer completed the fixed released engineering goal on H100: valid history-list negative, freshly reviewed binary-index positive and separate completion review. All200 versions survived; comparator calls fell100300→6654 (93.3659% reduction). This is an operation-count result, not wall-clock/GPU/unseen-science qualification. State20 retains two attempts, three reviews,10000ms consumed allowance, zero reservation, reviewed completion and the ended original Ticket. The two C_qual native process costs are0.186387s and0.155136s, separate from model/controller cost.
+
+The existing protected TraeX route retains27 requests (24 completed, three unresolved transport records), actual known usage and uncapped output. Native protocol15, resident lifecycle6 and actual default Source lifecycle5 checks pass on pinned Node24. Source reload preserves the same loaded author/state and exactly one of each prompt; actual pause, ended Ticket, late tool and alternate native lock refusal pass. Resident crash/overlapping stop/start retains request consumption and usage; failed restart retains the persistent stop marker.
+
+Project-owned native/model user services and the existing systemd60-second Source wake timer are enabled, with lingering verified. Intentional stop/respect-stop, empty cgroups and compatible code rollback preserve the same scientific row and all27 model requests. The completed scope stays inactive; no implicit successor, copied budget or Accorde admission is enabled. Four grouped source reviews and cross review have no open confirmed P0–P2 findings.
+
+For another hosted project, bind its existing authority or explicit authorized new registration, accepted domain hooks/profile, released inputs/resource policy and applicable qualification before enabling its Source. Scientific GPU/confirmation and broad Accorde M6 new-work adoption remain their project-owned gates. README and integration docs contain stable usage; detailed receipts and failed fixture preparations remain in ignored package artifacts.
+
+## M6 operational gate checkpoint
+
+The [project-owned M6 receipt](../../../accorde/.plan/receipts/261114-1817-m6-operational-qualification.json) records current-source qualification and owned remaining gates. Helper 0.2.3→0.2.2→0.2.3 preserves the same private current Accorde record, settled action/result/cost identities and consumed reviews; synthetic unknown replay and consumed-review refusal pass. A private retrospective native feedback association links the original criterion-revision request reconstructed from its frozen manifest to the actual fourth scientific evidence, preserving its original checkpoint and creating a separate effect checkpoint. This does not claim live source/author or prospective native scientific feedback.
+
+The current helper also passes the native default-worker eleven-cell scripted stratum in 32.414s. Three stopped default profile cuts preserve the same Source, ended Ticket identities and unknown reservation in 7.120s; an injected fallback shutdown timeout fails qualification, kills/reaps the owned process and unconditionally restores the current selector. Source review repaired the project's feedback-export identity/membership checks and qualifier false-pass/cleanup gaps; nine independent offline export cases pass. All original GoalLedger/exposure/native metadata still equals the starting current cut, production remains paused/idle and GPU idle. No new scientific admission or paid pilot model call occurred.
+
+Broader default scientific adoption remains deferred: deployed 3082 has no scientific Source and a held model route; the pilot worker is fixed to its consumed four-attempt scope. Actual new-work bindings/full applicable scientific profile, live author/Ticket feedback, incoming scientific rollback and an accepted benefit/cost cohort remain required. Retain the original GoalLedger/Controller/exposure writer; no transfer is required for this retained-owner route. No W/D/payback, confirmation, retirement or T1–T4 inference is made. Detailed receipts and private state remain in Accorde; no team upload or bot grant occurred.
+
+## Current M5/M6 execution boundary
+
+The user requested changed timing criteria and one fresh rerun. The frozen original study remains unchanged; a new project protocol makes distinct-value count/minimum observed gap diagnostic, and requires each matched ratio's propagated median precision interval to stay within 0.5%, one tenth of the fixed 5% material effect. The 31 samples, fixed 144-row/72-pair schedule, seed, graph packing, warmup, correctness, CV/spread limits and statistical screen remain. Rank coverage and nominal timer allowances are conditional on the declared assumptions; they establish no absolute or unseen-kernel accuracy claim.
+
+Independent method/source QA passed 21 counterexamples. Source/bridge/parent/state/Ticket checks and exact source acceptance passed. The original GoalLedger reoriented and registered the deliberately revised method through public metadata APIs, with no credit extension or old-result relabeling. Actual native design and profile reviews, real physics-off PID/device/lease/reviewer/pause/Ticket qualification, and a fresh scientific-action approval all preceded the fourth admission. A missing existing framework-module link and pre-admission entrypoint/invocation scope couplings were corrected with prior failed artifacts preserved; these did not consume extra scientific attempts.
+
+The complete fourth run is valid and eligible negative evidence. All 144 correctness/quality checks, 72 ratio-precision checks and both self-controls pass. Maximum propagated paired relative precision is 0.3382013%, below 0.5%. Point ratios range 0.9726745–1.0347926; their interval envelope is 0.9719905–1.0355058. No interval crosses 0.95 or 1.05. All four preregistered sign counts are 0/36 with tails 1.0, so the original outcome is unsupported within this fixed cost-only development pilot. Two new rows would fail the former uniqueness heuristic; their legacy diagnostics remain retained. No old invalid row was promoted.
+
+Independent outcome acceptance has zero confirmed findings and byte-verifies all fresh rows, ratios, ten retained PTX/CUBIN artifacts, native review/evidence/checkpoint and prior history. The retained original DeepSeek author assessed the delivered actual evidence as a valid negative result, reported ordinary progress with human_action=null, and requested no further execution. The native checkpoint defers future work; accepted negative evidence is not scientific exhaustion or automatic new-work adoption.
+
+Charges are C_science 399.4347127749934s and C_run 26.542350520006607s, totaling 425.977063295s native elapsed. The nested collector wall is 388.83032048499444s. Native revision 56 retains four consumed attempts/2600000ms, seven review requests and zero reservation. Original goal36 retains 388 closed admissions, spent128109.46207563952s, remaining75031.66138083488s and zero reservation; all prior charges/results remain.
+
+The exact owned private runtime is stopped after the actual author assessment. The idle model relay and reverse forwarding are stopped, retaining all104 requests; its finite request quota was extended from96 to128 within the user's unlimited pilot model-spending authority without changing the protected identity, endpoint, timeouts or scientific attempt quota. Fresh supported three-store backups, compatible private public reopen and three stale-copy refusals passed in2.021422089s at the stopped-source boundary, preserving current four-attempt/388-admission metadata. No live history restore, executing-profile rollback, writer transfer, confirmation, training reuse or legacy retirement occurred.
+
+M5 now has an independently accepted bounded scientific negative pilot. Broader property/feedback/profile benefit and M6 new-work cutover remain unqualified; adoption stays deferred and original authorities stay retained. No fifth attempt or downstream model route is authorized by this result. Detailed evidence and private recovery copies remain in Accorde; existing user-identity team Doc/archive access applies to the earlier permitted release, with no new upload or bot grant.
+
+## Earlier implementation checkpoints and remaining gates
 
 Package 0.2.0 adds the bounded qualification-only GPU policy/guard, exact native facts retained before fallible settlement, state/domain version 3 with explicit historical v1/v2 readers, non-mutating GPU settlement inspection and a bounded team reproduction-bundle tool. The helpers layout and exact generated docs/skill/lock remain reproducible. Package 0.1.2 introduced the native automatic proposal/reviewer tools, same-record review/feedback/publication associations, effect checkpoint versions, persisted reviewer prefix verification, and read-only coverage/continuity/budget audits. The earlier GPU/layout checkpoint passed 45 behavior tests and relocated M2/M6 regressions; the latest default-worker checkpoint below passes 51 tests; two H100 producer/guard cases also pass under a two-unit, 60-second engineering reservation. Earlier 36-test receipts remain historical; M6 includes the M3 automatic workflow and extracted-package recovery. Exact new sources/package/evidence are in the [layout/adoption receipt](../review/261112-0004-layout-and-adoption-receipt.json). The [0.1.2 receipt](../review/261111-2244-m3-m4-package-receipt.json) retains the earlier 21-test checkpoint.
 
@@ -51,7 +87,7 @@ Accorde is a GPU performance-modeling project. The prior CPU replay intake/bridg
 
 M6 now reads the actual H100 goal and exposure authorities. All 385 admitted campaigns are closed; the latest goal budget is 203141.1234564744 seconds including recovery extensions, with 127278.50447571557 spent, zero reserved and 75862.61898075882 remaining. The goal is awaiting context change; a positive balance does not authorize its restart. Two supported SQLite backups preserve table counts/logical hashes and restore on isolated read-only copies. They are private metadata recovery sets, not ordinary team releases or a complete source/evidence/Session handoff. Native state/domain version 3 rejects implicit older-store adoption; historical v1/v2 snapshots remain readable. Exact version-three native facts are immutable across corruption/downgrade, and later GPU inspection does not release authority reservations.
 
-Next scientific adoption work: bind a viable project-selected question/complete scheduling unit and full environment/verifier, then qualify native source/Ticket, independent scientific review and all required GPU profile/property cells under explicit GPU/model/coordination bounds. The current engineering route must not reopen the exhausted H3 goal or become a fresh scientific ledger. Actual runtime/operator evidence must reconcile legacy consumers/history and supported recovery/fencing before any M6 cutover. A project source review pack is built and restoration-verified, and seven bundle refusal/integrity checks pass. Publication and actual recipient access remain unverified; the archive cannot close that cell. These operational/qualification holds are not scientific exhaustion.
+Current scientific adoption work is the original-attempt reconciliation and actual supported deadline/profile gate recorded in the latest native continuation below. The question, caller context, scheduling unit and native review have scoped acceptance; the native hold cannot become a fresh project ledger or budget. Current private metadata copies/reopen and user-confirmed existing Doc/archive access are observed; actual scientific execution/feedback, executing-profile rollback and writer transfer remain required. Earlier source-pack/transport limitations are historical receipt boundaries and do not imply scientific exhaustion.
 
 ## 1604 entry accounting
 
@@ -146,6 +182,12 @@ Build/typecheck and58 behavior tests pass; the unchanged M2 route still passes11
 
 The historical CLI override of512 completed with6,139 output tokens and remains a retained failed-cap witness. The user subsequently removed the unenforceable token-cap requirement. New reviewer policies use finite request/deadline bounds; the driver omits `maxTokens`, and TraeX records carried legacy hints as ignored while retaining actual usage. Token-cap enforcement no longer blocks readiness. Substantive context/profile acceptance and existing aggregate admission remain required; M6 still needs M5 and separately qualified live writer fencing/current-state rollback.
 
+## Committed integration and scientific authority preparation
+
+The reviewed real-model/default-worker/guarded-GPU integration is committed as b251e09 (Accorde domain integration d797e520). A new native C_science port now requires an exact independently reviewed project envelope and separately registered guard over the original authority. One controller unit supplies one supervisory wall charge; multi-process/overlap attribution is outside this initial profile. Original costs and native coordination time are separated, unknown outcomes retain associations/reservations, and all69 behavior tests/build/typecheck pass. Grouped and cross-group code review has zero open P0-P2; its original cost-allocation finding and repair remain retained.
+
+The [project tracker](../../../accorde/.plan/trackers/261112-0004-dsh-research-adoption.md) records accepted external caller-context, actual source/pilot-shape GPU checks and an idle original-writer fence/recovery. Scientific Source/Store/profile adoption, exact paired-envelope original GoalLedger admission, the scientific pilot/feedback effect and current-state adoption rollback remain next. No actual scientific admission or writer transfer is inferred from these preparatory checks. README organization is unchanged.
+
 ## Recording format for execution
 
 For each milestone update, record outcome (passed/failed/deferred/partial), frozen source/profile identity, actual command receipt, expected versus observed behavior, spent/reserved limits, unresolved ownership and next authorized action. Compact package qualification receipts belong in .plan/review/; raw fixture logs may be local. Deliberate scientific plans/compact evidence stay versioned in P and explorative detail/large outputs use ignored P artifacts; this tracker records curated milestone status and immutable references. Include plan/architecture identity, permitted export/access status, integration verification and applicable migration continuity. Keep a duplicate/replayed action tied to its original attempt. Preserve failure evidence and remaining capability limits.
@@ -162,6 +204,16 @@ Let's also brainstorm a more human effective and human labor efficient way to re
 ~~~text
 if dsh-superagent already integrated lark/feishu, live (organized) lark docs might be a good candidate for sharing/reviewing
 ~~~
+
+## Native continuation and remaining work
+
+[The current compact receipt](../review/261113-1848-native-continuation.json) binds the independently reviewed local helper correction and project-owned H100 outcome. Native shell/sandbox resolution, cancellation, output and environment checks now precede scientific/GPU preflight and reservation; final checks still preserve unknown consumption after a later configuration/authority change. All88 helper tests, including15 new real-public-shell counterexamples, plus typecheck/build pass. This future-only code has not been deployed onto the admitted H100 attempt.
+
+The actual default-worker run reached one admitted native attempt and stopped before Job creation because its650000ms deadline resolved as600000ms. One attempt and650000ms remain reserved/unknown; original scientific authority remains385 closed admissions, zero reservation and no new scientific charge. Independent DeepSeek disposition records not_executed, no scientific evidence and no reviewed scientific exhaustion. The candidate is stopped, production paused and idle relay/tunnel stopped with all49 requests retained. No identical-unit replay, refund, fresh ledger or scientific/adoption claim is authorized by these observations.
+
+Accorde owns a reviewed export of one real Doc comment version into native feedback scan refs. Original bytes, replay, partial/stale capture and atomic publication failure checks pass; native wakeup/disposition/scientific effect remain unexecuted. The user confirmed access to the existing Doc/archive; Docrevision10 records user identity and that confirmation. No bot grant or permission change occurred. Actual H100 current-state metadata copies/public reopen and all three stale-copy refusals passed in2.076 seconds with the unknown reservation preserved; executing-profile rollback, cross-store atomicity and writer transfer remain separate.
+
+Next work follows the project's original authority: accepted read-only reconciliation of the held attempt, exact host/profile qualification of the future fix and a supported full-unit deadline, then an eligible reviewed scientific continuation, actual feedback effect and separately qualified adoption. A remaining original science balance does not bypass the native hold. Detailed recovery planning belongs in the project artifacts; Accorde trackers use .plan/trackers/ while this package keeps .plan/tracker/.
 
 ## User Prompt, Verbatim
 
@@ -226,6 +278,20 @@ also remove the status of plans and next work from README.md to its own tracker.
 use .plan/tracker/ for M1-M6 impl status tracking.
 ~~~
 
+## Continuation request, verbatim
+
+~~~text
+rerun
+~~~
+
+~~~text
+M5: relax the gate to 20 seconds
+~~~
+
+~~~text
+continute M5 and M6
+~~~
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -263,3 +329,27 @@ use .plan/tracker/ for M1-M6 impl status tracking.
 | r31 | 2026-11-12 20:33:35 -0800 | Executed approved path with uniform14-case/61-cell fault qualification,55 tests, project model/contract/design and user Doc feedback preparation; preserved scientific/native-execution/authority gates and all failures. |
 | r32 | 2026-11-12T21:04:01.838020-08:00 | Added actual model-selected native tool and four serving GPU mechanics witnesses,58 tests, unchanged H3 audit and concrete failed512-token override; scientific/context/authority gates retained. |
 | r33 | 2026-11-12T22:17:59.035365-08:00 | Removed mandatory reviewer output-token caps and the token-control readiness gate at user request; preserved request/deadline/capture/usage controls, legacy policy readability, historical failures and independent scientific/authority gates. |
+
+| r34 | 2026-11-13T12:52:52.665061-08:00 | Committed accepted integration and added reviewed one-unit original scientific-authority port with69 tests; linked project-owned caller-context/pilot-shape and idle-fencing preparation without activating science or adoption. |
+
+| r35 | 2026-11-13T17:25:19.494475-08:00 | Corrected Accorde tracker links to .plan/trackers/ at user request; dsh-research keeps its own .plan/tracker/. |
+
+| r36 | 2026-11-13T19:00:14.295463-08:00 | Recorded reviewed future spec preparation with88 tests, actual native prelaunch unknown/no science, user-confirmed access, native feedback export and current-host metadata recovery; preserved scientific/adoption gates. |
+
+| r37 | 2026-11-13T22:32:17.112944-08:00 | Recorded reviewed0.2.1/contract2.3.4 recovery and actual native20-to21 coordination-invalid settlement with consumed1/650000ms preserved/reservation0; incoming science/adoption gates pending. |
+
+| r38 | 2026-11-14T07:24:54.770513+00:00 | Recorded actual unchanged-credit goal35-to36 anchor, source-only25-case preserved worker/12-case binding and fresh SCI design request_changes; native diagnostic and actual scientific/profile/adoption gates pending. |
+
+| r39 | 2026-11-14T02:27:08.147916-08:00 | Recorded helper0.2.2/162 tests, actual qualified Source/profile and fresh reviewed replacement lifecycle, invalid nested-admission timeout with original386 history/new charge, and exact post-pilot metadata continuity; conservative adoption deferral approved; future observer qualification remains separate. |
+
+| r40 | 2026-11-14T02:34:18.943668-08:00 | Closed actual invalid-lifecycle acceptance and prospective observer source review with zero confirmed P0-P2/22 private checks; finalized reviewed adoption deferral and current-state continuity, stopped owned idle relay/tunnel; full scientific pilot/feedback/cutover remain gated by a new prospective policy/profile. |
+
+| r41 | 2026-11-14T08:58:00.564539-08:00 | Recorded project-owned user-authorized20-second full-validation gate, exact local/H100 source revision and retained historical evidence; fresh bindings required and current attempts remain exhausted. |
+
+| r42 | 2026-11-14T09:57:47.568671-08:00 | Recorded user-authorized rerun with cumulative history preserved, helper023/contract235/182tests, actual reviewed originalmetadata/context and zero additionalcredit/admission; qualifiednative source/profile/action and actual run remain in progress. |
+
+| r43 | 2026-11-14T12:24:59.593822-08:00 | Recorded actual third144-row run, three frozen timing-quality rejections and invalid verifier disposition; retained actual author assessment, exact charges/consumption and post-third metadata continuity; stopped owned runtime/relay/forward, deferred adoption with no fourth attempt. |
+
+| r44 | 2026-11-14T17:57:46.724433-08:00 | Recorded changed-criteria fourth run with actual fresh review/qualification, accepted valid negative 144-row evidence, author assessment and conserved charges; current metadata recovery passed, stopped owned runtime/relay/forward, retained all104 model requests and deferred broader adoption. |
+| r45 | 2026-11-14T18:42:52.267752-08:00 | Recorded current private adapter/default worker/stopped-profile code rollback and exact original metadata preservation; reviewed exporter and cleanup repairs, retained precise production/live-feedback/benefit holds and original writer. |
+| r46 | 2026-11-14T22:17:51.194095-08:00 | Recorded real autonomous default production loop, V4/prospective feedback and reviewed conclusion,183 regressions, Source/resident/service/rollback qualification and enabled idle H100 services; retained exact costs/history and project scientific adoption gates. |

@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-11-13T17:25:19.494475-08:00",
+  "kind": "tracked_project_tracker_relocation",
+  "old_path": "/Users/bytedance/wk/accorde/.plan/tracker/261112-0004-dsh-research-adoption.md",
+  "canonical_path": "/Users/bytedance/wk/accorde/.plan/trackers/261112-0004-dsh-research-adoption.md",
+  "old_sha256": "9b311eab7b32ad14e9f8ea7f9e839ab64f21fb9167cf23046a78963b559d2015",
+  "canonical_sha256": "daa190529773247a0512ff6f762490d07142e749324d28cb117c3a803be7b687",
+  "historical_receipts": "Original observed paths in immutable earlier receipts are preserved; Git retains original versions. Maintained links use the canonical path.",
+  "prompt_verbatim": "accorde's trackers are in /Users/bytedance/wk/accorde/.plan/trackers/ not */tracker/"
+}

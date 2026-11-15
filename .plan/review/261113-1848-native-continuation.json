@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-13T18:58:55.973774-08:00",
+  "kind": "native_scientific_continuation_checkpoint",
+  "contract": "dsh-research/research-loop@2.3.3",
+  "status": "local_fix_and_current_metadata_accepted_scientific_pilot_held",
+  "sources": [
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/src/native.ts",
+      "sha256": "0451f9de8c050a96c5aa09b4b7b02e74d6d2908117be7f0525b71551fbe62e08",
+      "size_bytes": 40210
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/examples/traex-tools/relay.mjs",
+      "sha256": "082de06f1ee6aeff5e6fb9f9a137d2c9510ba536f334e12275089890674dc5ff",
+      "size_bytes": 5057
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/examples/traex-tools/relay-limits.mjs",
+      "sha256": "6ba6cd5212fb362ca1f894cdedef9c5a732d3302ca49217d6a893f7c210791b1",
+      "size_bytes": 1657
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/examples/traex-tools/remote-model.mjs",
+      "sha256": "13c1b8b33de21dad323aadf8103f4a766d46b95aa49394d1968355fc87656d91",
+      "size_bytes": 2695
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/tests/native-spec-preflight.test.ts",
+      "sha256": "fa1e220a01db5d0db212c8bc3ed13fca1873774bba110843a3be48acacb1d9de",
+      "size_bytes": 14130
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "helpers/tests/relay-limits.test.ts",
+      "sha256": "97de8ace447abcfd34f0163b54340cf4c75724458dc5cb594611a8ebde3125b5",
+      "size_bytes": 2176
+    },
+    {
+      "repo": "accorde",
+      "uri": "tools/dsh_research/science_source.mjs",
+      "sha256": "740050d8c34107c93bce44add789bf0eea1eebeec5ac6de39047f56b4ca999e8",
+      "size_bytes": 3863
+    },
+    {
+      "repo": "accorde",
+      "uri": "tools/dsh_research/science_worker.mjs",
+      "sha256": "882f4c3b627b010d7b8e94e248ac12ce48ba55b8c00add0d3d5b54d66aa75e15",
+      "size_bytes": 26821
+    },
+    {
+      "repo": "accorde",
+      "uri": "tools/dsh_research/lark_feedback.py",
+      "sha256": "c0117a2e81b3f16d4efb18bfb74c084ef1fdda8f4d2e62c67d9e30a451d6d2eb",
+      "size_bytes": 10553
+    },
+    {
+      "repo": "accorde",
+      "uri": "tools/dsh_research/qualify_current_state_rollback.py",
+      "sha256": "e5c0fb11d294ffded0e4fe2165939fea8d1af6b6745093dc22ded0442324a6bb",
+      "size_bytes": 31826
+    }
+  ],
+  "evidence": [
+    {
+      "repo": "dsh-research",
+      "uri": "local_artifacts/dsh-research/scientific-adoption/native-spec-preflight-fix/verification.json",
+      "sha256": "3619535a3b1df523e29f33743377983fe51b484fda7a31e832e91b38cc1c6e14",
+      "size_bytes": 2188
+    },
+    {
+      "repo": "dsh-research",
+      "uri": "local_artifacts/dsh-research/scientific-adoption/native-spec-preflight-fix/review/acceptance.md",
+      "sha256": "2d71c20bb404958ebed06517b59d174b1660b6c2c46ade055c7f22ad70bbbd0a",
+      "size_bytes": 7753
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261113-context/remote-worker/result-followup.json",
+      "sha256": "9553718871ae15c9c37b61f39dc078bb087701abd49241a2f4f670351951bf5d",
+      "size_bytes": 20868
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261113-context/remote-worker/independent-scientific-disposition.json",
+      "sha256": "9422c10ad8c2e429d981eb48dee7d441fdf510b12198c51620b785ce9c2e3fef",
+      "size_bytes": 11936
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261113-1836-host-boundary/safe-boundary.json",
+      "sha256": "6dd739b076b99207f6b84d9f4506047cdc37f36e518388835211607121ee5047",
+      "size_bytes": 1701
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261113-1838-host-qualified/receipt.json",
+      "sha256": "7f54f63854f86e130b40675adbc1e675fa9e99ef5219e580a5feb8a4796c6305",
+      "size_bytes": 675306
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/review/actual-host-verification.json",
+      "sha256": "2b3c6eb7c177b7514a4b987c724b0731f0804fc13c5d10992dfc4b0323eded4b",
+      "size_bytes": 8010
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/feedback/native-scan-v1/review/acceptance_export.md",
+      "sha256": "ea0324da671da97b63289f35e3855c3ddaaae43c5124184924e0d70232dc09bc",
+      "size_bytes": 7526
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/team-release/261113-1807-access/access-receipt.json",
+      "sha256": "c44ae110c519d29120cfd8ac5b5cdfa4a06917d04f8ea16fd51b47950cc24a5c",
+      "size_bytes": 2523
+    },
+    {
+      "repo": "accorde",
+      "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/team-release/261113-1807-access/access-confirmation-verified.json",
+      "sha256": "3eb955237ee5f26eab73fc9c56efe456bc8b966408d8182016db009d0883a8b7",
+      "size_bytes": 1202
+    }
+  ],
+  "package_validation": {
+    "full_tests": 88,
+    "focused_native_spec_tests": 15,
+    "typecheck": "passed",
+    "build": "passed",
+    "independent_open_p0_p2": 0,
+    "deployed_to_admitted_h100_attempt": false
+  },
+  "actual_native_attempt": {
+    "attempts": 1,
+    "phase": "unknown",
+    "reserved_timeout_ms": 650000,
+    "job_id": null,
+    "rows_collected": 0,
+    "cause": "Public managed shell resolves650000ms as600000ms; exact frozen-spec check stopped before jobs.start",
+    "same_unit_redispatch": false,
+    "C_run_settled": false,
+    "C_run_residual_seconds": null
+  },
+  "original_scientific_authority": {
+    "goal_id": "accorde-operation-shape-joint-goal-r35",
+    "admissions": 385,
+    "all_closed": true,
+    "new_admissions": 0,
+    "reserved_seconds": 0,
+    "spent_seconds": 127278.50447571557,
+    "remaining_seconds": 75862.61898075882,
+    "C_science_delta_seconds": 0,
+    "scientific_outcome": "not_executed",
+    "scientific_exhaustion_reviewed": false
+  },
+  "actual_current_metadata": {
+    "fixture_only": false,
+    "whole_seconds": 2.076337182021234,
+    "current_and_reopened_metadata_equal": true,
+    "stale_copy_refusals": 3,
+    "unknown_reservation_preserved": true,
+    "live_restore_writes": 0,
+    "executing_profile_rollback": false,
+    "writer_transfer": false
+  },
+  "sharing": {
+    "identity": "user",
+    "existing_doc_and_archive_access": "explicit user confirmation",
+    "verified_doc_revision": 10,
+    "bot_grants": 0,
+    "native_scan_versions": 1,
+    "native_scan_contract_validation": "passed",
+    "native_author_wakeup": false,
+    "scientific_feedback_effect": false
+  },
+  "terminal_operations": {
+    "private_candidate_stopped": true,
+    "production_paused": true,
+    "idle_model_relay_and_tunnel_stopped": true,
+    "retained_model_requests": 49,
+    "total_model_request_allowance": 64,
+    "output_token_cap": null,
+    "confirmation": "off",
+    "legacy_retired": false,
+    "new_work_adopted": false
+  },
+  "required_remaining_gates": [
+    "Supported original-attempt read-only reconciliation; retain unknown consumption and reservation until actual accepted exit evidence",
+    "Exact host/profile qualification of future pre-admission fix and a supported deadline compatible with the full original scientific unit",
+    "A reviewed eligible continuation within original authority; no identical immutable-unit redispatch or fresh budget/ledger to bypass the hold",
+    "Actual scientific pilot/outcome and native feedback disposition/effect, followed by separately qualified eligible adoption/executing-profile rollback"
+  ],
+  "revision_history": [
+    {
+      "at": "2026-11-13T18:58:56.019939-08:00",
+      "change": "Recorded exact locally accepted fix, actual native prelaunch refusal and preserved current-host metadata/access; scientific adoption remains held."
+    }
+  ]
+}

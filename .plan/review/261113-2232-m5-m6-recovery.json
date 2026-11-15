@@ -1,0 +1,489 @@
+{
+  "kind": "m5_m6_recovery_checkpoint",
+  "at": "2026-11-13T22:32:17.112944-08:00",
+  "helper_version": "0.2.2",
+  "contract_version": "2.3.4",
+  "record_domain_version": 3,
+  "helper_package_sha256": "f16760897fc5664058e149a1d2b7386f718df38583b920f8ccb2025e40412113",
+  "validation": {
+    "full_helper_tests": 162,
+    "typecheck": "passed",
+    "build": "passed",
+    "generic_review_open_P0_P2": 0,
+    "host_source_review_open_P0_P2": 0,
+    "preserved_worker_checks": 25,
+    "original_anchor_private_cases": 9,
+    "proposal_private_cases": 8,
+    "resolved_binding_local_cases": 12,
+    "approval_context_tests": 10
+  },
+  "actual_project_transition": {
+    "project": "accorde",
+    "host": "h100sjc0",
+    "source_sha256": "d6a3a39532b5b242ee8ffbd2d9ed946ec30d0b1c99a9f7b85cd48bc5bb9292d4",
+    "policy_sha256": "a74d56db00004766aa5347728cf93b78e7a2e90fc2d8b0cf6f8d4b20e2a573be",
+    "native_review_sha256": "e0e88a67e0e619cd5a37c0f9e41494a61e064e71ba8a6d7f4598bf91707878e2",
+    "parent_status": "settled_coordination_invalid",
+    "state_revision_before": 20,
+    "state_revision_after": 21,
+    "consumed_attempts": 1,
+    "consumed_timeout_ms": 650000,
+    "reserved_timeout_ms": 0,
+    "association": {
+      "action_id": "action-4b2781a7e0961b5b423bb1c7b652be395dedbabc222e05b0db723534525aa617",
+      "attempt_id": "attempt-action-4b2781a7e0961b5b423bb1c7b652be395dedbabc222e05b0db723534525aa617",
+      "checkpoint": {
+        "sha256": "4172220f5fd0c3b54d40f2cd33ee34432a6de816e72f13307d15c5fe6e663f60",
+        "size_bytes": 4614,
+        "uri": "local_artifacts/autoresearch/dsh/accorde-dsh-caller-value-alignment-pilot-v1/no-dispatch/dce1d14cae4c1a60083aee0bca5b83238e72ee2c264c52eb82788adf32b0ef7a/checkpoint.json"
+      },
+      "evidence": {
+        "sha256": "05740fcafe5d237b3d77b383e9932c10f6f30e16bc0330f0089dbb259b065d9b",
+        "size_bytes": 6052,
+        "uri": "local_artifacts/autoresearch/dsh/accorde-dsh-caller-value-alignment-pilot-v1/no-dispatch/dce1d14cae4c1a60083aee0bca5b83238e72ee2c264c52eb82788adf32b0ef7a/evidence.json"
+      },
+      "job_id": null,
+      "proofRef": {
+        "sha256": "dce1d14cae4c1a60083aee0bca5b83238e72ee2c264c52eb82788adf32b0ef7a",
+        "size_bytes": 9231,
+        "uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261113-recovery/host-reconciliation/applied-v7-021-r2/qualified-proof.json"
+      },
+      "replay": false,
+      "status": "settled"
+    },
+    "independent_apply_review": "accepted_zero_open_confirmed_P0_P2",
+    "original_scientific_admissions": 385,
+    "new_scientific_admissions": 0,
+    "scientific_status": "ineligible",
+    "C_run_amount": null,
+    "C_run_settled": false,
+    "independent_apply_receipt": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261113-recovery/host-reconciliation/review/acceptance_apply.json",
+      "sha256": "d6930f8fcef9b774a77a8d609c9625b325c495a3def38ecb1e24da4d5f9ce7fe",
+      "size_bytes": 17475
+    }
+  },
+  "next": "Retain accepted negative pilot and original authorities; broader feedback/property/profile benefit and writer-transfer/executing-rollback acceptance remain before M6 cutover. No fifth run or model/confirmation route authorized by this result.",
+  "scientific_pilot_complete": true,
+  "new_work_adopted": false,
+  "confirmation": "off",
+  "legacy_authority": "retained",
+  "project_tracker": "../../../accorde/.plan/trackers/261112-0004-dsh-research-adoption.md",
+  "prompt_verbatim": "continute M5 and M6",
+  "revision_history": [
+    {
+      "at": "2026-11-13T22:32:17.112944-08:00",
+      "change": "Recorded accepted reusable repair and actual scoped original-host metadata settlement; retained all scientific/profile/adoption gates."
+    },
+    {
+      "at": "2026-11-14T06:43:46.765766+00:00",
+      "change": "Independent actual apply acceptance confirms exact transition and all retained identities/history; no scientific activation or writer transfer qualified."
+    },
+    {
+      "at": "2026-11-14T07:24:54.770513+00:00",
+      "change": "Recorded actual original-authority consecutive anchor and conserved credit; actual scientific-design changes requested with separate diagnostic, source-only preparation retained."
+    },
+    {
+      "at": "2026-11-14T10:09:34.214579+00:00",
+      "change": "Recorded helper0.2.2/162 tests, actual reviewed original SCI metadata registration, physical Source/Store/sandbox qualification and fresh reviewed second native job under original authority; terminal and M6 decisions remain pending."
+    },
+    {
+      "at": "2026-11-14T02:27:08.147916-08:00",
+      "change": "Recorded exact invalid replacement terminal/costs, post-pilot current-state continuity and actual native approval of conservative adoption deferral/retained-authority policy; no scientific result/retry/adoption/transfer claimed. Future-only metadata observer05631daa passes22 private checks; independent source review and actual lifecycle acceptance pending."
+    },
+    {
+      "at": "2026-11-14T02:33:21.388021-08:00",
+      "change": "Closed independent actual-invalid-lifecycle acceptance and prospective observer source review (both zero confirmed P0-P2), retained22 private checks, finalized reviewed adoption deferral/current-state continuity and stopped owned idle relay/tunnel; scientific pilot/new-work cutover remain unqualified."
+    },
+    {
+      "at": "2026-11-14T08:58:00.564539-08:00",
+      "change": "Recorded user-selected20-second gate source revision and identical H100 staging with full validation retained; preserved executed source/historical pins/costs and current attempt cap, fresh bindings remain required."
+    },
+    {
+      "at": "2026-11-14T09:57:47.568671-08:00",
+      "change": "Recorded explicit rerun authorization, helper023/contract235/182 tests, reviewed original recovery/reorientation/proposal/assessment metadata with no addedcredit or admission, and verified canonical storage recovery; actual thirdrun remains pending qualifiednative source/profile."
+    },
+    {
+      "at": "2026-11-14T12:24:59.593822-08:00",
+      "change": "Recorded actual third-run evidence/charges/author assessment and fresh supported post-stop metadata continuity; prior observations preserved, current three-attempt allowance exhausted."
+    },
+    {
+      "at": "2026-11-14T23:05:37.062487+00:00",
+      "change": "Recorded explicit prospective changed-criteria fourth-run authorization and passed synthetic/independent source QA; prior three invalid attempts/costs retained and actual native/original review/qualification pending."
+    },
+    {
+      "at": "2026-11-14T23:44:05.524276+00:00",
+      "change": "Recorded actual approved repaired method registration and constrained native forward loading; credits/native attempts conserved, actual physics-off qualification underway and no fourth scientific admission yet."
+    },
+    {
+      "at": "2026-11-14T17:57:46.724433-08:00",
+      "change": "Recorded independently accepted valid negative fourth pilot, actual author assessment, conserved accounting/four-attempt history and current post-stop metadata recovery; adoption held, no fifth attempt."
+    }
+  ],
+  "actual_goal_context": {
+    "goal_revision": 36,
+    "goal_hash": "4c048d7532fbf25511a03cb215d74980649f75f0892133a8fe42a138d17f53ab",
+    "context_hash": "d60c4f724283390a9b0b7daa12fbd64d35f8e67ca81a6c81ef17a6981575c07a",
+    "closed_scientific_admissions": 385,
+    "new_scientific_admissions": 0,
+    "accounting": {
+      "spent_seconds": 127278.50447571557,
+      "reserved_seconds": 0,
+      "base_max_seconds": 202400.9399431888,
+      "recovery_extension_seconds": 740.1835132855922,
+      "max_seconds": 203141.1234564744,
+      "remaining_seconds": 75862.61898075882
+    }
+  },
+  "scientific_registration_design_review": {
+    "model": "DeepSeek-V4.1-Flash",
+    "completed": true,
+    "global_before": 52,
+    "global_after": 53,
+    "resolution": "Fresh exact source-bound design review56 approved and original proposal/assessment/Controller metadata registered; prior request_changes and diagnostic retained.",
+    "historical_decision": {
+      "subject_kind": "contract_revision",
+      "decision": "request_changes",
+      "review_id": "original-recovery-scientific-design-2feae356659f8b4170cdd60e",
+      "request_sha256": "5cdd0dd045e69236bfcb2be6046333e89170ea3b53e29b5018c1ae36bba4d893",
+      "recovery_policy_sha256": "2feae356659f8b4170cdd60e39f272e6cef4c292b1053252e5736740a7ee4139"
+    }
+  },
+  "actual_scientific_registration": {
+    "proposal": "71dc393f82558eb52105a1c2bb9cafe9062b862eb55745d5ff68c30b1c0eebca",
+    "assessment": "8692ac350c551bda62d3c792772e8bae4001fd1fd724f18d0b24a68b6d0ba0e6",
+    "contract_semantic_sha256": "c4bee970c0525823bcd3b4a2c5c6199783c4536a30fdb0853f03c86f64c885f5",
+    "source_sha256": "bc2de63ace2e7e4a9053a7952ba7df51889c3403e716c43c184bf913701eb13b",
+    "metadata_registered": true,
+    "scientific_design_model": "DeepSeek-V4.1-Flash",
+    "review_ordinal": 56
+  },
+  "actual_profile_qualification": {
+    "project": "accorde",
+    "host": "h100sjc0",
+    "sha256": "d43ecad129a114a85e0970d464e398cc7ca54cbb757572d100d3271a05abd556",
+    "physics": false,
+    "passed": true,
+    "private_pid_namespace": true,
+    "target_gpu_only": true,
+    "original_lease_preserved": true,
+    "reviewer_execution_denied": true,
+    "pause_denied": true,
+    "scientific_admissions": 0,
+    "gpu_contexts_created": 0
+  },
+  "replacement_progress": {
+    "action_id": "action-cc6bec592487d63032eaf07c5c70b60a998553fe26a02f4700537f47b70cdc00",
+    "manifest_sha256": "5739efa34e6cb610ac48f98d209ece9b15fc40122c528891b1ff62a1e7958723",
+    "native_scientific_review_sha256": "4afd809d0398c1b906348852ba83496db9f96d5cb0c5eab8696943c2162d1fb4",
+    "review_decision": "approve",
+    "review_model": "DeepSeek-V4.1-Flash",
+    "admitted_revision": 27,
+    "observed_native_revision": 31,
+    "job_id": "bash-1",
+    "phase": "settled",
+    "consumed_attempts": 2,
+    "consumed_timeout_ms": 1300000,
+    "reserved_timeout_ms": 0,
+    "original_scientific_admission_state": "closed",
+    "original_scientific_reservation_seconds": 0,
+    "scientific_terminal": "invalid",
+    "source_code_sha256": "c752fcaa77666ce21dd8163365dbcba20669403f09724bf63db4767a3b65fb85",
+    "bridge_source_sha256": "68a1b75319f4d5e47ff2583a35fbc462346494f2bd9bc63fc6a2f666f5815172",
+    "evidence_sha256": "807da9c73c010282efc1212ba93270df32d36cc575a14d6084e83266b5027c06",
+    "checkpoint_sha256": "cd4afd0c03d7fd146338530c4fb75d02922492d7d4af1e580ecc7d9ae43c311d",
+    "scientific_timing_rows": 0,
+    "original_C_science_seconds": 31.429030936968047,
+    "native_C_run_seconds": 27.323981170031956,
+    "historical_parent_C_run_seconds": null,
+    "native_outer_process_elapsed_seconds": 58.753012107,
+    "C_run_classification": "Native outer elapsed less the separately recorded original C_science charge; no duplicate scientific charge",
+    "independent_lifecycle_acceptance_sha256": "823fa0522ec484e097ac453220f2f990018d4cdd44f61ce638b4a1e02e19f4e5",
+    "independent_lifecycle_open_P0_P2": 0
+  },
+  "updated_at": "2026-11-14T17:57:46.724433-08:00",
+  "post_pilot_continuity": {
+    "status": "passed",
+    "receipt_sha256": "93baf7aef494e5c7c130519c6c143bc11c25fa2ae16d0a8762c6f5570b2bb88c",
+    "whole_seconds": 2.073883373,
+    "closed_admissions": 386,
+    "spent_seconds": 127309.93350665254,
+    "remaining_seconds": 75831.18994982186,
+    "original_reserved_seconds": 0,
+    "native_revision": 31,
+    "consumed_attempts": 2,
+    "consumed_timeout_ms": 1300000,
+    "native_reserved_timeout_ms": 0,
+    "review_requests": 4,
+    "stale_copy_refusals": 3,
+    "live_restore_writes": 0,
+    "writer_transfer_qualified": false,
+    "executing_profile_rollback_qualified": false
+  },
+  "adoption_disposition": {
+    "new_work": "defer",
+    "confirmation": "off",
+    "legacy_dependencies": "retain_original_v0.5.4_GoalLedger_Controller_and_exposure_authority",
+    "scientific_exhaustion": false,
+    "native_policy_decision": "approve",
+    "model": "DeepSeek-V4.1-Flash",
+    "policy_sha256": "d9cc041f8ed64d4722aa40144b21e33439a6fcb6bdedafa6613a98918e99cb73",
+    "request_sha256": "d419c2b502094c0356ac5e14c1a6e0579ee9d595e757c01b158e20557420c034",
+    "review_receipt_sha256": "3f6d0bb62a59341888742105d243578c17a767ffce855070eb9b7b55e80d48c2",
+    "verification_sha256": "550d9bf72a67ed1cc6fcf6c8ec88e38fe13e07ceaa0eb2936f4511b1f46c60be",
+    "review_request_ordinal": 64,
+    "historical_prefix_records_preserved": 63,
+    "historical_unresolved_model_records_preserved": 6,
+    "third_attempt_consumed": true,
+    "fourth_attempt_authorized": false,
+    "current_disposition": "defer_new_work_confirmation_off_retain_original_authority_after_invalid_third_attempt",
+    "historical_disposition_review_granted_retry": false
+  },
+  "timeout_diagnosis": {
+    "nested_observer_deadline_seconds": 10,
+    "read_only_validate_seconds": 10.796395475044847,
+    "total_pin_hash_bytes": 8526786247,
+    "controller_lock_cause_established": false,
+    "future_metadata_observer_integrated": false,
+    "admission_or_gpu_work_by_probe": 0
+  },
+  "future_observer": {
+    "project_source": "tools/dsh_research/original_admission_observer.py",
+    "source_sha256": "05631daab55d924ea976c908c480fc25c3afaa86f16a356e1bb2d3655d3f3f49",
+    "size_bytes": 12280,
+    "private_checks_passed": 22,
+    "private_checks_failed": 0,
+    "huge_source_pins_opened": 0,
+    "original_Controller_constructors": 0,
+    "original_GoalLedger_constructors": 0,
+    "authoritative_metadata_writes": 0,
+    "SQLite_WAL_sidecars_possible": true,
+    "installed": false,
+    "host_qualified": false,
+    "source_review": "accepted_prospective_only_zero_confirmed_P0_P2",
+    "scientific_retry_authorized": false,
+    "acceptance_sha256": "58869c50b1491158bad62079147b5b1ebb82944664c039618871d5c75ea5a545"
+  },
+  "operational_state": {
+    "private_scientific_runtime": "stopped_after_actual_author_assessment",
+    "production_3082": "running_paused",
+    "model_relay_and_tunnel": "stopped_after_104_retained_requests"
+  },
+  "gate_timeout_revision": {
+    "prompt_verbatim": "M5: relax the gate to 20 seconds",
+    "before_timeout_seconds": 10,
+    "after_timeout_seconds": 20,
+    "before_source_sha256": "092fa2e88af725e58a643a570731e79673861e87d0bd47b6b953311e3519c7c9",
+    "after_source_sha256": "d8f51606b0ce7c102607c922147b8341503d75193edaea50deb0913fa3b6976a",
+    "local_and_H100_bytes_match": true,
+    "full_validation_retained": true,
+    "syntax_and_exact_one_line_diff": "passed",
+    "future_observer": "optional_alternative",
+    "fresh_source_bindings_required": true,
+    "scientific_admissions": 0,
+    "additional_attempts_authorized": false
+  },
+  "rerun_progress": {
+    "user_prompt_verbatim": "rerun",
+    "state": "third_attempt_settled_invalid_author_assessed_runtime_stopped",
+    "helper_version": "0.2.3",
+    "contract_version": "2.3.5",
+    "helper_full_tests": 182,
+    "helper_package_sha256": "83f0e7365f9de0522171b9b2e4f839f77778e0d1654c09e3f75d4cfdf7b30e95",
+    "scientific_gate_seconds": 20,
+    "authorized_cumulative_native_attempts": 3,
+    "authorized_cumulative_native_timeout_ms": 1950000,
+    "prior_consumed_attempts_preserved": 2,
+    "prior_consumed_timeout_ms_preserved": 1300000,
+    "native_start_revision": 31,
+    "original_goal_revision": 36,
+    "original_context_hash_after_registration": "f37fc320f13d17396a4f64a63edeb299179426410e63a13735a530173a35b3c9",
+    "original_prior_closed_admissions": 386,
+    "original_budget_extension_added_seconds": 0,
+    "new_scientific_admissions": 1,
+    "scientific_review_ordinal": 66,
+    "scientific_review_decision": "approve",
+    "scientific_policy_sha256": "683e2efdcc25d9b74af3446c4ec6d72c532c5c75b5e72ac5285ade33aa700dd5",
+    "native_source_review_remaining": null,
+    "storage_recovery": "verified canonical pinned CUDA environment bind;111 source pins preserved; authority files not moved",
+    "native_final_revision": 41,
+    "consumed_attempts": 3,
+    "consumed_timeout_ms": 1950000,
+    "reserved_timeout_ms": 0,
+    "action_id": "action-83388c12055fd587d912df1a3a6cf251b4a016a19d7623376265641865f039f6",
+    "record_count": 144,
+    "correctness_pass_count": 144,
+    "timing_quality_pass_count": 141,
+    "rejected_timing_rows": 3,
+    "rejection_reason": "Each rejected row has15 unique samples; frozen requirement>=16 out of31. Other timing checks pass.",
+    "evidence_status": "invalid",
+    "scientific_status": "ineligible",
+    "scientific_conclusion": null,
+    "secondary_verifier_error": "Invalid or unavailable verifier output: list index out of range",
+    "C_science_seconds": 400.09385621198453,
+    "C_run_seconds": 26.69442502201548,
+    "original_closed_admissions": 387,
+    "original_accounting": {
+      "base_max_seconds": 202400.9399431888,
+      "max_seconds": 203141.1234564744,
+      "recovery_extension_seconds": 740.1835132855922,
+      "remaining_seconds": 75431.09609360987,
+      "reserved_seconds": 0,
+      "spent_seconds": 127710.02736286452
+    },
+    "source_review": "accepted_zero_confirmed_P0_P2",
+    "physics_off_qualification": "passed",
+    "fresh_scientific_action_review": "approve",
+    "author_actual_assessment": "invalid_no_scientific_claim_no_further_execution",
+    "final_verification": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-rerun/outcome-final-r1/final-verification.json",
+      "sha256": "e6f5d480e65960f6558e87bc6b411e9fb2efc48fc82644d0a8a69c0c871a8755",
+      "size_bytes": 7523
+    },
+    "metadata_continuity": {
+      "receipt": {
+        "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261114-rerun-final-qualified/receipt.json",
+        "sha256": "15325f8c400dde3aeceb96d47e119a5986805e7ff44cb10a1a7653e6a3b95e3a",
+        "size_bytes": 668531
+      },
+      "status": "passed",
+      "whole_seconds": 2.0229856009827927,
+      "stale_copy_refusals": 3,
+      "live_restore_writes": 0,
+      "writer_transfer_proven": false
+    },
+    "fourth_attempt_authorized": false
+  },
+  "post_rerun_continuity": {
+    "receipt": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261114-rerun-final-qualified/receipt.json",
+      "sha256": "15325f8c400dde3aeceb96d47e119a5986805e7ff44cb10a1a7653e6a3b95e3a",
+      "size_bytes": 668531
+    },
+    "status": "passed",
+    "whole_seconds": 2.0229856009827927,
+    "stale_copy_refusals": 3,
+    "live_restore_writes": 0,
+    "writer_transfer_proven": false
+  },
+  "post_rerun_author_assessment": {
+    "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-rerun/outcome-final-r1/retained-author-assessment.json",
+    "sha256": "da6886d4c3d1788083020fbc1f3fd1f1f03e17bbd989240c37cc6f3eb84d4036",
+    "size_bytes": 17567
+  },
+  "precision_rerun_progress": {
+    "prompt_verbatim": "change the criteria and rerun",
+    "state": "fourth_attempt_completed_valid_negative_accepted_and_stopped",
+    "new_original_units_authorized": 1,
+    "new_original_seconds": 600,
+    "new_native_timeout_ms": 650000,
+    "prior_native_attempts_preserved": 3,
+    "prior_native_timeout_ms_preserved": 1950000,
+    "cumulative_native_attempts": 4,
+    "cumulative_native_timeout_ms": 2600000,
+    "scientific_method_revision": true,
+    "retrospective_reclassification": false,
+    "new_scientific_admissions": 1,
+    "method": "31 samples;median ranks6/26;declared2us event allowance;all72 ratio precision<=0.5% tied to5%materiality;distinct count diagnostic",
+    "source_method_QA": "accepted_zero_confirmed_P0_P2",
+    "synthetic_cases": 21,
+    "source_closure_pins": 968,
+    "host_source_closure_validation_seconds": 10.970095108030364,
+    "original_current_context_before_reorientation": "47821f9be8d18667bf9142185a27bc3347cfd98ce9fcbd1d4524fa94ffe7a61f",
+    "original_native_state_before": 41,
+    "new_original_metadata_registration": "pending",
+    "new_physics_off_profile_qualification": "pending",
+    "new_native_scientific_action_review": "pending",
+    "new_attempt_executed": true,
+    "plan_project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/scientific-method/261114-1455-precision-protocol.md",
+    "original_metadata_registered": true,
+    "original_registration": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/original-authority/registered-r1/registration-receipt.json",
+      "sha256": "ab532f3004840b9dae00a5b7f09ff86d8691847f0a9b413daadf067e276be593",
+      "size_bytes": 1746
+    },
+    "original_binding_receipt": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/original-authority/registered-r1/registration-binding-receipt.json",
+      "sha256": "ac4b8fbdc14a8f697a4d798edee9ab03fa9a9125a345a751438d20925f790445",
+      "size_bytes": 3086
+    },
+    "original_context_after_registration": "d9982743a9854c7c3fe5bd8ac972cecdb46f8db647449d8131c72640b216e8b2",
+    "actual_native_method_review": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/review-driver/scientific-method-r4/receipt.json",
+      "sha256": "cc14139e5bbe756cc713e8443253710ae0fcf6c8883830800bafaa919d30097d",
+      "size_bytes": 6933
+    },
+    "actual_native_forward_profile_review": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/review-driver/forward-profile-r1/receipt.json",
+      "sha256": "40f33bf713a8a1f4d5f92214e7887896b55412816fc92353107f5c0abba5c709",
+      "size_bytes": 6930
+    },
+    "global_model_requests_observed": 104,
+    "new_original_seconds_charged": 399.4347127749934,
+    "record_count": 144,
+    "quality_pass_count": 144,
+    "matched_pairs": 72,
+    "pair_precision_pass_count": 72,
+    "maximum_pair_relative_precision": 0.0033820129591239922,
+    "scientific_outcome": "unsupported",
+    "evidence_status": "valid",
+    "scientific_status": "eligible",
+    "C_science_seconds": 399.4347127749934,
+    "C_run_seconds": 26.542350520006607,
+    "native_final_revision": 56,
+    "consumed_attempts": 4,
+    "consumed_timeout_ms": 2600000,
+    "reserved_timeout_ms": 0,
+    "original_closed_admissions": 388,
+    "original_accounting": {
+      "base_max_seconds": 202400.9399431888,
+      "max_seconds": 203141.1234564744,
+      "recovery_extension_seconds": 740.1835132855922,
+      "remaining_seconds": 75031.66138083488,
+      "reserved_seconds": 0,
+      "spent_seconds": 128109.46207563952
+    },
+    "independent_outcome_acceptance": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/outcome-review/acceptance_outcome.json",
+      "sha256": "5756d386dab0fb961afa13b0ac2cf20ad81a710d01aae20175d9cff263553e55",
+      "size_bytes": 18986
+    },
+    "retained_author_assessment": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/outcome-final-r1/retained-author-assessment.json",
+      "sha256": "0d11b6f6b25c8b4bbad0ddaf17f2f362c57f0d3104aaad4e711d515880bc7f2d",
+      "size_bytes": 9239
+    },
+    "current_metadata_recovery": {
+      "receipt": {
+        "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261115-precision-final-qualified/receipt.json",
+        "sha256": "a365b66f96cc2e28d37edd0b73bc0db181bb60624b542ad924ea9fd348005de1",
+        "size_bytes": 665970
+      },
+      "whole_seconds": 2.0214220890193246,
+      "supported_backups": 3,
+      "stale_copy_refusals": 3,
+      "live_restore_writes": 0,
+      "writer_transfer_proven": false
+    },
+    "private_runtime_stopped": true,
+    "model_relay_stopped": true,
+    "fifth_attempt_authorized": false,
+    "final_verification": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/science/261114-precision-rerun/outcome-final-r1/final-verification.json",
+      "sha256": "bb14eae7b5ef85e0931d939d89a905241dffb61f576e28796f8f3990a2291530",
+      "size_bytes": 7059
+    }
+  },
+  "post_precision_continuity": {
+    "receipt": {
+      "project_relative_uri": "local_artifacts/autoresearch/dsh/accorde-gpu-pilot/m6-retained/current-state-preparation/261115-precision-final-qualified/receipt.json",
+      "sha256": "a365b66f96cc2e28d37edd0b73bc0db181bb60624b542ad924ea9fd348005de1",
+      "size_bytes": 665970
+    },
+    "whole_seconds": 2.0214220890193246,
+    "supported_backups": 3,
+    "stale_copy_refusals": 3,
+    "live_restore_writes": 0,
+    "writer_transfer_proven": false
+  }
+}

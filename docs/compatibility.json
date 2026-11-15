@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "established_in": "2.3.2",
-  "table_sha256": "ce693a340f78d3686646afd6d1dd541f162f22cbca30ef6ddfe399fe23fce0a5",
+  "table_sha256": "30339e01d47a2bcaad1fde660a0451e9abcd039ec3e642ddb8ee0e8977a9b743",
   "rows": [
     {
       "row_id": "contract-1.0.0",
@@ -26,7 +26,7 @@
       "contract_version": "2.1.0",
       "changed_obligations": "Admission order proof, reviewer holds, release-schema ownership, applicability proof and scoped structural review",
       "assessment": "Additional evidence/record obligations; old encodings/qualification cannot be presumed sufficient",
-      "consumers_and_gate": "M1–M4 qualify proof/schema/review mappings; M6 assesses affected adopters",
+      "consumers_and_gate": "M1\u2013M4 qualify proof/schema/review mappings; M6 assesses affected adopters",
       "assessment_mode": "retrospective",
       "recorded_at": "2026-11-11T21:12:18-08:00"
     },
@@ -74,6 +74,33 @@
       "changed_obligations": "Machine-checkable compatibility row binding, retrospective assessment labeling and accepted-declaration envelope binding",
       "assessment": "Added qualification/adoption reference encoding; parsing is not semantic compatibility or adoption approval",
       "consumers_and_gate": "M1 encoding/checks bind register bytes, table and row hash; M4/M6 and T4 consumers retain review and accepted envelope authority"
+    },
+    {
+      "row_id": "contract-2.3.4",
+      "contract_version": "2.3.4",
+      "assessment_mode": "contemporaneous",
+      "recorded_at": "2026-11-13T20:59:55.944311-08:00",
+      "changed_obligations": "Qualified pre-dispatch coordination settlement, independently observed native recovery review, immutable replacement identity and cumulative original-authority recovery scope",
+      "assessment": "New source-proof and recovery mapping obligations; existing record/domain3 forms retained, old attempts require exact qualified mapping without refunded consumption or fabricated execution",
+      "consumers_and_gate": "M1/M4 qualify proof/review/CAS/replay and unchanged-unit refusals; M5/M6 pin current source/profile and original mandate before eligible replacement or adoption"
+    },
+    {
+      "row_id": "contract-2.3.5",
+      "contract_version": "2.3.5",
+      "assessment_mode": "contemporaneous",
+      "recorded_at": "2026-11-14T09:09:09.852867-08:00",
+      "changed_obligations": "Explicit host opt-in for exact settled invalid scientific failure, native terminal/capture and original charged-checkpoint recovery qualification",
+      "assessment": "Additional failure-class evidence and host qualification; default pre-dispatch behavior and record/domain3 forms retained, no attempt or cost refund",
+      "consumers_and_gate": "M1/M4 qualify dispatched-parent refusal and exact facts; M5/M6 bind fresh guard/profile/original recovery and cumulative allowance before a distinct reviewed replacement"
+    },
+    {
+      "row_id": "contract-2.4.0",
+      "contract_version": "2.4.0",
+      "changed_obligations": "Explicit project research invocation/input/cost profiles, version-four prospective feedback and native wakeup/decision state, permitted reviewer source context and separate completion/exhaustion reviews",
+      "assessment": "New profile and version-four encoding; historical version-three profiles/receipts remain unchanged, reverse adoption requires explicit compatibility and supported handoff",
+      "consumers_and_gate": "M1/M3/M4 qualify production installer, source/Ticket/role/feedback/context/replay/decision/restart boundaries; M6 pins exact project scope and preserved authority before enabling",
+      "assessment_mode": "contemporaneous",
+      "recorded_at": "2026-11-14T19:26:07.266832-08:00"
     }
   ]
 }

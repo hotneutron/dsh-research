@@ -69,6 +69,7 @@ export class TraexToolAdapter extends LlmAdapter {
     for await (const chunk of text.stream({ provider: options.provider, model: options.model, ...(options.signal ? { signal: options.signal } : {}),
       messages: [{ role: 'user', content: [{ type: 'text', text:
         'Represent exactly one next response for the supplied DSH conversation. Return JSON with text and tool_calls. ' +
+        `Return at most ${this.config.maxToolCallsPerTurn} tool call(s). Do not bundle dependent operations: request one operation, then wait for its actual result in the next conversation request. ` +
         'A tool call is a requested native DSH operation, never a CLI operation or execution authority. ' +
         'Choose only currently declared tools, with arguments encoded as a JSON object string matching their schema. ' +
         'Use an empty tool_calls array when done. Do not fabricate results for calls; the next native request will contain actual tool results. ' +

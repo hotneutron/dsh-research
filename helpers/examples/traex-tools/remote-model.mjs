@@ -4,18 +4,22 @@ import { sha256 } from 'dsh-research'
 
 export class RemoteTraexAdapter extends LlmAdapter {
   receipts = []
-  constructor(kind) { super(); this.kind = kind }
+  constructor(kind, allowedTools) { super(); this.kind = kind; this.allowedTools = allowedTools }
   async resolveModel(provider, model) {
     if (model !== 'DeepSeek-V4.1-Flash') throw new Error('Approved model required')
     return { provider, id: model, name: model }
   }
   async *stream(options) {
+    if (this.allowedTools && options.sessionId?.startsWith('worker-'))
+      options = { ...options, tools: (options.tools ?? []).filter(tool => this.allowedTools.includes(tool.name)) }
     const url = new URL(process.env.DSH_RESEARCH_REAL_MODELS_URL)
     if (url.hostname !== '127.0.0.1' || url.protocol !== 'http:' || url.pathname !== '/') throw new Error('Explicit loopback model relay required')
     const token = (await readFile(process.env.DSH_RESEARCH_REAL_MODELS_TOKEN_FILE, 'utf8')).trim()
     const { signal, ...request } = options
     const body = JSON.stringify(request)
-    const bounded = AbortSignal.any([signal ?? new AbortController().signal, AbortSignal.timeout(130000)])
+    const deadlineMs = Number(process.env.DSH_RESEARCH_REAL_MODELS_TIMEOUT_MS ?? 130000)
+    if (!Number.isSafeInteger(deadlineMs) || deadlineMs <= 0) throw new Error('Finite positive remote model deadline required')
+    const bounded = AbortSignal.any([signal ?? new AbortController().signal, AbortSignal.timeout(deadlineMs)])
     const response = await fetch(new URL(this.kind, url), { method: 'POST', headers: { 'content-type': 'application/json', 'x-relay-token': token }, body, signal: bounded })
     if (!response.ok || !response.body) throw new Error('Native model relay request unresolved')
     const record = { session_id: options.sessionId ?? null, kind: this.kind, request_sha256: sha256(body), completed: false }

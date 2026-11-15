@@ -18,7 +18,7 @@ import Skills from '@deepseek-ai/dsh-skill'
 import * as FilesystemSkills from '@deepseek-ai/dsh-skill-filesystem'
 import { defineTool } from '@deepseek-ai/dsh-tools'
 import { ProjectArtifacts, ManifestSchema, ReviewSchema, ResearchStateSchema, canonicalJson, deriveActionId, sha256 } from 'dsh-research'
-import { NativeResearchAdapter, researchDomain } from 'dsh-research/native'
+import { NativeResearchAdapter, researchDomain, productionResearchDomain } from 'dsh-research/native'
 
 import Subagents, { NO_START_CAPABILITIES } from '@deepseek-ai/dsh-subagent'
 import SessionQuery from '@deepseek-ai/dsh-session-query'
@@ -79,7 +79,7 @@ export async function createCpuFixture(outputArg, options = {}) {
   backend = new SqliteStorageBackend({ path: join(root, '.autoresearch/dsh/state.sqlite3'), journalMode: 'wal' })
   removeBackend = ctx.storage.backend.register('sqlite', backend)
   const facility = new DomainFacility(ctx, { backend: 'sqlite' })
-  domain = await facility.open(researchDomain)
+  domain = await facility.open(options.production ? productionResearchDomain : researchDomain)
   const table = domain.table('projects')
   if (!options.context) await ctx.plugin(Skills)
   await ctx.plugin(FilesystemSkills, { includeDefaultRoots: false, customSkillDirs: [join(packageRoot, 'dist/skills')], watch: false })
@@ -126,14 +126,14 @@ export async function createCpuFixture(outputArg, options = {}) {
   releases.push({ name: 'dsh-research', version: packageJson.version, content: await source('snapshots/package.json', join(packageRoot, 'package.json')) })
   const moduleHashes = {}
   for (const module of ['records', 'bindings', 'manifest', 'admission', 'evaluate', 'loop', 'native', 'collaboration', 'coordination', 'publication', 'review', 'gpu']) moduleHashes[module] = sha256(await readFile(join(packageRoot, `dist/${module}.js`)))
-  const profile = await json('snapshots/profile.json', { scope: 'synthetic_released_cpu', confirmation: 'off', author_tools: options.authorTools ?? ['research_run'], reviewer_tools: [], maxConcurrentJobsPerOwner: 1,
+  const profile = await json('snapshots/profile.json', { scope: options.production ? 'project_research' : 'synthetic_released_cpu', confirmation: 'off', author_tools: options.authorTools ?? ['research_run'], reviewer_tools: [], maxConcurrentJobsPerOwner: 1,
     tool_registration: options.registration ?? { toolScope: 'host' }, default_worker: Boolean(options.context),
     native_review: options.nativeReview ?? null,
     execution_sandbox: options.executionSandbox ?? null,
     qualification_limits: { max_attempts: options.maxAttempts ?? 8, max_review_requests: options.maxReviews ?? 8, max_total_timeout_ms: options.maxTotalTimeoutMs ?? 16000 },
     package_modules: moduleHashes, example_driver_sha256: sha256(await readFile(fileURLToPath(import.meta.url))) })
   const registration = await json('snapshots/registration.json', { project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', scope: 'synthetic development only' })
-  const authority = { project_id: 'synthetic-m2', project_root: root, authority_id: 'synthetic-m2', writer_id: 'synthetic-host', registration }
+  const authority = { project_id: 'synthetic-m2', project_root: root, authority_id: 'synthetic-m2', writer_id: options.production ? author.id : 'synthetic-host', registration }
   const lock = await source('snapshots/lock.yaml', join(packageRoot, 'dist/qualification-lock.yaml'))
   const binding = { contract_ref: { id: 'dsh-research/research-loop', version: row.contract_version, artifact: contract },
     compatibility_row_ref: { register: registerRef, contract_version: row.contract_version, row_id: row.row_id, row_sha256: sha256(canonicalJson(row)), table_sha256: register.table_sha256 },
@@ -144,15 +144,17 @@ export async function createCpuFixture(outputArg, options = {}) {
   const domainPolicy = await json('snapshots/domain-policy.json', { scope: 'synthetic released inputs only', score_meaning: 'positive/negative support relative to a zero synthetic baseline', verifier })
   const reviewerPreset = await json('snapshots/reviewer-preset.json', { session_id: reviewerId, provider: reviewerProvider, model: reviewerModel })
   const permissions = await json('snapshots/reviewer-permissions.json', { tools: [], boundary: 'native tool guard; trusted same account' })
-  const policy = { scope: 'synthetic_released_cpu', authority, binding, goal_id: 'synthetic-cpu', goal_revision: 'r1', max_attempts: options.maxAttempts ?? 8,
+  const policy = { scope: options.production ? 'project_research' : 'synthetic_released_cpu', authority, binding, goal_id: 'synthetic-cpu', goal_revision: 'r1', max_attempts: options.maxAttempts ?? 8,
     max_timeout_ms: options.actionTimeoutMs ?? 2000, max_total_timeout_ms: options.maxTotalTimeoutMs ?? 16000, max_output_bytes: 8192, allowed_executables: [process.execPath],
     allowed_operations: options.allowedOperations ?? ['negative', 'positive', 'timeout-zero', 'invalid-output', 'drift', 'unknown-launch', 'baseline'], domain_policy: domainPolicy, verifier, entrypoint: evaluator,
     reviewer: { session_id: reviewerId, provider: reviewerProvider, preset: reviewerPreset, permissions },
     ...(options.automaticReview ? { review_limits: { max_requests: options.maxReviews ?? 8, timeout_ms: options.reviewTimeout ?? 2000, subagent_provider: options.reviewProvider ?? options.nativeReview?.provider ?? 'synthetic-review', model: reviewerModel } } : {}),
-    allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'] }
+    allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'],
+    ...(options.production ? { execution: { arguments: [{ kind: 'entrypoint' }, { kind: 'input', index: 0 }, { kind: 'operation' }], input_count: 1, input_purpose: 'C_qual', environment: {}, cost_purpose: 'C_qual' } } : {}) }
   const policyRef = await json('snapshots/policy.json', policy)
   if (table.get('synthetic-m2')) throw new Error('Synthetic fixture cannot overwrite an existing authority; use retained-state reopen')
-  await table.put('synthetic-m2', ResearchStateSchema.parse({ schema_version: 3, consumed_review_requests: 0, review_requests: {}, rejected_subjects: {}, feedback: { cursors: {}, items: {} }, publications: {}, authority, binding, policy: policyRef,
+  await table.put('synthetic-m2', ResearchStateSchema.parse({ schema_version: options.production ? 4 : 3,
+    ...(options.production ? { loop: { decision: null, notifications: {} } } : {}), consumed_review_requests: 0, review_requests: {}, rejected_subjects: {}, feedback: { cursors: {}, items: {} }, publications: {}, authority, binding, policy: policyRef,
     revision: 0, stopped: false, consumed_attempts: 0, consumed_timeout_ms: 0, reserved_timeout_ms: 0, consumed_reviews: [], active_action_id: null, actions: {}, hold: null }))
   const config = { artifacts, table, projectKey: 'synthetic-m2', policy: policyRef, authorSessionId: author.id, authorTools: options.authorTools ?? ['research_run'],
     ...(options.context ? { executionShell: options.executionShell ?? author.ctx.shell, assertActiveAuthority: options.assertActiveAuthority } : {}),

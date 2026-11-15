@@ -45,3 +45,33 @@ for (const e of [{ type: 'thread.started', thread_id: 'uncapped-fixture' },
     assert.equal(adapter.receipts.length, 1)
   } finally { await rm(root, { recursive: true, force: true }) }
 })
+
+test('completed CLI diagnostics are retained; incomplete turns and native operations are refused', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'traex-diagnostics-'))
+  try {
+    for (const mode of ['diagnostic', 'incomplete', 'operation', 'fatal']) {
+      const executable = join(root, mode)
+      await writeFile(executable, `#!${process.execPath}
+import { writeFileSync } from 'node:fs';
+for await (const _ of process.stdin) {}
+writeFileSync(process.argv[process.argv.indexOf('--output-last-message') + 1], 'Completed review');
+const events = [{ type: 'item.completed', item: { type: 'error', message: 'Application reload unavailable' } }];
+if ('${mode}' === 'operation') events.push({ type: 'item.completed', item: { type: 'command_execution', command: 'forbidden' } });
+if ('${mode}' !== 'incomplete') events.push({ type: 'turn.completed', usage: { input_tokens: 100, output_tokens: 20, cached_input_tokens: 0, cache_creation_input_tokens: 0, reasoning_output_tokens: 0 } });
+for (const event of events) process.stdout.write(JSON.stringify(event) + '\\n');
+if ('${mode}' === 'fatal') process.exitCode = 1;
+`)
+      await chmod(executable, 0o700)
+      const adapter = new TraexTextAdapter({ executable, projectRoot: root, artifactsRoot: join(root, 'private-' + mode),
+        model: 'DeepSeek-V4.1-Flash', timeoutMs: 10000, maxRequests: 1 })
+      const run = async () => { for await (const _ of adapter.stream({ provider: 'fixture', model: 'DeepSeek-V4.1-Flash', messages: [] })) {} }
+      if (mode === 'diagnostic') {
+        await run()
+        assert.deepEqual((adapter.receipts[0] as { diagnostics: string[] }).diagnostics, ['Application reload unavailable'])
+      } else {
+        await assert.rejects(run(), mode === 'incomplete' ? /no completed native turn/ : mode === 'operation' ? /unqualified tool/ : /exit=1/)
+        assert.equal(adapter.receipts.length, 0)
+      }
+    }
+  } finally { await rm(root, { recursive: true, force: true }) }
+})

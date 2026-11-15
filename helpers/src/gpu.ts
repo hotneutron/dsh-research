@@ -2,12 +2,17 @@ import { z } from 'zod'
 import { ByteRef, Count, Id } from './records.js'
 import type { ArtifactReference, Manifest } from './records.js'
 import { canonicalJson } from './bindings.js'
+import { SciencePolicySchema } from './science.js'
 
 export const GpuResourceSchema = z.strictObject({ host: Id, device_uuid: z.string().regex(/^GPU-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/) })
-export const GpuPolicySchema = z.strictObject({
+const gpuPolicyFields = {
   resource: GpuResourceSchema, guard: ByteRef, qualification: ByteRef, budget: ByteRef, lease_namespace: ByteRef,
-  environment: z.record(Id, z.string()), purpose: z.literal('C_qual'),
-})
+  environment: z.record(Id, z.string()),
+}
+export const GpuPolicySchema = z.discriminatedUnion('purpose', [
+  z.strictObject({ ...gpuPolicyFields, purpose: z.literal('C_qual') }),
+  z.strictObject({ ...gpuPolicyFields, purpose: z.literal('C_science'), science: SciencePolicySchema }),
+])
 export const GpuPreflightSchema = z.strictObject({
   schema_version: z.literal(1), kind: z.literal('gpu_preflight'), manifest: ByteRef,
   guard: ByteRef, resource: GpuResourceSchema, ready: z.boolean(), observation: ByteRef,

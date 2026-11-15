@@ -56,8 +56,7 @@ def controlled(args, control):
         return 0
     if args.command in ('stop', 'restart'):
         # Persist intent before stopping, including a failed or timed-out shutdown.
-        if args.command == 'stop':
-            marker.write_text('Intentional stop; only explicit start/restart clears this marker.\n')
+        marker.write_text('Intentional stop or restart in progress; clear only after verified quiescence and explicit start/restart.\n')
         subprocess.run(['systemctl', '--user', 'stop', args.unit], check=True)
     status = properties(args.unit)
     pids = remaining(status.get('ControlGroup', ''))

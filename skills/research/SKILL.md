@@ -7,7 +7,7 @@ description: Conduct bounded, reviewed research in a hosted project using dsh-re
 
 Resolve the original request, canonical project root P, standing goal authority, exact contract/profile and current project state. Keep scientific code, decisions, evidence, feedback and native state in P. Keep package implementation and package qualification in dsh-research.
 
-The packaged native adapter currently supports synthetic released CPU development. Its existence does not qualify a live project profile. Check the applicable deployment/qualification receipt before treating a capability as supported. Record missing authority, review or native evidence as an owned operational hold; continue unrelated admissible analysis.
+The native adapter supports released synthetic development, qualified GPU routes and an explicit project-owned production profile. `NativeProductionResearch` installs on an existing author/Ticket with project proposal/verifier/conclusion hooks and version-four state. Its existence does not qualify a live project profile. Check the applicable deployment/qualification receipt before treating a capability as supported. Keep historical version-three stores pinned until a reviewed supported handoff. Record missing authority, review or native evidence as an owned operational hold; continue unrelated admissible analysis.
 
 ## Author procedure
 
@@ -17,6 +17,8 @@ The packaged native adapter currently supports synthetic released CPU developmen
 4. Read the original action association on replay. Treat an unknown launch/settlement as unresolved, retain its reservation, and use existing native ownership/termination evidence for reconciliation. Never repeat an admitted action merely because its worker or transport restarted.
 5. Check actual terminal facts, complete captured bytes, identity before/after and the bound domain verifier. Hash and parse the same captured bytes. Preserve interrupted, timed-out, cancelled, truncated or drifted evidence as invalid even when it contains a passing score or exit zero. Keep a valid negative scientifically useful.
 6. Read the project checkpoint and prepare a justified bounded successor or diagnostic for fresh separate review. Continue automatically within standing authority once all prerequisites hold. Preserve earlier failures and charges. Request required human scientific steering only after scoped alternatives, a materially different rebrainstorm and completed separate exhaustion review.
+
+On a production loop, use `research_status` to read actual evidence/costs and capture source/reviewer versions. Adopt feedback through an unadmitted materially changed proposal with its exact `feedback_item_id` and reason; retain the fresh review and settled effect. Use `research_conclude` for separately reviewed goal completion or scientific exhaustion before a terminal native report. Normal reports use `human_action=null`. Existing Source/startup/scheduled wakeups retain the original author and authority; never restart an admitted action or create an empty replacement record to recover.
 
 Use [packet and outcome guidance](references/packets.md) when preparing references or interpreting a returned association.
 
@@ -38,3 +40,4 @@ Treat feedback as capture → disposition → frozen action change → actual ef
 |---|---|---|
 | r1 | 2026-11-11 22:08:03 -0800 | Created the M2 research procedure over exact records and existing providers, with project ownership, guarded execution, reviewed continuation and permitted sharing. |
 | r2 | 2026-11-11 23:26:54 -0800 | Added automatic proposal/review tool use and retained exact scope, project ownership, independent review and non-human-gated continuation rules. |
+| r3 | 2026-11-14T21:59:03.959632-08:00 | Added explicit production profile, version-four continuity, captured feedback, separately reviewed conclusion and existing Source wake procedure. |

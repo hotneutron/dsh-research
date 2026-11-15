@@ -12,11 +12,15 @@ export const ReviewIntentSchema = z.strictObject({
   if (['completed', 'request_changes', 'deferred'].includes(v.phase) && (v.completion === null || v.receipt === null))
     ctx.addIssue({ code: 'custom', message: 'Completed review intent needs native completion and receipt bytes' })
 })
-export const FeedbackItemSchema = z.strictObject({
+export const LegacyFeedbackItemSchema = z.strictObject({
   item_id: Id, source_id: Id, message_id: Id, source_version: Id, content: ByteRef,
   disposition: z.enum(['pending', 'adopted', 'rejected', 'deferred', 'stale']), reason: Id.nullable(),
   changed_action: ByteRef.nullable(), effect: ByteRef.nullable(), effect_status: z.enum(['pending', 'executed', 'failed', 'not_adopted']),
   effect_checkpoint: ByteRef.optional(),
+})
+export const FeedbackItemSchema = LegacyFeedbackItemSchema.extend({ captured_revision: Count.optional() })
+export const LegacyFeedbackStateSchema = z.strictObject({
+  cursors: z.record(Id, z.strictObject({ cursor: Id, scan: ByteRef })), items: z.record(Id, LegacyFeedbackItemSchema),
 })
 export const FeedbackStateSchema = z.strictObject({
   cursors: z.record(Id, z.strictObject({ cursor: Id, scan: ByteRef })), items: z.record(Id, FeedbackItemSchema),

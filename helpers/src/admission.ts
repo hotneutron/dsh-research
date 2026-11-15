@@ -2,11 +2,14 @@ import { z } from 'zod'
 import { AuthorityRef, Binding, ByteRef, Count, Hold, Id } from './records.js'
 import type { ArtifactReference, BoundIdentity, Manifest, Review } from './records.js'
 import { canonicalJson, sha256 } from './bindings.js'
-import { ReviewIntentSchema, FeedbackStateSchema, PublicationSchema } from './collaboration.js'
+import { ReviewIntentSchema, FeedbackStateSchema, LegacyFeedbackStateSchema, PublicationSchema } from './collaboration.js'
 import { GpuPolicySchema } from './gpu.js'
+import { checkRecoveryPreflight } from './recovery.js'
+import type { RecoveryPreflight } from './recovery.js'
+import { InvocationTemplateSchema } from './execution.js'
 
 export const DevelopmentPolicySchema = z.strictObject({
-  scope: z.enum(['synthetic_released_cpu', 'project_gpu_development']), authority: AuthorityRef, binding: Binding,
+  scope: z.enum(['synthetic_released_cpu', 'project_gpu_development', 'project_research']), authority: AuthorityRef, binding: Binding,
   goal_id: Id, goal_revision: Id, max_attempts: Count.positive(), max_timeout_ms: Count.positive(),
   max_total_timeout_ms: Count.positive(), max_output_bytes: Count.positive(),
   allowed_executables: z.array(Id).min(1), allowed_operations: z.array(Id).min(1),
@@ -19,12 +22,19 @@ export const DevelopmentPolicySchema = z.strictObject({
     subagent_provider: Id, model: Id }).optional(),
   allowed_read_prefixes: z.array(z.enum(['snapshots/', 'local_artifacts/autoresearch/dsh/'])).min(1),
   gpu: GpuPolicySchema.optional(),
+  execution: InvocationTemplateSchema.optional(),
 }).superRefine((v, ctx) => {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'Policy binding and registered authority differ' })
-  if ((v.scope === 'project_gpu_development') !== (v.gpu !== undefined)) ctx.addIssue({ code: 'custom', message: 'GPU scope requires its exact resource/guard policy; synthetic scope cannot carry GPU authority' })
+  if ((v.scope === 'project_gpu_development' && !v.gpu) || (v.scope === 'synthetic_released_cpu' && v.gpu)) ctx.addIssue({ code: 'custom', message: 'GPU scope requires its exact resource/guard policy; synthetic scope cannot carry GPU authority' })
+  if (v.scope === 'project_research' && !v.execution) ctx.addIssue({ code: 'custom', message: 'Production research requires an explicit frozen invocation and cost profile' })
+  if (v.execution && v.execution.input_purpose !== v.execution.cost_purpose)
+    ctx.addIssue({ code: 'custom', message: 'Declared production input purpose must match its native execution cost purpose' })
+  if (v.scope !== 'project_research' && v.execution) ctx.addIssue({ code: 'custom', message: 'Historical profiles retain their original invocation semantics' })
+  if (v.gpu && v.execution && (v.execution.cost_purpose !== v.gpu.purpose || v.execution.input_purpose !== v.gpu.purpose || canonicalJson(v.execution.environment) !== canonicalJson(v.gpu.environment)))
+    ctx.addIssue({ code: 'custom', message: 'Production invocation cannot change its GPU cost/input/environment policy' })
   if (v.gpu && v.gpu.environment.CUDA_VISIBLE_DEVICES !== v.gpu.resource.device_uuid) ctx.addIssue({ code: 'custom', message: 'GPU environment must bind the exact device UUID' })
-  // This initial GPU mapping is qualification-only. A caller-set assurance label
-  // cannot enable scientific adoption before its full profile/authority gate.
+  // C_science requires the exact existing-authority envelope and a separately
+  // host-registered scientific guard; an assurance label supplies no authority.
 })
 export type DevelopmentPolicy = z.infer<typeof DevelopmentPolicySchema>
 const actionStateObject = z.strictObject({
@@ -45,15 +55,25 @@ const legacyStateObject = z.strictObject({
 export const LegacyResearchStateSchema = legacyStateObject.superRefine(validateConsumption)
 const version2StateObject = legacyStateObject.extend({
   schema_version: z.literal(2), consumed_review_requests: Count, review_requests: z.record(Id, ReviewIntentSchema),
-  rejected_subjects: z.record(Id, ByteRef), feedback: FeedbackStateSchema, publications: z.record(Id, PublicationSchema),
+  rejected_subjects: z.record(Id, ByteRef), feedback: LegacyFeedbackStateSchema, publications: z.record(Id, PublicationSchema),
 })
 function validateCoordination(v: Omit<z.infer<typeof version2StateObject>, 'schema_version'>, ctx: z.RefinementCtx) {
   validateConsumption(v, ctx)
   if (v.consumed_review_requests !== Object.keys(v.review_requests).length) ctx.addIssue({ code: "custom", message: "Review request consumption differs from retained intents" })
 }
 export const Version2ResearchStateSchema = version2StateObject.superRefine(validateCoordination)
-export const ResearchStateSchema = version2StateObject.extend({ schema_version: z.literal(3), actions: z.record(Id, ActionStateSchema) }).superRefine(validateCoordination)
-export const HistoricalResearchStateSchema = z.union([LegacyResearchStateSchema, Version2ResearchStateSchema, ResearchStateSchema])
+export const Version3ResearchStateSchema = version2StateObject.extend({ schema_version: z.literal(3), actions: z.record(Id, ActionStateSchema) }).superRefine(validateCoordination)
+export const Version4ResearchStateSchema = version2StateObject.extend({ schema_version: z.literal(4), actions: z.record(Id, ActionStateSchema),
+  feedback: FeedbackStateSchema,
+  loop: z.strictObject({
+    decision: z.strictObject({ kind: z.enum(['goal_completion', 'scientific_exhaustion']), subject: ByteRef, review: ByteRef,
+      checkpoint: ByteRef, human_question: Id.nullable() }).nullable(),
+    notifications: z.record(Id, z.strictObject({ action_id: Id, checkpoint: ByteRef, message_id: Id,
+      content: ByteRef, status: z.enum(['pending', 'observed']), observation: ByteRef.nullable() })),
+  }),
+}).superRefine(validateCoordination)
+export const ResearchStateSchema = z.union([Version3ResearchStateSchema, Version4ResearchStateSchema])
+export const HistoricalResearchStateSchema = z.union([LegacyResearchStateSchema, Version2ResearchStateSchema, Version3ResearchStateSchema, Version4ResearchStateSchema])
 
 function validateConsumption(v: Omit<z.infer<typeof legacyStateObject>, 'schema_version'>, ctx: z.RefinementCtx) {
   if (canonicalJson(v.authority) !== canonicalJson(v.binding.authority)) ctx.addIssue({ code: 'custom', message: 'State binding and registered authority differ' })
@@ -92,7 +112,7 @@ export function assertApprovedReview(manifest: Manifest, manifestRef: ArtifactRe
 
 /** Pure coupled update for the existing serialized record boundary. */
 export function reserveAction(current: ResearchState, manifest: Manifest, manifestRef: ArtifactReference, review: Review, reviewRef: ArtifactReference,
-  policy: DevelopmentPolicy, policyRef: ArtifactReference, expectedRevision: number, dispatchToken: string): ResearchState {
+  policy: DevelopmentPolicy, policyRef: ArtifactReference, expectedRevision: number, dispatchToken: string, recovery?: RecoveryPreflight): ResearchState {
   ResearchStateSchema.parse(current)
   if (!equalIdentity(current.authority, policy.authority) || !equalIdentity(current.binding, policy.binding)
     || !equalIdentity(manifest.binding, current.binding) || !equalIdentity(current.policy, policyRef)) throw new AdmissionError('identity', 'Registered project authority/profile differs')
@@ -111,7 +131,11 @@ export function reserveAction(current: ResearchState, manifest: Manifest, manife
     || current.consumed_attempts >= manifest.bounds.max_attempts || current.consumed_attempts >= policy.max_attempts
     || current.consumed_timeout_ms + manifest.bounds.timeout_ms > policy.max_total_timeout_ms
     || current.consumed_timeout_ms + manifest.bounds.timeout_ms > manifest.bounds.timeout_reservation_ms) throw new AdmissionError('bounds', 'Attempt or total timeout allowance is exhausted')
-  if (manifest.proposal.retry !== null) throw new AdmissionError('held', 'Fresh retry/rejected-path recovery policy is not yet qualified')
+  if (manifest.proposal.retry !== null) {
+    if (!recovery) throw new AdmissionError('held', 'Fresh retry/rejected-path recovery policy is not yet qualified')
+    try { checkRecoveryPreflight(recovery, current, manifest, manifestRef, policyRef) }
+    catch (error) { throw new AdmissionError('held', error instanceof Error ? error.message : 'Recovery proof is unavailable') }
+  } else if (recovery) throw new AdmissionError('identity', 'A recovery proof cannot authorize an unrelated fresh action')
   const revision = current.revision + 1
   const action: ActionState = { action_id: manifest.action_id, attempt_id: `attempt-${manifest.action_id}`, manifest: manifestRef, review: reviewRef, dispatch_token: Id.parse(dispatchToken),
     review_id: review.review_id, admitted_revision: revision, timeout_ms: manifest.bounds.timeout_ms, reservation_active: true,

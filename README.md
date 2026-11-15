@@ -47,8 +47,8 @@ P/
   src/ and tools/                     # shared scientific implementation and verifiers
   .plan/                              # deliberate plans/contracts and useful summaries
   .autoresearch/dsh/
-    state.sqlite3                     # coupled project record via existing storage provider
-    superagent/                       # native orchestration state
+    superagent/                       # native orchestration state and existing writer lock
+      science.sqlite3                 # production coupled record inside that lock boundary
     sessions/                         # native Session persistence
     profile/                          # resolved package/provider/prompt pins
 ```
@@ -80,6 +80,12 @@ Timeout, cancellation, crash, unknown execution and identity drift remain invali
 Normal execution, technical review, diagnosis, covered recovery and alternative selection continue autonomously within standing scope and resource policy. Optional comments or publication failures do not block admissible research. Human scientific steering follows independently challenged scoped exhaustion after orthogonal alternatives and a materially different rebrainstorm. Hard limits, missing permission and unresolved processes remain operational holds; explicit human stop is respected.
 
 The synthetic CPU profile keeps fresh/sealed confirmation off. Enabled access requires its own qualified ordering, exposure-history and single-writer policy. Renaming a branch, profile or campaign cannot make exposed data fresh.
+
+## Using an autonomous project loop
+
+Install `NativeProductionResearch` on the project's existing native author and open Ticket. The project supplies its proposal factory, released inputs, verifier, conclusion premises and accepted resource policy. The loop freezes proposals, obtains separate review, executes through existing jobs, delivers actual outcomes and continues to a separately reviewed completion or scoped exhaustion.
+
+Use the [production integration guide](docs/integration.md#autonomous-production-research) for the project hooks, version-four state, Source installation and Linux service controls. Keep each deployment bound to its own qualified domain and authority; the engineering example evaluates a fixed released trace.
 
 ## Keeping source and plans manageable
 
@@ -149,7 +155,7 @@ The smoke commands require a fresh output directory and write their records and 
 
 See the [native integration guide](docs/integration.md) for the proposal/review/feedback tools, project configuration and read-only audits.
 
-The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts synthetic CPU and bounded `project_gpu_development` qualification policies and requires registered project state. GPU qualification binds an exact device, lease namespace and host-registered termination guard; scientific GPU adoption uses its separate project qualification gate. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
+The package includes a generated qualification-lock snapshot and the [research skill](skills/research/SKILL.md). Core helpers are exported from `dsh-research`; the native adapter is exported from `dsh-research/native` with optional exact-version DSH peers. It accepts synthetic CPU, bounded `project_gpu_development` qualification and explicit `project_research` policies, each requiring registered project state. GPU qualification binds an exact device, lease namespace and host-registered termination guard; scientific GPU adoption uses its separate project qualification gate. Native jobs are process-local; an unresolved launch retains its project reservation after reopen.
 
 ## Revision History
 
@@ -171,3 +177,4 @@ The package includes a generated qualification-lock snapshot and the [research s
 | r14 | 2026-11-12 00:07:50 -0800 | Grouped package configuration, source, tests, scripts and examples under helpers; build emits canonical docs and skill copies, and a portable native continuity rehearsal. |
 | r15 | 2026-11-12 00:30:09 -0800 | Clarified Accorde's GPU scientific target and the helper purpose of synthetic CPU examples. |
 | r16 | 2026-11-12 11:04:59 -0800 | Documented the bounded GPU qualification guard and retained stable usage/project ownership; current execution status remains in the tracker. |
+| r17 | 2026-11-14T21:59:03.959632-08:00 | Added stable autonomous production usage, project hooks and same-lock version-four layout; kept deployment status and next work in the canonical tracker. |
