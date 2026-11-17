@@ -12,12 +12,16 @@ export async function createGovernance({ projectRoot, routes, helpers, config })
       const codexFixture = route.driver.id === 'codex-app-server-v1' && route.driver.version === 'fixture-1'
         && route.driver.codex?.home === projectRoot && route.authentication.protected_reference === projectRoot
         && route.driver.executable.path === join(projectRoot, 'fixture-cli.mjs')
+      const claudeFixture = route.driver.id === 'claude-print-v1' && route.driver.version === 'fixture-1'
+        && route.driver.claude?.api_key_file === join(projectRoot, 'fixture-key')
+        && route.authentication.protected_reference === join(projectRoot, 'fixture-key')
+        && route.driver.executable.path === join(projectRoot, 'fixture-cli.mjs')
       if (codexFixture) {
         try { await readFile(join(projectRoot, 'auth.json')); throw new Error('Fixture home cannot contain a real account credential') }
         catch (error) { if (error.code !== 'ENOENT') throw error }
       }
       if (route.authentication.class !== 'scripted_fixture' || route.authentication.principal !== 'fixture-only'
-        || route.authentication.protected_reference !== 'fixture:no-credential' && !codexFixture || route.provider !== 'fixture-provider')
+        || route.authentication.protected_reference !== 'fixture:no-credential' && !codexFixture && !claudeFixture || route.provider !== 'fixture-provider')
         throw new Error('Fixture authority cannot approve a real provider/auth route')
       return { route_sha256: sha256(canonicalJson(route)), authority: route.exposure.authority }
     },

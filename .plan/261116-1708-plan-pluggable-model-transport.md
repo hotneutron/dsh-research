@@ -1,6 +1,6 @@
 # Pluggable model transport
 
-Status: **Execution authorized — TraeX extraction and Codex.** The user authorized implementation with a tracker, then selected Codex as the one additional driver; other CLI drivers remain deferred. Live qualification/deployment still requires the route-specific bindings and evidence below.
+Status: **Execution authorized — TraeX, Codex and Claude prototypes.** The user authorized implementation with a tracker, then selected Codex and now Claude; other CLI drivers remain deferred. Each live profile still requires its own accepted finite qualification scope. Live qualification/deployment still requires the route-specific bindings and evidence below.
 Created: 2026-11-16T17:08:15.204183-08:00. Updated: 2026-11-16T23:28:28.823593-08:00. Baseline: `de8ed8bb5fab6d346639c4d1e27ad37fa2bed8cc` (`origin/main`), helper `0.3.2`, research-loop contract `2.4.0`.
 
 ## Need and initial decision
@@ -168,6 +168,10 @@ The subsequent request selects Codex as the first additional transport. Implemen
 
 The execution tracker records mechanism qualification and exact live gates. A named hosted project/model, actual account-use/exposure/separation basis and finite qualification matrix are still required before vendor-backed adoption; scripted and local HTTP responses cannot establish them. Preserve all existing research state during any later cutover.
 
+## Claude extension scope
+
+The user now requests Claude after committing the TraeX/Codex baseline. This supersedes the initial two-driver ceiling for prototype implementation; it does not enable a three-driver live profile or authorize automatic vendor failover. Qualify one pinned Claude bare-mode CLI with exact stdin context, explicit empty tools, non-refreshing API-key authentication and raw response usage. Preserve the shared governance, reviewer separation, model ledger and project-owned scientific authority. Live model/account/host scope remains separately gated.
+
 ## User request, verbatim
 
 ```text
@@ -192,6 +196,12 @@ Codex request, verbatim:
 work on codex.
 ```
 
+Claude request, verbatim:
+
+```text
+commit then work on claude
+```
+
 ## Revision History
 
 | Timestamp | Change |
@@ -205,3 +215,5 @@ work on codex.
 | 2026-11-17T11:48:03.884746-08:00 | Selected Codex as the bounded additional transport after the new user request; retained native DSH ownership, exact-context safeguards and separate live route/host gates. |
 
 | 2026-11-17T11:59:30.441993-08:00 | Replaced the provisional exec cut after review exposed cumulative usage and hidden compaction; narrowed Codex qualification to auditable raw-response protocol and non-refreshing file auth. Preserved original findings and explicit live host/account gates. |
+
+| 2026-11-17T13:11:25.135939-08:00 | User requested Claude after the 8c33295 commit; expanded prototype implementation only, retaining per-profile qualification, explicit routes and live grants. |

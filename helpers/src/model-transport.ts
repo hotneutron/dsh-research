@@ -13,7 +13,9 @@ export * from './model-budget.js'
 export * from './model-migration.js'
 
 export type ModelOptions = Parameters<LlmAdapter['stream']>[0]
-export interface EncodedModelInput { stdin: string; document: string | null; instructions: string; schema: unknown | null }
+export interface EncodedModelInput { stdin: string; document: string | null; instructions: string; schema: unknown | null;
+  /** Qualified bound for native CLI-generated framing, separate from materialized stdin/doc bytes. */
+  native_context_bytes?: number }
 export interface DriverObservation { executable: ExecutablePin; runtime: ExecutablePin[]; version: string;
   launch: { executable: ExecutablePin; interpreter: ExecutablePin | null } }
 export interface DriverCompletion {
@@ -141,8 +143,11 @@ export class ModelTextAdapter extends LlmAdapter {
       const instructions = selection?.instructions ?? 'Return the requested answer from the complete approved DSH context. CLI tools and external operations are disabled.'
       const input = frozenJson(this.config.driver.encode(context, instructions, selection?.schema ?? null, this.route.driver.context_delivery))
       const automaticBytes = this.route.driver.auto_context.reduce((sum, item) => sum + item.file.size_bytes, 0)
+      const nativeContextBytes = input.native_context_bytes ?? 0
+      if (!Number.isSafeInteger(nativeContextBytes) || nativeContextBytes < 0) throw new Error('Native context byte bound is invalid')
       const encodedBytes = Buffer.byteLength(input.stdin) + (input.document === null ? 0 : Buffer.byteLength(input.document))
         + (input.schema === null ? 0 : Buffer.byteLength(canonicalJson(input.schema))) + automaticBytes
+        + nativeContextBytes
       if (!Number.isSafeInteger(encodedBytes) || encodedBytes > this.route.limits.max_encoded_input_bytes) throw new Error('Final encoded model input exceeds its declared byte bound')
       await bounded(Promise.all(this.route.driver.auto_context.map(value => verifyPin(value.file))), signal)
       requestRoot = await privateRequestDirectory(this.config.projectRoot, this.config.artifactsRoot, reservation.record.id)
@@ -154,7 +159,7 @@ export class ModelTextAdapter extends LlmAdapter {
       await writeFile(join(requestRoot, 'private-approved-context.json'), canonicalJson(context), { mode: 0o600 })
       await writeFile(join(requestRoot, 'preflight.json'), canonicalJson({ route_id: this.route.id, route_sha256: grant.route_sha256,
         session_id: options.sessionId, context_sha256: contextHash, approval, observation, encoded_input_bytes: encodedBytes,
-        encoded_input_sha256: sha256(canonicalJson(input)), output_token_cap: null }), { mode: 0o600 })
+        encoded_input_sha256: sha256(canonicalJson(input)), native_context_bytes_bound: nativeContextBytes, output_token_cap: null }), { mode: 0o600 })
       // Recheck the trusted authority and payload decision after asynchronous version/file reads.
       const fresh = await bounded(this.config.governance.verifyRoute(this.route, signal), signal)
       if (canonicalJson(fresh) !== canonicalJson(grant)) throw new Error('Model authority changed before admission')
@@ -187,7 +192,7 @@ export class ModelTextAdapter extends LlmAdapter {
         reported_provider: completion.reported_provider, reported_model: completion.reported_model,
         served_identity: completion.reported_model === null || completion.reported_provider === null ? 'unobserved' : 'provider_reported',
         cli_thread_id: completion.thread_id, context_sha256: contextHash, input_sha256: sha256(canonicalJson(input)),
-        encoded_input_bytes: encodedBytes, raw_usage: completion.raw_usage, usage, diagnostics: completion.diagnostics,
+        encoded_input_bytes: encodedBytes, native_context_bytes_bound: nativeContextBytes, raw_usage: completion.raw_usage, usage, diagnostics: completion.diagnostics,
         elapsed_ms: completion.elapsed_ms, artifacts: requestRoot, selection: selection ? value : null,
         output_token_cap: null, ignored_output_token_hint: options.maxTokens ?? null, scientific_execution_authorized: false }
       await writeFile(join(requestRoot, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n', { mode: 0o600 })

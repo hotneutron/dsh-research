@@ -13,6 +13,7 @@ export const ModelRouteSchema = z.strictObject({
   driver: z.strictObject({ id: z.string().min(1), implementation: ByteRef, executable: ExecutablePinSchema,
     runtime: z.array(ExecutablePinSchema), version: z.string().min(1), qualification: ByteRef,
     codex: z.strictObject({ home: z.string().min(1), model_catalog: ExecutablePinSchema }).optional(),
+    claude: z.strictObject({ api_key_file: z.string().min(1) }).optional(),
     context_delivery: z.enum(['stdin', 'project_document']), auto_context: z.array(z.strictObject({
       file: ExecutablePinSchema, content_class: z.string().min(1),
     })), auto_context_basis: ByteRef }),
@@ -40,6 +41,14 @@ export const ModelRouteSchema = z.strictObject({
       ctx.addIssue({ code: 'custom', message: 'Codex requires its protected home reference and classified pinned model catalog' })
     if (route.driver.context_delivery !== 'stdin') ctx.addIssue({ code: 'custom', message: 'Codex only qualifies complete stdin context' })
   } else if (route.driver.codex) ctx.addIssue({ code: 'custom', message: 'Codex controls cannot configure another driver' })
+  if (route.driver.id === 'claude-print-v1') {
+    if (!route.driver.claude || route.driver.claude.api_key_file !== route.authentication.protected_reference
+      || !['anthropic_api_key', 'scripted_fixture'].includes(route.authentication.class))
+      ctx.addIssue({ code: 'custom', message: 'Claude bare mode requires its protected API-key reference' })
+    if (route.driver.context_delivery !== 'stdin') ctx.addIssue({ code: 'custom', message: 'Claude only qualifies complete stdin context' })
+    if (!/^claude-[a-z0-9-]+$/.test(route.model)) ctx.addIssue({ code: 'custom', message: 'Claude requires an explicit full model ID' })
+    if (!route.exposure.allowed_classes.includes('runtime')) ctx.addIssue({ code: 'custom', message: 'Claude native SDK framing requires runtime exposure qualification' })
+  } else if (route.driver.claude) ctx.addIssue({ code: 'custom', message: 'Claude controls cannot configure another driver' })
 })
 export type ModelRoute = z.infer<typeof ModelRouteSchema>
 export interface ContentEntry { pointer: string; sha256: string; size_bytes: number; content_class: string }

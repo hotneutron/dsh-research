@@ -32,6 +32,10 @@
     "./model-drivers/codex": {
       "types": "./dist/model-drivers/codex.d.ts",
       "import": "./dist/model-drivers/codex.js"
+    },
+    "./model-drivers/claude": {
+      "types": "./dist/model-drivers/claude.d.ts",
+      "import": "./dist/model-drivers/claude.js"
     }
   },
   "files": [

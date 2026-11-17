@@ -62,13 +62,17 @@ Replay resolves the original action/review association. Unknown launches retain 
 
 ## Pluggable model transport
 
-`ModelTextAdapter` (`dsh-research/model-transport`) implements DSH's `LlmAdapter` with an injected driver, trusted project governance and shared `ModelRequestBudget`. `ModelToolAdapter` (`dsh-research/model-tools`) validates the full response and persists native call IDs before emitting tool blocks. `TraexDriver` (`dsh-research/model-drivers/traex`) and `CodexDriver` (`dsh-research/model-drivers/codex`) supply CLI mechanics. The relay selects each route's driver while sharing one model budget.
+`ModelTextAdapter` (`dsh-research/model-transport`) implements DSH's `LlmAdapter` with an injected driver, trusted project governance and shared `ModelRequestBudget`. `ModelToolAdapter` (`dsh-research/model-tools`) validates the full response and persists native call IDs before emitting tool blocks. `TraexDriver` (`dsh-research/model-drivers/traex`), `CodexDriver` (`dsh-research/model-drivers/codex`) and `ClaudeDriver` (`dsh-research/model-drivers/claude`) supply CLI mechanics. The relay selects each route's driver while sharing one model budget.
 
 The accepted route binds executable/runtime/version pins, requested versus provider-reported model assurance, authentication principal/use basis, off-mode content exposure, reviewer separation and exact byte/deadline limits. Host `verifyRoute` and `approveContext` hooks verify actual authority and classify every payload entry; missing or uncovered evidence refuses before model debit. Output remains uncapped, and missing required usage makes a charged response ineligible.
 
 Codex uses `driver.id=codex-app-server-v1`, complete `stdin` delivery and `driver.codex={home, model_catalog}`. `home` references protected file-backed API authentication (`authentication.class=codex_file`); refreshable account/keyring authentication is unqualified. A temporary auth-only home isolates user configuration, MCP servers, skills and history, and is removed after owned process teardown. Credential bytes never enter receipts. The classified catalog pin must appear in `auto_context` and contain the exact requested model once.
 
 The driver removes CLI tools and metadata-selected delegation, verifies effective thread controls, consumes correlated raw response/usage events and refuses missing counters, extra responses, compaction, hooks or changed context. Unknown ownership holds the model scope and preserves its temporary auth-home reference for host reconciliation. Served-model verification remains unavailable: use `requested_only` assurance. Qualify the exact host, account use, exposure and reviewer policy before live adoption.
+
+Claude routes use `driver.id=claude-print-v1`, complete `stdin`, an explicit full `claude-*` model ID and `driver.claude.api_key_file` matching the protected authentication reference (`authentication.class=anthropic_api_key`). Bare mode excludes user context/customizations; CLI tools, MCP, skills, compaction and prompt suggestions are disabled. Structured selections use DSH's validated JSON response contract, keeping Claude's native tool list empty. Raw stream counters and final result must agree; missing usage, truncated output, child/tool activity or ambiguous responses remain charged and ineligible.
+
+Claude's native SDK identity/date framing requires the route's `runtime` exposure and `auto_context_basis` qualification; its finite 8 KiB allowance is included in the preflight input bound and receipt. API credentials stay in the child environment and are absent from logs and team artifacts. The helper adds no output-token cap; native API defaults still apply and a `max_tokens` stop is ineligible. The observed model is retained, while served-provider assurance remains unqualified. OAuth/subscription and third-party Claude backends require separate qualification.
 
 The shared budget counts admitted DSH transport requests. CLI-internal attempts are outside that count; failed/multiple responses retain raw completion and known usage evidence and remain charged. Request limits therefore do not claim provider-wide call or spend enforcement.
 
@@ -159,3 +163,5 @@ Fixtures establish only their declared scope. The [research-loop contract](contr
 - 2026-11-17T11:48:03.884746-08:00: Added governed Codex route bindings, per-route relay driver selection, pinned native protocol scope and explicit served-model/live-adoption limits.
 
 - 2026-11-17T11:59:30.441993-08:00: Replaced provisional Codex exec parsing with private app-server raw-response audit, isolated non-refreshing file auth, exact event/control/usage checks and explicit logical-request/host gates.
+
+- 2026-11-17T13:24:41.402481-08:00: Added Claude bare-mode API-file transport, raw response/usage validation, native framing input allowance, mixed routing and explicit authentication/identity/live limits.

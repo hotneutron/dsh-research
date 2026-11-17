@@ -6,22 +6,23 @@ import { modelFixture } from './model-fixture.js'
 import { ModelTextAdapter } from '../src/model-transport.js'
 import { TraexDriver } from '../src/model-drivers/traex.js'
 import { CodexDriver } from '../src/model-drivers/codex.js'
+import { ClaudeDriver } from '../src/model-drivers/claude.js'
 import { deriveActionId } from '../src/bindings.js'
 import { ManifestSchema } from '../src/records.js'
 import { NativeReviewDriver } from '../src/review.js'
 import { createCpuFixture } from '../examples/synthetic-cpu/fixture.mjs'
 
-for(const transport of ['traex','codex'] as const)test(`DSH author and separate reviewer use ${transport} for exact review, native execution and settled replay`, {timeout:30000}, async()=>{
+for(const transport of ['traex','codex','claude'] as const)test(`DSH author and separate reviewer use ${transport} for exact review, native execution and settled replay`, {timeout:30000}, async()=>{
   const m=await modelFixture({maxRequests:6,maxInFlight:2,driver:transport})
   let native:any
   let remove:undefined|(()=>void)
   try {
     const original=m.governance.approveContext
     m.governance.approveContext=async(...args)=>({...await original(...args),author_session_id:'m2-author',reviewer_session_id:'m2-reviewer'})
-    const reviewer=new ModelTextAdapter({projectRoot:m.root,artifactsRoot:join(m.root,'requests'),driver:transport === 'codex' ? new CodexDriver() : new TraexDriver(),governance:m.governance,budget:m.budget,
+    const reviewer=new ModelTextAdapter({projectRoot:m.root,artifactsRoot:join(m.root,'requests'),driver:transport === 'claude' ? new ClaudeDriver() : transport === 'codex' ? new CodexDriver() : new TraexDriver(),governance:m.governance,budget:m.budget,
       route:{...m.route,id:'fixture-reviewer-route',dsh_provider:'fixture-reviewer-dsh',role:'reviewer'}})
-    native=await createCpuFixture(join(m.root,'native-project'),{production:true,automaticReview:true,authorLLM:m.tools,authorProvider:'fixture-dsh',authorModel:'fixture-model',
-      reviewerLLM:reviewer,reviewerProvider:'fixture-reviewer-dsh',reviewerModel:'fixture-model',maxAttempts:1,maxTotalTimeoutMs:2000,reviewTimeout:10000})
+    native=await createCpuFixture(join(m.root,'native-project'),{production:true,automaticReview:true,authorLLM:m.tools,authorProvider:'fixture-dsh',authorModel:m.route.model,
+      reviewerLLM:reviewer,reviewerProvider:'fixture-reviewer-dsh',reviewerModel:m.route.model,maxAttempts:1,maxTotalTimeoutMs:2000,reviewTimeout:10000})
     const subject=await native.makeSubject('negative')
     const manifest=ManifestSchema.parse({...subject,action_id:deriveActionId(subject)})
     const manifestRef=await native.json('snapshots/extracted-transport-manifest.json',manifest)

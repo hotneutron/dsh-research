@@ -7,12 +7,13 @@ import type { ModelGovernance } from '../src/model-policy.js'
 import { ModelTextAdapter, ModelRequestBudget } from '../src/model-transport.js'
 import { TraexDriver } from '../src/model-drivers/traex.js'
 import { CodexDriver } from '../src/model-drivers/codex.js'
+import { ClaudeDriver } from '../src/model-drivers/claude.js'
 import { ModelToolAdapter } from '../src/model-tools.js'
 import type { ModelBudgetSnapshot, ModelOptions } from '../src/model-transport.js'
 import { SessionId } from '@deepseek-ai/dsh-session'
 import { execFileSync } from 'node:child_process'
 
-export async function modelFixture(settings: { maxRequests?: number; maxInFlight?: number; delivery?: 'stdin' | 'project_document'; role?: 'author' | 'reviewer' | 'planning'; ownRuntime?: boolean; driver?: 'traex' | 'codex' } = {}) {
+export async function modelFixture(settings: { maxRequests?: number; maxInFlight?: number; delivery?: 'stdin' | 'project_document'; role?: 'author' | 'reviewer' | 'planning'; ownRuntime?: boolean; driver?: 'traex' | 'codex' | 'claude' } = {}) {
   let fixtureNode = process.env.DSH_MODEL_FIXTURE_NODE ?? process.execPath
   const root = await realpath(await mkdtemp(join(tmpdir(), 'dsh-model-transport-')))
   if (settings.ownRuntime) { const target=join(root,'fixture-node');await writeFile(target,await readFile(fixtureNode),{mode:0o500});fixtureNode=target }
@@ -23,20 +24,24 @@ export async function modelFixture(settings: { maxRequests?: number; maxInFlight
     const uri = 'proofs/' + name + '.json'; await writeFile(join(root, uri), bytes)
     return { uri, sha256: sha256(bytes), size_bytes: bytes.length }
   }
-  const driver = settings.driver === 'codex' ? new CodexDriver() : new TraexDriver()
+  const model = settings.driver === 'claude' ? 'claude-fixture-model' : 'fixture-model'
+  const keyPath = join(root,'fixture-key')
+  if(settings.driver === 'claude') await writeFile(keyPath,'dsh-scripted-fixture-key',{mode:0o600})
+  const driver = settings.driver === 'claude' ? new ClaudeDriver() : settings.driver === 'codex' ? new CodexDriver() : new TraexDriver()
   const executable = join(root, 'fixture-cli.mjs')
   await writeFile(executable, `#!${fixtureNode}
 import {readFileSync,writeFileSync,appendFileSync} from 'node:fs';
 import {spawn} from 'node:child_process';
 import {decodeModelContext} from '${new URL('../dist/model-context.js', import.meta.url).href}';
 if(process.argv.includes('--version')){process.stdout.write('fixture-1\\n');process.exit(0)}
-const codex=process.argv.includes('app-server');
+const codex=process.argv.includes('app-server'),claude=process.argv.includes('--bare');
 let prompt='',rpcTurn=null;
-if(codex){
+if(codex||claude){
  const {createInterface}=await import('node:readline');
  const lines=createInterface({input:process.stdin});
  for await(const line of lines){
   const r=JSON.parse(line);
+  if(claude&&r.type==='user'){prompt=r.message.content[0].text;break;}
   if(r.id===1)process.stdout.write(JSON.stringify({id:1,result:{}})+'\\n');
   if(r.id===2)process.stdout.write(JSON.stringify({id:2,result:{model:'fixture-model',modelProvider:'openai',cwd:process.cwd(),approvalPolicy:'never',sandbox:{type:'readOnly',networkAccess:false},instructionSources:[],thread:{id:'fixture-thread',ephemeral:true}}})+'\\n');
   if(r.id===3){rpcTurn=r.params;prompt=r.params.input[0].text;process.stdout.write(JSON.stringify({id:3,result:{turn:{id:'fixture-turn'}}})+'\\n');break;}
@@ -44,7 +49,7 @@ if(codex){
  lines.close();
 }else for await(const chunk of process.stdin)prompt+=chunk;
 
-if(!codex&&process.argv.includes('-c'))prompt+=readFileSync('AGENTS.override.md','utf8');
+if(!codex&&!claude&&process.argv.includes('-c'))prompt+=readFileSync('AGENTS.override.md','utf8');
 if(codex){
  const controls=process.argv.filter((v,i)=>process.argv[i-1]==='-c');
  if(!controls.includes('features.shell_tool=false')||!controls.includes('features.hooks=false')||!controls.includes('project_doc_max_bytes=0')||!controls.includes('skills.include_instructions=false')||!process.argv.includes('--no-daemon'))process.exit(3);
@@ -60,7 +65,7 @@ if(prompt.includes('owned-descendant')){
  await new Promise(resolve=>setTimeout(resolve,300));
  await new Promise(resolve=>setTimeout(resolve,10000));
 }
-if(!codex&&(!process.argv.includes('--disallowed-tool')||!process.argv.includes('--ephemeral')))process.exit(3);
+if(!codex&&!claude&&(!process.argv.includes('--disallowed-tool')||!process.argv.includes('--ephemeral')))process.exit(3);
 if(prompt.includes('delay-response'))await new Promise(resolve=>setTimeout(resolve,500));
 if(prompt.includes('timeout-response'))await new Promise(resolve=>setTimeout(resolve,10000));
 const marker=prompt.includes('marker-A')?'marker-A':prompt.includes('marker-B')?'marker-B':'fixture-response';
@@ -72,11 +77,28 @@ const settled=JSON.stringify(context.messages).includes('settled');
 const reviewText=context.messages.flatMap(message=>message.content??[]).findLast(block=>block.type==='text'&&block.text.includes('REVIEW_PACKET_JSON\\n'))?.text;
 const packet=reviewText?JSON.parse(reviewText.split('REVIEW_PACKET_JSON\\n').at(-1)):null;
 const tool=prompt.includes('select-native-tool');
-const answer=(codex?rpcTurn.outputSchema!==null:process.argv.includes('--output-schema'))?JSON.stringify({text:marker,tool_calls:native&&!settled?[{name:'research_run',arguments:native[1]}]:native?[]:tool?[{name:prompt.includes('invalid-selection')?'shell':'research_run',arguments:'{"expected_revision":3}'}]:[]}):packet?JSON.stringify({decision:'approve',reason:'Exact scripted fixture source/limits are consistent; no live model/science claim',review_id:packet.review_id,action_id:packet.action_id,manifest_sha256:packet.manifest_sha256,request_sha256:packet.request_sha256}):marker;
+const structured=claude?process.argv[process.argv.indexOf('--system-prompt')+1].includes('Return JSON matching this schema:'):codex?rpcTurn.outputSchema!==null:process.argv.includes('--output-schema');
+const answer=structured?JSON.stringify({text:marker,tool_calls:native&&!settled?[{name:'research_run',arguments:native[1]}]:native?[]:tool?[{name:prompt.includes('invalid-selection')?'shell':'research_run',arguments:'{"expected_revision":3}'}]:[]}):packet?JSON.stringify({decision:'approve',reason:'Exact scripted fixture source/limits are consistent; no live model/science claim',review_id:packet.review_id,action_id:packet.action_id,manifest_sha256:packet.manifest_sha256,request_sha256:packet.request_sha256}):marker;
 const answerPath=process.argv[process.argv.indexOf('--output-last-message')+1];
-if(!codex)writeFileSync(answerPath,prompt.includes('answer-drift')?'different-answer':answer);
+if(!codex&&!claude)writeFileSync(answerPath,prompt.includes('answer-drift')?'different-answer':answer);
 const usage=prompt.includes('zero-usage')?{input_tokens:0,cached_input_tokens:0,cache_write_input_tokens:0,output_tokens:0,reasoning_output_tokens:0}:prompt.includes('missing-usage')?{}:{input_tokens:marker==='marker-A'?101:202,output_tokens:600,cached_input_tokens:0,cache_creation_input_tokens:0,cache_write_input_tokens:0,reasoning_output_tokens:100};
-if(codex){
+if(claude){
+ if(!process.argv.includes('--tools')||process.argv[process.argv.indexOf('--tools')+1]!==''||!process.argv.includes('--disable-slash-commands')||!process.argv.includes('--strict-mcp-config')||process.env.ANTHROPIC_API_KEY!=='dsh-scripted-fixture-key')process.exit(3);
+ const session='claude-fixture-session',model=prompt.includes('wrong-model')?'claude-wrong-model':'${model}';
+ const counters={input_tokens:usage.input_tokens,cache_read_input_tokens:usage.cached_input_tokens,cache_creation_input_tokens:usage.cache_creation_input_tokens,output_tokens:usage.output_tokens};
+ const events=[{type:'system',subtype:'init',cwd:process.cwd(),session_id:session,tools:[],mcp_servers:[],model,permissionMode:'dontAsk',slash_commands:[],apiKeySource:'ANTHROPIC_API_KEY',claude_code_version:'fixture-1',skills:[],plugins:[]},
+ {type:'stream_event',event:{type:'message_start',message:{id:'claude-response',type:'message',role:'assistant',model,usage:prompt.includes('missing-usage')?{}:counters}}},
+ {type:'stream_event',event:{type:'content_block_start',index:0,content_block:{type:prompt.includes('cli-operation')?'tool_use':'text',text:''}}},
+ {type:'stream_event',event:{type:'content_block_delta',index:0,delta:{type:'text_delta',text:answer}}},
+ {type:'assistant',message:{id:'claude-response',type:'message',role:'assistant',model,content:[{type:'text',text:answer}]}},
+ {type:'stream_event',event:{type:'content_block_stop',index:0}},
+ {type:'stream_event',event:{type:'message_delta',delta:{stop_reason:prompt.includes('truncated')?'max_tokens':'end_turn'},usage:{output_tokens:usage.output_tokens}}},
+ ...(prompt.includes('incomplete-cli')?[]:[{type:'stream_event',event:{type:'message_stop'}}]),
+ ...(prompt.includes('hook-event')?[{type:'system',subtype:'hook_started'}]:[]),
+ ...(prompt.includes('duplicate-terminal')?[{type:'stream_event',event:{type:'message_start',message:{id:'second',role:'assistant',model}}}]:[]),
+ {type:'result',subtype:'success',is_error:false,num_turns:1,stop_reason:'end_turn',terminal_reason:'completed',permission_denials:[],subagent_stats:{spawned:0,max_depth:0},result:prompt.includes('answer-drift')?'different-answer':answer,usage:prompt.includes('invalid-terminal-counters')?{}:counters,modelUsage:{[model]:{}}}];
+ for(const event of events)process.stdout.write(JSON.stringify({...event,session_id:session,parent_tool_use_id:null})+'\\n');
+}else if(codex){
  const raw={threadId:'fixture-thread',turnId:'fixture-turn',responseId:'fixture-response',usage:{inputTokens:usage.input_tokens,cachedInputTokens:usage.cached_input_tokens,cacheWriteInputTokens:usage.cache_write_input_tokens,outputTokens:usage.output_tokens,reasoningOutputTokens:usage.reasoning_output_tokens,totalTokens:usage.input_tokens+usage.output_tokens},usageMetadata:{metadata:{input_tokens:usage.input_tokens,output_tokens:usage.output_tokens,total_tokens:usage.input_tokens+usage.output_tokens,input_tokens_details:{cached_tokens:usage.cached_input_tokens,cache_write_tokens:usage.cache_write_input_tokens},output_tokens_details:{reasoning_tokens:usage.reasoning_output_tokens}}}};
  const events=[{method:'rawResponseItem/completed',params:{threadId:'fixture-thread',turnId:'fixture-turn',item:{type:'message',role:'user',content:[{type:'input_text',text:prompt}]}}},{method:'item/started',params:{threadId:'fixture-thread',turnId:'fixture-turn',item:{type:prompt.includes('cli-operation')?'commandExecution':'reasoning'}}},
  ...(prompt.includes('model-rerouted')?[{method:'model/rerouted',params:{threadId:'fixture-thread',turnId:'fixture-turn'}}]:[]),
@@ -92,7 +114,7 @@ if(codex){
 for(const event of [{type:'thread.started',thread_id:marker},...(codex?[{type:'turn.started'}]:[]),
  {type:'item.completed',item:{type:prompt.includes('cli-operation')?'command_execution':'error',message:prompt.includes('model-rerouted')?'model rerouted: fixture-model -> other':'Retained reload diagnostic'}},
  ...(codex?[{type:'item.completed',item:{type:'agent_message',text:answer}}]:[]),
- ...(prompt.includes('incomplete-cli')?[]:[{type:'turn.completed',usage,...(codex||prompt.includes('unreported-model')?{}:{provider:'fixture-provider',model:prompt.includes('wrong-model')?'wrong-model':'fixture-model'})}]),
+ ...(prompt.includes('incomplete-cli')?[]:[{type:'turn.completed',usage,...(codex||prompt.includes('unreported-model')?{}:{provider:'fixture-provider',model:prompt.includes('wrong-model')?'wrong-model':'${model}'})}]),
  ...(prompt.includes('duplicate-terminal')?[{type:'turn.completed',usage}]:[]),
  ...(prompt.includes('post-terminal')?[{type:'item.completed',item:{type:'agent_message',text:'late'}}]:[])])process.stdout.write(JSON.stringify(event)+'\\n');
 }
@@ -101,12 +123,12 @@ for(const event of [{type:'thread.started',thread_id:marker},...(codex?[{type:'t
   const pin = async (path: string) => { const bytes = await readFile(path); return { path, sha256: sha256(bytes), size_bytes: bytes.length } }
   const catalogPath = join(root,'fixture-model-catalog.json')
   if(settings.driver === 'codex') await writeFile(catalogPath,canonicalJson({models:[{slug:'fixture-model',apply_patch_tool_type:'freeform',shell_type:'unified_exec',experimental_supported_tools:['clock'],model_messages:{instructions_template:'Unapproved catalog instructions'}}]}))
-  const route = ModelRouteSchema.parse({ schema_version: 1, id: 'fixture-route', provider: 'fixture-provider', model: 'fixture-model',
+  const route = ModelRouteSchema.parse({ schema_version: 1, id: 'fixture-route', provider: 'fixture-provider', model,
     dsh_provider: 'fixture-dsh', role: settings.role ?? 'author',
     driver: { id: driver.id, implementation: await ref('implementation'), executable: await pin(executable), runtime: [await pin(fixtureNode)],
-      version: 'fixture-1', qualification: await ref('qualification'), context_delivery: settings.delivery ?? 'stdin', ...(settings.driver === 'codex' ? {codex:{home:root,model_catalog:await pin(catalogPath)}} : {}), auto_context: settings.driver === 'codex' ? [{file:await pin(catalogPath),content_class:'runtime'}] : [], auto_context_basis: await ref('automatic-context') },
+      version: 'fixture-1', qualification: await ref('qualification'), context_delivery: settings.delivery ?? 'stdin', ...(settings.driver === 'claude' ? {claude:{api_key_file:keyPath}} : {}), ...(settings.driver === 'codex' ? {codex:{home:root,model_catalog:await pin(catalogPath)}} : {}), auto_context: settings.driver === 'codex' ? [{file:await pin(catalogPath),content_class:'runtime'}] : [], auto_context_basis: await ref('automatic-context') },
     identity: { assurance: 'requested_only', basis: await ref('identity') },
-    authentication: { principal: 'fixture-only', class: 'scripted_fixture', use_mode: 'unattended', protected_reference: settings.driver === 'codex' ? root : 'fixture:no-credential', basis: await ref('auth') },
+    authentication: { principal: 'fixture-only', class: 'scripted_fixture', use_mode: 'unattended', protected_reference: settings.driver === 'claude' ? keyPath : settings.driver === 'codex' ? root : 'fixture:no-credential', basis: await ref('auth') },
     exposure: { allowed_classes: ['runtime', 'released'], confirmation: 'off', authority: await ref('authority'), decision: await ref('exposure') },
     separation: settings.role === 'planning' ? null : { basis: await ref('separation'), preset: await ref('preset'), permissions: await ref('permissions') },
     limits: { timeout_ms: 2000, preflight_timeout_ms: 10000, max_encoded_input_bytes: 1024*1024, max_capture_bytes: 1024*1024, max_answer_bytes: 128*1024 } })
@@ -131,7 +153,7 @@ for(const event of [{type:'thread.started',thread_id:marker},...(codex?[{type:'t
     route: { ...route, ...overrides }, driver, governance, budget })
   const text = adapter()
   let tools: ModelToolAdapter | null = null
-  const options = (message = 'fixture-response'): ModelOptions => ({ provider: 'fixture-dsh', model: 'fixture-model',
+  const options = (message = 'fixture-response'): ModelOptions => ({ provider: 'fixture-dsh', model,
     sessionId: SessionId(settings.role === 'reviewer' ? 'fixture-reviewer' : 'fixture-author'),
     messages: [{ role: 'user', content: [{ type: 'text', text: message }] }] })
   const run = async (value = options(), target: { stream(value: ModelOptions): AsyncIterable<unknown> } = text) => {

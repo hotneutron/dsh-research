@@ -36,7 +36,7 @@
   "model_or_GPU_external_dispatches": 0,
   "served_model_identity": "Only fixture evidence; actual served identity unqualified",
   "live_route_or_cutover": "Not enabled; needs actual auth/use/exposure/separation authority and host/profile evidence",
-  "additional_drivers": "Codex added in separately scoped prototype qualification; other CLIs deferred",
+  "additional_drivers": "Codex and Claude separately scoped prototype qualification; other CLIs deferred",
   "source_pins": {
     "helpers/src/model-policy.ts": "929d3802af0b95314d61c8e8d9384145e0abf89b051473e3e35bc59d1a8890d4",
     "helpers/src/model-budget.ts": "7e3c2c7b4a6a74a3a1c82e1df75e4b1acaffa7b4c803783cc50ef0485672f558",
@@ -174,6 +174,151 @@
     {
       "at": "2026-11-17T12:02:25.436422-08:00",
       "change": "Retained original TraeX extraction pins and added separately scoped Codex raw-protocol qualification, current source pins and live gates."
+    },
+    {
+      "at": "2026-11-17T13:36:51.130407-08:00",
+      "change": "Added separately scoped Claude bare/API qualification; retained original extraction and Codex records/pins."
     }
-  ]
+  ],
+  "claude_extension": {
+    "at": "2026-11-17T13:36:51.130407-08:00",
+    "baseline_commit": "8c33295",
+    "driver": "claude-print-v1",
+    "scope": "Claude bare/API-file mechanical qualification; live route and scientific adoption remain separate",
+    "regressions": {
+      "passed": 285,
+      "failed": 0,
+      "concurrency": 4,
+      "log": "final-regressions.log"
+    },
+    "focused_retention": {
+      "passed": 18,
+      "failed": 0,
+      "log": "retention-checks.log"
+    },
+    "native": {
+      "version": "2.1.248 (Claude Code)",
+      "binary": {
+        "path": "/opt/homebrew/lib/node_modules/@anthropic-ai/claude-code/bin/claude.exe",
+        "sha256": "a3f276daa51919f378bcd797d44f8e3d09653c2858123157d272de38952efeef",
+        "size_bytes": 206463136
+      },
+      "driver_checks": [
+        {
+          "mode": "text",
+          "finished": true,
+          "requests": 1,
+          "elapsed_ms": 2345.870208,
+          "error": null
+        },
+        {
+          "mode": "schema",
+          "finished": true,
+          "requests": 1,
+          "elapsed_ms": 2295.02025,
+          "error": null
+        },
+        {
+          "mode": "missing-usage",
+          "finished": false,
+          "requests": 1,
+          "elapsed_ms": 2210.028958,
+          "error": "ModelDriverFailure: Claude response failed, was interrupted or was truncated: Error: Required Claude usage counter input_tokens is unresolved"
+        },
+        {
+          "mode": "truncated",
+          "finished": false,
+          "requests": 2,
+          "elapsed_ms": 2588.1451669999997,
+          "error": "ModelDriverFailure: Claude response failed, was interrupted or was truncated: Error: Claude response is truncated, continued or selecting CLI tools"
+        },
+        {
+          "mode": "wrong-model",
+          "finished": false,
+          "requests": 1,
+          "elapsed_ms": 2212.4974170000005,
+          "error": "ModelDriverFailure: Claude response failed, was interrupted or was truncated: Error: Claude response identity is ambiguous"
+        }
+      ],
+      "endpoint": "owned scripted loopback Anthropic Messages API; wrapper changes only endpoint, pins native executable and leaves production driver flags/events unchanged",
+      "external_model_calls": 0,
+      "observed_sdk_date_framing_bytes": 442,
+      "qualified_local_framing_allowance_bytes": 8192,
+      "claims": [
+        "empty CLI tools/MCP/skills/plugins and bare context isolation",
+        "raw input/cache counters and final output usage are authoritative; provisional assistant usage is not used as final output",
+        "no emitted response on missing usage, max_tokens or model identity conflict",
+        "upstream attempts can exceed one logical request; truncated native driver observed two before teardown"
+      ],
+      "limits": [
+        "native framing allowance is a qualified local ceiling, not a universal host measurement",
+        "SDK reported cost is a fixture price estimate, not actual vendor spending",
+        "no live auth/provider-use/exposure/reviewer acceptance or scientific adequacy claim"
+      ]
+    },
+    "review": {
+      "groups": 2,
+      "cross_review": true,
+      "current_confirmed_open_P0_P1_P2": 0
+    },
+    "live_gates": [
+      "exact host/executable/version/model and protected API-key file/use basis",
+      "project exposure decision including native runtime framing",
+      "qualified author/reviewer separation and funded acceptance scope",
+      "OAuth/subscription/keychain and third-party providers deferred",
+      "unknown escaped-process/provider-call ownership requires explicit reconciliation"
+    ],
+    "source_pins": {
+      "helpers/src/model-drivers/claude.ts": {
+        "sha256": "6ba4a55d31837c15963613545b0bc5cb7fb4d1b7d6d9a4d0a3319806e13f6056",
+        "size_bytes": 14108
+      },
+      "helpers/src/model-policy.ts": {
+        "sha256": "0289b75f2aee7c05ecc8a3b66a9e9fbd0f0d0ab1c91f02e4e4d9d0d597cd8474",
+        "size_bytes": 8030
+      },
+      "helpers/src/model-transport.ts": {
+        "sha256": "37c93ce660408b0b5099fc72b7b2ed37572ca9164bb268343ca2e1e60128eca3",
+        "size_bytes": 16137
+      },
+      "helpers/examples/model-transport/relay.mjs": {
+        "sha256": "600155bb8441a9e4e08c1dd58a0eeb0da0fd8c58b207e34cdbbb5025ed515052",
+        "size_bytes": 10497
+      },
+      "helpers/examples/model-transport/governance-fixture.mjs": {
+        "sha256": "d250bb4b715863905afde8f46ede5648d80d57aaa37a618adb576ff250aca93f",
+        "size_bytes": 2358
+      },
+      "helpers/tests/claude.test.ts": {
+        "sha256": "661085b8b19e996b1efd45311404dc62ca635a8f17a0c3b174dc1e83b373f083",
+        "size_bytes": 6296
+      },
+      "helpers/tests/model-fixture.ts": {
+        "sha256": "5c05d438f8fbc8384751aa6dd9bf91bebdb37fd637702194efef3c0260b77757",
+        "size_bytes": 17653
+      },
+      "helpers/tests/model-native-integration.test.ts": {
+        "sha256": "d651c3ebe8c164380ab36fa5606bffd55de4abfbbb9eede909d1f465ca698e26",
+        "size_bytes": 3872
+      },
+      "helpers/tests/model-relay.test.ts": {
+        "sha256": "c3735a5072916aa03c244ba9ae8c9deffbef74859eac1e87e461e17d231812df",
+        "size_bytes": 5304
+      },
+      "helpers/package.json": {
+        "sha256": "518f23053de8250b10ca6569c5734e6727fcbf4e6b601d22fa0e031ddf6ba085",
+        "size_bytes": 4856
+      },
+      "docs/integration.md": {
+        "sha256": "26ae30d9c9c9fce08519ee0cb6c4aec3d28e264cffba5af6cc841bcea9214407",
+        "size_bytes": 19155
+      }
+    },
+    "package": {
+      "sha256": "510dc1a5febeb8004b34d673232240dd3d3d999eeaf645f06f60509ba8e55c1a",
+      "size_bytes": 241562,
+      "claude_exports_present": true,
+      "private_artifacts_excluded": true
+    }
+  }
 }

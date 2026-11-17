@@ -19,7 +19,7 @@ The `m3:default` script runs the automatic proposal, separate review and feedbac
 
 Use `--fault <case>` with the default-runtime runner for a declared native failure/recovery stratum.
 
-The model transport API is `dsh-research/model-transport` (`ModelTextAdapter`, `ModelRouteSchema`, `ModelRequestBudget`), with `ModelToolAdapter` in `dsh-research/model-tools` and `TraexDriver` / `CodexDriver` in `dsh-research/model-drivers/traex` / `dsh-research/model-drivers/codex`. Supply trusted project authorization/classification hooks, exact route pins, role and exposure/auth evidence, byte bounds and a shared model budget. The fixture governance module is explicitly not real authorization. CLI tools stay disabled; DSH owns execution, and native IDs are persisted before projection. Output tokens are uncapped; failures and unknown usage remain charged.
+The model transport API is `dsh-research/model-transport` (`ModelTextAdapter`, `ModelRouteSchema`, `ModelRequestBudget`), with `ModelToolAdapter` in `dsh-research/model-tools` and `TraexDriver`, `CodexDriver` and `ClaudeDriver` in `dsh-research/model-drivers/{traex,codex,claude}`. Supply trusted project authorization/classification hooks, exact route pins, role and exposure/auth evidence, byte bounds and a shared model budget. The fixture governance module is explicitly not real authorization. CLI tools stay disabled; DSH owns execution, and native IDs are persisted before projection. Output tokens are uncapped; failures and unknown usage remain charged.
 
 See [integration guidance](../docs/integration.md#pluggable-model-transport) for configuration and the native mechanism qualification. The removed `traex`/`traex-tools` APIs have no compatibility shims. Old deployed consumers remain pinned until their separate state/route handoff is qualified.
 
@@ -36,3 +36,5 @@ See [integration guidance](../docs/integration.md#pluggable-model-transport) for
 | r7 | 2026-11-17T03:08:26.060475-08:00 | Replaced prototype TraeX exports with the governed shared transport, explicit role bindings and scoped driver; retained project-owned qualification and history. |
 
 | r8 | 2026-11-17T11:48:03.884746-08:00 | Added the Codex driver and mixed relay bindings; native local-endpoint qualification remains separate from live account/host adoption. |
+
+| r9 | 2026-11-17T13:24:41.402481-08:00 | Added Claude bare-mode transport with protected API auth, raw response usage, native framing bound and shared DSH relay/qualification. |
