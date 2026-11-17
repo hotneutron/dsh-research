@@ -87,6 +87,8 @@ Install `NativeProductionResearch` on the project's existing native author and o
 
 Use the [production integration guide](docs/integration.md#autonomous-production-research) for the project hooks, version-four state, Source installation and Linux service controls. Keep each deployment bound to its own qualified domain and authority; the engineering example evaluates a fixed released trace.
 
+Model transport uses a shared DSH adapter with explicit route governance and an injected CLI driver. See [transport integration](docs/integration.md#pluggable-model-transport); the current extraction provides TraeX, while other drivers are selected only for an accepted project need.
+
 ## Keeping source and plans manageable
 
 Parameter trials share an implementation and retain distinct configurations. Implementation changes use source revisions. Group method-specific code by family and extract shared helpers when their assumptions and consumers justify it.
@@ -178,3 +180,4 @@ The package includes a generated qualification-lock snapshot and the [research s
 | r15 | 2026-11-12 00:30:09 -0800 | Clarified Accorde's GPU scientific target and the helper purpose of synthetic CPU examples. |
 | r16 | 2026-11-12 11:04:59 -0800 | Documented the bounded GPU qualification guard and retained stable usage/project ownership; current execution status remains in the tracker. |
 | r17 | 2026-11-14T21:59:03.959632-08:00 | Added stable autonomous production usage, project hooks and same-lock version-four layout; kept deployment status and next work in the canonical tracker. |
+| r18 | 2026-11-17T03:08:26.060475-08:00 | Linked the governed shared model transport API and explicit TraeX-only scope; execution status stays in trackers. |

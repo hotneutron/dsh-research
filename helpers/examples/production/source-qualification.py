@@ -33,7 +33,7 @@ def run(args):
     config={**template,'project_key':profile,'authority_id':profile+'-disposable','goal_id':profile,
             'artifact_prefix':str((output/'artifacts').relative_to(root)),
             'native_state_dir':str(state/'superagent'),'state_path':str((state/'superagent/science.sqlite3').relative_to(root)),
-            'models':{'transport':'disposable_scripted','author_provider':'production-lifecycle-author','reviewer_provider':'production-lifecycle-reviewer','model':'scripted'},
+            'models':{'transport':'disposable_scripted','author_provider':'production-lifecycle-author','reviewer_provider':'production-lifecycle-reviewer','author_model':'scripted','reviewer_model':'scripted'},
             'reviewer_session_id':profile+'-reviewer','profile_revision':profile+'-v1',
             'goal_text':'User-authorized disposable package Source lifecycle qualification. No model-selected tools, science or external messages.'}
     # The Source recipe uses the canonical artifact namespace even for qualification.

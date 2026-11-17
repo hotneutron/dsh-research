@@ -37,11 +37,15 @@ export async function apply(ctx) {
   assert.ok(!(relative(root, dirname(statePath)).startsWith('..')))
   try { statePath = await realpath(statePath); assert.ok(!relative(root, statePath).startsWith('..')) }
   catch (error) { if (error.code !== 'ENOENT') throw error }
-  if (config.models?.transport === 'traex-relay') {
-    const { RemoteTraexAdapter } = await import(new URL('../examples/traex-tools/remote-model.mjs', import.meta.resolve('dsh-research')))
-    ctx.llm.registerAdapter([config.models.author_provider], new RemoteTraexAdapter('tools',
+  if (config.models?.transport === 'model-relay') {
+    const { RemoteModelAdapter } = await import(new URL('../examples/model-transport/remote-model.mjs', import.meta.resolve('dsh-research')))
+    ctx.llm.registerAdapter([config.models.author_provider], new RemoteModelAdapter('tools',
+      { provider: config.models.author_provider, model: config.models.author_model },
       ['research_propose', 'research_review', 'research_feedback', 'research_run', 'research_status', 'research_conclude', 'orchestrator_report']))
-    ctx.llm.registerAdapter([config.models.reviewer_provider], new RemoteTraexAdapter('text'))
+    ctx.llm.registerAdapter([config.models.reviewer_provider], new RemoteModelAdapter('text',
+      { provider: config.models.reviewer_provider, model: config.models.reviewer_model }))
+  } else if (config.models?.transport && !['native', 'disposable_scripted'].includes(config.models.transport)) {
+    throw new Error('Unknown model transport; configure the qualified model-relay binding explicitly')
   }
   ctx.inject(['orchestrator'], async child => {
     const lockedStateDir = await realpath(config.native_state_dir)

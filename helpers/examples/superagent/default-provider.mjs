@@ -21,8 +21,9 @@ export async function apply(ctx) {
   const servingMode = process.env.DSH_RESEARCH_SERVING_GPU === '1'
   let realWorker, realReviewer
   if (realMode) {
-    const { RemoteTraexAdapter } = await import(new URL('../examples/traex-tools/remote-model.mjs', import.meta.resolve('dsh-research')))
-    realWorker = new RemoteTraexAdapter('tools'); realReviewer = new RemoteTraexAdapter('text')
+    const { RemoteModelAdapter } = await import(new URL('../examples/model-transport/remote-model.mjs', import.meta.resolve('dsh-research')))
+    realWorker = new RemoteModelAdapter('tools', { provider: 'default-real-worker', model: process.env.DSH_RESEARCH_AUTHOR_MODEL })
+    realReviewer = new RemoteModelAdapter('text', { provider: 'default-real-reviewer', model: process.env.DSH_RESEARCH_REVIEWER_MODEL })
     ctx.llm.registerAdapter(['default-real-worker'], realWorker)
     ctx.llm.registerAdapter(['default-real-reviewer'], realReviewer)
   }

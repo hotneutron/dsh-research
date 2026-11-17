@@ -60,11 +60,21 @@ Publish permitted checkpoint and reproduction bytes through an existing project 
 
 Replay resolves the original action/review association. Unknown launches retain charges and reservations until qualified reconciliation; restart never authorizes another execution. Use the [reconciliation](../helpers/src/reconciliation.ts), [recovery](../helpers/src/recovery.ts) and [scientific-authority](../helpers/src/science.ts) APIs for exact host proofs and original approval gates. A new profile or positive remaining budget cannot reset authority.
 
-## TraeX model-selected native tools
+## Pluggable model transport
 
-`TraexTextAdapter` (`dsh-research/traex`) provides text planning/review through authenticated `traecli exec`. `TraexToolAdapter` (`dsh-research/traex-tools`) projects validated model selections into DSH tool calls. CLI tools stay disabled; DSH applies argument, role, stop and admission checks. Use one tool call per turn for the qualified engineering route.
+`ModelTextAdapter` (`dsh-research/model-transport`) implements DSH's `LlmAdapter` with an injected driver, trusted project governance and shared `ModelRequestBudget`. `ModelToolAdapter` (`dsh-research/model-tools`) validates the full response and persists native call IDs before emitting tool blocks. `TraexDriver` (`dsh-research/model-drivers/traex`) and `CodexDriver` (`dsh-research/model-drivers/codex`) supply CLI mechanics. The relay selects each route's driver while sharing one model budget.
 
-Configure the approved model, project/artifact roots, request count and deadline. Output-token caps are not enforced; actual usage and failures remain retained. The relay's `maxRequestBytes` bounds encoded HTTP input independently of model tokens. The optional `reviewerContextMode=latest_frozen_packet` retains the complete current packet and native history; qualify context changes for the target profile.
+The accepted route binds executable/runtime/version pins, requested versus provider-reported model assurance, authentication principal/use basis, off-mode content exposure, reviewer separation and exact byte/deadline limits. Host `verifyRoute` and `approveContext` hooks verify actual authority and classify every payload entry; missing or uncovered evidence refuses before model debit. Output remains uncapped, and missing required usage makes a charged response ineligible.
+
+Codex uses `driver.id=codex-app-server-v1`, complete `stdin` delivery and `driver.codex={home, model_catalog}`. `home` references protected file-backed API authentication (`authentication.class=codex_file`); refreshable account/keyring authentication is unqualified. A temporary auth-only home isolates user configuration, MCP servers, skills and history, and is removed after owned process teardown. Credential bytes never enter receipts. The classified catalog pin must appear in `auto_context` and contain the exact requested model once.
+
+The driver removes CLI tools and metadata-selected delegation, verifies effective thread controls, consumes correlated raw response/usage events and refuses missing counters, extra responses, compaction, hooks or changed context. Unknown ownership holds the model scope and preserves its temporary auth-home reference for host reconciliation. Served-model verification remains unavailable: use `requested_only` assurance. Qualify the exact host, account use, exposure and reviewer policy before live adoption.
+
+The shared budget counts admitted DSH transport requests. CLI-internal attempts are outside that count; failed/multiple responses retain raw completion and known usage evidence and remain charged. Request limits therefore do not claim provider-wide call or spend enforcement.
+
+The [generic relay](../helpers/examples/model-transport/relay.mjs) requires a pinned project governance module, text/tools route bindings, wire limit and scoped request/concurrency budget. Its native file lock spans the canonical budget for the process lifetime; unknown process ownership holds the scope until an exact host restart proof. The [fixture governance module](../helpers/examples/model-transport/governance-fixture.mjs) accepts only scripted fixture authority and cannot authorize a real account.
+
+The [remote client](../helpers/examples/model-transport/remote-model.mjs) preserves complete context and uses explicit role provider/model bindings. Configure `models.transport=model-relay`, `author_model`/`reviewer_model`, and `DSH_RESEARCH_MODEL_TRANSPORT_URL`, `DSH_RESEARCH_MODEL_TRANSPORT_TOKEN_FILE` and `DSH_RESEARCH_MODEL_TRANSPORT_TIMEOUT_MS`. A native DSH provider can remain outside this CLI bridge. Old prototype exports/configuration are replaced, not compatibility aliases.
 
 ## Linux deployment
 
@@ -77,11 +87,11 @@ python3 helpers/dist/production-systemd.py \
   --config /absolute/P/research-config.json \
   --relay-root /absolute/P/private-model-relay \
   --relay-controls /absolute/P/model-controls.json \
-  --executable /absolute/protected/traecli --profile project-research \
+  --profile project-research --model-timeout-ms 330000 \
   --port 3094 --output /absolute/P/fresh-service-config
 ```
 
-Relay controls require `resident=true`, fixed loopback `listenPort`, `maxRequests` and `perRequestMs`. Replacing a transport requires its frozen idle predecessor. Request accounting is durable before model contact; interrupted requests retain consumption, and receive failures remain separate from model dispatch.
+Relay configuration requires fixed `listenPort`, positive `maxRequestBytes`, `budget.scope_id`/`max_requests`/`max_in_flight`, a pinned `governance_module`, and `routes.text`/`routes.tools`. Route limits include `max_encoded_input_bytes`, model/preflight deadlines and capture sizes. Imported model history needs an independently fenced exact-byte mapping and retained identity index; no fresh allowance is created. Request accounting is durable before model contact; receive failures remain separate.
 
 Register the generated units with the systemd user manager and verify `Linger=yes` for unattended operation. The 60-second timer wakes only retained authority; a completed goal stays stopped. Control the native unit with [default-service.py](../helpers/scripts/default-service.py) using `start|stop|restart|status`, `--unit`, `--home` and `--profile`. `restart --respect-stop` preserves intentional stop. Failed shutdown retains the stop marker; verify empty cgroups before resetting unit failures or restarting.
 
@@ -100,7 +110,7 @@ Other focused recipes:
 |---|---|
 | [Production protocol](../helpers/examples/production/qualification.mjs) | Proposal, review, feedback, execution and conclusion. |
 | [Source lifecycle](../helpers/examples/production/source-qualification.py) | Session recovery, pause/Ticket/late-tool and clone refusal. |
-| [Resident relay](../helpers/examples/traex-tools/resident-qualification.mjs) | Crash/restart, accounting and overlapping stop/start. |
+| [Shared relay tests](../helpers/tests/model-relay.test.ts) | Cross-port writer fencing, bounded wire input and retained restart accounting. |
 | [GPU producer](../helpers/examples/gpu/run.mjs) | Device ownership, native terminal and quiescence. |
 | [Continuity](../helpers/examples/synthetic-cpu/continuity.mjs) | Supported backup/export and retained-state reopen. |
 
@@ -143,3 +153,9 @@ Fixtures establish only their declared scope. The [research-loop contract](contr
 - 2026-11-15T11:11:59.456531+00:00: Added explicit `reviewerContextMode=latest_frozen_packet` for text review transport. It preserves system/current-turn context and the complete latest frozen packet while retaining native history and all old usage. Seven parser/selection tests passed; the actual 1,639,279-character refused request becomes 354,319 characters with identical current packet identity and no token limit. Non-packet review and historical default behavior are unchanged.
 
 - 2026-11-16T16:11:22.361850-08:00: Condensed the guide around DSH/superagent integration, project bindings and operational rules; replaced repeated qualification/debug narratives with existing recipe, contract and receipt links; preserved current device-set, Session-recreation and model-capture guidance.
+
+- 2026-11-17T03:08:26.060475-08:00: Adopted the 0.4 transport extraction: governed generic text/tool adapters, scoped model ledger, TraeX driver, explicit role bindings and native file/process fencing. Old prototype exports are replaced; live auth/exposure/served identity remains separately qualified.
+
+- 2026-11-17T11:48:03.884746-08:00: Added governed Codex route bindings, per-route relay driver selection, pinned native protocol scope and explicit served-model/live-adoption limits.
+
+- 2026-11-17T11:59:30.441993-08:00: Replaced provisional Codex exec parsing with private app-server raw-response audit, isolated non-refreshing file auth, exact event/control/usage checks and explicit logical-request/host gates.

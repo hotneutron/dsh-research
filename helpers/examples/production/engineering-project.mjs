@@ -52,14 +52,14 @@ export async function open({ author, root, artifacts, table, config, current, ex
       comparison_unit: 'source_compare_function_invocations',
       excluded_from_metric: ['array insertion/movement','allocation','string creation','wall-clock/runtime work'],
       non_goals: ['GPU performance','unseen-workload accuracy','wall-clock speedup','training/confirmation data reuse'] })
-    const preset = await json('reviewer-preset.json', { provider: config.models.reviewer_provider, model: config.models.model })
+    const preset = await json('reviewer-preset.json', { provider: config.models.reviewer_provider, model: config.models.reviewer_model })
     const permissions = await json('reviewer-permissions.json', { tools: [], same_os_account: true, no_filesystem_secrecy_claim: true })
     policy = { scope: 'project_research', authority, binding, goal_id: config.goal_id, goal_revision: 'r1',
       max_attempts: config.budget.max_attempts, max_timeout_ms: config.budget.max_unit_ms, max_total_timeout_ms: config.budget.max_total_ms,
       max_output_bytes: 16384, allowed_executables: [config.node], allowed_operations: ['evaluate'],
       domain_policy: domainPolicy, verifier: config.project_module, entrypoint: config.producer,
       reviewer: { session_id: config.reviewer_session_id, provider: config.models.reviewer_provider, preset, permissions },
-      review_limits: { max_requests: config.budget.max_review_requests, timeout_ms: config.budget.review_timeout_ms, subagent_provider: 'spawn', model: config.models.model },
+      review_limits: { max_requests: config.budget.max_review_requests, timeout_ms: config.budget.review_timeout_ms, subagent_provider: 'spawn', model: config.models.reviewer_model },
       allowed_read_prefixes: ['snapshots/', 'local_artifacts/autoresearch/dsh/'],
       execution: { arguments: [{ kind: 'entrypoint' }, { kind: 'input', index: 0 }, { kind: 'input', index: 1 }, { kind: 'operation' }],
         input_count: 2, input_purpose: 'C_qual', environment: { CUDA_VISIBLE_DEVICES: '' }, cost_purpose: 'C_qual' } }

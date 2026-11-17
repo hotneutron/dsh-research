@@ -16,15 +16,14 @@ def generate(args):
         if any(c.isspace() or c in '%\\"' for c in str(path)):
             raise ValueError('Service paths must not contain whitespace, percent, backslash or quotes')
         paths[name] = path
-    executable = Path(args.executable).resolve(strict=True)
-    if any(c.isspace() or c in '%\\"' for c in str(executable)):
-        raise ValueError('Invalid protected CLI executable path')
     if not re.fullmatch(r'[a-z][a-z0-9-]{0,60}', args.profile) or not 1024 <= args.port <= 65535:
         raise ValueError('Explicit profile and loopback native port required')
     controls = json.loads(paths['relay_controls'].read_text())
     relay_port = controls.get('listenPort')
-    if controls.get('resident') is not True or not isinstance(relay_port, int) or not 1024 <= relay_port <= 65535:
-        raise ValueError('Resident relay with fixed loopback port required')
+    if not isinstance(relay_port, int) or not 1024 <= relay_port <= 65535 or not controls.get('governance_module') or not controls.get('routes'):
+        raise ValueError('Governed model relay with fixed loopback port required')
+    if not isinstance(args.model_timeout_ms,int) or args.model_timeout_ms<=0:
+        raise ValueError('Explicit positive model response deadline required')
     output = paths['output']
     output.mkdir(parents=True, exist_ok=False)
     native = args.profile + '.service'
@@ -33,9 +32,9 @@ def generate(args):
     stopped = paths['home'] / 'profiles' / args.profile / 'service-control/manually-stopped'
     environment = output / 'production.env'
     values = {'DSH_PRODUCTION_RESEARCH_CONFIG': str(paths['config']),
-              'DSH_RESEARCH_REAL_MODELS_URL': f'http://127.0.0.1:{relay_port}/',
-              'DSH_RESEARCH_REAL_MODELS_TOKEN_FILE': str(paths['relay_root'] / 'private-relay-token'),
-              'DSH_RESEARCH_REAL_MODELS_TIMEOUT_MS': str(controls['perRequestMs'] + 30000)}
+              'DSH_RESEARCH_MODEL_TRANSPORT_URL': f'http://127.0.0.1:{relay_port}/',
+              'DSH_RESEARCH_MODEL_TRANSPORT_TOKEN_FILE': str(paths['relay_root'] / 'private-relay-token'),
+              'DSH_RESEARCH_MODEL_TRANSPORT_TIMEOUT_MS': str(args.model_timeout_ms)}
     with environment.open('x') as stream:
         for key, value in values.items():
             stream.write(f'{key}="{value}"\n')
@@ -61,7 +60,7 @@ StartLimitBurst=3
 [Service]
 Type=exec
 WorkingDirectory={paths['helper']}
-ExecStart={node} {paths['helper']}/examples/traex-tools/relay.mjs {paths['relay_root']} {executable} {paths['relay_controls']}
+ExecStart={node} {paths['helper']}/examples/model-transport/relay.mjs {project} {paths['relay_root']} {paths['relay_controls']}
 UMask=0077
 Restart=on-failure
 RestartSec=35
@@ -103,7 +102,8 @@ WantedBy=timers.target
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    for field in ('project', 'runtime', 'home', 'helper', 'config', 'relay-root', 'relay-controls', 'executable', 'profile', 'output'):
+    for field in ('project', 'runtime', 'home', 'helper', 'config', 'relay-root', 'relay-controls', 'profile', 'output'):
         parser.add_argument('--' + field, required=True)
     parser.add_argument('--port', type=int, required=True)
+    parser.add_argument('--model-timeout-ms', type=int, required=True)
     generate(parser.parse_args())

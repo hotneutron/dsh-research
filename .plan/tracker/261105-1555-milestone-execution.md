@@ -41,6 +41,10 @@ M1/M2 fixture execution stays in synthetic package-owned state; no hosted-projec
 
 Plans written does not mean milestones executed. Record dates, actual commands, receipt links, limits and failures when work occurs; update this artifact's timestamped Revision History on every amendment.
 
+## Model transport extraction
+
+The [transport tracker](261117-0213-pluggable-model-transport.md) and [receipt](../review/261117-0334-model-transport-extraction.json) record helper0.4.0 in an isolated worktree. Shared governed DSH adapters replace prototype TraeX exports; TraeX is the only implemented CLI driver. 243 bounded-concurrency regressions and15native loop checks pass, with original failed fixtures/review findings retained. Actual vendor auth/exposure/served identity and active project cutover remain gated; M5/M6 scientific authority and deployed model history were not changed.
+
 ## Autonomous production loop
 
 The [production qualification receipt](../review/261114-2217-autonomous-production-loop.json) records helper0.3.0/contract2.4.0 and the explicit version-four project loop. Existing native Source/Store/author/reviewer/jobs remain in use; project hooks own proposal construction, inputs, verifier, feedback change and conclusion premises. Historical version-three deployments remain separate and retain their current authority.
@@ -353,3 +357,4 @@ continute M5 and M6
 | r44 | 2026-11-14T17:57:46.724433-08:00 | Recorded changed-criteria fourth run with actual fresh review/qualification, accepted valid negative 144-row evidence, author assessment and conserved charges; current metadata recovery passed, stopped owned runtime/relay/forward, retained all104 model requests and deferred broader adoption. |
 | r45 | 2026-11-14T18:42:52.267752-08:00 | Recorded current private adapter/default worker/stopped-profile code rollback and exact original metadata preservation; reviewed exporter and cleanup repairs, retained precise production/live-feedback/benefit holds and original writer. |
 | r46 | 2026-11-14T22:17:51.194095-08:00 | Recorded real autonomous default production loop, V4/prospective feedback and reviewed conclusion,183 regressions, Source/resident/service/rollback qualification and enabled idle H100 services; retained exact costs/history and project scientific adoption gates. |
+| r47 | 2026-11-17T03:34:01.033680-08:00 | Recorded isolated model transport extraction and scoped 243/15 acceptance; preserved existing milestone/scientific authority and explicit live route gates. |

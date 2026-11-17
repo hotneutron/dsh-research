@@ -9,7 +9,7 @@ import time
 def qualification_plan(helper):
     names = ['examples/superagent/real-runtime.py', 'examples/superagent/real-automatic-worker.mjs',
              'examples/superagent/research-worker.mjs', 'examples/superagent/default-provider.mjs',
-             'examples/traex-tools/remote-model.mjs', 'examples/synthetic-cpu/fixture.mjs', 'dist/review.js', 'dist/traex.js', 'dist/traex-tools.js']
+             'examples/model-transport/remote-model.mjs', 'examples/synthetic-cpu/fixture.mjs', 'dist/review.js', 'dist/model-transport.js', 'dist/model-tools.js']
     return {'schema_version': 1, 'scope': 'Real DeepSeek author/reviewer through default Source/Store/DshExecutor; synthetic released engineering inputs',
         'budget': {'max_wall_seconds': 900, 'max_model_requests': 32, 'per_model_request_seconds': 120,
                    'max_admissions': 5, 'max_review_requests': 6, 'aggregate_evaluator_ms': 10000, 'scientific_gpu_dispatches': 0},

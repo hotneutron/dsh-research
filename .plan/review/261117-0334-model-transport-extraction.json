@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "at": "2026-11-17T03:34:01.033680-08:00",
+  "scope": "TraeX extraction only; owned scripted/released-input qualification",
+  "worktree": "/Users/bytedance/wk/dsh-research/.trae/worktrees/pluggable-model-transport",
+  "branch": "worktree-pluggable-model-transport",
+  "helper_version": "0.4.0",
+  "baseline": "de8ed8bb5fab6d346639c4d1e27ad37fa2bed8cc",
+  "implemented": [
+    "shared DSH text/tool adapters",
+    "trusted host route/exposure/auth/separation preflight",
+    "canonical private namespace and frozen executable/interpreter",
+    "exact input bound and conserved model requests",
+    "native file lock and process ownership holds",
+    "durable native IDs",
+    "explicit original-byte model-ledger mapping"
+  ],
+  "regressions": {
+    "passed": 243,
+    "concurrency": 4,
+    "runtime": "official standalone Node24.9.0",
+    "retained_failure": {
+      "log": "regressions-r2.log",
+      "tests": 243,
+      "passed": 242,
+      "failed_case": "GPU native replay retained ineligible fixture result at high parallelism",
+      "disposition": "No scientific/GPU change or threshold relaxation; full bounded-concurrency suite passed. Prior failed result remains retained."
+    }
+  },
+  "native_loop_checks_passed": 15,
+  "independent_source_review": {
+    "groups": 2,
+    "open_confirmed_P0_P1_P2": 0,
+    "cross_review": "Source repairs and late settlement cancellation verified; preserved initial findings and source-only provenance"
+  },
+  "model_or_GPU_external_dispatches": 0,
+  "served_model_identity": "Only fixture evidence; actual served identity unqualified",
+  "live_route_or_cutover": "Not enabled; needs actual auth/use/exposure/separation authority and host/profile evidence",
+  "additional_drivers": "Codex added in separately scoped prototype qualification; other CLIs deferred",
+  "source_pins": {
+    "helpers/src/model-policy.ts": "929d3802af0b95314d61c8e8d9384145e0abf89b051473e3e35bc59d1a8890d4",
+    "helpers/src/model-budget.ts": "7e3c2c7b4a6a74a3a1c82e1df75e4b1acaffa7b4c803783cc50ef0485672f558",
+    "helpers/src/model-context.ts": "ec084e395d5ea611485a90b3a4bf53b93e91663a387977f29890e120c9d4033a",
+    "helpers/src/model-transport.ts": "9c595f6c23fba21b64591ab52c3cfdbd15a9e737c9e4c19d7d69a52ea0ded007",
+    "helpers/src/model-tools.ts": "8425eb238234ca35f0cf2c04f6883f5a38834d2e0292a67724c28f2a9643cd84",
+    "helpers/src/model-migration.ts": "ffafc6fccc8645aa37534bb7014a1f9fc2ad05ea7a8a663eac1a22cd2b5fc956",
+    "helpers/src/model-drivers/traex.ts": "f1bc90c4e085822ec691d1ce7734122ebffcdf7f0f56a9c72925653e931a2235",
+    "helpers/examples/model-transport/relay.mjs": "09b1d43a343f16aee9c6c67ad7fe2f7c4a04eb8997698e33748b06acf0c1a9a3",
+    "helpers/examples/model-transport/remote-model.mjs": "eb4bbb6c6d7bc7e534ffa57f20cf731d76deec804d31ee9e864f98c34c6ca4c1",
+    "helpers/examples/production/source.mjs": "473cd774b810bcbc4c4ffa35e360683b92af05535c0dd38dc6bceb129a846d48",
+    "helpers/scripts/production-systemd.py": "9fba33dc1b3fdbdbc9d72739e0e6797d521c911126dc67b2ef4b15396e845c66",
+    "helpers/package.json": "9e53f8f68f8801902a113aa4eda6ad35c402dc81b63f5a48c04b16e56fda57b4",
+    "helpers/pnpm-lock.yaml": "403377993a875091ec98c7dccc8fb311d618dc6895214c34f478ec90296ffea3"
+  },
+  "detailed_evidence": {
+    "uri": "local_artifacts/dsh-research/model-transport/261117-0213/qualification.json",
+    "sha256": "e67e3f9d1cbe5faf0f9149aae0bf699fb462ef99105606b586f97298eaa1d4f4",
+    "size_bytes": 4797
+  },
+  "codex_extension": {
+    "at": "2026-11-17T12:02:25.436422-08:00",
+    "scope": "Codex app-server mechanical qualification; no live account/model/scientific cutover",
+    "driver": "codex-app-server-v1",
+    "regressions": {
+      "passed": 265,
+      "failed": 0,
+      "concurrency": 4,
+      "runtime": "standalone Node24.9.0",
+      "log": "final-regressions.log"
+    },
+    "native": {
+      "cli": "codex-cli 0.166.0",
+      "binary": {
+        "source": "/opt/homebrew/lib/node_modules/@openai/codex/node_modules/@openai/codex-darwin-arm64/vendor/aarch64-apple-darwin/bin/codex",
+        "sha256": "39acf979729dd290f9a24ee38b2914e036c91b65952872e28ae2a6b88a7db7c1",
+        "size_bytes": 268972064
+      },
+      "transport": "private stdio app-server, local scripted HTTP Responses endpoint",
+      "external_model_requests": 0,
+      "gpu_dispatches": 0,
+      "observations": [
+        "text/structured request context and tools=[]",
+        "exact raw usage and original provider usage JSON",
+        "omitted usage represented as null",
+        "end_turn false exposes two separate completions",
+        "context-limit failure"
+      ],
+      "limits": [
+        "Mac mandatory system hook remains unqualified and driver refuses it",
+        "native compaction case observed continuations, no actual contextCompaction item",
+        "no served-model identity or live model/auth/use/separation acceptance"
+      ]
+    },
+    "live_gates": [
+      "exact host/binary/model + API file-auth protected reference/use grant",
+      "project content exposure and reviewer separation authority",
+      "finite funded qualification scope",
+      "mandatory hook / runtime source conformance",
+      "refreshable account/keyring authentication deferred"
+    ],
+    "reviews": {
+      "groups": 2,
+      "cross_review": true,
+      "original_exec_findings": "retained and closed by replacement",
+      "current_confirmed_open_P0_P1_P2": 0,
+      "cross_source_sha256": "a787adcca60c5c3a8353db1bd126a70760a9a285ae94e55731d992460da0db08"
+    },
+    "source_pins": {
+      "helpers/src/model-drivers/codex.ts": {
+        "sha256": "a787adcca60c5c3a8353db1bd126a70760a9a285ae94e55731d992460da0db08",
+        "size_bytes": 18334
+      },
+      "helpers/src/model-drivers/cli-process.ts": {
+        "sha256": "71b0debd1986253f89005c065b557c2509a57fb29c390151c2a02540f07c675c",
+        "size_bytes": 6723
+      },
+      "helpers/src/model-drivers/traex.ts": {
+        "sha256": "281cf5ad58560961aa28848006a9e8665f577e732e67d0889182548bc7d178b6",
+        "size_bytes": 6382
+      },
+      "helpers/src/model-policy.ts": {
+        "sha256": "aa7aff471bcfd61179b0cfee20eab0883e4069c8dfa9557b561c36b45d1f7b10",
+        "size_bytes": 7021
+      },
+      "helpers/src/model-transport.ts": {
+        "sha256": "3b2f8a6604bb85410b21a6c66ec6a4ad1da886652b60570fe185b3eaa25ddfb7",
+        "size_bytes": 15676
+      },
+      "helpers/examples/model-transport/relay.mjs": {
+        "sha256": "4923dbc5e084b8b4f4115704412efcdc78437596dd6dfbae9c7d94bf9b46b6c8",
+        "size_bytes": 10374
+      },
+      "helpers/examples/model-transport/governance-fixture.mjs": {
+        "sha256": "65ab8e1344264eec8e1d44291090a07208efc5b26dea1e1975ea65631ffa4602",
+        "size_bytes": 1982
+      },
+      "helpers/tests/codex.test.ts": {
+        "sha256": "1771a349e0ddd6b2b4c990baf967fd2978d6e90dc6673ad8e5a545d16457b9e4",
+        "size_bytes": 8500
+      },
+      "helpers/tests/model-fixture.ts": {
+        "sha256": "a581c2f44d57be2d2248193f1efc8ff46db0580310578565c44307af111ebf40",
+        "size_bytes": 14542
+      },
+      "helpers/tests/model-native-integration.test.ts": {
+        "sha256": "3a47ddad8ada1d79543e23d998c04584e7f445fff3a9e71aeed5f92b77c13c55",
+        "size_bytes": 3759
+      },
+      "helpers/tests/model-relay.test.ts": {
+        "sha256": "dd7faaffb76c4777c04cd38630bc5fab8c1212773e4b022f64387cd8701aa878",
+        "size_bytes": 5230
+      },
+      "helpers/package.json": {
+        "sha256": "3f436a8b54268f0a913d608aa6a621cf671c86bf914963d71f79c6eff97e180b",
+        "size_bytes": 4717
+      },
+      "docs/integration.md": {
+        "sha256": "05f52f668ff4dfd5e2eceaa285e4796c01905b313e5afb53886aaa90ee8c1c88",
+        "size_bytes": 17712
+      }
+    },
+    "focused_final_checks": {
+      "passed": 20,
+      "failed": 0,
+      "log": "retention-checks.log"
+    },
+    "package": {
+      "sha256": "0aa1f16a62525381ef105de8733378badeedb3afdbab80c4fbfe68349d5736a7",
+      "size_bytes": 237166,
+      "private_artifacts_excluded": true
+    }
+  },
+  "revision_history": [
+    {
+      "at": "2026-11-17T12:02:25.436422-08:00",
+      "change": "Retained original TraeX extraction pins and added separately scoped Codex raw-protocol qualification, current source pins and live gates."
+    }
+  ]
+}

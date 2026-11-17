@@ -22,6 +22,8 @@ def run(args):
         if args.real_models or args.automatic or args.fault: raise ValueError('Serving GPU is a separately frozen qualification stratum')
         args.research = True
     if args.real_models:
+        if not args.author_model or not args.reviewer_model:
+            raise ValueError('Real model qualification requires explicit author/reviewer model bindings')
         args.automatic = True
     if args.fault:
         args.automatic = True
@@ -72,6 +74,8 @@ def run(args):
            'DSH_RESEARCH_AUTOMATIC_QUALIFICATION': '1' if args.automatic else '0',
            'DSH_RESEARCH_FAULT_QUALIFICATION': args.fault or '',
            'DSH_RESEARCH_REAL_MODELS': '1' if args.real_models else '0',
+           'DSH_RESEARCH_AUTHOR_MODEL': args.author_model or '',
+           'DSH_RESEARCH_REVIEWER_MODEL': args.reviewer_model or '',
            'DSH_RESEARCH_SERVING_GPU': '1' if args.serving_gpu else '0',
            'DSH_RESEARCH_SERVING_CRASH': '1' if args.serving_crash else '0',
            'PATH': str(node.parent) + os.pathsep + os.environ['PATH']}
@@ -188,7 +192,7 @@ def run(args):
         # Save all non-account blocks while setup is pending; then resolve fixture accounts last.
         save('eval', {'mode': 'observe', 'model': {'provider': 'default-qualification', 'model': 'router'}})
         save('executor', {'model': {'provider': 'default-real-worker' if args.real_models else 'default-qualification',
-                                   'model': 'DeepSeek-V4.1-Flash' if args.real_models else 'worker'}, 'maxWorkers': 1,
+                                   'model': args.author_model if args.real_models else 'worker'}, 'maxWorkers': 1,
                           'directory': str(output / 'work'), 'prepare': '', 'blockedCommands': []})
         save('policy', {'rules': [], 'sources': {'github': {'allowed': [{'id': 'fixture-owner'}]}}})
         save('source:github', {'enabled': True, 'config': {'repository': 'fixture/default-runtime', 'cli': str(source)}})
@@ -360,6 +364,8 @@ if __name__ == '__main__':
     parser.add_argument('--research', action='store_true', help='Qualify guarded research tools inside the default worker')
     parser.add_argument('--automatic', action='store_true', help='Qualify native automatic proposal/review/feedback and bounded validity drills')
     parser.add_argument('--real-models', action='store_true', help='Use bounded loopback TraeX relay for actual native author/reviewer calls')
+    parser.add_argument('--author-model', help='Exact accepted author model for real model qualification')
+    parser.add_argument('--reviewer-model', help='Exact accepted reviewer model for real model qualification')
     parser.add_argument('--serving-gpu', action='store_true', help='Qualify project serving producer on guarded native default worker')
     parser.add_argument('--serving-crash', action='store_true', help='Crash/reopen the GPU qualification runtime after a real CUDA context is created')
     parser.add_argument('--fault', help='Qualify one bounded native failure/recovery stratum')

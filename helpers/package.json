@@ -1,6 +1,6 @@
 {
   "name": "dsh-research",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "description": "Project-owned research contracts for DSH and superagent",
@@ -17,18 +17,30 @@
       "types": "./dist/native.d.ts",
       "import": "./dist/native.js"
     },
-    "./traex": {
-      "types": "./dist/traex.d.ts",
-      "import": "./dist/traex.js"
+    "./model-transport": {
+      "types": "./dist/model-transport.d.ts",
+      "import": "./dist/model-transport.js"
     },
-    "./traex-tools": {
-      "types": "./dist/traex-tools.d.ts",
-      "import": "./dist/traex-tools.js"
+    "./model-tools": {
+      "types": "./dist/model-tools.d.ts",
+      "import": "./dist/model-tools.js"
+    },
+    "./model-drivers/traex": {
+      "types": "./dist/model-drivers/traex.d.ts",
+      "import": "./dist/model-drivers/traex.js"
+    },
+    "./model-drivers/codex": {
+      "types": "./dist/model-drivers/codex.d.ts",
+      "import": "./dist/model-drivers/codex.js"
     }
   },
   "files": [
     "dist",
-    "examples"
+    "examples/model-transport",
+    "examples/production",
+    "examples/synthetic-cpu",
+    "examples/superagent",
+    "examples/gpu"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && node scripts/copy-qualification-lock.mjs",
@@ -53,6 +65,7 @@
     "@deepseek-ai/dsh-agent": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-agent-loop": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-agent-loop-testkit": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-atomic-write": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-bash-local": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-jobs": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-jobs-local": "0.2.1-alpha.2",
@@ -69,24 +82,25 @@
     "@deepseek-ai/dsh-storage-sqlite": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-subagent": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-subprocess-local": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-tools": "0.2.1-alpha.2",
     "@types/node": "22.20.0",
     "tsx": "4.23.13",
-    "typescript": "6.0.3",
-    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2"
+    "typescript": "6.0.3"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-llm": "0.2.1-alpha.2",
     "@deepseek-ai/cordis": "4.0.5-alpha.1",
     "@deepseek-ai/dsh-agent": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-jobs": "0.2.1-alpha.2",
-    "@deepseek-ai/dsh-shell": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-llm": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-session": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-session-query": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-shell": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-storage-domain": "0.2.1-alpha.2",
-    "@deepseek-ai/dsh-tools": "0.2.1-alpha.2",
-    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2",
     "@deepseek-ai/dsh-subagent": "0.2.1-alpha.2",
-    "@deepseek-ai/dsh-session-query": "0.2.1-alpha.2"
+    "@deepseek-ai/dsh-system-prompt": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-tools": "0.2.1-alpha.2",
+    "@deepseek-ai/dsh-atomic-write": "0.2.1-alpha.2"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-llm": {
@@ -120,6 +134,9 @@
       "optional": true
     },
     "@deepseek-ai/dsh-session-query": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-atomic-write": {
       "optional": true
     }
   }
