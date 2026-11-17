@@ -11,7 +11,7 @@ import { NativeProductionResearch, productionResearchDomain } from 'dsh-research
 import { ProjectArtifacts, Version4ResearchStateSchema, canonicalJson, sha256 } from 'dsh-research'
 
 export const name = 'dsh-production-research-source'
-export const inject = ['llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'sessionQuery', 'subagents', 'sandboxPolicy', 'sessionController']
+export const inject = ['sessions', 'llm', 'webServer', 'agents', 'agentLoop', 'storage', 'tools', 'jobs', 'sessionQuery', 'subagents', 'sandboxPolicy', 'sessionController']
 const kind = { kind: 'project-research', title: { en: 'Project research', zh: '项目研究' },
   description: { en: 'Bounded research under project authority', zh: '项目权限范围内的有界研究' }, schema: z.strictObject({}), fields: [], health: [],
   scope: () => ({ listened: true, observed: true }),
@@ -78,13 +78,15 @@ export async function apply(ctx) {
       if (!agent.id.startsWith('worker-')) return
       const ticket = source.tickets.get(agent.id.slice('worker-'.length))
       if (!ticket || ticket.mandate.actor.source !== kind.kind) return
-      if (author && author !== agent) throw new Error('One registered production research author per project')
+      agent = child.agents.get(agent.id) ?? agent
+      if (author && author.id !== agent.id) throw new Error('One registered production research author per project')
+      if (author && author !== agent) { removeGoalPrompt?.(); loop?.close(); loop = undefined }
       const current = table.get(config.project_key)
       if (current && current.authority.writer_id !== agent.id) throw new Error('Existing admission owner requires supported handoff; no new authority')
       author = agent
       let shell
       await agent.ctx.inject(['shell'], scope => { shell = scope.shell })
-      const sandbox = child.sandboxPolicy.resolve({ session: agent.session, mode: 'workspace-write' })
+      const sandbox = child.sandboxPolicy.resolve({ session: agent.session, mode: config.approved_execution_sandbox_mode ?? 'workspace-write' })
       const project = await module.open({ ctx: child, author: agent, root, artifacts, table, config, current,
         executionShell: shell, executionSandbox: sandbox, source_ticket: ticket })
       assertLock()
@@ -101,14 +103,16 @@ export async function apply(ctx) {
       assert.equal(registration.mandate, canonicalJson(ticket.mandate))
       if (table.get(config.project_key).stopped) return
       loop = await NativeProductionResearch.open(child, { ...project.research,
+        artifactPrefix: config.metadata_prefix ?? project.research.artifactPrefix,
         artifacts, table, projectKey: config.project_key, authorSessionId: agent.id,
         executionShell: shell, assertActiveAuthority: authority })
       try { removeGoalPrompt = agent.ctx.systemPrompt.section({ name: 'project-research-goal', order: 10003, interpolate: false, text: project.instructions }) }
       catch (error) { loop.close(); loop = undefined; throw error }
     }
     const installOnce = agent => {
-      if (!installs.has(agent.id)) installs.set(agent.id, install(agent).catch(error => { installs.delete(agent.id); throw error }))
-      return installs.get(agent.id)
+      agent = child.agents.get(agent.id) ?? agent
+      if (!installs.has(agent)) installs.set(agent, install(agent).catch(error => { installs.delete(agent); throw error }))
+      return installs.get(agent)
     }
     child.on('agent/created', ({ agent }) => installOnce(agent))
     const recover = async () => {

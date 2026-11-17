@@ -1,3 +1,9 @@
+export function modelRequestByteLimit(controls) {
+  const limit = controls.maxRequestBytes ?? 1024 * 1024
+  if (!Number.isSafeInteger(limit) || limit <= 0) throw new Error('Positive finite model request capture bound required')
+  return limit
+}
+
 export async function readModelRequest(stream, maxBytes = 1024 * 1024) {
   const pieces = []; let bytes = 0
   for await (const chunk of stream) {

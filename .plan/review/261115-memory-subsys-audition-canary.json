@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-11-15T15:42:36.007322+00:00",
+  "disposition": "SCOPED_NATIVE_MECHANISMS_DEMONSTRATED; REPAIR_AND_BROADER_QUALIFICATION_REQUIRED",
+  "scientific_outcome": "INVALID_PILOT; FINAL_OUTPUT_TAIL_FAILED_BEFORE_MEASUREMENT",
+  "pilot_groups_run": 1,
+  "H100_execution_helper": "0.3.1",
+  "local_model_relay_helper": "0.3.2",
+  "checks": {
+    "build": "PASS",
+    "typecheck": "PASS",
+    "regressions": 192
+  },
+  "original_authority_and_consumption_retained": true,
+  "recorded_attempts": 6,
+  "recorded_timeout_ms": 5400000,
+  "active_reservation_ms": 0,
+  "model_token_cap": null,
+  "benefit_or_manual_time_savings": "UNPROVEN",
+  "detail": {
+    "path": "local_artifacts/dsh-research/audition/memory-subsys-20261114/audition-result.md",
+    "sha256": "fec42dea5cf48cc157bc40388d2d3bb40447ccf2d46e5a0a37fa0f8be0996baa"
+  },
+  "scientific_report": "../bytesim.orig/.trae/documents/memory_subsystem/261115-report-dsh-memory-contention-canary.md",
+  "quota_extension": "APPROVED_MAX6_WITHIN_SAME_5400000_MS",
+  "commits": 0,
+  "pushes": 0,
+  "pilot_successful_groups": 0,
+  "pilot_measured_rank_captures": 0,
+  "goal_completion": false,
+  "scientific_exhaustion": false,
+  "scoped_outcome_review": {
+    "path": "../bytesim.orig/local_artifacts/autoresearch/dsh/memory-system-20261114/host-mirror/outcome-review-r1/review.json",
+    "sha256": "17539473a1efa9f12ef61f26ae2071883ea18d792f879716737eec1e17c18e3b"
+  },
+  "permitted_export": {
+    "path": "../bytesim.orig/local_artifacts/autoresearch/dsh/memory-system-20261114/exports/six-attempt-evidence-r18-verified.tar.gz",
+    "sha256": "ae1089beff0d45786cbf1426e729a58d3e1e58ea700f235710e38cf19e332ca2",
+    "files_restored": 150
+  },
+  "final_model_requests": 150,
+  "available_model_tokens": 18687593,
+  "unresolved_usage_receipts": 4,
+  "revision_history": [
+    {
+      "timestamp": "2026-11-15T11:52:26.837400+00:00",
+      "change": "Original valid eager canary checkpoint retained in ignored backup"
+    },
+    {
+      "timestamp": "2026-11-15T15:42:36.007322+00:00",
+      "change": "Updated scoped receipt after invalid sixth action, actual separate report review and exact restoration; no goal/model completion"
+    }
+  ]
+}

@@ -6,6 +6,14 @@ import { join } from 'node:path'
 import { parseTraexToolSelection, TraexToolAdapter } from '../src/traex-tools.js'
 
 const tools = [{ name: 'research_run', description: 'Native guarded research tool', parameters: { type: 'object' } }]
+test('a complete JSON code fence preserves strict native tool validation', () => {
+  const answer = JSON.stringify({ text: 'Continue the retained action', tool_calls: [{ name: 'research_run', arguments: '{"expected_revision":3}' }] })
+  assert.deepEqual(parseTraexToolSelection('```json\n' + answer + '\n```', tools, 1), parseTraexToolSelection(answer, tools, 1))
+  const forbidden = JSON.stringify({ text: '', tool_calls: [{ name: 'shell', arguments: '{}' }] })
+  assert.throws(() => parseTraexToolSelection('```json\n' + forbidden + '\n```', tools, 1), /absent/)
+  for (const incomplete of ['```json\n' + answer, 'prose\n```json\n' + answer + '\n```', '```json\n' + answer + '\n```\nprose'])
+    assert.throws(() => parseTraexToolSelection(incomplete, tools, 1))
+})
 test('structured choices reject undeclared tools, malformed arguments and over-bound responses before publication', () => {
   const encode = (calls: unknown[]) => JSON.stringify({ text: '', tool_calls: calls })
   const call = { name: 'research_run', arguments: '{"expected_revision":3}' }

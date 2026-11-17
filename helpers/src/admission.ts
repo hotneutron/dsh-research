@@ -3,7 +3,7 @@ import { AuthorityRef, Binding, ByteRef, Count, Hold, Id } from './records.js'
 import type { ArtifactReference, BoundIdentity, Manifest, Review } from './records.js'
 import { canonicalJson, sha256 } from './bindings.js'
 import { ReviewIntentSchema, FeedbackStateSchema, LegacyFeedbackStateSchema, PublicationSchema } from './collaboration.js'
-import { GpuPolicySchema } from './gpu.js'
+import { GpuPolicySchema, gpuDeviceMask } from './gpu.js'
 import { checkRecoveryPreflight } from './recovery.js'
 import type { RecoveryPreflight } from './recovery.js'
 import { InvocationTemplateSchema } from './execution.js'
@@ -32,7 +32,7 @@ export const DevelopmentPolicySchema = z.strictObject({
   if (v.scope !== 'project_research' && v.execution) ctx.addIssue({ code: 'custom', message: 'Historical profiles retain their original invocation semantics' })
   if (v.gpu && v.execution && (v.execution.cost_purpose !== v.gpu.purpose || v.execution.input_purpose !== v.gpu.purpose || canonicalJson(v.execution.environment) !== canonicalJson(v.gpu.environment)))
     ctx.addIssue({ code: 'custom', message: 'Production invocation cannot change its GPU cost/input/environment policy' })
-  if (v.gpu && v.gpu.environment.CUDA_VISIBLE_DEVICES !== v.gpu.resource.device_uuid) ctx.addIssue({ code: 'custom', message: 'GPU environment must bind the exact device UUID' })
+  if (v.gpu && v.gpu.environment.CUDA_VISIBLE_DEVICES !== gpuDeviceMask(v.gpu.resource)) ctx.addIssue({ code: 'custom', message: 'GPU environment must bind the exact ordered device UUID set' })
   // C_science requires the exact existing-authority envelope and a separately
   // host-registered scientific guard; an assurance label supplies no authority.
 })

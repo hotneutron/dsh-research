@@ -17,7 +17,8 @@ const selectionSchema = z.object({ text: z.string(), tool_calls: z.array(z.objec
 
 export function parseTraexToolSelection(answer: string, tools: readonly ToolSchema[], maxCalls: number) {
   if (!Number.isSafeInteger(maxCalls) || maxCalls < 1 || maxCalls > 4) throw new Error('Bounded tool selection requires 1–4 calls per turn')
-  const selection = selectionSchema.parse(JSON.parse(answer))
+  const fenced = answer.trim().match(/^```(?:json)?[ \t]*\r?\n([\s\S]*?)\r?\n```$/)
+  const selection = selectionSchema.parse(JSON.parse(fenced ? fenced[1]! : answer))
   const names = new Set(tools.map(t => t.name))
   if (names.size !== tools.length) throw new Error('Ambiguous native tool declarations')
   if (selection.tool_calls.length > maxCalls) throw new Error('TraeX response exceeds the frozen tool-call bound')

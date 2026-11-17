@@ -1,208 +1,12 @@
-# Native research integration
+# Research integration with DSH and superagent
 
-Use the exact package and peer versions pinned in helpers/package.json and the generated qualification lock. The native API is exported from `dsh-research/native`; records, binding checks and read-only audits are exported from `dsh-research`.
-
-## Project configuration
-
-Configure one canonical hosted-project root P and one authorized host writer. Native Session paths, coupled state, scientific artifacts and feedback all belong to P. Resolve existing authority before opening the adapter; `NativeResearchAdapter.open` refuses a missing project record.
-
-| Native facility | Public provider used by the example | Project configuration |
-|---|---|---|
-| Workers | @deepseek-ai/dsh-agent-loop | Author Session and separate reviewer model route |
-| Review lifecycle | @deepseek-ai/dsh-subagent | Configured local provider, one active reviewer child, caller delivery and native catalog/query |
-| Execution | @deepseek-ai/dsh-bash-local over @deepseek-ai/dsh-subprocess-local | Explicit cwd, capped deadline and kill-on-expiry |
-| Job ownership | @deepseek-ai/dsh-jobs-local | One active job per owner and an attached controller |
-| Coupled record | @deepseek-ai/dsh-storage-domain over @deepseek-ai/dsh-storage-sqlite | P/.autoresearch/dsh/state.sqlite3 and registered project key |
-| Native history | @deepseek-ai/dsh-session-persistence-jsonl | P/.autoresearch/dsh/sessions |
-| Skill loading | @deepseek-ai/dsh-skill-filesystem | Explicit package skills directory; verify discovered bytes |
-
-The development policies accept `synthetic_released_cpu` and `project_gpu_development`. The GPU variant currently supports `C_qual` only: caller-set assurance cannot enable scientific GPU adoption. It binds the exact device UUID/environment, existing lease namespace, producer, qualification and budget snapshots, and a host-registered `NativeGpuGuard`. The manifest must include the exact qualification as a reviewed prerequisite. Arbitrary shell argv, a replacement guard or a changed environment are refused.
-
-`NativeGpuGuard.preflight` provides exact subject/device observations before admission. The pinned producer acquires the existing resource lease before any scientific GPU dispatch and retains it through process/device teardown. `settle` binds its lease/quiescence proof to the admitted action, dispatch token, native terminal and exact capture. Missing ownership, release or quiescence retains the original charge/reservation. An incomplete unit remains ineligible even after exit zero. Guard methods have finite deadlines; native termination alone does not certify GPU settlement.
-
-Accorde's scientific GPU campaign still requires its project-selected question, complete environment/source/codegen/input closure, accepted resource/model/coordination bounds, domain verifier and independent scientific/profile qualification. The CUDA-driver fixture qualifies bounded producer/guard mechanics, not predictor science.
-
-## Coupled record versions
-
-Record version 3 retains exact admission, identity, terminal and capture refs before fallible GPU settlement. Version 2 introduced review/feedback/publication associations. The native domain descriptor is now version 3 and rejects implicit older-store adoption. `LegacyResearchStateSchema` (v1), `Version2ResearchStateSchema` and `HistoricalResearchStateSchema` preserve historical reading; they do not initialize or migrate authority. A 2-to-3 handoff needs an explicit reviewed compatibility/retention mapping and supported provider transfer.
-
-Use `auditContinuity` to check retained consumption and immutable associations before a prospective handoff. A compatible code change cannot refund actions/reviews or release an unresolved reservation. A production handoff needs existing writer fencing, supported backup/restore and an independently reviewed mapping.
-
-## Author and reviewer tools
-
-Register the coordination and review tools before installing the adapter's author mask. The example's author can invoke:
-
-- `research_propose`: use a project-supplied factory to freeze a new manifest; the package verifies binding and source identities.
-- `research_review`: persist the exact bounded request before invoking the existing subagent route, then retain actual native completion and subject hashes.
-- `research_run`: consume one exact approved action through the coupled record, await/verify its acknowledgement, and delegate to the existing shell/job service.
-- `research_feedback`: capture complete source scans, disposition exact source versions and associate actual settled effects.
-
-The reviewer receives no execution tools. Add policy sections or a reviewer persona through the existing prompt API; retain runtime-owned context and original-source/stop behavior. Do not replace the complete work prompt with a research paragraph.
-
-Completed reviewer proof may be checked against a live or persisted native Session cut. The retained prefix, provider, request/action hashes and normal completion must match. An interrupted or unknown request remains an owned hold, consumes its review allowance, and is reconciled before another dispatch. A new plan or transport name cannot revive an unchanged rejected subject.
-
-## Feedback and publication
-
-Source scans retain exact captured page and content bytes. Page cursor continuity and a final page with no next cursor are required before the queue/watermark update. Preserve edited versions separately; source text is advisory evidence rather than execution authority.
-
-An adopted disposition links a changed frozen manifest. An executed effect must resolve to the corresponding settled action/evidence. Effect checkpoints append new identities and preserve the original checkpoint rather than relabeling its pending effect.
-
-`publishCheckpoint` calls a supplied existing project transport. It checks fetched release bytes and audience access, reconciles uncertain publication before retrying and changes only publication associations. Its transport must supply trustworthy access facts; a fixture access response does not qualify real team permissions. Publish only permitted project-authored release bytes. Raw Sessions, restricted inputs and secrets require their own authorized surfaces.
-
-Normal `progressReport` outcomes include `human_action=null`. Supply an existing unresolved question when mapping host attention, and preserve it until its reviewed resolution. Operational holds do not create scientific-exhaustion questions.
-
-## Reproducible examples and audits
-
-The [shared fixture](../helpers/examples/synthetic-cpu/fixture.mjs) supplies disposable synthetic authority and a deterministic project verifier. [Automatic execution](../helpers/examples/synthetic-cpu/automatic.mjs) exercises proposal, separate native review, a valid negative, edited feedback and an actual successor effect. [Fault drills](../helpers/examples/synthetic-cpu/faults.mjs) cover reviewer interruption, uncertain association, delayed acknowledgement and replay.
-
-`auditCoverage` checks closure only for its exact frozen matrix, scope and assurance. Missing or conflicting assertions remain unresolved/failed; fixture observations cannot satisfy live cells. Observation provenance and semantic/domain review remain separate qualification obligations. The fault matrix is a finite union of relevant cells, not an automatic cross product of every property and fault.
-
-`auditContinuity` checks full immutable action/review identities, dispatch phases, charged history, rejected subjects, finalized feedback/effects and publication audience/access proofs. A changed writer returns `writer_changed_requires_handoff`; any changed feedback cursor returns `feedback_cursor_requires_reconciliation`. Profile/policy changes also require explicit compatibility review. These results require external supported fencing or exact scan-chain evidence, which two snapshots cannot supply. Version-three native facts are also immutable and cannot be erased by a downgrade. `inspectGpuSettlement` can derive a later bounded quiescence proof from retained native facts without admission, relaunch or state reservation release. Even a clean snapshot audit does not approve deployment or certify legacy exposure history.
-
-The [continuity rehearsal](../helpers/examples/synthetic-cpu/continuity.mjs) closes the disposable source writer, uses Node's supported SQLite backup API, exports exact linked artifact and native Session files, and opens the restored database through the native domain without reseeding. It preserves the original canonical root; actual relocation, running jobs and live authority handoff require their own qualification.
-
-The [GPU qualification example](../helpers/examples/gpu/run.mjs) uses the unchanged public native shell/jobs/storage services, scripted review and an H100 CUDA-driver vector-add producer. It has positive and incomplete-unit cases, no scientific dataset reads and no paid model calls. Its fixture authority is separate from Accorde's scientific goal/exposure records.
-
-The generated `dist/reproduction-bundle.py` builds a bounded source/config/evidence archive from an explicit byte-pinned project declaration, rejects private/state/Session/log paths, and verifies restored members. Packaging does not certify permission or recipient access; the existing publication transport must establish those facts separately.
-
-Implementation status and blockers are maintained in the [M1–M6 tracker](../.plan/tracker/261105-1555-milestone-execution.md).
-
-## Public superagent integration qualification
-
-From the source checkout, build the helper package and use the qualified unchanged prototype checkout with its pinned dependencies:
-
-```sh
-npx --yes pnpm@11.7.0 --dir helpers m1:integrated /absolute/fresh-output /absolute/dsh-superagent-prototype
-```
-
-The command creates a disposable consumer and resolves `dsh-superagent` and the DSH facilities through public package exports. Its source request/Ticket Mandate forwards the manifest to a native author Session; it checks source filtering/duplicate outbox, job/expiry/cwd/concurrency, exact native state and Session reopen, reviewer cancellation/launch denial and direct-child wait/list/drain, public Config/prompt/policy controls, and the unchanged service script's intentional-stop behavior.
-
-The public core uses `MemoryRepositories` only as an explicit ephemeral qualification fixture. The scientific state and native Sessions are persisted through their existing providers. It does not qualify the prototype's default deployed Store/DshExecutor, actual cloud Source accounts/outbound access, or a production service/watchdog installation. Scientific/profile acceptance remains separately reviewed.
-
-## Default Source, Store and worker deployment
-
-Use a separate consumer with the unchanged `dsh-superagent` public plugin and the native default web bundle to qualify the actual persistent Store and DshExecutor:
-
-```sh
-python3 helpers/examples/superagent/default-runtime.py \
-  --runtime /absolute/project-owned/pinned-runtime \
-  --output /absolute/fresh-qualification-project
-```
-
-The runtime directory contains Node `node-v24.9.0-linux-x64/bin/node`, the installed `@deepseek-ai/dsh` 0.2.1-alpha.2 family, Cordis 4.0.5-alpha.1 and the unchanged prototype artifact. Install the prototype's peer packages explicitly at their pinned versions and retain the consumer's exact npm lock; npm's alpha peer resolution must not silently substitute newer APIs. The helper package's pnpm lock governs helper development, while the deployed consumer's npm lock governs its installed bundle.
-
-This command uses real default providers, a native fixture GitHub CLI and bounded scripted native models. It checks the installed Source's normalization, disabled-source filtering, duplicate intake and same-account non-human classification; actual Ticket/worker Session delivery and reports; durable Store reopen; revision conflicts and explicit stop. It retains the exact fixture source files, profile, normalized restored Source record and Session events. The fixture CLI never contacts GitHub. Its provider requires an explicit disposable-qualification environment flag and must remain outside a hosted project's research profile.
-
-`dist/default-profile.py` prepares a new project-owned profile without starting it. It refuses an existing profile and binds default JSONL Sessions, workspace storage, query path and prototype `stateDir` under the named project. Preparing this orchestration Store does not initialize a scientific budget, exposure ledger or research writer. Keep current scientific authorities authoritative through separately qualified adoption.
-
-For Linux deployment, `dist/default-systemd.py` generates a project-owned user unit and `dist/default-service.py` controls its registered unit. Use the wrapper for intentional stop, start and `restart --respect-stop`. Stop succeeds only after checking the systemd result and remaining cgroup processes; unresolved timeout or residual children block a new start. The unit uses SIGINT, `SendSIGKILL=no`, accepted native exit statuses, and a recovery delay longer than the prototype's 30-second writer-lock stale period. A persistent intentional-stop marker also gates user-manager startup. On H100 Linux, Node 24 uses process name `MainThread`; the unchanged prototype service script's process-name filter misses it, so that script is retained for reference and is not the deployed controller.
-
-An initial hosted-project deployment stays paused with Eval off, no admitted senders/rules, unavailable model routes, and a refusing prepare command. `dist/github-read-only.py` supports real authenticated, repository-scoped GET reads while refusing writes. It constrains that transport; a worker running as the same OS user is not isolated by it. Source identity, allowed human intake, independent scientific/domain review, aggregate model/GPU authority and research-tool adoption must be qualified before scientific activation. A successful infrastructure drill does not lift those holds.
-
-Keep Store backups and native Sessions private in the hosted project. Share only an explicitly permitted source/config/evidence bundle through the existing team transport, with verified recipient access. A receipt hash or SSH-local path alone does not grant access to teammates.
-
-## Guarded research inside the default worker
-
-The default worker can register its research entrypoint locally through `adapter.register({ toolScope: 'author', inheritedTools: ['skill'] })`. DSH's inherited-tool restrictions intersect, while agent-local tools remain visible. The adapter still installs its monotonic author/reviewer guard, and the prototype's Ticket-ended guard remains active. Configure `authorTools` explicitly to retain the guarded entrypoint, skill loading and required native report tools; raw shell and other inherited capabilities stay masked.
-
-The host supplies the worker's existing scoped `executionShell`, obtained through supported service injection, and `assertActiveAuthority`, which verifies the current native Ticket/mandate and operator pause. The adapter awaits that assertion before admission and again before reading the fresh committed tuple for dispatch. Callers must read native Ticket state after their last asynchronous authority lookup. Unknown or revoked authority cannot launch from an earlier snapshot; an already consumed uncertain attempt keeps its charge/reservation.
-
-The packed default consumer adds this qualification mode:
-
-```sh
-python3 helpers/examples/superagent/default-runtime.py \
-  --runtime /absolute/isolated-pinned-consumer \
-  --output /absolute/fresh-qualification-project --research
-```
-
-Its isolated consumer includes the packed helper plus the pinned native storage-sqlite and AgentLoop test-support packages. The existing default AgentLoop, Source, Store, DshExecutor, worker preset and scoped shell run the integration; the fixture does not mount a replacement AgentLoop. The native worker loads the research skill, receives exact manifest/review references through a Source input, invokes `research_run`, captures a valid synthetic negative and reports the actual evidence/checkpoint. Separate native reviewer completion, bypass/reviewer/argv refusal, replay, uncertain publication, retained reservations, process reopen and native Ticket stop are checked with bounded scripted models.
-
-An existing-context synthetic fixture requires the explicit disposable marker and refuses to overwrite an existing scientific record. Reopen uses the retained registration and the same project row. Error cleanup removes the fixture's registration and does not dispose the caller's context. This qualifies the synthetic ordinary-worker protocol; Accorde's live scientific workload, aggregate authorities and domain/profile qualification remain separate adoption work.
-
-## Automatic planning on the default worker
-
-Use the installed default `SubagentRuntime`, its `spawn` provider and the public Session query alongside the ordinary worker:
-
-```sh
-python3 helpers/examples/superagent/default-runtime.py \
-  --runtime /absolute/isolated-pinned-consumer \
-  --output /absolute/fresh-qualification-project --automatic
-```
-
-The [automatic worker recipe](../helpers/examples/superagent/automatic-worker.mjs) registers `research_propose`, `research_review` and `research_feedback` on the author's scoped context alongside `research_run`, the native report tool and the research skill. The author inherits only `skill`; existing worker masks and monotonic tool guards continue to apply. The reviewer child inherits a legal `skill` deny filter and the package guard denies every reviewer execution tool, including late local registrations. Local research tool names must not be passed to an inherited-tool filter: the native tool service rejects such names.
-
-The disposable fixture verifies the installed provider's detached child creation, isolated parent context, agent options, persona, depth and tool-filter capabilities. It reuses the default subagent and Session query services. Its scripted model transport drives proposal → separate review → exact admission; request_changes produces a changed proposal, and a valid negative produces a newly reviewed successor. A complete two-page feedback capture retains both comment versions, records rejection/adoption and associates the adopted version with the actual settled effect. Publication outage/reconciliation changes only the publication record. These transports exercise protocol mechanics; team publication and scientific reasoning require their own evidence.
-
-Pass the host's existing `assertActiveAuthority` to `NativeReviewDriver.open` as well as `NativeResearchAdapter.open`. Review verifies it before consuming the bounded intent and again after durable acknowledgement, then reads fresh scientific stop/hold/action state before native dispatch. If revocation wins that race, the consumed intent stays unresolved and replay cannot start a second reviewer. Review and evaluator limits remain separate.
-
-The default executor may unload a reviewer after an ordinary worker turn ends. Read its persisted Session cut through the public query; a missing or interrupted cut cannot authorize an action. A reopened qualification reads the same registration, final packet, coverage observations and coupled row without reseeding or minting a successor.
-
-The [coverage recipe](../helpers/examples/superagent/default-coverage.mjs) freezes the declared scope and budget before reviewer/evaluator dispatch, binds the native matrix to the exact project/profile, retains per-cell evidence and verifies its bytes before auditing. The runner reports covered/failed/unresolved IDs. It caps the default stratum at five synthetic admissions, four evaluator publications, six review requests, forty scripted router/author requests per process and a 180-second window. The 1000 ms deadline fixture remains within the 2000 ms per-action policy. Native terminal signals and the standalone graceful-zero witness are separate observations; both must retain invalidity on timeout.
-
-This released-input scripted stratum covers eleven specified native cells. The full property set, semantic decisions, actual recipient access, enabled confirmation, running-process crash recovery and scientific GPU adoption retain their separate gates in the tracker. All qualification profiles require an explicit disposable marker and remain outside hosted scientific authority.
-
-## Default failure strata and sandbox ownership
-
-Run one isolated declared failure stratum with `default-runtime.py --fault <case>`. The available cases cover reviewer timeout/unavailability/stale answers/lost association/acknowledgement, delayed or lost action acknowledgement, protected/off-mode and source-drift refusals, process-tree deadlines, running loss, competing runtime locks and complete private cold-tree restoration. Every case freezes its own matrix and bounds before dispatch. Retained earlier passes keep their historical pins; a changed consumer needs its own current-source qualification.
-
-The default executor applies a saved permission preset after worker creation. Direct shell calls otherwise fall back to the deployment sandbox policy. A host can bind `executionSandbox` to the immutable effective profile and resolve the existing calling Session policy with an explicitly approved narrower mode. The adapter verifies mode, Session, project writable root, current authority and resolved spec before dispatch. The qualification witnesses use workspace-write only for their declared worker workspace; the author/reviewer tool and stop guards remain active.
-
-Process witnesses record PID namespace, namespace PID, start ticks and boot identity. Host observation maps those facts to the owning process; unobservable identities stay unresolved. Operator cleanup uses pidfd with identity revalidation, and never releases an uncertain reservation. A crashed runtime's missing native job/terminal stays held even if process cleanup succeeds. Resumed report delivery may remain pending on its native binding; a presentation attempt is not delivered evidence.
-
-Private recovery sets include registration, frozen plan, Source/provider/runner, profiles, native Store, scientific record, Sessions, artifacts and workspace files, preserving executable modes. Dependency links stay declared references. The cold-tree rehearsal quarantines the live tree before restoring; it cannot pass by relying on omitted live files. Actual legacy writer handoff is a separate project gate.
-
-Diagnostic GET snapshots are summarized and bounded. Successful receipts are written after runtime cleanup and trace writing, and the final whole-run time is checked against the frozen window. Raw private histories stay in project artifacts and may be compressed/archived with verified byte identity rather than duplicated on every poll.
-
-## TraeX planning model transport
-
-`dsh-research/traex` exports `TraexTextAdapter`, a text-only native DSH planning adapter using the user's existing authenticated `traecli exec` route and the approved DeepSeek-V4.1-Flash model. Configure explicit project/artifact roots, request count and deadline. Native tools are refused by this text-only route. Output-token caps are not applied; a legacy `maxTokens` hint is accepted without enforcement and recorded as `legacy_max_tokens_ignored`, alongside `output_token_cap=null`. Model replies carry validated disjoint native usage before finish; raw CLI and Session histories remain private.
-
-This can qualify planning and separate review without a separate API credential. It does not enable a scientific GPU policy or the native execution tool loop. Those require the project's exact producer/verifier/environment/budget/authority packet and applicable qualification. User-identity Doc capture queues original source versions durably before advancing its cursor; missing author delivery is retained pending rather than invented.
-
-## TraeX model-selected native tools
-
-`dsh-research/traex-tools` exports `TraexToolAdapter`. It asks the same authenticated CLI for a structured text response containing a public reply and requested native tool names/JSON arguments. The CLI's own tools remain disabled. The adapter projects a fully validated selection envelope into DSH tool blocks, assigning correlation IDs and retaining the original response and usage. DSH's existing tools service validates each argument schema and applies its normal role, stop and project-authority checks before execution.
-
-Configure the exact approved model, canonical project/artifact roots, request count/deadline and `maxToolCallsPerTurn` (1–4). All selection names and JSON-object argument strings are checked before any block is emitted. This does not provide atomic execution of a batch: native validation and admission remain per call. Use one call per turn for the qualified engineering route. Sampling/stop/reasoning controls with no supported mapping, undeclared tools and model substitution are refused. Output-token caps are not applied; legacy token hints are recorded as ignored. Request counts, deadlines, capture limits and actual usage remain enforced or recorded as appropriate.
-
-The [native model qualification recipe](../helpers/examples/traex-tools/run.mjs) executes one exact model-selected guarded `research_run`, retains a valid synthetic negative and verifies replay preserves its single admission. Its author uses real DeepSeek-V4.1-Flash; its separate native review completion is scripted. This is a disposable public AgentLoop harness, with four model requests maximum, a 120-second deadline per request, one native call per turn and one 2000-ms evaluator allowance. It does not qualify the production/default worker or Accorde science.
-
-The native review policy requires a finite `max_requests` and `timeout_ms`; it does not require `max_tokens`. The optional legacy field remains readable in frozen older policies, and the driver does not pass it to new reviewer Sessions. TraeX bounds requests with counts/deadlines/capture limits and retains authoritative usage. A carried native `maxTokens` hint is explicitly recorded as ignored; no output-token enforcement is claimed. Earlier failed override witnesses remain historical evidence and no longer block readiness solely on token control. Existing reviewer Sessions and scientific records are not rewritten or refunded.
-
-## Qualified pre-dispatch recovery
-
-`reconcileNoDispatch` accepts a host registered source/ownership guard and independently observed native recovery-review Session. It reads the complete original tool prefix and original compressed source, exact control-flow qualification, original no-admission observation and current writer scope before a serialized invalid-coordination settlement. The actual tool result is retained with incomplete scientific output, unknown process terminal and null unresolved execution cost. All consumed attempts/reviews/time remain charged; only the exact active reservation can be released once through eligible policy settlement. Scientific completion and arbitrary empty-job observations cannot substitute for that proof.
-
-`NativeResearchConfig.recovery` registers the original-authority guard for a new reviewed replacement. The manifest's retry parent/failure/policy must match the retained settled pre-dispatch evidence/checkpoint, qualification prerequisites, current policy/revision and distinct immutable unit content. `reserveAction` refuses retry metadata without this verified guard proof. Prospective caps count the old consumption. Existing source profiles require separately reviewed forward binding; the original authority must supply a supported exact mandate/assessment and remains the scientific admission writer.
-
-Records/domain remain version3; qualified no-dispatch settlement and replay use their existing invalid/ineligible forms. Historical2.3.3 bindings are readable and retain exact original bytes; applying2.3.4 requires its fresh source/property/mapping review. Native rollback cannot drop the original failure, proof, budget or feedback history. Normal result settlement and confirmation-off restrictions remain in force.
-
-
-## Original approval gates before reservation
-
-Helper0.2.2 supplies optional `approvedReview` and `approvedReviewRef` to `NativeScienceGuard.preflight`. The native adapter authenticates that exact caller approval against the actual reviewer Session before invoking the guard, and passes detached copies so guard code cannot mutate the admission inputs. Existing guards can ignore these fields. Record/domain encoding remains version3 and the contract remains2.3.4.
-
-An adopter with a separate original review inbox must correlate this approval with the same original unit, packet and contract through its supported APIs, then verify that gate before native reservation. A goal-budget gate alone does not satisfy a pending original action-review gate. Missing, stale or mismatched approval must fail before another native attempt is consumed. Native callback fields grant no scientific admission or writer transfer; the original controller continues to own those operations.
-
-## Qualified dispatched scientific failure recovery
-
-A new profile may explicitly register `NativeRecoveryGuard.parentEvidenceKind: settled_scientific_failure` under contract2.3.5. The adapter verifies the exact retained settled parent and native admission/identity/terminal/capture facts, invalid scientific evidence, available pinned scientific cost and settlement before invoking the independently qualified original-authority guard. The guard must verify the original closed admission/checkpoint/current recovery policy and distinct updated unit; then a fresh native approval and original Inbox action gate precede reservation.
-
-The absent/default mode continues to require qualified pre-dispatch evidence. Selecting the new host mode supplies no attempt allowance by itself: the bound prospective policy and manifest still count all previous consumption. Existing schema/domain3 records and older action/review/source bytes remain immutable. Current legacy execution pins may be replaced only for qualified new actions through a preserved-history profile update, never by editing an old action or resetting its ledger.
-
-## Project-owned M6 operational qualification
-
-Retain the original scientific admission writer when the incoming route delegates to that same GoalLedger/Controller. A new orchestration profile does not require authority transfer by itself. Freeze its exact scope and separate new-work adoption, confirmation and dependency-retirement decisions.
-
-Rehearse compatible code/profile cuts on the same private current-state copy. Check current-action replay resolves its retained association, expected historical-profile refusals are specific, unknown execution retains reservation, and consumed review cannot authorize a new action. A stopped default profile must retain native Source bytes, ended Ticket/assignment identities, operator pause and current coupled history. Failed graceful shutdown invalidates the cut; cleanup must reap the owned process and restore the current selector even if shutdown fails.
-
-Source export must bind message/version/actor/content identities and complete queue membership to retained original scans. A retrospective association with an already executed scientific action needs explicit chronology and a separate effect checkpoint preserving the original checkpoint. It establishes its declared private mechanics; prospective live source capture and author/Ticket scientific effects require their own qualification.
-
-Operational mechanics and a valid negative pilot establish no quantified human-work savings or payback. Bind benefit/cost comparisons to a prospectively accepted cohort/horizon and preserve all earlier C_run/C_qual and unavailable costs. Project receipts own exact pins/results/holds; the [milestone tracker](../.plan/tracker/261105-1555-milestone-execution.md) links the current assessment.
+Build the helper package using the [README](../README.md#development-checks), then install its exact [package and peer versions](../helpers/package.json) in the project runtime. Runtime APIs are exported from `dsh-research/native`; records, bindings and audits from `dsh-research`.
 
 ## Autonomous production research
 
-`NativeProductionResearch` installs the research tools and guards on an existing native author. Its `project_research` policy binds a typed execution template, released input count/purpose, cost purpose, separate reviewer route and prospective resource limits. The project supplies `ProductionProjectHooks`: proposal construction, permitted frozen reviewer context, decision subjects and domain-owned conclusion premises. A feedback reader also requires a domain-owned validator for the changed action.
+Superagent owns intake, Tickets and worker lifecycle. DSH runs the author, separate reviewer, jobs and persistence. dsh-research attaches the research protocol to the DSH author Session created by superagent.
+
+After the host supplies the project bindings:
 
 ```js
 import { NativeProductionResearch } from 'dsh-research/native'
@@ -215,34 +19,56 @@ const loop = await NativeProductionResearch.open(ctx, {
 })
 ```
 
-The host supplies the author's existing scoped shell and current Ticket/mandate/pause assertion. `executionSandbox` binds the accepted profile and its native resolver. `verifier` binds the exact domain verifier and result interpretation; project hooks decide which evidence can establish the goal. All references must resolve to retained bytes in the canonical project. A configuration field or model reply cannot register scientific authority.
+The project supplies:
 
-Use `productionResearchDomain` and `Version4ResearchStateSchema` for this loop. Version four retains prospective feedback capture revisions, durable native outcome notices and reviewed loop decisions. The version-three `researchDomain` remains available for pinned historical deployments. Do not open a V3 store as V4 or reconstruct it as an empty row. An existing-state adoption needs a separately reviewed retention mapping, writer fencing and supported backup/restore. Compatible rollback keeps the current record and all post-cutover consumption.
+- **Authority and execution:** the registered writer, open Ticket/mandate, current pause check, scoped shell and accepted sandbox resolver.
+- **Frozen policy:** contract/profile references, input and cost purposes, invocation template, resource limits and reviewer route.
+- **Domain hooks:** proposal construction, permitted reviewer context, verifier and completion/exhaustion premises. A feedback reader also needs a changed-action validator.
 
-The [Source recipe](../helpers/examples/production/source.mjs) reads an explicit project-owned configuration from `DSH_PRODUCTION_RESEARCH_CONFIG`. It loads the byte-pinned project module, keeps `science.sqlite3` inside the configured native `machine.stateDir` lock, and uses the actual native runtime lifetime. Its recovery resolves the retained author and installs on that same agent even after Source reload. New project registration requires `authority_registration=explicit_new_project`; the example's initial mandate requires an authenticated original CLI user item and its source metadata. Do not relabel an agent event or construct a user signature to pass this check. Existing hosted-project Sources can instead install the loop for their already authorized native author.
+The [Source recipe](../helpers/examples/production/source.mjs) loads a pinned project module from `DSH_PRODUCTION_RESEARCH_CONFIG`. It requires the native `sessions` service for durable outcome delivery, preserves the registered writer Session when DSH recreates its Agent, and disposes the previous installation before reinstalling. Optional `metadata_prefix` versions installation artifacts without changing scientific state. New registration requires an authentic user mandate and `authority_registration=explicit_new_project`.
 
-The author uses `research_propose`, `research_review`, `research_run` and `research_status`. Status returns parsed retained evidence, checkpoints, costs, current bounds and captured source versions. An adopted reviewer/source suggestion must identify its captured version and a materially changed unadmitted manifest; separate review and actual execution then establish its effect. Optional publication/source failures remain recorded without blocking admissible research.
+See the [engineering project](../helpers/examples/production/engineering-project.mjs) for complete bindings and hooks. Each scientific project needs its own accepted domain/profile qualification.
 
-`research_conclude` creates a non-executing decision subject and obtains separate native review. `goal_completion` additionally requires domain evidence satisfying the original goal. `scientific_exhaustion` requires the scoped alternatives, materially different rebrainstorm, domain assessment and exact steering question. Ordinary negative/procedural results use `human_action=null`; a terminal native report cannot close the Ticket before this reviewed conclusion. Unknown execution, exhausted budget or unavailable review cannot establish scientific exhaustion.
+## Project state and resources
 
-The [engineering project module](../helpers/examples/production/engineering-project.mjs) illustrates these hooks over a fixed released versioned event trace and the [instrumented evaluator](../helpers/examples/production/evaluate.mjs). Its metric counts calls to the same comparator and excludes insertion, allocation and wall-clock cost. It establishes its declared engineering scope; another project's scientific workload needs its own accepted factory, verifier, input/resource policy and profile qualification.
+Resolve all state, Sessions and artifacts under one canonical project root P. Production `science.sqlite3` must be inside superagent's configured `machine.stateDir` and existing writer lock; worktrees and clones share the same authority and consumed history.
 
-From a built source checkout, run the disposable native protocol and transport lifecycle checks in fresh output directories:
+Production uses `productionResearchDomain` and `Version4ResearchStateSchema`. Historical `researchDomain` remains version three. Migration requires a reviewed retention mapping, supported backup/restore and writer fencing; preserve charges, reservations, reviews, feedback and exposure history. Compatible rollback retains the current record.
 
-```sh
-node helpers/examples/production/qualification.mjs /absolute/fresh-native-protocol
-node helpers/examples/traex-tools/resident-qualification.mjs /absolute/fresh-relay-check
-```
+GPU actions need a qualified host resource/termination guard; scientific runs also need the original scientific authority. The optional ordered `resource.device_uuids` set and `CUDA_VISIBLE_DEVICES` must match, with the primary device first. Acquisition, ownership and quiescence/release must cover every participant; omitted lists retain historical single-device behavior. Confirmation remains off until separately qualified.
 
-Both commands use scripted models and package-owned qualification authority. The relay check exercises actual process-group crash, interrupted usage, duplicate listener refusal and overlapping graceful stop/start. They do not spend model tokens or admit hosted-project science.
+## Author and reviewer tools
 
-The [default Source lifecycle drill](../helpers/examples/production/source-qualification.py) accepts `--project`, `--runtime`, `--template` (an existing accepted engineering configuration) and `--output` under that project. It prepares an explicitly disposable profile with a fixture CLI, checks a public plugin restart against the same loaded author and one copy of each prompt, then verifies actual pause, ended Ticket, late-tool and cloned writer refusal. It observes native failed-Fiber evidence for the clone case and retains zero research admissions. This drill requires the pinned Linux consumer; it is separate from a real-model/domain pilot.
+| Tool | Purpose |
+|---|---|
+| `research_propose` | Freeze a project-supplied manifest. |
+| `research_review` | Obtain separate review for its exact subject and hashes. |
+| `research_run` | Admit and execute the approved action at the observed state revision. |
+| `research_status` | Read actual evidence, checkpoints, costs, bounds and captured feedback. |
+| `research_feedback` | Capture source versions, record dispositions and link settled effects. |
+| `research_conclude` | Separately review goal completion or scoped scientific exhaustion. |
 
-### Linux service deployment
+Keep the host's `assertActiveAuthority` on both execution and review. The reviewer receives permitted frozen context and no execution tools; a separate Session alone does not establish filesystem secrecy. Register local research tools on the author context; inherited-tool filters apply only to inherited capabilities.
 
-After qualifying the exact project/profile and fencing its prior writer, prepare resident relay controls with `resident=true`, a fixed loopback `listenPort`, `maxRequests` and `perRequestMs`. When replacing a transport, include the frozen complete idle `predecessor` reference. Resident restart preserves all consumed requests and retained usage; it marks interrupted requests unresolved without authorizing tools or refunding them. Diagnostic CLI error items are retained only alongside a normal completed turn; native CLI tool operations and incomplete turns remain refused. Output tokens remain uncapped.
+Valid negatives lead to justified successors under standing authority. Ordinary reports use `human_action=null`; terminal reports require the reviewed conclusion. Unknown execution, missing review or exhausted budget are operational holds, not scientific exhaustion.
 
-Generate project-owned native, model and scheduled Source units:
+## Feedback, sharing and recovery
+
+Capture complete source scans before advancing cursors; preserve edited versions. Adoption links a materially changed unadmitted manifest, fresh review and actual settled effect before the response. Optional source/publication failures do not block otherwise admissible research.
+
+Publish permitted checkpoint and reproduction bytes through an existing project transport. Verify recipient access to both the brief and its underlying assets. Keep raw Sessions, credentials, private state and restricted inputs out of team releases; a local path or archive alone is not shared access.
+
+Replay resolves the original action/review association. Unknown launches retain charges and reservations until qualified reconciliation; restart never authorizes another execution. Use the [reconciliation](../helpers/src/reconciliation.ts), [recovery](../helpers/src/recovery.ts) and [scientific-authority](../helpers/src/science.ts) APIs for exact host proofs and original approval gates. A new profile or positive remaining budget cannot reset authority.
+
+## TraeX model-selected native tools
+
+`TraexTextAdapter` (`dsh-research/traex`) provides text planning/review through authenticated `traecli exec`. `TraexToolAdapter` (`dsh-research/traex-tools`) projects validated model selections into DSH tool calls. CLI tools stay disabled; DSH applies argument, role, stop and admission checks. Use one tool call per turn for the qualified engineering route.
+
+Configure the approved model, project/artifact roots, request count and deadline. Output-token caps are not enforced; actual usage and failures remain retained. The relay's `maxRequestBytes` bounds encoded HTTP input independently of model tokens. The optional `reviewerContextMode=latest_frozen_packet` retains the complete current packet and native history; qualify context changes for the target profile.
+
+## Linux deployment
+
+Prepare project-owned profiles with [default-profile.py](../helpers/scripts/default-profile.py). After profile qualification and prior-writer fencing, generate native/model services and the scheduled Source wake:
 
 ```sh
 python3 helpers/dist/production-systemd.py \
@@ -255,11 +81,30 @@ python3 helpers/dist/production-systemd.py \
   --port 3094 --output /absolute/P/fresh-service-config
 ```
 
-Register the generated units with the existing systemd user manager. The native unit requires its model unit; the model follows native stop/restart. The existing systemd timer invokes `production-wake.py` every 60 seconds. It only wakes retained authority, skips running/stopped work, and reconciles an exact existing reviewer association when possible. It creates no new goal, budget or scientific scheduler. An unattended user deployment requires an enabled persistent user manager; verify `loginctl show-user` and its `Linger` property.
+Relay controls require `resident=true`, fixed loopback `listenPort`, `maxRequests` and `perRequestMs`. Replacing a transport requires its frozen idle predecessor. Request accounting is durable before model contact; interrupted requests retain consumption, and receive failures remain separate from model dispatch.
 
-Use `default-service.py start|stop|restart|status --unit <profile>.service --home <native-home> --profile <profile>` for the native unit, including `restart --respect-stop`. Intentional stop is persistent and gates both services and scheduled wake. Refused or incomplete shutdown keeps its stop marker and blocks restart. Systemd's restart/start-rate limits are separate from consumed model requests; after a bounded operator maintenance drill hits a start-rate limit, verify both cgroups are empty before explicitly resetting those unit failures. Keep the model request history unchanged.
+Register the generated units with the systemd user manager and verify `Linger=yes` for unattended operation. The 60-second timer wakes only retained authority; a completed goal stays stopped. Control the native unit with [default-service.py](../helpers/scripts/default-service.py) using `start|stop|restart|status`, `--unit`, `--home` and `--profile`. `restart --respect-stop` preserves intentional stop. Failed shutdown retains the stop marker; verify empty cgroups before resetting unit failures or restarting.
 
-The relay commits atomic fsynced request accounting before contacting TraeX and holds its fixed listener until all old handlers and final writes drain. Keep token files and CLI/Session histories private. Preparing services neither opens confirmation inputs nor grants a hosted project's scientific authority. A completed goal remains stopped on service restart; new work needs its own accepted scope/continuity transition.
+## Automatic planning on the default worker
+
+From a built checkout with the pinned Linux consumer, run the default Source/Store/worker qualification in a fresh output directory:
+
+```sh
+python3 helpers/examples/superagent/default-runtime.py \
+  --runtime /absolute/pinned-runtime --output /absolute/fresh-project --automatic
+```
+
+Other focused recipes:
+
+| Recipe | Scope |
+|---|---|
+| [Production protocol](../helpers/examples/production/qualification.mjs) | Proposal, review, feedback, execution and conclusion. |
+| [Source lifecycle](../helpers/examples/production/source-qualification.py) | Session recovery, pause/Ticket/late-tool and clone refusal. |
+| [Resident relay](../helpers/examples/traex-tools/resident-qualification.mjs) | Crash/restart, accounting and overlapping stop/start. |
+| [GPU producer](../helpers/examples/gpu/run.mjs) | Device ownership, native terminal and quiescence. |
+| [Continuity](../helpers/examples/synthetic-cpu/continuity.mjs) | Supported backup/export and retained-state reopen. |
+
+Fixtures establish only their declared scope. The [research-loop contract](contracts.md) defines obligations; the [tracker](../.plan/tracker/261105-1555-milestone-execution.md) and [receipts](../.plan/review/) hold implementation status and qualification history.
 
 ## Revision History
 
@@ -286,3 +131,15 @@ The relay commits atomic fsynced request accounting before contacting TraeX and 
 - 2026-11-14T18:43:46.995064-08:00: Documented retained-owner M6 code/profile qualification, exact native Source/Ticket/replay and unconditional cleanup checks, original feedback-version export/retrospective scope and explicit benefit evidence.
 
 - 2026-11-14T21:59:03.959632-08:00: Added project-owned autonomous production hooks, explicit V3/V4 adoption, reviewed conclusion/prospective feedback and resident native/model/scheduled service lifecycle.
+
+- 2026-11-15T08:09:01.233577+00:00: Documented helper0.3.1 optional ordered GPU device-set/mask/receipt binding, retained historical single-device bytes, and required exact adopter guard/source qualification under unchanged contract2.4.0.
+
+- 2026-11-15T10:07:09.214443+00:00: Ported the mem-subsys Source recipe fixes for same-Session Agent recreation, per-instance installation caching and versioned metadata. These local recipe changes require their exact deployment qualification; the project-owned native Source receipts are scoped evidence.
+
+- 2026-11-15T10:19:02.542940+00:00: Added the Source SessionStore dependency discovered by real post-failure outcome delivery; retained scientific settlement and pending notice identity remain unchanged.
+
+- 2026-11-15T11:00:38.925129+00:00: Documented configurable model-request capture bytes and retained pre-dispatch receive failures, qualified with four focused parser tests and an actual authenticated 2 MiB transport control; model token limits remain unset.
+
+- 2026-11-15T11:11:59.456531+00:00: Added explicit `reviewerContextMode=latest_frozen_packet` for text review transport. It preserves system/current-turn context and the complete latest frozen packet while retaining native history and all old usage. Seven parser/selection tests passed; the actual 1,639,279-character refused request becomes 354,319 characters with identical current packet identity and no token limit. Non-packet review and historical default behavior are unchanged.
+
+- 2026-11-16T16:11:22.361850-08:00: Condensed the guide around DSH/superagent integration, project bindings and operational rules; replaced repeated qualification/debug narratives with existing recipe, contract and receipt links; preserved current device-set, Session-recreation and model-capture guidance.

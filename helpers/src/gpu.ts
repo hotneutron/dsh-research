@@ -4,7 +4,21 @@ import type { ArtifactReference, Manifest } from './records.js'
 import { canonicalJson } from './bindings.js'
 import { SciencePolicySchema } from './science.js'
 
-export const GpuResourceSchema = z.strictObject({ host: Id, device_uuid: z.string().regex(/^GPU-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/) })
+const DeviceUuid = z.string().regex(/^GPU-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/)
+export const GpuResourceSchema = z.strictObject({
+  host: Id, device_uuid: DeviceUuid,
+  // Optional so historical single-device bytes retain their original shape.
+  // A named set is ordered by CUDA ordinal and includes its primary first.
+  device_uuids: z.array(DeviceUuid).min(1).optional(),
+}).superRefine((resource, ctx) => {
+  if (resource.device_uuids && (resource.device_uuids[0] !== resource.device_uuid
+    || new Set(resource.device_uuids).size !== resource.device_uuids.length))
+    ctx.addIssue({ code: 'custom', message: 'GPU device set must be unique and start with the primary UUID' })
+})
+export function gpuDeviceMask(resource: z.infer<typeof GpuResourceSchema>): string {
+  const parsed = GpuResourceSchema.parse(resource)
+  return (parsed.device_uuids ?? [parsed.device_uuid]).join(',')
+}
 const gpuPolicyFields = {
   resource: GpuResourceSchema, guard: ByteRef, qualification: ByteRef, budget: ByteRef, lease_namespace: ByteRef,
   environment: z.record(Id, z.string()),
@@ -40,6 +54,8 @@ export interface GpuSettlementContext extends GpuExecutionContext {
 /** Host-registered project procedure over existing resource/producer services.
  * GPU acquisition occurs in the pinned producer before scientific GPU dispatch;
  * the producer must retain the existing lease through device/child teardown.
+ * For an explicit device set, observation/lease/complete-unit/quiescence cover
+ * every named participant atomically; a primary-device-only guard is insufficient.
  * The author cannot replace these hooks, and their provenance needs separate qualification.
  */
 export interface NativeGpuGuard {

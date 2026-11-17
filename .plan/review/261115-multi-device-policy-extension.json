@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-15T08:35:10.978553+00:00",
+  "scope": "Optional ordered multi-device policy extension; host-specific scientific adoption remains separate",
+  "helper_version": "0.3.1",
+  "contract_version": "2.4.0",
+  "regression_tests": 186,
+  "tests_passed": 186,
+  "typecheck": "PASS",
+  "build": "PASS",
+  "source_hashes": {
+    "helpers/src/gpu.ts": "3cd369576b2842eeebfd47976fac1e474e9d62b7ca16d98508e4f20b76cbe2b9",
+    "helpers/src/admission.ts": "9007e0142da2ddc686ff3bdb617f0ec41c457bc7c680d935cd3264a9360d0aa8",
+    "helpers/tests/gpu-device-set.test.ts": "1e7c292b86d66ffc06242b7050de8ca76416ad76e8daa0f92278019fc0469a10",
+    "helpers/package.json": "2cb5ec126261f16823de679620ddff1cd0d5fb0df9a3f233e2732b963c65327c",
+    "docs/integration.md": "e8717fd655473243e43436a03c125d2be3b792a73302883ec9d1120ffaabcc04"
+  },
+  "compatibility": "Absent device_uuids preserves old single-device byte shape; explicit sets require unique primary-first order and exact CUDA mask; old primary-only guard receipts refuse new sets",
+  "real_GPU_qualification": "PENDING_NATIVE_CANARY",
+  "original_request_verbatim": "since this run will also be reviewed for developing dsh-research, write a separate plan on dsh-research audition.",
+  "execution_authorization_verbatim": "both plans reviewed and approved. full speed ahead!"
+}

@@ -3,8 +3,15 @@ import { open, rename, unlink } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 
 // This is transport accounting only. Interrupted requests cannot authorize native tools.
-export function residentPredecessor(snapshot, controls) {
-  if (snapshot.maxRequests !== controls.maxRequests || snapshot.perRequestMs !== controls.perRequestMs)
+/** @param {any} snapshot
+ * @param {any} controls
+ * @param {null|{qualified:boolean,from_ms:number,to_ms:number,retained_requests:number,[key:string]:any}} deadlineRenewal
+ */
+export function residentPredecessor(snapshot, controls, deadlineRenewal = null) {
+  const reviewedDeadline = deadlineRenewal?.qualified === true && deadlineRenewal.from_ms === snapshot.perRequestMs
+    && deadlineRenewal.to_ms === controls.perRequestMs && deadlineRenewal.retained_requests === snapshot.requests
+    && snapshot.active === 0
+  if (snapshot.maxRequests !== controls.maxRequests || (snapshot.perRequestMs !== controls.perRequestMs && !reviewedDeadline))
     throw new Error('Resident relay limits changed without a reviewed forward transport handoff')
   const prior = structuredClone(snapshot)
   if (!Number.isSafeInteger(prior.active) || prior.active < 0 || !Array.isArray(prior.ledger))
@@ -35,3 +42,6 @@ export async function atomicPrivateJson(path, value) {
 export function frozenSnapshot(path, bytes) {
   return { path, sha256: createHash('sha256').update(bytes).digest('hex'), size_bytes: bytes.length }
 }
+
+// ## Revision History
+// 2026-11-16T19:37:56.752974+00:00: Permit only exact independently reviewed deadline extension; unchanged request allowance and complete idle history are required.
