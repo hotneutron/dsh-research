@@ -9,14 +9,14 @@ import { setTimeout as wait } from 'node:timers/promises'
 import { modelFixture } from './model-fixture.js'
 import { sha256 } from '../src/bindings.js'
 
-for(const transport of ['traex','mixed','mixed-claude'] as const)test(`native file fencing and retained restart work for ${transport} routes`, {timeout:30000}, async()=>{
-  const f=await modelFixture({driver:transport === 'mixed-claude' ? 'claude' : transport === 'mixed' ? 'codex' : 'traex'}), root=join(f.root,'relay')
+for(const transport of ['traex','mixed','mixed-claude','mixed-opencode'] as const)test(`native file fencing and retained restart work for ${transport} routes`, {timeout:30000}, async()=>{
+  const f=await modelFixture({driver:transport === 'mixed-opencode' ? 'opencode' : transport === 'mixed-claude' ? 'claude' : transport === 'mixed' ? 'codex' : 'traex'}), root=join(f.root,'relay')
   const port=async()=>{const server=createServer();await new Promise<void>(yes=>server.listen(0,'127.0.0.1',yes));const address=server.address();assert.ok(address&&typeof address!=='string');const value=address.port;await new Promise<void>(yes=>server.close(()=>yes()));return value}
   const firstPort=await port(),secondPort=await port(),configPath=join(f.root,'transport.json')
   const moduleBytes=await readFile(new URL('../examples/model-transport/governance-fixture.mjs',import.meta.url)),uri='proofs/governance.mjs'
   await writeFile(join(f.root,uri),moduleBytes)
   const config={listenPort:firstPort,maxRequestBytes:200000,budget:{scope_id:'fixture-auth-scope',max_requests:8,max_in_flight:1},
-    routes:{tools:transport !== 'traex' ? {...f.route,driver:{...f.route.driver,id:'traex-exec-v1',codex:undefined,claude:undefined,auto_context:[]},authentication:{...f.route.authentication,protected_reference:'fixture:no-credential'}} : f.route,text:{...f.route,id:'fixture-reviewer-route',role:'reviewer',dsh_provider:'fixture-reviewer-dsh'}},
+    routes:{tools:transport !== 'traex' ? {...f.route,driver:{...f.route.driver,id:'traex-exec-v1',codex:undefined,claude:undefined,opencode:undefined,auto_context:[]},authentication:{...f.route.authentication,protected_reference:'fixture:no-credential'}} : f.route,text:{...f.route,id:'fixture-reviewer-route',role:'reviewer',dsh_provider:'fixture-reviewer-dsh'}},
     governance_module:{uri,sha256:sha256(moduleBytes),size_bytes:moduleBytes.length},fixture_before_read:f.route.exposure.decision}
   await writeFile(configPath,JSON.stringify(config))
   const processes:Array<{child:ReturnType<typeof spawn>;done:Promise<number|null>;errors:()=>string}>=[]

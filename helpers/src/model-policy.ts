@@ -14,6 +14,8 @@ export const ModelRouteSchema = z.strictObject({
     runtime: z.array(ExecutablePinSchema), version: z.string().min(1), qualification: ByteRef,
     codex: z.strictObject({ home: z.string().min(1), model_catalog: ExecutablePinSchema }).optional(),
     claude: z.strictObject({ api_key_file: z.string().min(1) }).optional(),
+    opencode: z.strictObject({ sdk: z.literal('openai-compatible-chat'), api_key_file: z.string().min(1),
+      base_url: z.url().max(2048), model_catalog: ExecutablePinSchema }).optional(),
     context_delivery: z.enum(['stdin', 'project_document']), auto_context: z.array(z.strictObject({
       file: ExecutablePinSchema, content_class: z.string().min(1),
     })), auto_context_basis: ByteRef }),
@@ -49,6 +51,21 @@ export const ModelRouteSchema = z.strictObject({
     if (!/^claude-[a-z0-9-]+$/.test(route.model)) ctx.addIssue({ code: 'custom', message: 'Claude requires an explicit full model ID' })
     if (!route.exposure.allowed_classes.includes('runtime')) ctx.addIssue({ code: 'custom', message: 'Claude native SDK framing requires runtime exposure qualification' })
   } else if (route.driver.claude) ctx.addIssue({ code: 'custom', message: 'Claude controls cannot configure another driver' })
+  if (route.driver.id === 'opencode-run-v1') {
+    const config = route.driver.opencode
+    if (!config || config.api_key_file !== route.authentication.protected_reference
+      || !['openai_compatible_api_key', 'scripted_fixture'].includes(route.authentication.class)
+      || !route.driver.auto_context.some(entry => canonicalJson(entry.file) === canonicalJson(config.model_catalog)))
+      ctx.addIssue({ code: 'custom', message: 'OpenCode requires a classified model catalog and protected API-key reference' })
+    if (route.driver.context_delivery !== 'stdin' || !/^[a-zA-Z0-9_.:/-]{1,128}$/.test(route.model)
+      || !route.exposure.allowed_classes.includes('runtime'))
+      ctx.addIssue({ code: 'custom', message: 'OpenCode requires bounded exact model ID, complete stdin and qualified runtime framing' })
+    if (config) {
+      const url = new URL(config.base_url)
+      if (url.username || url.password || url.search || url.hash || url.protocol !== 'https:' && !(url.protocol === 'http:' && ['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname)))
+        ctx.addIssue({ code: 'custom', message: 'OpenCode endpoint must be HTTPS or qualified loopback without embedded credentials' })
+    }
+  } else if (route.driver.opencode) ctx.addIssue({ code: 'custom', message: 'OpenCode controls cannot configure another driver' })
 })
 export type ModelRoute = z.infer<typeof ModelRouteSchema>
 export interface ContentEntry { pointer: string; sha256: string; size_bytes: number; content_class: string }

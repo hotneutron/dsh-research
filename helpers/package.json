@@ -36,6 +36,10 @@
     "./model-drivers/claude": {
       "types": "./dist/model-drivers/claude.d.ts",
       "import": "./dist/model-drivers/claude.js"
+    },
+    "./model-drivers/opencode": {
+      "types": "./dist/model-drivers/opencode.d.ts",
+      "import": "./dist/model-drivers/opencode.js"
     }
   },
   "files": [

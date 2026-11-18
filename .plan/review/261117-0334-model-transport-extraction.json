@@ -36,7 +36,7 @@
   "model_or_GPU_external_dispatches": 0,
   "served_model_identity": "Only fixture evidence; actual served identity unqualified",
   "live_route_or_cutover": "Not enabled; needs actual auth/use/exposure/separation authority and host/profile evidence",
-  "additional_drivers": "Codex and Claude separately scoped prototype qualification; other CLIs deferred",
+  "additional_drivers": "Codex, Claude and one OpenCode SDK path separately scoped; other providers/CLIs deferred",
   "source_pins": {
     "helpers/src/model-policy.ts": "929d3802af0b95314d61c8e8d9384145e0abf89b051473e3e35bc59d1a8890d4",
     "helpers/src/model-budget.ts": "7e3c2c7b4a6a74a3a1c82e1df75e4b1acaffa7b4c803783cc50ef0485672f558",
@@ -178,6 +178,10 @@
     {
       "at": "2026-11-17T13:36:51.130407-08:00",
       "change": "Added separately scoped Claude bare/API qualification; retained original extraction and Codex records/pins."
+    },
+    {
+      "at": "2026-11-17T14:51:05.298244-08:00",
+      "change": "Added scoped OpenCode native/raw-proxy qualification; preserved original extraction/Codex/Claude records."
     }
   ],
   "claude_extension": {
@@ -318,6 +322,154 @@
       "sha256": "510dc1a5febeb8004b34d673232240dd3d3d999eeaf645f06f60509ba8e55c1a",
       "size_bytes": 241562,
       "claude_exports_present": true,
+      "private_artifacts_excluded": true
+    }
+  },
+  "opencode_extension": {
+    "at": "2026-11-17T14:51:05.298244-08:00",
+    "baseline_commit": "d78d75a",
+    "driver": "opencode-run-v1",
+    "sdk": "bundled @ai-sdk/openai-compatible / Chat Completions",
+    "scope": "OpenCode exact native/API-file mechanical qualification; no general provider or hosted scientific acceptance",
+    "regressions": {
+      "passed": 305,
+      "failed": 0,
+      "concurrency": 4,
+      "log": "regressions.log"
+    },
+    "focused_faults": {
+      "passed": 18,
+      "failed": 0,
+      "log": "proxy-final.log"
+    },
+    "native": {
+      "version": "1.18.15",
+      "binary": {
+        "path": "/opt/homebrew/Cellar/opencode/1.18.15/bin/opencode",
+        "sha256": "195d811a91508d856a4d67b77d04d410193b194cf509e0ee85d45cb0fa572a11",
+        "size_bytes": 143133026
+      },
+      "driver_checks": [
+        {
+          "mode": "text",
+          "finished": true,
+          "error": null,
+          "requests": 1,
+          "elapsed_ms": 6006.415042
+        },
+        {
+          "mode": "schema",
+          "finished": true,
+          "error": null,
+          "requests": 1,
+          "elapsed_ms": 6046.031833000001
+        },
+        {
+          "mode": "missing-usage",
+          "finished": false,
+          "error": "ModelDriverFailure: OpenCode response is interrupted, failed or incomplete: Error: Raw upstream identity, operation, finish or usage is unqualified",
+          "requests": 1,
+          "elapsed_ms": 5762.668541000001
+        },
+        {
+          "mode": "truncated",
+          "finished": false,
+          "error": "ModelDriverFailure: OpenCode response is interrupted, failed or incomplete: Error: Raw upstream identity, operation, finish or usage is unqualified",
+          "requests": 1,
+          "elapsed_ms": 5936.050708999999
+        },
+        {
+          "mode": "inconsistent-usage",
+          "finished": false,
+          "error": "ModelDriverFailure: OpenCode response is interrupted, failed or incomplete: Error: Raw chat usage is absent or inconsistent",
+          "requests": 1,
+          "elapsed_ms": 5944.003708
+        }
+      ],
+      "external_model_calls": 0,
+      "one_upstream_call_per_logical_request": true,
+      "endpoint": "owned scripted loopback OpenAI Chat Completions API",
+      "qualification_notes": [
+        "OpenCode normalized a conflicting native total before raw proxy added; superseded scope retained",
+        "raw proxy validates request/model/context/framing/original usage before forwarding any model bytes",
+        "API credentials remain in parent; native CLI receives ephemeral proxy token",
+        "cache/reasoning fields retained only when actually present in raw provider usage",
+        "one-step native agent preset removed because it inserted conflicting summary instructions",
+        "16KiB native framing ceiling and bounded isolated runtime are host-profile qualification constraints",
+        "pre-EOF reported usage, split-secret/decoded-token refusal and owned-observation cleanup are independently witnessed"
+      ]
+    },
+    "reviews": {
+      "groups": 2,
+      "cross_review": true,
+      "current_confirmed_open_P0_P1_P2": 0,
+      "prior_findings": "retained with source-level closure notes"
+    },
+    "live_gates": [
+      "named project/model/API-key file and actual use/exposure/reviewer grant",
+      "exact unmanaged host/binary/SDK/model capacity and native framing qualification",
+      "other OpenCode SDK/provider/plugin/auth combinations deferred",
+      "independent served-provider identity remains unobserved",
+      "escaped process or unknown provider billing/ownership needs exact host reconciliation"
+    ],
+    "source_pins": {
+      "helpers/src/model-drivers/opencode.ts": {
+        "sha256": "9485a517be6dce18777423bf44b18757d153a410340b0a29d4acf3b30f0ce520",
+        "size_bytes": 20513
+      },
+      "helpers/src/model-drivers/opencode-proxy.ts": {
+        "sha256": "c4e7eec19b492be7096fa2af0db93506f0eadfebd53adbc49b5c81493d8a0907",
+        "size_bytes": 12029
+      },
+      "helpers/src/model-drivers/cli-process.ts": {
+        "sha256": "9d312b95db3cce667989cf74084313ac0fba7b065fc7c2f44d9b6a362c7c687f",
+        "size_bytes": 6865
+      },
+      "helpers/src/model-policy.ts": {
+        "sha256": "b754a6ee1bed9af63c4f588b455869c6169c17c845ff43d622861ded9fb457c5",
+        "size_bytes": 9558
+      },
+      "helpers/src/model-transport.ts": {
+        "sha256": "a03f75bdea8a5baa8ce0244483c8277c1b6347a85789845112ecae12ba785cd2",
+        "size_bytes": 16460
+      },
+      "helpers/examples/model-transport/relay.mjs": {
+        "sha256": "418f5bd572ad773030787732adce96968fba513aff81256594c86f75b9fe767a",
+        "size_bytes": 10626
+      },
+      "helpers/examples/model-transport/governance-fixture.mjs": {
+        "sha256": "f377b10f8a56e5e046948dc994cd35168083ed5c26241c27b9c65eb4006dd5e6",
+        "size_bytes": 2740
+      },
+      "helpers/tests/opencode.test.ts": {
+        "sha256": "19e8cabe83d32f5c9b886056096cad0eb8693580cfdc46928126813f9820a798",
+        "size_bytes": 9166
+      },
+      "helpers/tests/model-fixture.ts": {
+        "sha256": "e61ab1dcce07e3fc04d8be3d5505342af77ff9281041503d9671f9d3adff4775",
+        "size_bytes": 24705
+      },
+      "helpers/tests/model-native-integration.test.ts": {
+        "sha256": "fa1b5649e00a5e53fed4ae29ba091c659f1950abba30571fd9f99e7d2c9f2cb0",
+        "size_bytes": 3999
+      },
+      "helpers/tests/model-relay.test.ts": {
+        "sha256": "a59e54881967e160a14947fc28d885c760c04d25d9aac9ffb4d600f75814ad09",
+        "size_bytes": 5386
+      },
+      "helpers/package.json": {
+        "sha256": "f07d45ac2e186357d769653076a328aa06ee5fc84c37ff8be919d6a118baad22",
+        "size_bytes": 5001
+      },
+      "docs/integration.md": {
+        "sha256": "c704ef6f0b08571eb234351f729168578b257d1191118473bd24fc7687bfe1cb",
+        "size_bytes": 20778
+      }
+    },
+    "package": {
+      "sha256": "dbf10f308029bcd5896e956befe9e3789c36fa6ce53029cbd979fe40e78edbcd",
+      "size_bytes": 252565,
+      "opencode_exports_present": true,
       "private_artifacts_excluded": true
     }
   }

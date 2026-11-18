@@ -1,6 +1,6 @@
 # Pluggable model transport
 
-Status: **Execution authorized — TraeX, Codex and Claude prototypes.** The user authorized implementation with a tracker, then selected Codex and now Claude; other CLI drivers remain deferred. Each live profile still requires its own accepted finite qualification scope. Live qualification/deployment still requires the route-specific bindings and evidence below.
+Status: **Execution authorized — TraeX, Codex, Claude and scoped OpenCode prototypes.** The user authorized implementation with a tracker, then selected Codex, Claude and now OpenCode; other CLI/provider combinations remain deferred. Each live profile still requires its own accepted finite qualification scope. Live qualification/deployment still requires the route-specific bindings and evidence below.
 Created: 2026-11-16T17:08:15.204183-08:00. Updated: 2026-11-16T23:28:28.823593-08:00. Baseline: `de8ed8bb5fab6d346639c4d1e27ad37fa2bed8cc` (`origin/main`), helper `0.3.2`, research-loop contract `2.4.0`.
 
 ## Need and initial decision
@@ -172,6 +172,10 @@ The execution tracker records mechanism qualification and exact live gates. A na
 
 The user now requests Claude after committing the TraeX/Codex baseline. This supersedes the initial two-driver ceiling for prototype implementation; it does not enable a three-driver live profile or authorize automatic vendor failover. Qualify one pinned Claude bare-mode CLI with exact stdin context, explicit empty tools, non-refreshing API-key authentication and raw response usage. Preserve the shared governance, reviewer separation, model ledger and project-owned scientific authority. Live model/account/host scope remains separately gated.
 
+## OpenCode extension scope
+
+The user requests OpenCode after committing Claude support. Implement one explicitly configured provider/model/API-auth path and qualify the exact native version, runtime/provider dependencies, configuration/plugin isolation, no-execution controls and complete response/usage evidence. This supersedes the prototype driver count only. It does not qualify every OpenCode provider, enable automatic failover, relax exposure/reviewer authority or mutate existing research state. Keep unknown native behavior or usage ineligible. Because SDK normalization can hide upstream inconsistencies, the scoped route now uses a private one-call proxy to validate the actual request and raw response before delivering it to OpenCode. API credentials stay in the parent; native state is isolated and cleanup uses owned observations. Model capacity metadata is pinned; no arbitrary SDK or native tool execution is admitted. Live per-project model/auth and funded acceptance remain separate.
+
 ## User request, verbatim
 
 ```text
@@ -202,6 +206,12 @@ Claude request, verbatim:
 commit then work on claude
 ```
 
+OpenCode request, verbatim:
+
+```text
+commit then work on opencode
+```
+
 ## Revision History
 
 | Timestamp | Change |
@@ -217,3 +227,7 @@ commit then work on claude
 | 2026-11-17T11:59:30.441993-08:00 | Replaced the provisional exec cut after review exposed cumulative usage and hidden compaction; narrowed Codex qualification to auditable raw-response protocol and non-refreshing file auth. Preserved original findings and explicit live host/account gates. |
 
 | 2026-11-17T13:11:25.135939-08:00 | User requested Claude after the 8c33295 commit; expanded prototype implementation only, retaining per-profile qualification, explicit routes and live grants. |
+
+| 2026-11-17T13:54:19.051166-08:00 | User requested OpenCode after the d78d75a Claude commit; opened one bounded prototype provider path while retaining per-profile live authority and qualification gates. |
+
+| 2026-11-17T14:47:03.099437-08:00 | Added OpenCode raw-validation proxy after native SDK erased a conflicting total; retained one-call, context/credential/usage checks and per-profile host/model/auth gates. |

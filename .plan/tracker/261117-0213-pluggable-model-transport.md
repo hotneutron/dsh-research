@@ -1,6 +1,6 @@
 # Pluggable model transport implementation
 
-Created: 2026-11-17T02:13:36.898930-08:00. Scope: **TraeX, Codex and Claude prototype transports**.
+Created: 2026-11-17T02:13:36.898930-08:00. Scope: **TraeX, Codex, Claude and scoped OpenCode prototype transports**.
 Plan: [reviewed plan](../261116-1708-plan-pluggable-model-transport.md). Baseline: `de8ed8bb5fab6d346639c4d1e27ad37fa2bed8cc`, helper0.3.2 / contract2.4.0.
 
 ## Status
@@ -13,14 +13,15 @@ Plan: [reviewed plan](../261116-1708-plan-pluggable-model-transport.md). Baselin
 | Live route / cutover | Gated | Requires exact host/binary/model identity, non-refreshing API auth/use/exposure/separation evidence and qualification budget. Mac mandatory system hook and refreshable ChatGPT/keyring auth remain unqualified. No active project state is reset or mutated. |
 | Codex driver | Mechanism qualification passed | Private app-server raw protocol, bounded full-context stdin, isolated API file auth, exact raw usage/controls, compaction/hook/multiple-response refusal and mixed relay; 265 full regressions, focused retention and grouped/cross reviews. Native0.166 local HTTP observations retained; live route remains gated. |
 | Claude driver | Mechanism qualification passed | Bare/API-file driver, strict raw response/usage and empty CLI tools, DSH JSON selection, shared relay; 285 regressions + 18 focused checks and five actual native-driver/local-API cases. Live grants remain gated. |
-| Other drivers | Deferred | OpenCode and other driver implementations remain deferred. |
+| OpenCode driver | Scoped mechanism qualification passed | One bundled Chat SDK/API-file route, isolated native controls, private one-call raw audit;305 full checks,18 fault cases and five actual native/API cases. Other providers and live grants remain gated. |
+| Other drivers/providers | Deferred | No blanket qualification of OpenCode provider/plugin combinations. |
 
 ## Implemented API and evidence
 
 [Compact extraction receipt](../review/261117-0334-model-transport-extraction.json). High-parallelism GPU fixture failure is retained separately; no tolerance or scientific criterion was changed.
 
 
-The 0.4 prototype exports `model-transport`, `model-tools`, `model-drivers/traex`, `model-drivers/codex` and `model-drivers/claude`; old TraeX exports are removed. The relay/Source use explicit role/model bindings and a pinned project governance module. Model budget and scientific admission remain separate. Source/state/proofs and detailed [qualification evidence](../../local_artifacts/dsh-research/model-transport/261117-0213/qualification.json) are retained in the worktree artifact area.
+The 0.4 prototype exports `model-transport`, `model-tools`, `model-drivers/traex`, `model-drivers/codex`, `model-drivers/claude` and `model-drivers/opencode`; old TraeX exports are removed. The relay/Source use explicit role/model bindings and a pinned project governance module. Model budget and scientific admission remain separate. Source/state/proofs and detailed [qualification evidence](../../local_artifacts/dsh-research/model-transport/261117-0213/qualification.json) are retained in the worktree artifact area.
 
 Native file-lock scope is one host/PID namespace. CLI shutdown evidence covers the owned POSIX process group; provider-specific escaped-child behavior remains a live qualification gate. Missing served-model evidence is explicitly unobserved; fixture callbacks cannot authorize real vendor/account content. No live deployment, model spend or scientific authority mutation occurred.
 
@@ -47,3 +48,7 @@ No backward API compatibility is required. Retain historical IDs/artifacts and p
 | 2026-11-17T13:11:25.135939-08:00 | Committed the TraeX/Codex baseline as 8c33295, then opened Claude implementation in the same isolated worktree after the user request. |
 
 | 2026-11-17T13:36:51.130407-08:00 | Completed Claude mechanical qualification, 285/18 checks, actual native driver acceptance/refusal and grouped/cross review. Retained SDK framing/internal-attempt limits and private evidence; Claude live/subscription/backend adoption remains unqualified. |
+
+| 2026-11-17T13:54:19.051166-08:00 | Committed Claude support as d78d75a, then opened one scoped OpenCode transport under the new user request. |
+
+| 2026-11-17T14:51:05.298244-08:00 | Completed scoped OpenCode raw-proxy qualification,305/18 checks, actual native five cases and grouped/cross review. Preserved SDK normalization/cleanup/credential findings and explicit live/provider gates. |

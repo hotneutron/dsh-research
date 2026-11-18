@@ -31,7 +31,8 @@ export class ModelDriverFailure extends Error {
 export interface TextModelDriver {
   readonly id: string
   encode(context: unknown, instructions: string, schema: unknown | null, delivery: ModelRoute['driver']['context_delivery']): EncodedModelInput
-  observe(route: Readonly<ModelRoute>, requestRoot: string, signal: AbortSignal): Promise<DriverObservation>
+  observe(route: Readonly<ModelRoute>, requestRoot: string, signal: AbortSignal, input?: Readonly<EncodedModelInput>): Promise<DriverObservation>
+  disposeObservation?(requestRoot: string, ownershipUnknown: boolean): Promise<void>
   run(route: Readonly<ModelRoute>, input: EncodedModelInput, requestRoot: string, signal: AbortSignal, beforeLaunch: () => Promise<void>, assertDispatch: () => void): Promise<DriverCompletion>
   usage(raw: unknown): TokenUsage
 }
@@ -118,6 +119,7 @@ export class ModelTextAdapter extends LlmAdapter {
     let requestRoot = join(this.config.artifactsRoot, reservation.record.id)
     let partial: unknown = null
     let settled = false
+    let ownershipUnknown = false
     try {
       await this.resolveModel(options.provider, options.model)
       if (!options.sessionId) throw new Error('An observed DSH Session is required for model transport')
@@ -152,7 +154,7 @@ export class ModelTextAdapter extends LlmAdapter {
       await bounded(Promise.all(this.route.driver.auto_context.map(value => verifyPin(value.file))), signal)
       requestRoot = await privateRequestDirectory(this.config.projectRoot, this.config.artifactsRoot, reservation.record.id)
       // A process-owning observer must finish bounded teardown before its reservation can be released.
-      const observation = await this.config.driver.observe(this.route, requestRoot, signal)
+      const observation = await this.config.driver.observe(this.route, requestRoot, signal, input)
       if (observation.version !== this.route.driver.version || canonicalJson(observation.executable) !== canonicalJson(this.route.driver.executable)
         || canonicalJson(observation.runtime) !== canonicalJson(this.route.driver.runtime)) throw new Error('Observed driver version/distribution is not approved')
       signal.throwIfAborted()
@@ -203,8 +205,11 @@ export class ModelTextAdapter extends LlmAdapter {
       this.receipts.push(receipt)
       return { completion, usage, value, receipt }
     } catch (error) {
+      ownershipUnknown = error instanceof ModelOwnershipError
       if (!settled) await reservation.fail(String(error), error instanceof ModelOwnershipError || error instanceof ModelDriverFailure ? error.evidence : partial, error instanceof ModelOwnershipError)
       throw error
+    } finally {
+      await this.config.driver.disposeObservation?.(requestRoot, ownershipUnknown)
     }
   }
   override async *stream(options: ModelOptions): AsyncGenerator<StreamChunk> {

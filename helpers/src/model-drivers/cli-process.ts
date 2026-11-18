@@ -14,6 +14,7 @@ export async function pinnedBytes(pin: ExecutablePin) {
   return bytes
 }
 export interface CliExchange {
+  initialInput?: string
   begin(send: (value: unknown) => void): void
   line(line: string, send: (value: unknown) => void, end: () => void): void
 }
@@ -51,7 +52,8 @@ export async function runProcess(executable: string, argv: string[], cwd: string
     } catch (error) { protocolError = error; stop() }
   })
   child.stderr.on('data', chunk => { stderr = collect(stderr, Buffer.from(chunk)) })
-  if (exchange) { try { exchange.begin(send) } catch (error) { protocolError = error; stop() } }
+  if (exchange?.initialInput !== undefined) child.stdin.end(exchange.initialInput)
+  else if (exchange) { try { exchange.begin(send) } catch (error) { protocolError = error; stop() } }
   else child.stdin.end(stdin)
   let result: { code: number | null; signal: NodeJS.Signals | null }
   try { result = await new Promise((yes, no) => { child.once('error', no); child.once('close', (code, endedSignal) => yes({ code, signal: endedSignal })) }) }
@@ -74,7 +76,7 @@ export async function runProcess(executable: string, argv: string[], cwd: string
 }
 
 
-export async function observeFrozenCli(route: Readonly<ModelRoute>, requestRoot: string, signal: AbortSignal): Promise<DriverObservation> {
+export async function observeFrozenCli(route: Readonly<ModelRoute>, requestRoot: string, signal: AbortSignal, env?: NodeJS.ProcessEnv): Promise<DriverObservation> {
     const bytes = await pinnedBytes(route.driver.executable)
     for (const pin of route.driver.runtime) await pinnedBytes(pin)
     const firstLine = bytes.subarray(0, Math.min(bytes.length, 1024)).toString().split('\n')[0] ?? ''
@@ -94,7 +96,7 @@ export async function observeFrozenCli(route: Readonly<ModelRoute>, requestRoot:
     }
     const launch = { executable: { path: frozenExecutable, sha256: sha256(bytes), size_bytes: bytes.length }, interpreter }
     await writeFile(join(requestRoot, 'frozen-launch.json'), canonicalJson(launch), { mode: 0o600 })
-    const probe = await runProcess(interpreter?.path ?? frozenExecutable, interpreter ? [frozenExecutable, '--version'] : ['--version'], requestRoot, '', signal, Math.min(route.limits.max_capture_bytes, 65536))
+    const probe = await runProcess(interpreter?.path ?? frozenExecutable, interpreter ? [frozenExecutable, '--version'] : ['--version'], requestRoot, '', signal, Math.min(route.limits.max_capture_bytes, 65536), env)
     await writeFile(join(requestRoot, 'version-observation.json'), canonicalJson({ stdout: probe.stdout.toString(), stderr: probe.stderr.toString(),
       code: probe.code, signal: probe.signal, executable_sha256: sha256(bytes) }), { mode: 0o600 })
     if (probe.code !== 0 || probe.signal || probe.overflow || probe.aborted) throw new Error('CLI version observation is unresolved')

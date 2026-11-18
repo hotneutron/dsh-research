@@ -11,6 +11,7 @@ import { ModelToolAdapter } from 'dsh-research/model-tools'
 import { TraexDriver } from 'dsh-research/model-drivers/traex'
 import { CodexDriver } from 'dsh-research/model-drivers/codex'
 import { ClaudeDriver } from 'dsh-research/model-drivers/claude'
+import { OpenCodeDriver } from 'dsh-research/model-drivers/opencode'
 import { canonicalJson, sha256, verifyBytes } from 'dsh-research'
 import { atomicPrivateJson } from './storage.mjs'
 import { readModelRequest } from './http-input.mjs'
@@ -32,6 +33,7 @@ const driverFor = id => {
   if (id === 'traex-exec-v1') return new TraexDriver()
   if (id === 'codex-app-server-v1') return new CodexDriver()
   if (id === 'claude-print-v1') return new ClaudeDriver()
+  if (id === 'opencode-run-v1') return new OpenCodeDriver()
   throw new Error('Unsupported model driver: ' + id)
 }
 const drivers = { text: driverFor(routes.text.driver.id), tools: driverFor(routes.tools.driver.id) }
