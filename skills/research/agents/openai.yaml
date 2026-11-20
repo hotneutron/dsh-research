@@ -1,4 +1,4 @@
 interface:
   display_name: "Project Research"
-  short_description: "Bounded research with auditable project evidence"
-  default_prompt: "Use $research to run the next bounded, reviewed research action in this project."
+  short_description: "Fail-fast experiments, decisions and scientific review"
+  default_prompt: "Use $research to compare the next experiments, preserve partial lessons, and prepare a reviewed action under this project's current methodology."
