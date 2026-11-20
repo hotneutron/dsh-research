@@ -40,7 +40,8 @@ export async function apply(ctx) {
   if (config.models?.transport === 'traex-relay') {
     const { RemoteTraexAdapter } = await import(new URL('../examples/traex-tools/remote-model.mjs', import.meta.resolve('dsh-research')))
     ctx.llm.registerAdapter([config.models.author_provider], new RemoteTraexAdapter('tools',
-      ['research_propose', 'research_review', 'research_feedback', 'research_run', 'research_status', 'research_conclude', 'orchestrator_report']))
+      ['research_propose', 'research_review', 'research_feedback', 'research_run', 'research_status', 'research_conclude', 'orchestrator_report',
+        'research_decision', 'research_evidence', 'research_context', 'research_status_read']))
     ctx.llm.registerAdapter([config.models.reviewer_provider], new RemoteTraexAdapter('text'))
   }
   ctx.inject(['orchestrator'], async child => {

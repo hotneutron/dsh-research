@@ -23,6 +23,10 @@ import { scientificSubject } from './collaboration.js'
 import type { FeedbackState } from './collaboration.js'
 import { publishCheckpoint } from './publication.js'
 import type { PublicationTransport } from './publication.js'
+import { ScientificHandoff, readArtifactPage } from './steering.js'
+import type { ScientificHandoffConfig } from './steering.js'
+import { boundedJsonContent, NativeRequiredContext, SCIENTIFIC_INLINE_LIMITS } from './delivery.js'
+import type { InlineDeliveryLimits } from './delivery.js'
 
 declare module '@deepseek-ai/dsh-llm' {
   interface MessageSourceMap {
@@ -49,6 +53,11 @@ export interface ProductionResearchConfig extends NativeResearchConfig {
   statusMaxActions?: number
   inheritedTools?: readonly string[]
   extraAuthorTools?: readonly ToolDefinition[]
+  /** Opt-in, profile-owned common evidence and scientific decision artifacts. */
+  scientificHandoff?: Omit<ScientificHandoffConfig, 'artifacts' | 'assertActiveAuthority'>
+  scientificInlineLimits?: InlineDeliveryLimits
+  /** Project writer derives the current immutable index from retained checkpoint/feedback artifacts. */
+  resolveScientificEvidenceIndex?: (state: ResearchState) => Promise<ArtifactReference>
   publication?: { audience: string; maxAttempts: number; transport: PublicationTransport;
     release(checkpoint: ArtifactReference, state: ResearchState): Promise<ArtifactReference> }
 }
@@ -58,6 +67,8 @@ export class NativeProductionResearch {
   private coordination!: NativeCoordinationTools
   private reviewer!: NativeReviewDriver
   private adapter!: NativeResearchAdapter
+  private handoff: ScientificHandoff | null = null
+  private requiredContext: NativeRequiredContext | null = null
   private readonly disposers: Array<() => void> = []
   private approvedSteering: { question: string; evidence: ArtifactReference[] } | null = null
   private constructor(private readonly ctx: Context, private readonly config: ProductionResearchConfig,
@@ -75,6 +86,9 @@ export class NativeProductionResearch {
     if (!Number.isSafeInteger(config.reviewContextMaxBytes) || config.reviewContextMaxBytes <= 0)
       throw new Error('Explicit positive reviewer context byte budget required')
     const loop = new NativeProductionResearch(ctx, config, author, policy)
+    if (config.scientificHandoff) loop.handoff = new ScientificHandoff({ ...config.scientificHandoff,
+      artifacts: config.artifacts.withReadPrefixes(policy.allowed_read_prefixes),
+      assertActiveAuthority: async () => { await loop.authority() } })
     Version4ResearchStateSchema.parse(config.table.get(config.projectKey))
     if (config.hooks.feedbackScan && !config.hooks.assertFeedbackChange)
       throw new Error('A project feedback source requires its domain-owned changed-action validator')
@@ -101,6 +115,8 @@ export class NativeProductionResearch {
           || manifest.bounds.timeout_ms > policy.max_timeout_ms || manifest.bounds.max_attempts > policy.max_attempts
           || manifest.bounds.timeout_reservation_ms > policy.max_total_timeout_ms)
           throw new Error('Project proposal exceeds the accepted standing scientific scope/bounds')
+        await loop.refreshScientificIndex()
+        await loop.handoff?.assertManifest(manifest)
         return subject
       },
       afterPropose: async (ref, manifest, args) => {
@@ -117,19 +133,47 @@ export class NativeProductionResearch {
         await loop.coordination.disposition(item.item_id, 'adopted', args.feedback_reason, ref)
       } })
     loop.reviewer = await NativeReviewDriver.open(ctx, { ...config,
+      ...(loop.handoff ? { preloadContextText: true } : {}),
+      ...(loop.handoff ? { protectContext: (sessionId: string, content: Parameters<NativeRequiredContext['require']>[1]) =>
+        loop.requiredContext!.require(sessionId, content) } : {}),
       deniedTools: ctx.tools.schemas().map(tool => tool.name),
       assertDecisionPremises: config.hooks.assertDecisionPremises,
-      reviewContext: config.hooks.reviewContext })
+      reviewContext: async subject => {
+        const references = [...await config.hooks.reviewContext(subject)]
+        if (loop.handoff) {
+          await loop.refreshScientificIndex()
+          if (subject.kind === 'manifest') await loop.handoff.assertManifest(subject)
+          const context = await loop.handoff.context()
+          references.push(await json(`scientific-context/${sha256(canonicalJson(context))}.json`, context))
+          const discovery = await loop.handoff.discovery()
+          if (!equalIdentity(discovery.evidence_index, context.evidence_index))
+            throw new Error('Scientific context changed while freezing reviewer discovery')
+          boundedJsonContent(discovery, config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS)
+          references.push(await json(`scientific-discovery/${sha256(canonicalJson(discovery))}.json`, discovery))
+        }
+        return references
+      } })
+    const scientificTools = loop.handoff ? loop.scientificTools() : []
     const authorTools = ['research_propose', 'research_review', 'research_feedback', 'research_run', 'research_status', 'research_conclude',
-      'orchestrator_report', ...(config.inheritedTools ?? []), ...(config.extraAuthorTools ?? []).map(tool => tool.name)]
+      'orchestrator_report', ...(config.inheritedTools ?? []), ...(config.extraAuthorTools ?? []).map(tool => tool.name),
+      ...scientificTools.map(tool => tool.name)]
     loop.adapter = await NativeResearchAdapter.open(ctx, { ...config, authorTools,
+      ...((loop.handoff || config.assertAdmissionPremises) ? { assertAdmissionPremises: async (manifest: Manifest, state: ResearchState, owner: Agent) => {
+        await config.assertAdmissionPremises?.(manifest, state, owner)
+        await loop.refreshScientificIndex()
+        await loop.handoff?.assertManifest(manifest)
+      } } : {}),
       afterSettlement: async (association, owner, signal) => {
         await config.afterSettlement?.(association, owner, signal)
         await loop.outcome(association)
       } })
     try {
+      if (loop.handoff) {
+        loop.requiredContext = new NativeRequiredContext(ctx)
+        loop.disposers.push(() => loop.requiredContext!.close())
+      }
       loop.disposers.push(loop.adapter.register({ toolScope: 'author', inheritedTools: config.inheritedTools ?? [] }))
-      for (const tool of [...loop.coordination.tools(), loop.reviewer.tool(), ...loop.tools(), ...(config.extraAuthorTools ?? [])])
+      for (const tool of [...loop.coordination.tools(), loop.reviewer.tool(), ...loop.tools(), ...(config.extraAuthorTools ?? []), ...scientificTools])
         loop.disposers.push(author.ctx.tools.register(tool))
       loop.disposers.push(author.ctx.tools.guard(exec => {
         const args = exec.arguments as Record<string, unknown>
@@ -155,6 +199,13 @@ export class NativeProductionResearch {
     const state = this.config.table.get(this.config.projectKey)
     if (!state) throw new Error('Existing registered project authority required')
     return Version4ResearchStateSchema.parse(state)
+  }
+  private async refreshScientificIndex() {
+    if (this.handoff && this.config.resolveScientificEvidenceIndex) {
+      const state = await this.authority(), index = await this.config.resolveScientificEvidenceIndex(state)
+      if (this.state().revision !== state.revision) throw new Error('Scientific context changed during index resolution')
+      await this.handoff.advanceIndex(index)
+    }
   }
   private async authority() {
     if (this.ctx.agents.get(this.author.id) !== this.author) throw new Error('Production native author was replaced')
@@ -214,6 +265,7 @@ export class NativeProductionResearch {
       throw new Error('Exact registered author/profile required for production status')
     if (!state.stopped && state.hold === null) await this.syncFeedback()
     state = this.state()
+    await this.refreshScientificIndex()
     const maxActions = this.config.statusMaxActions ?? 16
     if (!Number.isSafeInteger(maxActions) || maxActions <= 0) throw new Error('Positive bounded status action window required')
     const all = Object.values(state.actions), selected = all.slice(-maxActions)
@@ -223,14 +275,37 @@ export class NativeProductionResearch {
       const checkpoint = action.checkpoint ? CheckpointSchema.parse(JSON.parse(Buffer.from(await this.config.artifacts.read(action.checkpoint)).toString())) : null
       actions.push({ action_id: action.action_id, phase: action.phase, evidence_ref: action.evidence, checkpoint_ref: action.checkpoint, evidence, checkpoint })
     }
-    return { state_revision: state.revision, binding: state.binding, stopped: state.stopped, hold: state.hold,
+    const status = { state_revision: state.revision, binding: state.binding, stopped: state.stopped, hold: state.hold,
       standing_policy: { goal_id: this.policy.goal_id, goal_revision: this.policy.goal_revision, allowed_operations: this.policy.allowed_operations },
       budget: { consumed_attempts: state.consumed_attempts, max_attempts: this.policy.max_attempts,
         consumed_timeout_ms: state.consumed_timeout_ms, reserved_timeout_ms: state.reserved_timeout_ms,
         max_total_timeout_ms: this.policy.max_total_timeout_ms, consumed_review_requests: state.consumed_review_requests,
         max_review_requests: this.policy.review_limits!.max_requests },
       actions, total_actions: all.length, omitted_actions: all.length - selected.length, loop: state.loop,
-      feedback: Object.values(state.feedback.items), publications: Object.values(state.publications) }
+      feedback: Object.values(state.feedback.items), publications: Object.values(state.publications),
+      ...(this.handoff ? { scientific_context: await this.handoff.context() } : {}) }
+    if (!this.handoff) return status
+    const scientific = await this.handoff.discovery()
+    if (!status.scientific_context || !equalIdentity(scientific.evidence_index, status.scientific_context.evidence_index))
+      throw new Error('Scientific index changed while preparing status discovery')
+    const retained = { kind: 'retained_research_status.v1', status }
+    const bytes = Buffer.from(canonicalJson(retained))
+    if (bytes.length > this.config.artifacts.maxReadBytes) throw new Error('Complete retained status exceeds declared artifact capture limit')
+    const fullStatus = await this.config.artifacts.writeOnce(`${this.config.artifactPrefix}/status/${sha256(bytes)}.json`, bytes)
+    const control = { kind: 'research_status_discovery.v1', state_revision: status.state_revision, stopped: status.stopped,
+      hold: status.hold ? { kind: status.hold.kind, reason: 'Read the complete retained status for the exact hold' } : null,
+      budget: status.budget, scientific, full_status: fullStatus,
+      status_retrieval: { tool: 'research_status_read', default_page_bytes: 1024 }, execution_authority: false }
+    const limits = this.config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS
+    let delivery = control
+    try { boundedJsonContent(delivery, limits) } catch (error) {
+      if (!(error instanceof Error) || !error.message.includes('overflow')) throw error
+      delivery = { ...control, scientific: { ...scientific,
+        lesson_catalog: { ...scientific.lesson_catalog, complete: false, entries: [] } } }
+      boundedJsonContent(delivery, limits)
+    }
+    if (this.state().revision !== state.revision) throw new Error('State changed while retaining scientific status')
+    return { ...status, scientific_delivery: delivery }
   }
   private async outcome(association: RunAssociation) {
     await this.syncFeedback()
@@ -247,7 +322,7 @@ export class NativeProductionResearch {
     const noticeId = `outcome-${action.action_id}-${action.checkpoint.sha256}`
     if (!this.state().loop.notifications[noticeId]) {
       const message = createUserMessage({ source: { kind: 'research-outcome', form: 'notice', summary: 'Settled scientific evidence; existing project authority retained' },
-        content: [{ type: 'text', text: `Internal settled research outcome under the existing project authority. Read research_status and the exact checkpoint/evidence; choose a justified successor or reviewed conclusion. Ordinary negative/procedural outcomes require no human input. ${canonicalJson({ action_id: action.action_id, evidence: action.evidence, checkpoint: action.checkpoint })}` }] })
+        content: [{ type: 'text', text: `Internal settled research outcome under the existing project authority. Read research_status and the exact checkpoint/evidence; choose a justified successor or reviewed conclusion. Ordinary negative/procedural outcomes require no human input. ${this.handoff ? 'Read the common scientific_context and retained lessons; compare lawful alternatives and freeze the inner-loop decision through research_decision before proposing its bound action. ' : ''}${canonicalJson({ action_id: action.action_id, evidence: action.evidence, checkpoint: action.checkpoint })}` }] })
       const content = await this.json(`outcomes/${noticeId}/message.json`, message)
       await this.config.table.update(this.config.projectKey, current => {
         const parsed = Version4ResearchStateSchema.parse(current)
@@ -349,11 +424,97 @@ export class NativeProductionResearch {
     return { status: kind === 'goal_completion' ? 'complete' : 'scientific_exhaustion', checkpoint: checkpointRef,
       review: reviewed.review, human_action: kind === 'scientific_exhaustion' ? subject.human_question : null }
   }
+  private scientificTools(): ToolDefinition[] {
+    const handoff = this.handoff!
+    const output = { schema: { type: 'json' as const }, render: (_args: unknown, value: unknown) => [{ type: 'text' as const, text: JSON.stringify(value) }] }
+    const ref = { type: 'object', additionalProperties: false, properties: {
+      uri: { type: 'string', required: true }, sha256: { type: 'string', required: true }, size_bytes: { type: 'integer', required: true } } } as const
+    const owner = (agent: Agent | undefined) => { if (agent !== this.author) throw new Error('Exact native author required for scientific handoff') }
+    const page = async (reference: ArtifactReference, args: Record<string, unknown>) => {
+      const offset = z.number().int().nonnegative().parse(args.offset_bytes ?? 0)
+      if (args.length_bytes !== undefined)
+        return { offset_bytes: offset, length_bytes: z.number().int().positive().parse(args.length_bytes) }
+      if (!reference.size_bytes) {
+        if (offset !== 0) throw new Error('Scientific context offset is outside the complete artifact')
+        return undefined
+      }
+      const bytes = Buffer.from(await this.config.artifacts.read(reference))
+      if (offset >= bytes.length) throw new Error('Scientific context offset is outside the complete artifact')
+      let length = Math.min(1024, bytes.length - offset)
+      while (length > 0 && !Buffer.from(bytes.subarray(offset, offset + length).toString('utf8')).equals(bytes.subarray(offset, offset + length))) length--
+      if (!length) throw new Error('Scientific context default page requires exact UTF-8')
+      return { offset_bytes: offset, length_bytes: length }
+    }
+    const readParameters = { reference: { ...ref, required: true }, offset_bytes: { type: 'integer' }, length_bytes: { type: 'integer' } } as const
+    const boundedOutput = { schema: { type: 'json' as const }, render: (_args: unknown, value: unknown) =>
+      boundedJsonContent(value, this.config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS) }
+    return [defineTool({ name: 'research_context', description: 'Read exact pinned scientific metadata, lesson bodies and catalog pages. Default is an explicit UTF-8 byte page; follow next_offset_bytes until complete.',
+      parameters: readParameters, output: boundedOutput,
+      execute: async (args, exec) => {
+        owner(exec.agent); await this.refreshScientificIndex()
+        const reference = ByteRef.parse(args.reference)
+        // Validate membership before reading a caller-supplied path for default-page sizing.
+        await handoff.assertContextReference(reference)
+        const result = await handoff.readContext(reference, await page(reference, args))
+        boundedJsonContent(result, this.config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS)
+        return result
+      } }),
+    defineTool({ name: 'research_status_read', description: 'Read a complete retained status from this exact project/profile and current scientific index, with explicit byte paging and completeness.',
+      parameters: readParameters, output: boundedOutput,
+      execute: async (args, exec) => {
+        owner(exec.agent); await this.refreshScientificIndex()
+        const reference = ByteRef.parse(args.reference)
+        if (reference.uri !== `${this.config.artifactPrefix}/status/${reference.sha256}.json`) throw new Error('Status snapshot is outside the exact retained status namespace')
+        const artifacts = this.config.artifacts.withReadPrefixes(this.policy.allowed_read_prefixes)
+        const retained = JSON.parse(Buffer.from(await artifacts.read(reference)).toString('utf8'))
+        const discovery = await handoff.discovery()
+        if (retained.kind !== 'retained_research_status.v1' || !equalIdentity(retained.status?.binding, this.policy.binding)
+          || !equalIdentity(retained.status?.scientific_context?.evidence_index, discovery.evidence_index))
+          throw new Error('Retained status uses a stale scientific index or different profile')
+        const result = await readArtifactPage(artifacts, reference, await page(reference, args))
+        boundedJsonContent(result, this.config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS)
+        await this.authority()
+        return result
+      } }),
+    defineTool({ name: 'research_decision', description: 'Retain an evidence-backed inner-loop decision and bind its scientific plan; this supplies no review or execution approval.',
+      parameters: { decision_json: { type: 'string', required: true }, scientific_plan: ref }, output,
+      execute: async (args, exec) => {
+        owner(exec.agent)
+        await this.refreshScientificIndex()
+        const decision = await handoff.freezeDecision(JSON.parse(z.string().min(1).parse(args.decision_json)))
+        const plan = args.scientific_plan ? ByteRef.parse(args.scientific_plan)
+          : await this.json(`scientific-plans/${decision.sha256}.json`, { kind: 'scientific_plan_from_decision.v1', decision,
+            scope: 'inner_loop', execution_authority: false })
+        return { decision, plan_association: plan ? await handoff.bindPlan(plan, decision) : null,
+          prerequisites: plan ? await handoff.prerequisites(plan, decision) : [], execution_authority: false }
+      } }),
+    defineTool({ name: 'research_evidence', description: 'Read the exact complete UTF-8 evidence from the pinned released scientific index; arbitrary/protected/bulk-auditor reads are refused.',
+      parameters: { reference: { ...ref, required: true }, offset_bytes: { type: 'integer' }, length_bytes: { type: 'integer' } }, output,
+      execute: async (args, exec) => {
+        owner(exec.agent); await this.refreshScientificIndex()
+        const page = args.offset_bytes !== undefined || args.length_bytes !== undefined
+          ? { offset_bytes: z.number().int().nonnegative().parse(args.offset_bytes), length_bytes: z.number().int().positive().parse(args.length_bytes) } : undefined
+        return handoff.readEvidence(ByteRef.parse(args.reference), page)
+      } })]
+  }
   private tools(): ToolDefinition[] {
     const output = { schema: { type: 'json' as const }, render: (_args: unknown, value: unknown) => [{ type: 'text' as const, text: JSON.stringify(value) }] }
     const owner = (agent: Agent | undefined) => { if (agent !== this.author) throw new Error('Exact native author required for production loop control') }
-    return [defineTool({ name: 'research_status', description: 'Capture complete source/reviewer feedback, actual effects, current action receipts and preserved aggregate bounds.', parameters: {}, output,
-      execute: async (_args, exec) => { owner(exec.agent); return JSON.parse(JSON.stringify(await this.status())) } }),
+    const statusOutput = this.handoff ? { schema: { type: 'json' as const }, render: (_args: unknown, value: unknown) =>
+      boundedJsonContent((value as { scientific_delivery: unknown }).scientific_delivery, this.config.scientificInlineLimits ?? SCIENTIFIC_INLINE_LIMITS) } : output
+    return [defineTool({ name: 'research_status', description: 'Capture complete status in an immutable artifact; expose bounded scientific discovery, every lesson catalog and exact read routes while preserving aggregate bounds.', parameters: {}, output: statusOutput,
+      ...(this.handoff ? { finalizeContent: (_exec: unknown, result: { isError: boolean; value?: unknown }) => {
+        if (result.isError) return undefined
+        try { return statusOutput.render({}, result.value) } catch { return [{ type: 'text' as const, text: 'Scientific discovery delivery invalid; provider inference requires exact retained discovery.' }] }
+      } } : {}),
+      execute: async (_args, exec) => {
+        owner(exec.agent)
+        const status = await this.status()
+        const modelCall = this.author.session.snapshotEvents().some(event => event.type === 'assistant/message'
+          && event.data.message.content.some(block => block.type === 'tool-call' && block.id === exec.callId && block.name === 'research_status'))
+        if ('scientific_delivery' in status && modelCall) this.requiredContext?.require(this.author.id, statusOutput.render({}, status))
+        return JSON.parse(JSON.stringify(status))
+      } }),
     defineTool({ name: 'research_conclude', description: 'Review a domain-backed goal completion or scoped scientific exhaustion before ending the autonomous loop.',
       parameters: { kind: { type: 'string', enum: ['goal_completion', 'scientific_exhaustion'], required: true }, rationale: { type: 'string', required: true },
         subject: { type: 'object', additionalProperties: false, description: 'Exact retained decision subject for reconciliation of an interrupted review.', properties: {

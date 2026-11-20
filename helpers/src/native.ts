@@ -49,6 +49,8 @@ export interface NativeResearchConfig {
   }
   /** Existing host authority check, e.g. current Ticket mandate and operator pause. Rechecked before dispatch. */
   assertActiveAuthority?: (owner: Agent) => void | Promise<void>
+  /** Qualified project scientific premises, rechecked before new reservation and dispatch. */
+  assertAdmissionPremises?: (manifest: Manifest, state: ResearchState, owner: Agent) => void | Promise<void>
   /** Existing project domain verifier; its pinned code supplies scientific meaning. */
   verifier: { identity: ArtifactReference; verify(result: Record<string, number | string | boolean>): Promise<'positive' | 'negative' | 'inconclusive'> }
   gpu?: NativeGpuGuard
@@ -239,6 +241,7 @@ export class NativeResearchAdapter {
     await this.config.artifacts.read(this.policy.entrypoint)
     await this.config.artifacts.read(this.config.policy)
     await this.config.assertActiveAuthority?.(owner)
+    await this.config.assertAdmissionPremises?.(manifest, structuredClone(this.config.table.get(this.config.projectKey)!), owner)
     // Known unsupported/clamped execution profiles must fail without consuming a review or reserving an attempt.
     const execution = await this.resolveExecution(manifest, owner, signal)
     let recovery: RecoveryPreflight | undefined
@@ -327,6 +330,7 @@ export class NativeResearchAdapter {
       await this.config.artifacts.read(preflight.observation)
     }
     await this.config.assertActiveAuthority?.(owner)
+    await this.config.assertAdmissionPremises?.(manifest, structuredClone(this.config.table.get(this.config.projectKey)!), owner)
     this.assertExecutionCurrent(execution, manifest, signal, 'before admission')
     signal.throwIfAborted()
     const token = randomUUID()
@@ -361,6 +365,7 @@ export class NativeResearchAdapter {
       if (shellIdentity(currentExecution.shell) !== shellIdentity(execution.shell) || !equalIdentity(executionIdentity(currentExecution.spec), executionIdentity(execution.spec)))
         throw new Error('Execution configuration changed after admission acknowledgement')
       await this.config.assertActiveAuthority?.(owner)
+      await this.config.assertAdmissionPremises?.(manifest, structuredClone(this.config.table.get(this.config.projectKey)!), owner)
       signal.throwIfAborted()
       // The durable acknowledgement is awaited; the registered tuple is verified immediately before native dispatch.
       const live = this.config.table.get(this.config.projectKey)!
@@ -550,4 +555,6 @@ export class NativeResearchAdapter {
 export { NativeReviewDriver, AUTHOR_INSTRUCTIONS, REVIEW_INSTRUCTIONS } from './review.js'
 export { NativeCoordinationTools } from './coordination.js'
 export { NativeProductionResearch } from './production.js'
+export { NativeRequiredContext, boundedJsonContent, SCIENTIFIC_INLINE_LIMITS } from './delivery.js'
+export type { InlineDeliveryLimits } from './delivery.js'
 export type { ProductionResearchConfig, ProductionProjectHooks } from './production.js'

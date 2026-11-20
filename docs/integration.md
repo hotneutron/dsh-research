@@ -106,6 +106,28 @@ Other focused recipes:
 
 Fixtures establish only their declared scope. The [research-loop contract](contracts.md) defines obligations; the [tracker](../.plan/tracker/261105-1555-milestone-execution.md) and [receipts](../.plan/review/) hold implementation status and qualification history.
 
+## Scientific decisions and shared evidence at checkpoints
+
+The opt-in `ScientificHandoff` helper supplies project-owned capability, evidence-index, lesson and decision artifacts. These are interpretation and dependency records; they add no native state encoding or execution authority. Qualify the exact consumer profile and current actor before installation.
+
+Configure `NativeProductionResearch` with `scientificHandoff` containing the project artifact prefix, immutable `evidenceIndex` and `capabilityEnvelope` references, and prospectively declared positive `maxContextBytes` and `maxIndexHistory` bounds. An optional `resolveScientificEvidenceIndex(state)` obtains the current immutable index from the project's retained checkpoint/feedback artifact associations. Each new index links its predecessor and retains all historical lessons, support and access classification; a disconnected or erasing chain is refused.
+
+With scientific handoff enabled, `research_status` keeps its complete canonical fields and adds `scientific_delivery`. Its native rendering is a compact `research_status_discovery.v1` envelope with budget/hold controls, exact index/methodology/capability references, a complete or explicitly paged lesson inventory, and the immutable `full_status` reference. The complete status is persisted before rendering. `research_status_read` retrieves that snapshot; `research_context` reads exact current metadata, lesson bodies and catalog pages; `research_evidence` retains its separate released-evidence access rules. Bulk auditor-only inputs remain classified and refused by the metadata/evidence model read routes.
+
+`scientificInlineLimits` defaults to 6,000 UTF-8 bytes and 2,000 SDK-estimated tokens. Scientific handoff can independently declare `maxDiscoveryBytes` and `maxCatalogPageBytes` (defaults 6,000 and 4,000). Every lesson status remains in the deterministic catalog, including tentative, disputed and superseded records. `lesson_catalog.complete` describes inventory delivery; `body_complete=false` explicitly requires reading the referenced lesson before using its contents. A catalog or discovery entry that cannot fit its declared bound fails without shortening its identity.
+
+For `research_context` and `research_status_read`, the default page is at most 1,024 bytes with a valid UTF-8 ending. Pass `offset_bytes=next_offset_bytes` for the next default page; an explicit `length_bytes` requires exact UTF-8 boundaries. Every page identifies the verified parent hash, page hash, total bytes, completeness and continuation. A final page of a multipart artifact still does not claim to contain the whole artifact. Missing or stale metadata, arbitrary paths and stale-index status snapshots are refused. An index entry can declare `preload=false` without hiding its reference.
+
+The native status finalizer restores the bounded envelope after tool-result spill policies. A session-specific read-only `llm/stream` guard verifies required discovery in the assembled ordinary model request and refuses provider dispatch when it is missing; auxiliary compaction/title calls are separate. Host inspection calls do not create an unlogged model-context requirement. The guard detects loss by later compaction and does not mutate frozen requests. Qualify the actual transport/profile and its configured limits before live adoption.
+
+With scientific handoff enabled, each review request includes the same pinned scientific discovery roots and a separate complete plaintext block for every selected context artifact. The native request guard protects both discovery and selected plaintext. It duplicates the exact references and bytes bound in the structured packet so source and scientific context remain readable when a transport encodes packet fields. Declared context limits refuse overflow. A reviewer without read tools needs decision-relevant material selected into this preload; catalog pointers alone do not establish that it read lesson bodies. This delivery grants no new reviewer execution tools or filesystem secrecy.
+
+Use `research_decision` with the actual decision JSON and scientific plan reference. It returns an immutable decision, plan association and required prerequisites. The project proposal factory uses that association as `manifest.plan.snapshot` and retains the prerequisites before the normal exact review/admission route. A feasible selected alternative must map to a qualified capability and the exact checkpoint. Observability, decision value and the quality of the alternatives still require scientific review; populated fields alone are insufficient.
+
+The common index and selected decision are checked during proposal/review and again before a new reservation and actual dispatch. Stale context refuses new work; a context change after reservation retains the existing unresolved ownership/charge rules. Already admitted action replay keeps its original association instead of asking current lessons to reauthorize it. Default profiles remain on their existing behavior unless the handoff is explicitly configured.
+
+The package [native handoff qualification](../helpers/examples/production/steering-qualification.mjs) exercises actual native CPU review/action/settlement paths with scripted model outputs, immutable lesson evolution, replay and reopen. Run it only in a fresh disposable directory after building the helper. Its receipts qualify protocol behavior in that fixture; they do not establish scientific judgment, reviewer reliability or production benefit.
+
 ## Revision History
 
 | Revision | Timestamp | Change |
@@ -134,6 +156,8 @@ Fixtures establish only their declared scope. The [research-loop contract](contr
 
 - 2026-11-15T08:09:01.233577+00:00: Documented helper0.3.1 optional ordered GPU device-set/mask/receipt binding, retained historical single-device bytes, and required exact adopter guard/source qualification under unchanged contract2.4.0.
 
+- 2026-11-20 03:06 -0800: Documented opt-in project scientific handoff artifacts, common readable evidence and pages, decision/lesson binding, current-context admission checks and immutable index retention. Preserved default profiles and unchanged native state encoding; identified scripted native qualification separately from scientific or economic acceptance.
+
 - 2026-11-15T10:07:09.214443+00:00: Ported the mem-subsys Source recipe fixes for same-Session Agent recreation, per-instance installation caching and versioned metadata. These local recipe changes require their exact deployment qualification; the project-owned native Source receipts are scoped evidence.
 
 - 2026-11-15T10:19:02.542940+00:00: Added the Source SessionStore dependency discovered by real post-failure outcome delivery; retained scientific settlement and pending notice identity remain unchanged.
@@ -143,3 +167,6 @@ Fixtures establish only their declared scope. The [research-loop contract](contr
 - 2026-11-15T11:11:59.456531+00:00: Added explicit `reviewerContextMode=latest_frozen_packet` for text review transport. It preserves system/current-turn context and the complete latest frozen packet while retaining native history and all old usage. Seven parser/selection tests passed; the actual 1,639,279-character refused request becomes 354,319 characters with identical current packet identity and no token limit. Non-packet review and historical default behavior are unchanged.
 
 - 2026-11-16T16:11:22.361850-08:00: Condensed the guide around DSH/superagent integration, project bindings and operational rules; replaced repeated qualification/debug narratives with existing recipe, contract and receipt links; preserved current device-set, Session-recreation and model-capture guidance.
+
+- 2026-11-20 04:35 -0800: Documented separate complete readable review-context delivery for opt-in scientific handoff and the preload requirement for reviewers without read tools.
+- 2026-11-20 14:09 -0800: Documented bounded scientific discovery, immutable complete status, exact metadata/catalog/status paging, SDK finalization/request guards and shared reviewer context semantics.
