@@ -1,131 +1,87 @@
 # Fail-fast exits and informative next experiments
 
-## Contents
+An inner-loop exit ends an experiment or bounded candidate batch at a legal checkpoint and returns its limitation. It must not change methodology, reject a physical hypothesis or establish goal exhaustion. Changing the measurement approach, representation family, observable definition or inference contract is an outer-loop decision and belongs in a separate assessment.
 
-- [Keep the decision and methodology explicit](#keep-the-decision-and-methodology-explicit)
-- [Choose a scoped fail-fast technique](#choose-a-scoped-fail-fast-technique)
-- [Use statistical futility only with a valid protocol](#use-statistical-futility-only-with-a-valid-protocol)
-- [Generate and compare the next alternatives](#generate-and-compare-the-next-alternatives)
-- [Evaluate decision value and reasonable cost](#evaluate-decision-value-and-reasonable-cost)
-- [Record the decision and reassess](#record-the-decision-and-reassess)
-- [Apply the exposure example](#apply-the-exposure-example)
-- [Sources and applicability](#sources-and-applicability)
+## Before freezing a batch
 
-## Keep the decision and methodology explicit
+Start from the original objective, current methodology, frozen judge, available capabilities, standing authority and existing consumption. Identify the one important decision the batch could change: keep or reject a candidate, choose an implementation, qualify an observable, advance a stage, or return a limitation.
 
-Start from the original objective, current methodology, frozen judge, available capabilities, standing authority and existing consumption. Identify the important decision blocked by current uncertainty: keep or reject a candidate, choose between implementations, qualify an observable, advance a stage, or return a limitation. Separate that decision from the action of collecting data.
+Read supported findings, valid negatives, rejected alternatives and unresolved claims. A retained path, hash or persistent Session does not prove that evidence reached the author or reviewer; verify the material is actually readable by both.
 
-Keep diagnostics and experiment variations within the current methodology. Mark an alternative measurement approach, observable definition, representation family or inference contract as a prospective outer-loop subject. Returning an inner-loop limitation can inform that later assessment; it does not itself change methodology or establish goal exhaustion.
+State the question, required observables, finite candidate/repair scope, legal checkpoints, exit conditions, usable partial outputs and resource bounds. Use the applicable prospective contract rather than global failure counts, candidate counts or token caps.
 
-Read both supported and negative results, partial lessons, rejected alternatives and unresolved claims. Ensure the author and reviewer can inspect the relevant evidence. Use the shared-lesson and visibility instructions in the main skill; do not infer a common scientific context from Session persistence or a full-byte-retention flag.
+## Pick a legal early exit
 
-Before running a development batch, state its question, required observables, candidate/repair scope, legal checkpoints, exit conditions, usable partial outputs and resource bounds. Use the applicable prospective contract rather than a global failure count, candidate count or token cap.
-
-## Choose a scoped fail-fast technique
-
-| Technique | Apply it when | Legal result and follow-up |
+| Technique | Use it when | Legal result |
 | --- | --- | --- |
-| Prerequisite gates ordered by cost | Identity, schema, capability, correctness or evidence prerequisites can be checked before dependent work | Stop the dependent stage when its prerequisite fails; retain the failure and select a supported repair or diagnostic. |
-| Small faithful observability pilot | It is unknown whether the current instrument/schedule can expose the required signal | Test the minimum representative unit preserving relevant work, concurrency and measurement semantics. Adequate observation opens the next stage; inadequate or ambiguous observation returns a measurement limitation. |
-| Deterministic feasibility or identifiability check | Fixed constraints or identical predictions can rule out a required result or distinction | Retain the explicit bound/collision witness. End only the affected candidate or experiment; a heuristic estimate is not an impossibility proof. |
-| Finite mechanism-backed repair slate | A failed implementation has specific plausible repairs under the current methodology | Give each repair a failure mechanism, changed condition and expected distinguishing result. Stop repeating unchanged failures; return a limitation when the declared slate yields no supported successor. |
-| Prospective sequential futility | Adequate observations and an accepted sampling model permit inference about the candidate's attainable benefit | Apply the registered stopping/error rule at legal checkpoints. Preserve an inconclusive result when useful benefit remains plausible. |
-| Successive halving or adaptive racing | Candidates share an adequate evaluator, target and meaningful resource/fidelity progression | Allocate development resources to remaining plausible candidates. Treat elimination as allocation within that search; retain independent confirmation requirements. |
+| Prerequisite gates ordered by cost | Identity, schema, capability, correctness or evidence checks can run before dependent work | Stop the dependent stage, retain the failure, select a supported repair or diagnostic |
+| Small faithful observability pilot | It is unknown whether the current instrument or schedule can expose the signal | Adequate observation opens the next stage; inadequate or ambiguous observation returns a measurement limitation |
+| Deterministic feasibility or identifiability check | Fixed constraints or identical predictions can rule out a required result or distinction | Retain the bound or collision witness; end only the affected candidate or experiment |
+| Finite mechanism-backed repair slate | A failed implementation has specific plausible repairs | Give each repair a mechanism, changed condition and expected distinguishing result; stop repeating unchanged failures |
+| Prospective sequential futility | Adequate observations and an accepted sampling model allow inference about attainable benefit | Apply the registered stopping rule at legal checkpoints; keep an inconclusive result when useful benefit remains plausible |
+| Successive halving or adaptive racing | Candidates share an evaluator, target and meaningful resource progression | Allocate within that search; retain independent confirmation |
 
-Use cheap prerequisite checks before expensive collection, fitting or profiling. Reuse accepted checks only when their source, environment and applicability still match. Do not rerun accepted evidence solely to fill a new checklist.
+Run cheap prerequisite checks before expensive collection, fitting or profiling. Reuse an accepted check only while its source, environment and applicability still match.
 
-For a faithful pilot, explain which reduced dimensions preserve the proposed mechanism and which claims remain untested. A single-rank substitute may miss a coupled-rank failure; a short work unit may change concurrency; fewer samples may lose required measurement precision. If fidelity to the target is unestablished, return a feasibility observation rather than a qualification pass.
+For a faithful pilot, say which reduced dimensions preserve the proposed mechanism and which claims remain untested. A single-rank substitute can miss a coupled-rank failure; a short unit can change concurrency; fewer samples can lose precision. Unestablished fidelity is a feasibility observation, not a qualification pass.
 
-Check identifiability before increasing sample size. If competing explanations imply the same observable under every proposed condition, more repeats cannot separate them. Add an allowed control that changes their predictions or return the limitation. Allow explanations to coexist; do not force a false binary choice.
+Check identifiability before increasing sample size: if competing explanations predict the same observable under every proposed condition, more repeats cannot separate them. Add an allowed control that changes their predictions, or return the limitation. Let explanations coexist.
 
-Preserve unknown process ownership, reservations and settlement requirements. Fail-fast does not authorize killing an owned process outside its accepted lifecycle, skipping teardown or declaring a missing result negative. Finish mandatory protocol obligations even when a dependent stage has already become ineligible, unless the frozen protocol permits early termination.
+Preserve unknown ownership, reservations and settlement requirements. Fail-fast does not authorize killing an owned process outside its accepted lifecycle, skipping teardown, or calling a missing result negative. Finish mandatory protocol obligations unless the frozen protocol permits early termination. Required repetition can be a protocol obligation even when its outcome will not change the next action.
 
-## Use statistical futility only with a valid protocol
+## Make the choice reachable
 
-Define the target benefit, minimum useful benefit `delta`, observation unit, sampling/error model, legal looks, error allowance and maximum authorized resource use before observing the stopping evidence. Orient the benefit so larger is better. Distinguish a development scheduling decision from a formal scientific conclusion.
+A prompt is not a choice. Three requirements are separate: the author is asked to select, the configuration admits more than one lawful option, and the result shows which option was actually selected.
 
-When a justified confidence sequence or registered group-sequential rule supplies a benefit interval `[L, U]` at a legal checkpoint:
+A fixed stage sequence such as preparation followed by assessment can be appropriate for a prerequisite, but it does not test selection among experiments: the next stage is supplied externally. Give the author the objective, accepted evidence and a capability description — fixed measurement semantics, permitted experiment variations, resources, claim boundaries and standing permissions — and let it propose an experiment with outcome branches. Verify source, evidence and exact scope downstream; do not preselect the experimental answer by supplying the next stage.
 
-- Treat `U < delta` as evidence that this candidate cannot deliver the declared useful benefit under the bound protocol.
-- Treat `L >= delta` as evidence relevant to advancement, subject to all remaining frozen gates and confirmation obligations.
-- Treat an interval crossing `delta` as unresolved; compare more discriminating measurement, additional supported sampling and scoped stop/defer.
+A useful proposal may lack execution prerequisites. Keep it as a proposed option and name the unmet condition. Scientific reasoning cannot grant hardware, resource or profile authority. Installation must inspect the assembled author prompt, reviewer preset and hook/profile hashes; editing repository text does not update a running worker.
 
-Choose bounds appropriate to the data and adaptive sampling. Ordinary fixed-sample confidence intervals repeatedly inspected at arbitrary times do not provide a time-uniform error guarantee. A confidence sequence addresses optional stopping under its assumptions; it does not repair drift, invalid evidence, data leakage, wrong observation units or uncontrolled comparisons across many candidates.
+## Compare the next alternatives
 
-Treat paired ranks, shared inputs, repeated samples within a job and common host state as potentially dependent. Count the justified independent block or use a supported dependence model. Do not count two ranks in one coupled execution as two independent experiment replications.
+Generate options from the blocked decision and surviving explanations, not from whatever tools are available. Include continued work when justified, a discriminating diagnostic, a distinct allowed experiment, and scoped defer or stop. Keep methodology-changing options separate and label them as outer-loop subjects.
 
-Use sequential likelihood-ratio tests only when the hypotheses, likelihood model and error boundaries are specified and justified. Use best-arm identification only for a defined comparable candidate population and outcome distribution. Those methods do not identify the best scientific question automatically.
+Each option states: the blocked decision and motivating evidence; the explanations or candidates it separates, with observable predictions and controls; at least two result branches with different follow-ups, including an inadequate branch; minimum useful evidence, legal exit, costs, prerequisites and evidence reuse changes; and why it is preferred now, or what is missing before a preference is justified.
 
-Check a fidelity schedule before using successive halving. Early rankings can change as resources increase. A reduced run that lacks the target observable cannot supply a comparable low-fidelity score; handle its measurement failure separately. Do not replace the study's frozen success criterion with a halving rank.
+Reject an option that cannot supply the required observable, repeats an unchanged rejected subject, or only adds examples of an established fact with no decision purpose. If every plausible outcome implies the same next action, name the fixed replication or multistep obligation that justifies the run.
 
-## Generate and compare the next alternatives
+Use contrasts that change the suspected mechanism while holding the relevant controls. Vary more than one factor when interactions matter; see the [statistical methods appendix](statistics-appendix.md) for screening aliasing. A screening effect is not causal identification.
 
-Generate alternatives from the blocked decision and surviving explanations, rather than from every tool that happens to be available. Include continued work on the present candidate when justified, a discriminating diagnostic, a distinct allowed experiment, and scoped defer/stop when relevant. List methodology-changing alternatives separately.
+Prefer an option only relative to the inspected slate. If several remain indistinguishable, take the cheapest supported disambiguating step or keep the tie.
 
-Give each feasible option:
+## Decision value and cost
 
-- The blocked decision and primary evidence motivating it.
-- The explanations or candidate choices it can distinguish, with observable predictions and required controls.
-- At least two plausible result branches with different follow-up actions, including an inadequate/inconclusive branch when possible.
-- Minimum useful evidence, legal exit point, costs, prerequisites and evidence reuse/applicability changes.
-- The reason to prefer it now, or the fact needed before a preference is justified.
+Separate the best current candidate from the best next experiment; measuring a weaker candidate can be right if its outcome most improves a consequential choice.
 
-Reject options that cannot supply the required observable, repeat an unchanged rejected subject, or only create more examples of an already established fact without a protocol or decision purpose. If all plausible outcomes lead to the same next action, identify the fixed replication obligation or explicitly necessary multistep decision path that justifies the experiment.
+Compare in this order:
 
-Use contrasts that change the suspected mechanism while preserving the relevant controls. Consider interactions: varying one factor at a time can leave joint effects undiscovered. A small factorial or fractional design can be useful within permitted variations, but state its aliasing and unresolved interactions. Augment a screening design only when the unresolved alias matters to the decision; a screening effect alone is not causal identification.
+1. Authority, feasibility and evidence validity — benefit cannot compensate for an unmet hard prerequisite.
+2. Whether the outcomes can change the important decision or enable its declared evidence path.
+3. Dominated options — drop an option if another gives the same discrimination with no worse cost, delay or risk.
+4. Decision consequences, measurement support, switching burden and opportunity cost; use sensitivity ranges instead of an unsupported precise ranking.
 
-Prefer an option only relative to the inspected slate and evidence. State that limitation. If several options remain indistinguishable, choose the least costly supported disambiguating step or retain the tie; do not invent a unique winner.
+Do not fabricate priors, likelihoods, success probabilities or utility scores. Unknown probabilities stay unknown. When estimates are unavailable, compare outcome branches, consequences of a wrong decision, evidence adequacy and cost ranges directly. Formal EVSI, futility and racing rules are in the [statistical methods appendix](statistics-appendix.md).
 
-## Evaluate decision value and reasonable cost
+Track compilation, CPU fitting, GPU/profiler collection, qualification, repetitions, interpretation, reviewer/model work, delivery and delay separately. Keep `C_science`, `C_qual` and coordination cost distinct; do not mix seconds, money and tokens without a supported conversion. Record unavailable costs as unavailable.
 
-Separate the best current candidate from the best next experiment. The latter can be a measurement of a weaker candidate if its outcome most improves a consequential choice. Reduced uncertainty, more hypotheses and a better score are useful only in relation to that choice and the applicable protocol.
+## Record the decision
 
-When a justified probabilistic decision model is available, use expected value of sample information:
+Close a finite batch when its purpose is answered or its remaining options lack stated decision value. Record which: valid negative, measurement limitation, resource hold, or unresolved result. Keep the whole objective's separate completion or exhaustion assessment.
 
-```text
-EVSI(e) = E over Y given D,e [max over a E[U(a, theta) given D,Y,e]]
-          - max over a E[U(a, theta) given D]
-```
+Retain one compact project-owned inner-loop decision record: trigger or checkpoint; blocked decision; decisive evidence and unresolved explanations; a small feasible set, each with its existing observable, at least two outcome branches with different follow-ups, cost or uncertainty, legal stopping point and authority prerequisites; any fixed protocol obligation; the selected option and why it is preferable now, including switching and opportunity costs; evidence to reuse and evidence that loses applicability; unchanged claim boundaries; the next frozen action or checkpoint; and a scoped defer or closure when appropriate.
 
-Let `D` denote current evidence, `e` the proposed experiment, `Y` its possible observation, `a` a subsequent decision and `theta` the unknown state. Bound the choices by actual scientific criteria and authority. Subtract experiment cost only when utility and cost have a justified common scale. Include cost and delay of the decision path the experiment enables. A one-step approximation may miss the value of an explicitly necessary sequence.
+Mechanical validation can require those associations; it cannot establish scientific judgment. Bind the record through an existing plan snapshot or proposal prerequisite and supply its exact bytes through the project review-context hook. Do not add undeclared fields to the native record encoding. A dedicated steering operation is justified only if the narrow integration cannot reliably retain or enforce the handoff.
 
-Do not fabricate calibrated priors, likelihoods, success probabilities or utility scores. When they are unavailable, compare observable outcome branches, consequences of a wrong decision, evidence adequacy and cost ranges directly. Keep confidence in an estimate separate from the importance of the decision.
+Reassess on a failed prerequisite, completed batch, stage gate, contradictory evidence or new human direction. Coalesce related facts at legal checkpoints instead of demanding a fresh options essay for every sample or transport retry. Reopen a rejected option only on a material evidence or context change, and retain its prior rejection.
 
-Order the comparison as follows:
+On return, compare the observed result with the stated branches, keep useful partial findings, and feed the lessons and unresolved remainder to both parties. Judge efficiency by decision improvement and cost, not by pivot, approval or reflection counts.
 
-1. Check authority, feasibility and evidence validity. Potential benefit cannot compensate for an unmet hard prerequisite.
-2. Check whether the outcomes can change the important decision or enable its declared evidence path.
-3. Remove dominated options: if another option provides the necessary discrimination with no worse supported cost, delay and relevant risk, retain the latter. State uncertain comparisons.
-4. Compare the remaining options' decision consequences, measurement support, switching/setup burden and opportunity costs. Use sensitivity to plausible costs/outcomes instead of an unsupported precise ranking.
+## Worked example: exposure
 
-Track compilation, CPU fitting, GPU/profiler collection, qualification, repetitions, interpretation, reviewer/model work, artifact delivery and delay separately. Keep `C_science`, `C_qual` and recurring coordination costs distinct. Do not add overlapping wall intervals or combine seconds, money and tokens without a supported conversion. Record unavailable costs as unavailable. Actual model spending can inform choice without imposing a token cap.
+A study whose unchanged gate requires 95% contender coverage of the full probe is not applying a 95% confidence level. Real kernel activity or partial overlap does not establish the required exposure.
 
-Close a finite batch when its purpose is answered or its remaining options lack stated decision value under the current constraints. Record whether that is a valid negative, measurement limitation, resource hold or unresolved candidate result. Preserve the entire objective's separate completion/exhaustion assessment.
+Compare an audit of retained interval accounting with a bounded permitted scheduling or duration contrast. An accounting defect calls for a scoped correction; consistent accounting favors a schedule diagnostic. Qualified exposure opens the next measurement gate; persistent failure returns a schedule limitation. Name the inconclusive branch when the diagnostic cannot separate the explanations.
 
-## Record the decision and reassess
+Coverage percentages, kernel presence or overlap, and case labels are different facts. An audit uses the frozen definitions and does not infer a defect from a name such as `serial`. A schedule change needs its own prospective scope, but a new manifest alone does not make it an outer-loop change, and it cannot repair the historical screen retroactively.
 
-Retain one compact project-owned decision artifact with the trigger, fixed methodology/judge, blocked decision, evidence and partial lessons, compared options, selected experiment/reason, outcome-to-action branches, costs, legal stopping points, reused/inapplicable evidence and next checkpoint.
-
-Bind its actual bytes through supported plan/prerequisite references and reviewer context. Keep strict native record/receipt encodings intact; a skill does not add a runtime field or operation. Obtain the existing exact-subject review and guarded admission before execution.
-
-Reassess on a failed prerequisite, completed development batch, stage gate, contradictory evidence or new human direction. Coalesce related facts at legal checkpoints. Avoid repeated reflection for every sample or transport retry. Reopen a rejected option only with a material evidence/context change, and retain its prior rejection.
-
-On return, compare the observed result with its stated branches. Retain useful partial findings even when the batch's main gate fails. Feed evidence-backed lessons and the unresolved remainder to both parties. Judge efficiency by actual decision improvement and cost, not the number of pivots, approvals or reflections.
-
-## Apply the exposure example
-
-For a study whose unchanged gate requires 95% contender coverage of the full probe, distinguish that coverage threshold from a 95% statistical confidence level. Real kernel activity or some overlap does not establish the required exposure.
-
-Compare an audit of retained interval accounting with a bounded permitted scheduling/duration contrast. An accounting defect calls for a scoped correction; consistent accounting favors a diagnostic of the schedule. Qualified exposure can open the next measurement gate; persistent failure returns a schedule limitation. Name an inconclusive branch when the diagnostic cannot distinguish the explanations.
-
-Preserve source/protocol successes and the failed exposure screen together. Do not infer physical contention's absence from inadequate exposure. Place a new instrument or observable contract in a separate future methodology-change proposal.
-
-## Sources and applicability
-
-- [Platt, Strong Inference (1964)](https://socialscience.fas.harvard.edu/files/2023/06/Platt1964_Science_StrongInference.pdf): Generate alternative explanations and discriminating experiments; use this as design guidance, not a guarantee that every mechanism admits a decisive binary test.
-- [Reyes and Powell, Optimal Learning for Sequential Decisions in Laboratory Experimentation (2020)](https://arxiv.org/abs/2004.05417): Choose information for its effect on subsequent decisions; numerical knowledge-gradient policies require a specified belief/measurement model.
-- [Simulating Study Data to Support Expected Value of Sample Information Calculations: A Tutorial](https://europepmc.org/articles/PMC8793320): Distinguish information value from net benefit after study cost; transfer the decision principle, not the medical utility model.
-- [Howard et al., Time-uniform, Nonparametric, Nonasymptotic Confidence Sequences](https://arxiv.org/abs/1810.08240): Support repeated looks and optional stopping with bounds suited to the observation model; preserve dependence and multi-candidate error obligations.
-- [Garivier and Kaufmann, Optimal Best Arm Identification with Fixed Confidence (2016)](https://arxiv.org/abs/1602.04589): Allocate samples and stop for a defined candidate-comparison problem; its optimality does not extend automatically to arbitrary scientific alternatives or costs.
-- [Li et al., Hyperband (2018)](https://jmlr.org/papers/v18/16-558.html): Allocate development resources through early elimination; require meaningful fidelity and preserve independent final evaluation.
-- [NIST, Fractional Factorial Design Resolution](https://www.itl.nist.gov/div898/handbook/pri/section3/pri3344.htm) and [Mirror-Image Foldover](https://www.itl.nist.gov/div898/handbook/pri/section3/pri3381.htm): Identify confounding and selectively resolve aliases in screening designs; do not present an aliased effect as an isolated mechanism.
+Keep the protocol successes and the failed exposure screen together. Inadequate exposure never implies that physical contention is absent. Replacing the instrument or changing its observable or inference contract is a future outer-loop subject; the failure can motivate that assessment without establishing that it has occurred.

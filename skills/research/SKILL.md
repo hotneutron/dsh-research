@@ -28,6 +28,8 @@ Use [packet and outcome guidance](references/packets.md) when preparing referenc
 
 Read [fail-fast and next-experiment guidance](references/fail-fast-and-next-experiments.md) before defining early exits, comparing alternatives or expanding a measurement matrix. Identify the decision the experiment could change, compare a small evidence-backed slate, and state observable outcome-to-action branches and full marginal costs. Prefer a supported diagnostic or bounded candidate comparison that can remove the current blockage. Treat failure counts and flat scores as reassessment signals; use a qualified prospective stopping rule for a scientific futility claim. Preserve formal confirmation, minimum sampling and matched-repeat obligations.
 
+Read [statistical methods](references/statistics-appendix.md) only when applying a registered futility rule, adaptive racing or an expected-value calculation.
+
 Read [scientific review and partial lessons](references/scientific-review-and-lessons.md) when assembling either party's context or interpreting results. Carry supported prerequisites, valid negatives, tentative explanations and unresolved claims separately into the next checkpoint. Make omissions discoverable and provide complete permitted evidence through an available read-only or preload route. Record missing visibility as a limitation on the affected inference.
 
 ## Reviewer procedure
@@ -52,3 +54,5 @@ Treat feedback as capture → disposition → frozen action change → actual ef
 | r2 | 2026-11-11 23:26:54 -0800 | Added automatic proposal/review tool use and retained exact scope, project ownership, independent review and non-human-gated continuation rules. |
 | r3 | 2026-11-14T21:59:03.959632-08:00 | Added explicit production profile, version-four continuity, captured feedback, separately reviewed conclusion and existing Source wake procedure. |
 | r4 | 2026-11-19 23:02:01 -0800 | Added inner-loop fail-fast exits, decision value and cost comparisons, substantive experimental review, shared evidence visibility and preservation of partial lessons. Added literature-backed references for review; no runtime code, installed profile or research-state change. |
+| r5 | 2026-11-19 23:15:34 -0800 | Condensed both research references by splitting them at the moment of use, removing duplicated scope rules and moving statistical protocols and sources into a separate appendix; behavior and obligations unchanged. |
+| r6 | 2026-11-19 23:20:43 -0800 | Rewrote both research references against the scientific-steering handoff brainstorm: explicit inner/outer boundary, reachable choice requirement, compact decision record, pre-delivery evidence selection and scoped lesson review. |
